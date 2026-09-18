@@ -1,1 +1,1 @@
-# coop-management-system-mockup
+# mockup_project

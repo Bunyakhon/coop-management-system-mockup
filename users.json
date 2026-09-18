@@ -1,0 +1,26 @@
+[
+  {
+    "email": "studentcoop@email.kmutnb.ac.th",
+    "password": "password123",
+    "role": "student",
+    "name": "พิมพ์ชนก สุขใจ"
+  },
+  {
+    "email": "officer@university.ac.th",
+    "password": "password123",
+    "role": "officer",
+    "name": "เจ้าหน้าที่ ภาควิชา"
+  },
+  {
+    "email": "teachercoop@university.ac.th",
+    "password": "password123",
+    "role": "teacher",
+    "name": "ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ"
+  },
+  {
+    "email": "head@university.ac.th",
+    "password": "password123",
+    "role": "head_department",
+    "name": "ผศ.ดร.ขนิษฐา นามี"
+  }
+]

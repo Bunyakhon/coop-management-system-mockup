@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>เข้าสู่ระบบ | KIWI</title>
+
+    <link rel="stylesheet" href="style.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sarabun:wght@500;600;700&family=Noto+Sans+Thai:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <!-- ========================= -->
+    <!-- Navbar -->
+    <!-- ========================= -->
+
+    <header class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="brand">
+          <img src="images/logo_kiwi.png" alt="KIWI Logo" class="brand-logo" />
+
+          <span>ระบบจัดการสหกิจศึกษา</span>
+        </a>
+
+        <div class="auth-buttons">
+          <a href="register.html" class="btn-login">
+            ยังไม่มีบัญชี? สมัครสมาชิก
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ========================= -->
+    <!-- Login -->
+    <!-- ========================= -->
+
+    <main
+      class="auth-wrapper"
+      style="display: flex; align-items: center; justify-content: center"
+    >
+      <div class="auth-card">
+        <div class="auth-header">
+          <h2>เข้าสู่ระบบ</h2>
+
+          <p>เข้าสู่ระบบ KIWI เพื่อใช้งานระบบจัดการสหกิจศึกษา</p>
+        </div>
+
+        <!-- ========================= -->
+        <!-- Google Login Mockup -->
+        <!-- ========================= -->
+
+        <button
+          type="button"
+          class="btn-google"
+          style="display: flex; width: 100%"
+        >
+          <svg class="google-icon" viewBox="0 0 24 24">
+            <path
+              fill="#4285F4"
+              d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58v3h3.86c2.26-2.09 3.56-5.17 3.56-8.82z"
+            />
+
+            <path
+              fill="#34A853"
+              d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.86-3c-1.08.72-2.45 1.15-4.07 1.15-3.13 0-5.78-2.11-6.73-4.96H1.29v3.09C3.26 21.3 7.31 24 12 24z"
+            />
+
+            <path
+              fill="#FBBC05"
+              d="M5.27 14.28A7.2 7.2 0 0 1 4.87 12c0-.79.14-1.57.4-2.28V6.63H1.29A11.98 11.98 0 0 0 0 12c0 1.93.46 3.76 1.29 5.37l3.98-3.09z"
+            />
+
+            <path
+              fill="#EA4335"
+              d="M12 4.75c1.76 0 3.34.61 4.58 1.8l3.43-3.43C17.94 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.63l3.98 3.09C6.22 6.86 8.87 4.75 12 4.75z"
+            />
+          </svg>
+
+          เข้าสู่ระบบด้วยบัญชี Google (KMUTNB)
+        </button>
+
+        <div class="divider" style="display: flex; align-items: center">
+          <span> หรือเข้าสู่ระบบด้วยอีเมล </span>
+        </div>
+
+        <!-- ========================= -->
+        <!-- บัญชีทดสอบ -->
+        <!-- ========================= -->
+
+        <div class="demo-hint">
+          <b> บัญชีทดสอบ Mockup </b>
+
+          <span>
+            รหัสผ่านทุกบัญชี:
+            <strong>password123</strong>
+          </span>
+
+          <br />
+
+          <strong> นักศึกษาสหกิจศึกษา </strong>
+          <br />
+          studentcoop@email.kmutnb.ac.th
+
+          <br />
+
+          <strong> อาจารย์ที่ปรึกษา / อาจารย์นิเทศ </strong>
+          <br />
+          teachercoop@university.ac.th
+
+          <br />
+
+          <strong> เจ้าหน้าที่ภาควิชา </strong>
+          <br />
+          officer@university.ac.th
+
+          <br />
+
+          <strong> หัวหน้าภาควิชา </strong>
+          <br />
+          head@university.ac.th
+        </div>
+
+        <!-- ========================= -->
+        <!-- Login Form -->
+        <!-- ========================= -->
+
+        <form
+          class="auth-form"
+          onsubmit="
+            event.preventDefault();
+            handleLogin(this.loginEmail.value.trim(), this.loginPassword.value);
+          "
+        >
+          <div class="form-group">
+            <label for="loginEmail"> อีเมล </label>
+
+            <div
+              class="input-icon-wrapper"
+              style="display: flex; align-items: center"
+            >
+              <i class="fa-solid fa-envelope input-icon"></i>
+
+              <input
+                type="email"
+                id="loginEmail"
+                name="loginEmail"
+                placeholder="กรอกอีเมล"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="loginPassword"> รหัสผ่าน </label>
+
+            <div
+              class="input-icon-wrapper"
+              style="display: flex; align-items: center"
+            >
+              <i class="fa-solid fa-lock input-icon"></i>
+
+              <input
+                type="password"
+                id="loginPassword"
+                name="loginPassword"
+                placeholder="กรอกรหัสผ่าน"
+                required
+              />
+            </div>
+          </div>
+
+          <div
+            class="form-actions"
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <label class="remember-me" style="display: flex">
+              <input type="checkbox" />
+              จำฉันไว้ในระบบ
+            </label>
+
+            <a href="#"> ลืมรหัสผ่าน? </a>
+          </div>
+
+          <button type="submit" class="btn-submit">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            เข้าสู่ระบบ
+          </button>
+        </form>
+
+        <p class="auth-footer">
+          ยังไม่มีบัญชีผู้ใช้?
+
+          <a href="register.html"> สมัครสมาชิกที่นี่ </a>
+        </p>
+      </div>
+    </main>
+
+    <!-- ========================= -->
+    <!-- Footer -->
+    <!-- ========================= -->
+
+    <footer class="footer">
+      <div class="footer-copyright">
+        <p>© KIWI — Co-operative Education Management System</p>
+      </div>
+    </footer>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>

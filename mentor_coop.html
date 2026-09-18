@@ -1,0 +1,1856 @@
+<!doctype html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>พี่เลี้ยง | ตรวจบันทึกการปฏิบัติงานสหกิจศึกษา | KIWI</title>
+  <link rel="stylesheet" href="style.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Sarabun:wght@500;600;700&family=Noto+Sans+Thai:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --mentor-primary: #3f6fb5;
+      --mentor-light: #eef4ff;
+      --mentor-border: #dbe3ef;
+      --mentor-text: #263447;
+      --mentor-muted: #718096;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Noto Sans Thai", sans-serif;
+      color: var(--mentor-text);
+      background: #f5f7fb;
+    }
+
+    .navbar {
+      background: #fff;
+      border-bottom: 1px solid var(--mentor-border);
+    }
+
+    .nav-container {
+      max-width: 1180px;
+      margin: auto;
+      padding: 14px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand {
+      text-decoration: none;
+      color: var(--mentor-text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 46px;
+      height: 46px;
+      object-fit: contain;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }
+
+    .brand-text strong {
+      font-family: "Sarabun", sans-serif;
+      font-size: 1.05rem;
+      color: var(--mentor-primary);
+    }
+
+    .brand-text span {
+      margin-top: 3px;
+      color: var(--mentor-muted);
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+
+    .btn {
+      border: 1px solid var(--mentor-border);
+      background: #fff;
+      color: var(--mentor-text);
+      border-radius: 20px;
+      padding: 9px 16px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn.primary {
+      background: var(--mentor-primary);
+      border-color: var(--mentor-primary);
+      color: #fff;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 22px 50px;
+    }
+
+    .page-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .page-head h1 {
+      font-family: "Sarabun", sans-serif;
+      margin: 0 0 4px;
+      font-size: 1.55rem;
+    }
+
+    .page-head p {
+      margin: 0;
+      color: var(--mentor-muted);
+      font-size: 0.86rem;
+    }
+
+    .mentor-card {
+      background: #fff;
+      border: 1px solid var(--mentor-border);
+      border-radius: 16px;
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .mentor-info {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--mentor-light);
+      color: var(--mentor-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+
+    .mentor-info b {
+      display: block;
+      font-family: "Sarabun", sans-serif;
+      font-size: 1rem;
+    }
+
+    .mentor-info span {
+      display: block;
+      color: var(--mentor-muted);
+      font-size: 0.78rem;
+      margin-top: 2px;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .summary-box {
+      background: #fff;
+      border: 1px solid var(--mentor-border);
+      border-radius: 12px;
+      padding: 15px;
+    }
+
+    .summary-box b {
+      display: block;
+      font-size: 1.2rem;
+      margin-bottom: 3px;
+    }
+
+    .summary-box span {
+      color: var(--mentor-muted);
+      font-size: 0.76rem;
+    }
+
+    .week-card {
+      background: #fff;
+      border: 1px solid var(--mentor-border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .week-head {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--mentor-border);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .week-head h2 {
+      font-family: "Sarabun", sans-serif;
+      font-size: 1.05rem;
+      margin: 0;
+    }
+
+    .week-head p {
+      margin: 3px 0 0;
+      color: var(--mentor-muted);
+      font-size: 0.76rem;
+    }
+
+    .day-list {
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .day-card {
+      border: 1px solid var(--mentor-border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .day-row {
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      background: #fff;
+    }
+
+    .day-row:hover {
+      background: #fafcff;
+    }
+
+    .day-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .day-number {
+      width: 38px;
+      height: 38px;
+      border-radius: 9px;
+      background: var(--mentor-light);
+      color: var(--mentor-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .day-title b {
+      display: block;
+      font-size: 0.86rem;
+    }
+
+    .day-title span {
+      display: block;
+      color: var(--mentor-muted);
+      font-size: 0.74rem;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 650px;
+    }
+
+    .day-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .score-badge {
+      border-radius: 14px;
+      padding: 4px 10px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      background: #eaf7ef;
+      color: #26834a;
+    }
+
+    .detail {
+      display: none;
+      padding: 0 16px 16px 66px;
+      border-top: 1px solid var(--mentor-border);
+      background: #fbfcfe;
+    }
+
+    .day-card.open .detail {
+      display: block;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding-top: 14px;
+    }
+
+    .detail-item {
+      background: #fff;
+      border: 1px solid var(--mentor-border);
+      border-radius: 9px;
+      padding: 11px 12px;
+    }
+
+    .detail-item.full {
+      grid-column: 1/-1;
+    }
+
+    .detail-item label {
+      display: block;
+      color: var(--mentor-muted);
+      font-size: 0.72rem;
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+
+    .detail-item p {
+      margin: 0;
+      font-size: 0.8rem;
+      line-height: 1.55;
+    }
+
+    .score-area {
+      margin-top: 13px;
+      padding: 13px;
+      border: 1px dashed #cbd5e1;
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .score-area label {
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .score-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .score-controls input {
+      width: 90px;
+      padding: 8px;
+      border: 1px solid var(--mentor-border);
+      border-radius: 8px;
+      font: inherit;
+    }
+
+    .score-input {
+      background: #fff;
+    }
+
+    .score-btn {
+      min-width: 110px;
+    }
+
+    .feedback {
+      width: 100%;
+      margin-top: 9px;
+      padding: 8px 10px;
+      border: 1px solid var(--mentor-border);
+      border-radius: 8px;
+      font: inherit;
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    .note {
+      margin-top: 14px;
+      color: var(--mentor-muted);
+      font-size: 0.75rem;
+    }
+
+    .tag {
+      display: inline-block;
+      border-radius: 12px;
+      padding: 4px 9px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
+    .tag.wait {
+      background: #fff3cd;
+      color: #946200;
+    }
+
+    .tag.done {
+      background: #eaf7ef;
+      color: #26834a;
+    }
+
+    @media (max-width: 800px) {
+      .summary {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .detail-item.full {
+        grid-column: auto;
+      }
+
+      .detail {
+        padding-left: 16px;
+      }
+
+      .day-row {
+        align-items: flex-start;
+      }
+
+      .day-actions {
+        flex-direction: column;
+        align-items: flex-end;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .summary {
+        grid-template-columns: 1fr;
+      }
+
+      .day-title span {
+        max-width: 190px;
+      }
+    }
+
+    /* ===== เพิ่มเฉพาะเมนูและ Popup ===== */
+    .mentor-menu {
+      background: #fff;
+      border: 1px solid var(--mentor-border);
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin-bottom: 18px;
+    }
+
+    .mentor-menu h2 {
+      font-family: "Sarabun", sans-serif;
+      font-size: 1rem;
+      margin: 0 0 14px;
+    }
+
+    .mentor-menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .mentor-menu-item {
+      width: 100%;
+      text-decoration: none;
+      color: var(--mentor-text);
+      border: 1px solid var(--mentor-border);
+      border-radius: 12px;
+      padding: 16px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-align: left;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .mentor-menu-item:hover {
+      background: var(--mentor-light);
+      border-color: var(--mentor-primary);
+    }
+
+    .mentor-menu-item:hover .mentor-menu-icon {
+      background: var(--mentor-primary);
+      color: #fff;
+    }
+
+    .mentor-menu-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: var(--mentor-light);
+      color: var(--mentor-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .mentor-menu-text b {
+      display: block;
+      font-family: "Sarabun", sans-serif;
+      font-size: 0.88rem;
+    }
+
+    .mentor-menu-text span {
+      display: block;
+      margin-top: 3px;
+      color: var(--mentor-muted);
+      font-size: 0.72rem;
+      line-height: 1.45;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(15, 23, 42, 0.45);
+      padding: 20px;
+      overflow: auto;
+    }
+
+    .modal.show {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-box {
+      width: min(720px, 100%);
+      max-height: 90vh;
+      overflow: auto;
+      background: #fff;
+      border-radius: 16px;
+      border: 1px solid var(--mentor-border);
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.18);
+    }
+
+    .modal-head {
+      padding: 17px 20px;
+      border-bottom: 1px solid var(--mentor-border);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .modal-head h3 {
+      margin: 0;
+      font-family: "Sarabun", sans-serif;
+      font-size: 1.05rem;
+    }
+
+    .modal-head p {
+      margin: 3px 0 0;
+      color: var(--mentor-muted);
+      font-size: 0.75rem;
+    }
+
+    .modal-close {
+      border: 0;
+      background: transparent;
+      font-size: 1.2rem;
+      color: var(--mentor-muted);
+      cursor: pointer;
+    }
+
+    .modal-body {
+      padding: 20px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group.full {
+      grid-column: 1/-1;
+    }
+
+    .form-group label {
+      font-size: 0.76rem;
+      font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      border: 1px solid var(--mentor-border);
+      border-radius: 9px;
+      padding: 9px 10px;
+      font: inherit;
+      color: var(--mentor-text);
+      background: #fff;
+    }
+
+    .form-group textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .readonly-box {
+      background: #f8fafc;
+      border: 1px solid var(--mentor-border);
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 0.78rem;
+      line-height: 1.6;
+    }
+
+    .choice-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .choice-card {
+      flex: 1;
+      min-width: 210px;
+      border: 1px solid var(--mentor-border);
+      border-radius: 10px;
+      padding: 11px 12px;
+      font-size: 0.78rem;
+      cursor: pointer;
+    }
+
+    .choice-card input {
+      margin-right: 6px;
+    }
+
+    .delegate-area {
+      display: none;
+      margin-top: 12px;
+      padding: 12px;
+      border: 1px dashed #cbd5e1;
+      border-radius: 10px;
+      background: #fbfcfe;
+    }
+
+    .delegate-area.show {
+      display: block;
+    }
+
+    .project-eval-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .project-eval-item {
+      border: 1px solid var(--mentor-border);
+      border-radius: 10px;
+      padding: 12px;
+    }
+
+    .project-eval-item b {
+      display: block;
+      font-size: 0.8rem;
+      margin-bottom: 8px;
+    }
+
+    .score-options {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      font-size: 0.76rem;
+    }
+
+    .modal-actions {
+      padding: 15px 20px;
+      border-top: 1px solid var(--mentor-border);
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 800px) {
+      .mentor-menu-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-group.full {
+        grid-column: auto;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .nav-container {
+        padding: 10px 14px;
+      }
+
+      .brand-logo {
+        width: 40px;
+        height: 40px;
+      }
+
+      .brand-text strong {
+        font-size: 0.95rem;
+      }
+
+      .brand-text span {
+        font-size: 0.68rem;
+      }
+
+      .nav-container > .btn {
+        padding: 8px 10px;
+        font-size: 0;
+      }
+
+      .nav-container > .btn i {
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand">
+        <img src="images/logo_kiwi.png" alt="KIWI Logo" class="brand-logo" />
+        <div class="brand-text">
+          <strong>KIWI</strong>
+          <span>ระบบจัดการสหกิจศึกษา</span>
+        </div>
+      </a>
+      <a href="student_coop.html" class="btn"><i class="fa-solid fa-arrow-left"></i> กลับหน้าบันทึกนักศึกษา</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-head">
+      <div>
+        <h1><i class="fa-solid fa-user-tie"></i> ตรวจบันทึกการปฏิบัติงานประจำวัน</h1>
+        <p>ตรวจสอบรายละเอียดการปฏิบัติงานของนักศึกษาสหกิจศึกษา และให้คะแนนรายวัน</p>
+      </div>
+      <span class="tag wait" id="weekStatus">รอตรวจประจำสัปดาห์</span>
+    </div>
+
+    <!-- ===== เพิ่มเฉพาะเมนูพี่เลี้ยง ===== -->
+    <section class="mentor-menu">
+      <h2><i class="fa-solid fa-bars"></i> เมนูพี่เลี้ยง</h2>
+      <div class="mentor-menu-grid">
+        <a href="student_coop_evaluation.html" class="mentor-menu-item">
+          <div class="mentor-menu-icon">
+            <i class="fa-solid fa-user-check"></i>
+          </div>
+          <div class="mentor-menu-text">
+            <b>ประเมินนักศึกษาสหกิจศึกษา</b>
+            <span>แบบประเมินผลนักศึกษาสหกิจศึกษา</span>
+          </div>
+        </a>
+
+        <button type="button" class="mentor-menu-item" id="openSupervisionModal">
+          <div class="mentor-menu-icon">
+            <i class="fa-solid fa-calendar-check"></i>
+          </div>
+          <div class="mentor-menu-text">
+            <b>ยืนยันการนิเทศ 1 - 2</b>
+            <span>สำหรับสหกิจศึกษา · สามารถมอบหมายผู้แทนได้</span>
+          </div>
+        </button>
+
+        <button type="button" class="mentor-menu-item" id="openProjectModal">
+          <div class="mentor-menu-icon">
+            <i class="fa-solid fa-file-circle-check"></i>
+          </div>
+          <div class="mentor-menu-text">
+            <b>ประเมินโครงการสหกิจศึกษา</b>
+            <span>ประเมินเล่มโครงการ ชิ้นงานโครงการ และโปสเตอร์</span>
+          </div>
+        </button>
+      </div>
+    </section>
+
+    <section class="mentor-card">
+      <div class="mentor-info">
+        <div class="avatar">
+          <i class="fa-solid fa-user-tie"></i>
+        </div>
+
+        <div>
+          <b>คุณณัฐชา วงศ์พิพัฒน์</b>
+
+          <span>
+            Frontend Development Lead / พี่เลี้ยง · natcha.w@bluewave.co.th
+          </span>
+        </div>
+      </div>
+
+      <div style="font-size: 0.78rem; color: var(--mentor-muted)">
+        นักศึกษา: นางสาวพิมพ์ชนก สุขใจ · Frontend Developer · BlueWave Digital Co., Ltd. · ชลบุรี · สัปดาห์ที่ 1
+      </div>
+    </section>
+
+    <div class="summary">
+      <div class="summary-box">
+        <b id="totalDays">5 วัน</b><span>บันทึกในสัปดาห์นี้</span>
+      </div>
+      <div class="summary-box">
+        <b id="checkedDays">2 วัน</b><span>ตรวจและให้คะแนนแล้ว</span>
+      </div>
+      <div class="summary-box">
+        <b id="pendingDays">3 วัน</b><span>รอตรวจ</span>
+      </div>
+      <div class="summary-box">
+        <b id="averageScore">17.5/20</b><span>คะแนนเฉลี่ยที่ตรวจแล้ว</span>
+      </div>
+    </div>
+
+    <section class="week-card">
+      <div class="week-head">
+        <div>
+          <h2>รายละเอียดบันทึกประจำสัปดาห์</h2>
+          <p>1 – 5 กันยายน 2569 · คลิกแต่ละวันเพื่อดูรายละเอียด</p>
+        </div>
+        <button class="btn primary" id="btnScoreAll">
+          <i class="fa-solid fa-check-double"></i> บันทึกคะแนนทั้งหมด
+        </button>
+      </div>
+
+      <div class="day-list">
+        <article class="day-card open" data-day="1" data-scored="true">
+
+          <div class="day-row">
+
+            <div class="day-left">
+
+              <div class="day-number">
+                จ.
+              </div>
+
+              <div class="day-title">
+
+                <b>วันจันทร์ที่ 1 ก.ย. 2569</b>
+
+                <span>
+                  ปฐมนิเทศและฝึกใช้งานระบบภายในบริษัท
+                  และประชุม Sprint Planning กับทีม Frontend
+                </span>
+
+              </div>
+
+            </div>
+
+            <div class="day-actions">
+              <span class="score-badge">
+                18/20 คะแนน
+              </span>
+
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+
+          </div>
+
+
+          <div class="detail">
+
+            <div class="detail-grid">
+
+              <div class="detail-item">
+                <label>งานที่ได้รับมอบหมาย</label>
+
+                <p>
+                  เข้าร่วมการปฐมนิเทศ ศึกษากฎระเบียบ
+                  เครื่องมือภายในบริษัท และเข้าร่วม
+                  Sprint Planning กับทีม Frontend
+                </p>
+              </div>
+
+
+              <div class="detail-item">
+                <label>ผลการปฏิบัติงาน</label>
+
+                <p>
+                  เข้าใจขั้นตอนการทำงานของทีม
+                  เครื่องมือที่ใช้ในโครงการ
+                  และได้รับมอบหมายงานสำหรับสัปดาห์แรก
+                </p>
+              </div>
+
+
+              <div class="detail-item">
+                <label>ปัญหาและอุปสรรค</label>
+
+                <p>
+                  ยังไม่คุ้นเคยกับโครงสร้างโครงการ
+                  และขั้นตอนการทำงานของทีม
+                </p>
+              </div>
+
+
+              <div class="detail-item">
+                <label>การแก้ไข</label>
+
+                <p>
+                  ศึกษาเอกสารภายในบริษัท
+                  และสอบถามขั้นตอนการทำงานจากพี่เลี้ยง
+                </p>
+              </div>
+
+
+              <div class="detail-item full">
+                <label>หมายเหตุ</label>
+
+                <p>
+                  เริ่มต้นการปฏิบัติงานสหกิจศึกษาและเตรียมสภาพแวดล้อม
+                  สำหรับการพัฒนา Frontend
+                </p>
+              </div>
+
+            </div>
+
+
+            <div class="score-area">
+
+              <label>
+                คะแนนการปฏิบัติงาน (เต็ม 20)
+              </label>
+
+              <div class="score-controls">
+
+                <input class="score-input" type="number" min="0" max="20" value="18">
+
+                <button class="btn primary score-btn">
+                  บันทึกคะแนน
+                </button>
+
+                <span class="tag done">
+                  ให้คะแนนแล้ว
+                </span>
+
+              </div>
+
+              <textarea class="feedback"
+                placeholder="ข้อเสนอแนะจากพี่เลี้ยง">สามารถปรับตัวเข้ากับทีมได้ดี ควรศึกษาโครงสร้างโครงการเพิ่มเติม</textarea>
+
+            </div>
+
+          </div>
+
+        </article>
+
+        <article class="day-card" data-day="2" data-scored="true">
+
+          <div class="day-row">
+
+            <div class="day-left">
+
+              <div class="day-number">
+                อ.
+              </div>
+
+              <div class="day-title">
+
+                <b>วันอังคารที่ 2 ก.ย. 2569</b>
+
+                <span>
+                  ศึกษาโครงสร้าง React Project,
+                  Design System และ Git Flow ของบริษัท
+                </span>
+
+              </div>
+
+            </div>
+
+            <div class="day-actions">
+
+              <span class="score-badge">
+                17/20 คะแนน
+              </span>
+
+              <i class="fa-solid fa-chevron-down"></i>
+
+            </div>
+
+          </div>
+
+
+          <div class="detail">
+
+            <div class="detail-grid">
+
+              <div class="detail-item">
+                <label>งานที่ได้รับมอบหมาย</label>
+
+                <p>
+                  ศึกษาโครงสร้าง React Project,
+                  Component, Design System
+                  และขั้นตอน Git Flow ของทีม
+                </p>
+              </div>
+
+
+              <div class="detail-item">
+                <label>ผลการปฏิบัติงาน</label>
+
+                <p>
+                  สามารถติดตั้งโครงการบนเครื่อง
+                  และทดลองสร้าง Component
+                  ตาม Design System ของบริษัทได้
+                </p>
+              </div>
+
+
+              <div class="detail-item">
+                <label>ปัญหาและอุปสรรค</label>
+
+                <p>
+                  ยังไม่เข้าใจการแบ่ง Component
+                  และรูปแบบการตั้งชื่อบางส่วนของโครงการ
+                </p>
+              </div>
+
+
+              <div class="detail-item">
+                <label>การแก้ไข</label>
+
+                <p>
+                  ศึกษา Source Code เดิม
+                  และสอบถามแนวทางจากพี่เลี้ยง
+                </p>
+              </div>
+
+
+              <div class="detail-item full">
+                <label>หมายเหตุ</label>
+
+                <p>
+                  ทดลอง Commit และสร้าง Branch
+                  ตาม Git Flow ของทีม
+                </p>
+              </div>
+
+            </div>
+
+
+            <div class="score-area">
+
+              <label>
+                คะแนนการปฏิบัติงาน (เต็ม 20)
+              </label>
+
+              <div class="score-controls">
+
+                <input class="score-input" type="number" min="0" max="20" value="17">
+
+                <button class="btn primary score-btn">
+                  บันทึกคะแนน
+                </button>
+
+                <span class="tag done">
+                  ให้คะแนนแล้ว
+                </span>
+
+              </div>
+
+              <textarea class="feedback"
+                placeholder="ข้อเสนอแนะจากพี่เลี้ยง">เรียนรู้ได้รวดเร็ว ควรฝึกใช้งาน Git และศึกษา Component เดิมเพิ่มเติม</textarea>
+
+            </div>
+
+          </div>
+
+        </article>
+
+        <article class="day-card" data-day="3" data-scored="false">
+
+          <div class="day-row">
+
+            <div class="day-left">
+
+              <div class="day-number">
+                พ.
+              </div>
+
+              <div class="day-title">
+
+                <b>วันพุธที่ 3 ก.ย. 2569</b>
+
+                <span>
+                  ออกแบบหน้า Dashboard ใน Figma
+                  และปรับ Component ตามข้อเสนอแนะของพี่เลี้ยง
+                </span>
+
+              </div>
+
+            </div>
+
+            <div class="day-actions">
+
+              <span class="tag wait">
+                รอตรวจ
+              </span>
+
+              <i class="fa-solid fa-chevron-down"></i>
+
+            </div>
+
+          </div>
+
+
+          <div class="detail">
+
+            <div class="detail-grid">
+
+              <div class="detail-item">
+
+                <label>
+                  งานที่ได้รับมอบหมาย
+                </label>
+
+                <p>
+                  ออกแบบหน้า Dashboard
+                  สำหรับแสดงข้อมูลการทำงานใน Figma
+                </p>
+
+              </div>
+
+
+              <div class="detail-item">
+
+                <label>
+                  ผลการปฏิบัติงาน
+                </label>
+
+                <p>
+                  ออกแบบ Layout, Navigation,
+                  Summary Card และ Component
+                  สำหรับแสดงข้อมูลเบื้องต้น
+                </p>
+
+              </div>
+
+
+              <div class="detail-item">
+
+                <label>
+                  ปัญหาและอุปสรรค
+                </label>
+
+                <p>
+                  การจัดวางข้อมูลในหน้าจอขนาดเล็ก
+                  ยังไม่เหมาะสม
+                </p>
+
+              </div>
+
+
+              <div class="detail-item">
+
+                <label>
+                  การแก้ไข
+                </label>
+
+                <p>
+                  ปรับ Layout ตามคำแนะนำของพี่เลี้ยง
+                  และออกแบบ Responsive Layout เพิ่มเติม
+                </p>
+
+              </div>
+
+
+              <div class="detail-item full">
+
+                <label>
+                  หมายเหตุ
+                </label>
+
+                <p>
+                  ส่ง Prototype ให้พี่เลี้ยง
+                  ตรวจสอบก่อนเริ่มพัฒนา
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="score-area">
+
+              <label>
+                คะแนนการปฏิบัติงาน (เต็ม 20)
+              </label>
+
+              <div class="score-controls">
+
+                <input class="score-input" type="number" min="0" max="20" placeholder="0-20">
+
+                <button class="btn primary score-btn">
+                  บันทึกคะแนน
+                </button>
+
+                <span class="tag wait">
+                  ยังไม่ได้ให้คะแนน
+                </span>
+
+              </div>
+
+              <textarea class="feedback" placeholder="ข้อเสนอแนะจากพี่เลี้ยง"></textarea>
+
+            </div>
+
+          </div>
+
+        </article>
+
+        <article class="day-card" data-day="4" data-scored="false">
+
+          <div class="day-row">
+
+            <div class="day-left">
+
+              <div class="day-number">
+                พฤ.
+              </div>
+
+              <div class="day-title">
+
+                <b>วันพฤหัสบดีที่ 4 ก.ย. 2569</b>
+
+                <span>
+                  เชื่อมต่อ REST API สำหรับดึงข้อมูล
+                  มาแสดงบน Dashboard
+                </span>
+
+              </div>
+
+            </div>
+
+            <div class="day-actions">
+
+              <span class="tag wait">
+                รอตรวจ
+              </span>
+
+              <i class="fa-solid fa-chevron-down"></i>
+
+            </div>
+
+          </div>
+
+
+          <div class="detail">
+
+            <div class="detail-grid">
+
+              <div class="detail-item">
+                <label>งานที่ได้รับมอบหมาย</label>
+
+                <p>
+                  เชื่อมต่อ REST API
+                  เพื่อดึงข้อมูลจาก Backend
+                  มาแสดงบนหน้า Dashboard
+                </p>
+              </div>
+
+
+              <div class="detail-item">
+                <label>ผลการปฏิบัติงาน</label>
+
+                <p>
+                  สามารถดึงข้อมูลจาก API
+                  และนำมาแสดงใน Component ได้สำเร็จ
+                </p>
+              </div>
+
+
+              <div class="detail-item">
+                <label>ปัญหาและอุปสรรค</label>
+
+                <p>
+                  รูปแบบข้อมูลจาก API บางส่วน
+                  ไม่ตรงกับโครงสร้าง Component
+                </p>
+              </div>
+
+
+              <div class="detail-item">
+                <label>การแก้ไข</label>
+
+                <p>
+                  ปรับการ Mapping ข้อมูล
+                  และเพิ่มเงื่อนไขตรวจสอบค่า
+                  ก่อนนำมาแสดงผล
+                </p>
+              </div>
+
+
+              <div class="detail-item full">
+                <label>หมายเหตุ</label>
+
+                <p>
+                  ทดสอบการแสดงผลด้วยข้อมูล Mockup
+                  และข้อมูลจาก API
+                </p>
+              </div>
+
+            </div>
+
+
+            <div class="score-area">
+
+              <label>
+                คะแนนการปฏิบัติงาน (เต็ม 20)
+              </label>
+
+              <div class="score-controls">
+
+                <input class="score-input" type="number" min="0" max="20" placeholder="0-20">
+
+                <button class="btn primary score-btn">
+                  บันทึกคะแนน
+                </button>
+
+                <span class="tag wait">
+                  ยังไม่ได้ให้คะแนน
+                </span>
+
+              </div>
+
+              <textarea class="feedback" placeholder="ข้อเสนอแนะจากพี่เลี้ยง"></textarea>
+
+            </div>
+
+          </div>
+
+        </article>
+
+        <article class="day-card" data-day="5" data-scored="false">
+
+          <div class="day-row">
+
+            <div class="day-left">
+
+              <div class="day-number">
+                ศ.
+              </div>
+
+              <div class="day-title">
+
+                <b>วันศุกร์ที่ 5 ก.ย. 2569</b>
+
+                <span>
+                  พัฒนา Component สำหรับแสดงข้อมูลสถิติ
+                  และกราฟบนหน้า Dashboard
+                </span>
+
+              </div>
+
+            </div>
+
+            <div class="day-actions">
+
+              <span class="tag wait">
+                รอตรวจ
+              </span>
+
+              <i class="fa-solid fa-chevron-down"></i>
+
+            </div>
+
+          </div>
+
+
+          <div class="detail">
+
+            <div class="detail-grid">
+
+              <div class="detail-item">
+                <label>งานที่ได้รับมอบหมาย</label>
+
+                <p>
+                  พัฒนา Summary Card
+                  และ Component สำหรับแสดงกราฟ
+                  บนหน้า Dashboard
+                </p>
+              </div>
+
+
+              <div class="detail-item">
+                <label>ผลการปฏิบัติงาน</label>
+
+                <p>
+                  สามารถสร้าง Component
+                  และแสดงข้อมูลสถิติจาก API
+                  ได้ตามแบบที่ออกแบบไว้
+                </p>
+              </div>
+
+
+              <div class="detail-item">
+                <label>ปัญหาและอุปสรรค</label>
+
+                <p>
+                  การแสดงกราฟในหน้าจอขนาดเล็ก
+                  มีบางส่วนเกินพื้นที่
+                </p>
+              </div>
+
+
+              <div class="detail-item">
+                <label>การแก้ไข</label>
+
+                <p>
+                  ปรับขนาด Component
+                  และเพิ่ม Responsive CSS
+                  สำหรับหน้าจอแต่ละขนาด
+                </p>
+              </div>
+
+
+              <div class="detail-item full">
+                <label>หมายเหตุ</label>
+
+                <p>
+                  เตรียมงานสำหรับทดสอบ
+                  Responsive Design ในวันถัดไป
+                </p>
+              </div>
+
+            </div>
+
+
+            <div class="score-area">
+
+              <label>
+                คะแนนการปฏิบัติงาน (เต็ม 20)
+              </label>
+
+              <div class="score-controls">
+
+                <input class="score-input" type="number" min="0" max="20" placeholder="0-20">
+
+                <button class="btn primary score-btn">
+                  บันทึกคะแนน
+                </button>
+
+                <span class="tag wait">
+                  ยังไม่ได้ให้คะแนน
+                </span>
+
+              </div>
+
+              <textarea class="feedback" placeholder="ข้อเสนอแนะจากพี่เลี้ยง"></textarea>
+
+            </div>
+
+          </div>
+
+        </article>
+      </div>
+      <div style="padding: 0 18px 18px">
+        <p class="note">
+          <i class="fa-solid fa-circle-info"></i> ข้อมูลทั้งหมดเป็น Mockup
+          สำหรับการออกแบบระบบ เมื่อกดบันทึกคะแนน
+          ระบบจะแสดงผลการบันทึกบนหน้านี้
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Popup ยืนยันการนิเทศ 1 - 2 ===== -->
+  <div class="modal" id="supervisionModal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <div>
+          <h3>
+            <i class="fa-solid fa-calendar-check"></i> ยืนยันการนิเทศ 1 - 2
+          </h3>
+          <p>สำหรับนักศึกษาสหกิจศึกษา · ข้อมูล Mockup</p>
+        </div>
+        <button class="modal-close" type="button" data-close="supervisionModal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="readonly-box">
+          <b>นักศึกษา:</b>
+          นางสาวพิมพ์ชนก สุขใจ · รหัส 6702458196
+          <br>
+
+          <b>สาขา:</b>
+          วิศวกรรมสารสนเทศและเครือข่าย
+          <br>
+
+          <b>สถานประกอบการ:</b>
+          BlueWave Digital Co., Ltd.
+        </div>
+
+        <div class="form-grid" style="margin-top: 14px">
+          <div class="form-group">
+            <label>ครั้งที่นิเทศ</label>
+            <select id="supervisionRound">
+              <option value="1">นิเทศครั้งที่ 1</option>
+              <option value="2">นิเทศครั้งที่ 2</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>วันนัดหมายนิเทศ</label>
+            <input type="date" value="2026-10-20" />
+          </div>
+
+          <div class="form-group">
+            <label>เวลา</label>
+            <input type="time" value="10:00" />
+          </div>
+
+          <div class="form-group">
+            <label>รูปแบบการนิเทศ</label>
+            <select>
+              <option>ณ สถานประกอบการ</option>
+              <option>ออนไลน์</option>
+            </select>
+          </div>
+
+          <div class="form-group full">
+            <label>ผู้เข้าร่วมการนิเทศ</label>
+            <div class="choice-row">
+              <label class="choice-card">
+                <input type="radio" name="supervisionPerson" value="self" checked />
+                ยืนยันเข้าร่วมด้วยตนเอง
+              </label>
+              <label class="choice-card">
+                <input type="radio" name="supervisionPerson" value="delegate" />
+                มอบหมายผู้แทนเข้าร่วมแทน
+              </label>
+            </div>
+
+            <div class="delegate-area" id="delegateArea">
+
+              <div class="form-grid">
+
+                <div class="form-group">
+                  <label>ชื่อ – สกุล ผู้แทน</label>
+
+                  <input type="text" id="delegateName" value="คุณภาคิน รัตนชัย">
+                </div>
+
+
+                <div class="form-group">
+                  <label>ตำแหน่ง</label>
+
+                  <input type="text" value="Senior Frontend Developer">
+                </div>
+
+
+                <div class="form-group">
+                  <label>เบอร์โทรศัพท์</label>
+
+                  <input type="text" value="086-418-7253">
+                </div>
+
+
+                <div class="form-group">
+                  <label>อีเมล</label>
+
+                  <input type="email" value="phakin.r@bluewave.co.th">
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+          <div class="form-group full">
+            <label>หมายเหตุ</label>
+            <textarea>สามารถเข้าร่วมการนิเทศตามวันและเวลาที่กำหนด</textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn" type="button" data-close="supervisionModal">
+          ยกเลิก
+        </button>
+        <button class="btn primary" type="button" id="saveSupervision">
+          <i class="fa-solid fa-check"></i> ยืนยันข้อมูล
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Popup ประเมินโครงการสหกิจศึกษา ===== -->
+  <div class="modal" id="projectModal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <div>
+          <h3>
+            <i class="fa-solid fa-file-circle-check"></i>
+            ประเมินโครงการสหกิจศึกษา
+          </h3>
+          <p>ประเมินเล่มโครงการ ชิ้นงานโครงการ และโปสเตอร์ · ข้อมูล Mockup</p>
+        </div>
+        <button class="modal-close" type="button" data-close="projectModal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="readonly-box">
+          <b>นักศึกษา:</b> นางสาวพิมพ์ชนก สุขใจ · รหัส 6702458196<br />
+          <b>ชื่อโครงการ:</b> ระบบแดชบอร์ดสำหรับติดตามและแสดงผลข้อมูลการปฏิบัติงาน<br />
+          <b>สถานประกอบการ:</b> BlueWave Digital Co., Ltd.
+        </div>
+
+        <div class="project-eval-grid" style="margin-top: 14px">
+          <div class="project-eval-item">
+            <b>1. เล่มโครงการ</b>
+            <div class="score-options">
+              <label><input type="radio" name="projectBook" value="4" checked />
+                ดีมาก (4)</label>
+              <label><input type="radio" name="projectBook" value="3" /> ดี
+                (3)</label>
+              <label><input type="radio" name="projectBook" value="2" /> พอใช้
+                (2)</label>
+              <label><input type="radio" name="projectBook" value="1" />
+                ต้องปรับปรุง (1)</label>
+            </div>
+          </div>
+
+          <div class="project-eval-item">
+            <b>2. ชิ้นงานโครงการ</b>
+            <div class="score-options">
+              <label><input type="radio" name="projectWork" value="4" /> ดีมาก
+                (4)</label>
+              <label><input type="radio" name="projectWork" value="3" checked />
+                ดี (3)</label>
+              <label><input type="radio" name="projectWork" value="2" /> พอใช้
+                (2)</label>
+              <label><input type="radio" name="projectWork" value="1" />
+                ต้องปรับปรุง (1)</label>
+            </div>
+          </div>
+
+          <div class="project-eval-item">
+            <b>3. โปสเตอร์โครงการ</b>
+            <div class="score-options">
+              <label><input type="radio" name="projectPoster" value="4" checked />
+                ดีมาก (4)</label>
+              <label><input type="radio" name="projectPoster" value="3" /> ดี
+                (3)</label>
+              <label><input type="radio" name="projectPoster" value="2" /> พอใช้
+                (2)</label>
+              <label><input type="radio" name="projectPoster" value="1" />
+                ต้องปรับปรุง (1)</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-grid" style="margin-top: 14px">
+          <div class="form-group full">
+            <label>ข้อเสนอแนะเพิ่มเติม</label>
+<textarea id="projectComment">โครงการมีการออกแบบส่วนติดต่อผู้ใช้ที่เป็นระบบ Dashboard ได้เหมาะสม สามารถแสดงข้อมูลจากระบบได้ชัดเจนและใช้งานได้จริง ควรปรับปรุงการแสดงผลบนอุปกรณ์ขนาดเล็กและจัดทำเอกสารอธิบาย Component เพิ่มเติม</textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn" type="button" data-close="projectModal">
+          ยกเลิก
+        </button>
+        <button class="btn primary" type="button" id="saveProjectEvaluation">
+          <i class="fa-solid fa-floppy-disk"></i> บันทึกการประเมิน
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll(".day-row").forEach((row) => {
+      row.addEventListener("click", () =>
+        row.closest(".day-card").classList.toggle("open"),
+      );
+    });
+
+    function refreshSummary() {
+      const cards = [...document.querySelectorAll(".day-card")];
+      const scored = cards.filter((c) => c.dataset.scored === "true");
+      const scores = scored.map((c) =>
+        Number(c.querySelector(".score-input")?.value || 0),
+      );
+      document.getElementById("totalDays").textContent =
+        cards.length + " วัน";
+      document.getElementById("checkedDays").textContent =
+        scored.length + " วัน";
+      document.getElementById("pendingDays").textContent =
+        cards.length - scored.length + " วัน";
+      if (scores.length) {
+        const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
+        document.getElementById("averageScore").textContent =
+          avg.toFixed(1) + "/20";
+      } else document.getElementById("averageScore").textContent = "0/20";
+      document.getElementById("weekStatus").textContent =
+        scored.length === cards.length ? "ตรวจครบแล้ว" : "รอตรวจประจำสัปดาห์";
+      document.getElementById("weekStatus").className =
+        "tag " + (scored.length === cards.length ? "done" : "wait");
+    }
+
+    document.querySelectorAll(".score-btn").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const card = btn.closest(".day-card");
+        const input = card.querySelector(".score-input");
+        const value = Number(input.value);
+        if (!input.value || value < 0 || value > 20) {
+          alert("กรุณากรอกคะแนนระหว่าง 0 - 20 คะแนน");
+          return;
+        }
+        card.dataset.scored = "true";
+        const actions = card.querySelector(".day-actions");
+        actions.innerHTML =
+          '<span class="score-badge">' +
+          value +
+          '/20 คะแนน</span><i class="fa-solid fa-chevron-down"></i>';
+        const scoreArea = card.querySelector(".score-area");
+        const status = scoreArea.querySelector(".tag");
+        status.textContent = "ให้คะแนนแล้ว";
+        status.className = "tag done";
+        alert("บันทึกคะแนนเรียบร้อยแล้ว (Mockup)");
+        refreshSummary();
+      });
+    });
+
+    document.getElementById("btnScoreAll").addEventListener("click", () => {
+      const pending = [...document.querySelectorAll(".day-card")].filter(
+        (c) => c.dataset.scored !== "true",
+      );
+      if (!pending.length) {
+        alert("บันทึกคะแนนครบทั้ง 5 วันแล้ว (Mockup)");
+        return;
+      }
+      alert(
+        "กรุณาเปิดแต่ละวันและกรอกคะแนน จากนั้นกด “บันทึกคะแนน” ในวันนั้น",
+      );
+    });
+    refreshSummary();
+
+    // ===== เพิ่มเฉพาะ JavaScript สำหรับ Popup =====
+    function openModal(id) {
+      document.getElementById(id).classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove("show");
+      document.body.style.overflow = "";
+    }
+
+    document
+      .getElementById("openSupervisionModal")
+      .addEventListener("click", () => openModal("supervisionModal"));
+    document
+      .getElementById("openProjectModal")
+      .addEventListener("click", () => openModal("projectModal"));
+
+    document.querySelectorAll("[data-close]").forEach((btn) => {
+      btn.addEventListener("click", () => closeModal(btn.dataset.close));
+    });
+
+    document.querySelectorAll(".modal").forEach((modal) => {
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal(modal.id);
+      });
+    });
+
+    document
+      .querySelectorAll('input[name="supervisionPerson"]')
+      .forEach((radio) => {
+        radio.addEventListener("change", () => {
+          document
+            .getElementById("delegateArea")
+            .classList.toggle(
+              "show",
+              radio.value === "delegate" && radio.checked,
+            );
+        });
+      });
+
+    document
+      .getElementById("saveSupervision")
+      .addEventListener("click", () => {
+        const type = document.querySelector(
+          'input[name="supervisionPerson"]:checked',
+        ).value;
+        if (
+          type === "delegate" &&
+          !document.getElementById("delegateName").value.trim()
+        ) {
+          alert("กรุณากรอกชื่อผู้แทน");
+          return;
+        }
+        alert(
+          type === "delegate"
+            ? "บันทึกการยืนยันและมอบหมายผู้แทนเรียบร้อยแล้ว (Mockup)"
+            : "บันทึกการยืนยันการนิเทศเรียบร้อยแล้ว (Mockup)",
+        );
+        closeModal("supervisionModal");
+      });
+
+    document
+      .getElementById("saveProjectEvaluation")
+      .addEventListener("click", () => {
+        const book = Number(
+          document.querySelector('input[name="projectBook"]:checked').value,
+        );
+        const work = Number(
+          document.querySelector('input[name="projectWork"]:checked').value,
+        );
+        const poster = Number(
+          document.querySelector('input[name="projectPoster"]:checked').value,
+        );
+        const total = book + work + poster;
+        alert(
+          "บันทึกการประเมินโครงการเรียบร้อยแล้ว (Mockup)\nคะแนนรวม: " +
+          total +
+          " / 12",
+        );
+        closeModal("projectModal");
+      });
+  </script>
+</body>
+
+</html>

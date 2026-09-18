@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>ลงประกาศรับนักศึกษาสหกิจศึกษา | KIWI</title>
+
+    <link rel="stylesheet" href="style.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sarabun:wght@500;600;700&family=Noto+Sans+Thai:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      /* ==========================================
+     Recruit Student / Company Job Post Form
+     ========================================== */
+
+      .form-container {
+        background: #ffffff;
+        padding: 2.2rem 2.5rem;
+        border: 1px solid var(--border-color);
+        border-radius: 18px;
+        box-shadow: 0 8px 25px rgba(11, 18, 32, 0.06);
+      }
+
+      /* Header */
+      .form-container h2 {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+
+        font-size: 1.55rem;
+        font-weight: 700;
+        color: var(--primary-color);
+      }
+
+      .form-container h2 i {
+        font-size: 1.4rem;
+      }
+
+      .form-container > p {
+        font-size: 0.92rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+
+      /* ==========================================
+     Form Section
+     ========================================== */
+
+      .form-section {
+        padding-bottom: 1.6rem;
+        margin-bottom: 1.6rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .form-section:last-of-type {
+        border-bottom: none;
+      }
+
+      .form-section-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        margin-bottom: 1.2rem;
+
+        color: var(--primary-color);
+        font-size: 1rem;
+        font-weight: 700;
+      }
+
+      .form-section-title i {
+        width: 20px;
+        text-align: center;
+      }
+
+      .required {
+        color: #dc2626;
+      }
+
+      .label-note {
+        color: var(--text-muted);
+        font-size: 0.8rem;
+        font-weight: 400;
+      }
+
+      /* ==========================================
+     Form Layout
+     ========================================== */
+
+      .form-container .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+
+        margin-bottom: 1.4rem;
+      }
+
+      .form-container .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .form-container .form-group label {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--text-dark);
+      }
+
+      /* ==========================================
+     Input / Select
+     ========================================== */
+
+      .form-container .filter-input,
+      .form-container .filter-select {
+        width: 100%;
+        height: 48px;
+
+        padding: 0 14px;
+
+        background: #f8fafc;
+
+        border: 1px solid #d5deeb;
+        border-radius: 10px;
+
+        color: var(--text-dark);
+        font-size: 0.9rem;
+
+        outline: none;
+
+        transition:
+          border-color 0.2s ease,
+          box-shadow 0.2s ease,
+          background-color 0.2s ease;
+      }
+
+      .form-container .filter-input::placeholder {
+        color: #8996aa;
+      }
+
+      .form-container .filter-input:focus,
+      .form-container .filter-select:focus {
+        background: #ffffff;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(20, 80, 163, 0.1);
+      }
+
+      /* ==========================================
+     Work Format Checkbox
+     ========================================== */
+
+      .work-format-group {
+        margin-top: 1.4rem;
+      }
+
+      .work-format-options {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+
+        padding-top: 4px;
+      }
+
+      .form-container .custom-checkbox {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        font-size: 0.9rem;
+        color: var(--text-dark);
+
+        cursor: pointer;
+      }
+
+      .form-container .custom-checkbox input {
+        width: 18px;
+        height: 18px;
+
+        accent-color: var(--primary-color);
+
+        cursor: pointer;
+      }
+
+      /* ==========================================
+     Security Verification
+     ========================================== */
+
+      .security-confirm {
+        width: 100%;
+        min-height: 54px;
+
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        padding: 14px 16px;
+
+        background: #f8fafc;
+
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+
+        cursor: pointer;
+
+        transition:
+          border-color 0.2s ease,
+          background-color 0.2s ease;
+      }
+
+      .security-confirm:hover {
+        background: #ffffff;
+        border-color: var(--primary-color);
+      }
+
+      .security-confirm input {
+        width: 18px;
+        height: 18px;
+
+        accent-color: var(--primary-color);
+
+        cursor: pointer;
+      }
+
+      .security-icon {
+        margin-left: auto;
+
+        color: var(--primary-color);
+
+        font-size: 1.2rem;
+      }
+
+      /* ==========================================
+     Submit Button
+     ========================================== */
+
+      .form-container .btn-submit {
+        width: 100%;
+
+        padding: 13px 18px;
+
+        background: var(--primary-color);
+
+        border: none;
+        border-radius: 10px;
+
+        color: #ffffff;
+
+        font-size: 0.95rem;
+        font-weight: 600;
+
+        cursor: pointer;
+
+        transition:
+          background-color 0.2s ease,
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .form-container .btn-submit:hover {
+        background: var(--primary-hover);
+
+        transform: translateY(-1px);
+
+        box-shadow: 0 5px 15px rgba(20, 80, 163, 0.18);
+      }
+
+      /* ==========================================
+     Responsive
+     ========================================== */
+
+      @media (max-width: 768px) {
+        .form-container {
+          padding: 1.5rem;
+        }
+
+        .form-container .form-row {
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
+
+        .form-container h2 {
+          font-size: 1.3rem;
+        }
+
+        .work-format-options {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 12px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="brand">
+          <img src="images/logo_kiwi.png" alt="KIWI Logo" class="brand-logo" />
+          <span>ระบบจัดการสหกิจศึกษา</span>
+        </a>
+
+        <ul class="nav-links">
+          <li>
+            <a href="index.html"> หน้าแรก </a>
+          </li>
+
+          <li>
+            <a href="search_company.html"> ค้นหาสถานประกอบการ </a>
+          </li>
+
+          <li class="active">
+            <a href="recruit_student.html"> ลงประกาศรับนักศึกษาสหกิจศึกษา </a>
+          </li>
+
+          <li>
+            <a href="https://sites.google.com/fitm.kmutnb.ac.th/it-coop"> คู่มือ </a>
+          </li>
+
+          <li>
+            <a href="#" id="navChatbotBtn"> แชทบอท </a>
+          </li>
+        </ul>
+
+        <div class="auth-buttons" id="navAuth">
+          <a href="login.html" class="btn-login"> เข้าสู่ระบบ </a>
+
+          <a href="register.html" class="btn-register"> สมัครสมาชิก </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content" style="max-width: 800px; margin: 3rem auto">
+      <div class="form-container">
+        <h2 style="color: var(--primary-color); margin-bottom: 0.5rem">
+          <i class="fa-solid fa-bullhorn"></i>
+
+          ลงประกาศรับนักศึกษาสหกิจศึกษา
+
+          <span
+            style="font-size: 1rem; color: var(--text-muted); font-weight: 400"
+          >
+            (สำหรับสถานประกอบการ ไม่ต้องเข้าสู่ระบบ)
+          </span>
+        </h2>
+
+        <p style="color: var(--text-muted); margin-bottom: 2rem">
+          กรอกรายละเอียดตำแหน่งงาน เพื่อให้นักศึกษาสหกิจศึกษาค้นหาและยื่นคำร้อง
+        </p>
+
+        <form id="recruitForm">
+          <!-- ข้อมูลสถานประกอบการ -->
+          <div class="form-section">
+            <h3 class="form-section-title">
+              <i class="fa-solid fa-building"></i>
+              ข้อมูลสถานประกอบการ
+            </h3>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="companyName">
+                  ชื่อสถานประกอบการ
+                  <span class="required">*</span>
+                </label>
+
+                <input
+                  type="text"
+                  id="companyName"
+                  class="filter-input"
+                  required
+                  placeholder="เช่น บริษัท เอบีซี จำกัด"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="companyEmail">
+                  Email ติดต่อ
+                  <span class="required">*</span>
+                </label>
+
+                <input
+                  type="email"
+                  id="companyEmail"
+                  class="filter-input"
+                  required
+                  placeholder="เช่น hr@company.com"
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="location">
+                สถานที่ปฏิบัติงาน (จังหวัด/เขต)
+                <span class="required">*</span>
+              </label>
+
+              <input
+                type="text"
+                id="location"
+                class="filter-input"
+                required
+                placeholder="เช่น กทม. - พญาไท"
+              />
+            </div>
+          </div>
+
+          <!-- ข้อมูลตำแหน่งงาน -->
+          <div class="form-section">
+            <h3 class="form-section-title">
+              <i class="fa-solid fa-briefcase"></i>
+              ข้อมูลตำแหน่งสหกิจศึกษา
+            </h3>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="jobTitle">
+                  ชื่อตำแหน่งงาน
+                  <span class="required">*</span>
+                </label>
+
+                <input
+                  type="text"
+                  id="jobTitle"
+                  class="filter-input"
+                  required
+                  placeholder="เช่น Frontend Developer"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="category">
+                  หมวดหมู่งาน
+                  <span class="required">*</span>
+                </label>
+
+                <select id="category" class="filter-select" required>
+                  <option value="">เลือกหมวดหมู่</option>
+                  <option value="ไอที/พัฒนาเว็บไซต์">ไอที/พัฒนาเว็บไซต์</option>
+                  <option value="ไอที/โปรแกรมเมอร์">ไอที/โปรแกรมเมอร์</option>
+                  <option value="ไอที/ออกแบบระบบ">ไอที/ออกแบบระบบ</option>
+                  <option value="ไอที/เครือข่าย">ไอที/เครือข่าย</option>
+                  <option value="ไอที/วิเคราะห์ข้อมูล">
+                    ไอที/วิเคราะห์ข้อมูล
+                  </option>
+                  <option value="ไอที/ออกแบบกราฟิก">ไอที/ออกแบบกราฟิก</option>
+                  <option value="ไอที/อื่น ๆ">ไอที/อื่น ๆ</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="quota">
+                  จำนวนที่รับ (อัตรา)
+                  <span class="required">*</span>
+                </label>
+
+                <input
+                  type="number"
+                  id="quota"
+                  class="filter-input"
+                  required
+                  min="1"
+                  placeholder="เช่น 2"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="salary">
+                  เบี้ยเลี้ยง / ค่าตอบแทน
+                  <span class="required">*</span>
+                </label>
+
+                <input
+                  type="text"
+                  id="salary"
+                  class="filter-input"
+                  required
+                  placeholder="เช่น 300 บาท/วัน หรือ ไม่ระบุ"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- รูปแบบการปฏิบัติงาน -->
+          <div class="form-section">
+            <h3 class="form-section-title">
+              <i class="fa-solid fa-calendar-days"></i>
+              รูปแบบการปฏิบัติงาน
+            </h3>
+
+            <div class="form-group">
+              <label for="workDays">
+                จำนวนวันการทำงาน
+                <span class="required">*</span>
+              </label>
+
+              <select id="workDays" class="filter-select" required>
+                <option value="">เลือกวันทำงาน</option>
+                <option value="จันทร์-ศุกร์">
+                  จันทร์-ศุกร์ (5 วัน/สัปดาห์)
+                </option>
+                <option value="จันทร์-เสาร์">
+                  จันทร์-เสาร์ (6 วัน/สัปดาห์)
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group work-format-group">
+              <label>
+                รูปแบบการทำงาน
+                <span class="required">*</span>
+                <span class="label-note"> (เลือกได้มากกว่า 1) </span>
+              </label>
+
+              <div class="work-format-options">
+                <label class="custom-checkbox">
+                  <input
+                    type="checkbox"
+                    name="workFormat"
+                    value="On-site"
+                    checked
+                  />
+                  <span>On-site</span>
+                </label>
+
+                <label class="custom-checkbox">
+                  <input
+                    type="checkbox"
+                    name="workFormat"
+                    value="Work from Home"
+                  />
+                  <span>Work From Home</span>
+                </label>
+
+                <label class="custom-checkbox">
+                  <input type="checkbox" name="workFormat" value="Hybrid" />
+                  <span>Hybrid</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- การยืนยันความปลอดภัย -->
+          <div class="form-section">
+            <h3 class="form-section-title">
+              <i class="fa-solid fa-shield-halved"></i>
+              การยืนยันความปลอดภัย
+            </h3>
+
+            <label class="security-confirm">
+              <input type="checkbox" id="captchaConfirm" required />
+
+              <span> ฉันไม่ใช่โปรแกรมอัตโนมัติ </span>
+
+              <i class="fa-solid fa-shield-halved security-icon"></i>
+            </label>
+          </div>
+
+          <!-- Submit -->
+          <button type="submit" class="btn-submit">
+            <i class="fa-solid fa-paper-plane"></i>
+            ยืนยันการลงประกาศ
+          </button>
+        </form>
+      </div>
+    </main>
+
+  <footer class="footer">
+    <div class="footer-copyright">
+      <p>© KIWI — Co-operative Education Management System</p>
+    </div>
+  </footer>
+
+    <script type="module" src="main.js"></script>
+
+    <!-- Script จัดการแบบฟอร์มและ CAPTCHA -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("recruitForm");
+
+        form.addEventListener("submit", (event) => {
+          event.preventDefault();
+
+          const companyName = document.getElementById("companyName").value;
+          const companyEmail = document.getElementById("companyEmail").value;
+          const location = document.getElementById("location").value;
+          const jobTitle = document.getElementById("jobTitle").value;
+          const category = document.getElementById("category").value;
+          const quota = document.getElementById("quota").value;
+          const salary = document.getElementById("salary").value;
+          const workDays = document.getElementById("workDays").value;
+          const captchaConfirm = document.getElementById("captchaConfirm");
+
+          const selectedWorkFormats = Array.from(
+            document.querySelectorAll('input[name="workFormat"]:checked'),
+          ).map((checkbox) => checkbox.value);
+
+          if (selectedWorkFormats.length === 0) {
+            alert("กรุณาเลือกรูปแบบการทำงานอย่างน้อย 1 รายการ");
+            return;
+          }
+
+          if (!captchaConfirm.checked) {
+            alert("กรุณายืนยันว่าคุณไม่ใช่โปรแกรมอัตโนมัติ");
+            return;
+          }
+
+          const jobTags = ["สหกิจศึกษา", ...selectedWorkFormats];
+
+          const newJob = {
+            id: Date.now(),
+            icon: "fa-solid fa-building",
+            company: companyName,
+            email: companyEmail,
+            location: location,
+            title: jobTitle,
+            category: category,
+            quota: `${quota} อัตรา`,
+            salary: salary,
+            workDays: workDays,
+            tags: jobTags,
+            time: "เพิ่งโพสต์",
+          };
+
+          const existingJobs = JSON.parse(
+            localStorage.getItem("userPostedJobs") || "[]",
+          );
+
+          existingJobs.unshift(newJob);
+
+          localStorage.setItem("userPostedJobs", JSON.stringify(existingJobs));
+
+          alert("✅ ลงประกาศรับนักศึกษาสหกิจศึกษาสำเร็จ");
+
+          window.location.href = "search_company.html";
+        });
+      });
+    </script>
+  </body>
+</html>

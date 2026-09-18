@@ -1,0 +1,3110 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>แดชบอร์ดหัวหน้าภาควิชา | KIWI — ระบบจัดการสหกิจศึกษา</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sarabun:wght@500;600;700&family=Noto+Sans+Thai:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* ==========================================
+       ส่วนเสริมเฉพาะหน้าอาจารย์นิเทศ — สอดคล้องกับ
+       ธีมสีและ component เดิมใน style.css
+       ========================================== */
+
+      .avatar-sm {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: var(--primary-light);
+        color: var(--primary-color);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.76rem;
+        font-weight: 700;
+        margin-right: 8px;
+        vertical-align: middle;
+      }
+      .student-cell {
+        display: flex;
+        align-items: center;
+      }
+      .sub-block-title {
+        font-family: "Sarabun", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin: 1.6rem 0 0.7rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .sub-block-title i {
+        color: var(--primary-color);
+      }
+      .tag-blue {
+        background: #dbeafe;
+        color: #1d4ed8;
+      }
+      .tag-coop {
+        background: var(--primary-light);
+        color: var(--primary-color);
+      }
+      .request-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      #panel-profile .mockup-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      #panel-profile .mockup-field {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+      }
+
+      #panel-profile .mockup-field.full {
+        grid-column: 1 / -1;
+      }
+
+      #panel-profile .mockup-field label {
+        font-size: 14px;
+        font-weight: 600;
+        color: #374151;
+      }
+
+      #panel-profile .mockup-field input,
+      #panel-profile .mockup-field select {
+        width: 100%;
+        min-height: 42px;
+        padding: 10px 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        background: #fff;
+        font-family: "Noto Sans Thai", sans-serif;
+        font-size: 14px;
+        box-sizing: border-box;
+        outline: none;
+      }
+
+      #panel-profile .mockup-field input:focus,
+      #panel-profile .mockup-field select:focus {
+        border-color: var(--primary-color);
+      }
+
+      @media (max-width: 700px) {
+        #panel-profile .mockup-grid {
+          grid-template-columns: 1fr;
+        }
+
+        #panel-profile .mockup-field.full {
+          grid-column: auto;
+        }
+      }
+      /* ==========================================
+   ค้นหาข้อมูลอาจารย์
+   ========================================== */
+
+      .teacher-search-card {
+        margin: 18px 0 22px;
+        padding: 20px;
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 14px;
+      }
+
+      .teacher-search-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+
+      .teacher-search-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+        background: var(--primary-light);
+        color: var(--primary-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 17px;
+      }
+
+      .teacher-search-info h3 {
+        margin: 0 0 3px;
+        font-family: "Sarabun", sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        color: #111827;
+      }
+
+      .teacher-search-info p {
+        margin: 0;
+        font-size: 13px;
+        color: #6b7280;
+      }
+
+      .teacher-search-form {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .teacher-search-input-wrap {
+        flex: 1;
+        position: relative;
+      }
+
+      .teacher-search-input-wrap > i {
+        position: absolute;
+        top: 50%;
+        left: 14px;
+        transform: translateY(-50%);
+        color: #9ca3af;
+        font-size: 14px;
+        pointer-events: none;
+      }
+
+      .teacher-search-input-wrap input {
+        width: 100%;
+        height: 44px;
+        padding: 0 14px 0 42px;
+        border: 1px solid #d1d5db;
+        border-radius: 9px;
+        background: #ffffff;
+        font-family: "Noto Sans Thai", sans-serif;
+        font-size: 14px;
+        color: #111827;
+        outline: none;
+        box-sizing: border-box;
+        transition: 0.2s;
+      }
+
+      .teacher-search-input-wrap input::placeholder {
+        color: #9ca3af;
+      }
+
+      .teacher-search-input-wrap input:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+      }
+
+      .teacher-search-button {
+        height: 44px;
+        padding: 0 20px;
+        border: none;
+        border-radius: 9px;
+        background: var(--primary-color);
+        color: #ffffff;
+        font-family: "Noto Sans Thai", sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+
+        transition: 0.2s;
+      }
+
+      .teacher-search-button:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+      }
+
+      @media (max-width: 700px) {
+        .teacher-search-form {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .teacher-search-button {
+          width: 100%;
+        }
+      }
+      /* ==========================================
+   Modal แก้ไขข้อมูลอาจารย์
+   ========================================== */
+
+      .mockup-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+
+        display: none;
+        align-items: center;
+        justify-content: center;
+
+        padding: 20px;
+
+        background: rgba(15, 23, 42, 0.45);
+        backdrop-filter: blur(2px);
+      }
+
+      .mockup-modal.show {
+        display: flex;
+      }
+
+      .mockup-card {
+        width: 100%;
+        max-width: 620px;
+
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 16px;
+
+        box-shadow:
+          0 20px 25px -5px rgba(0, 0, 0, 0.12),
+          0 8px 10px -6px rgba(0, 0, 0, 0.08);
+
+        overflow: hidden;
+      }
+
+      .mockup-card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        padding: 18px 22px;
+
+        background: #ffffff;
+        border-bottom: 1px solid #e5e7eb;
+      }
+
+      .mockup-card-header h3 {
+        margin: 0;
+
+        display: flex;
+        align-items: center;
+        gap: 9px;
+
+        font-family: "Sarabun", sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+        color: #111827;
+      }
+
+      .mockup-card-header h3 i {
+        color: var(--primary-color);
+      }
+
+      .mockup-close {
+        width: 34px;
+        height: 34px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border: none;
+        border-radius: 8px;
+
+        background: #f3f4f6;
+        color: #6b7280;
+
+        font-size: 22px;
+        line-height: 1;
+
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .mockup-close:hover {
+        background: #fee2e2;
+        color: #dc2626;
+      }
+
+      .mockup-body {
+        padding: 22px;
+      }
+
+      /* Grid ภายใน Modal */
+
+      .mockup-modal .mockup-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .mockup-modal .mockup-field {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+      }
+
+      .mockup-modal .mockup-field.full {
+        grid-column: 1 / -1;
+      }
+
+      /* Label */
+
+      .mockup-modal .mockup-field label {
+        font-size: 14px;
+        font-weight: 600;
+        color: #374151;
+      }
+
+      /* Input / Select */
+
+      .mockup-modal .mockup-field input,
+      .mockup-modal .mockup-field select {
+        width: 100%;
+        min-height: 42px;
+
+        padding: 10px 12px;
+
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+
+        background: #ffffff;
+        color: #111827;
+
+        font-family: "Noto Sans Thai", sans-serif;
+        font-size: 14px;
+
+        outline: none;
+        box-sizing: border-box;
+
+        transition: 0.2s;
+      }
+
+      .mockup-modal .mockup-field input:focus,
+      .mockup-modal .mockup-field select:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+      }
+
+      /* ปุ่มด้านล่าง */
+
+      .mockup-modal .btn-mock-sm {
+        min-height: 38px;
+        padding: 8px 16px;
+      }
+
+      /* Responsive */
+
+      @media (max-width: 700px) {
+        .mockup-modal {
+          padding: 12px;
+        }
+
+        .mockup-card {
+          max-width: 100%;
+        }
+
+        .mockup-modal .mockup-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .mockup-modal .mockup-field.full {
+          grid-column: auto;
+        }
+
+        .mockup-card-header {
+          padding: 16px 18px;
+        }
+
+        .mockup-body {
+          padding: 18px;
+        }
+      }
+      /* =====================================================
+   KIWI - อนุมัติคำร้องสหกิจศึกษา
+   ===================================================== */
+
+      #panel-coop-request-approval {
+        width: 100%;
+      }
+
+      /* Header */
+      #panel-coop-request-approval .panel-header {
+        margin-bottom: 22px;
+      }
+
+      #panel-coop-request-approval .panel-header h2 {
+        margin: 0 0 5px;
+        font-family: "Sarabun", sans-serif;
+        font-size: 22px;
+        font-weight: 700;
+        color: #0f172a;
+      }
+
+      #panel-coop-request-approval .panel-header p {
+        margin: 0;
+        font-size: 14px;
+        color: #64748b;
+      }
+
+      /* =====================================================
+   Table Card
+   ===================================================== */
+
+      #panel-coop-request-approval .mock-table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+
+        box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+      }
+
+      /* Table */
+      #panel-coop-request-approval .mock-table {
+        width: 100%;
+        min-width: 1050px;
+
+        border-collapse: separate;
+        border-spacing: 0;
+
+        font-size: 14px;
+        color: #1e293b;
+      }
+
+      /* =====================================================
+   Header
+   ===================================================== */
+
+      #panel-coop-request-approval .mock-table thead {
+        background: #f8fafc;
+      }
+
+      #panel-coop-request-approval .mock-table th {
+        padding: 14px 14px;
+
+        text-align: left;
+        vertical-align: middle;
+
+        font-size: 13px;
+        font-weight: 700;
+
+        color: #475569;
+
+        border-bottom: 1px solid #e2e8f0;
+
+        white-space: nowrap;
+      }
+
+      #panel-coop-request-approval .mock-table th:first-child {
+        padding-left: 18px;
+      }
+
+      #panel-coop-request-approval .mock-table th:last-child {
+        padding-right: 18px;
+      }
+
+      /* =====================================================
+   Body
+   ===================================================== */
+
+      #panel-coop-request-approval .mock-table td {
+        padding: 16px 14px;
+
+        vertical-align: middle;
+
+        border-bottom: 1px solid #e8eef5;
+
+        line-height: 1.5;
+      }
+
+      #panel-coop-request-approval .mock-table tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      #panel-coop-request-approval .mock-table tbody tr {
+        background: #ffffff;
+        transition:
+          background 0.18s ease,
+          box-shadow 0.18s ease;
+      }
+
+      #panel-coop-request-approval .mock-table tbody tr:hover {
+        background: #f8fbff;
+      }
+
+      /* =====================================================
+   Column Widths
+   ===================================================== */
+
+      #panel-coop-request-approval .mock-table th:nth-child(1),
+      #panel-coop-request-approval .mock-table td:nth-child(1) {
+        min-width: 155px;
+      }
+
+      #panel-coop-request-approval .mock-table th:nth-child(2),
+      #panel-coop-request-approval .mock-table td:nth-child(2) {
+        min-width: 105px;
+        white-space: nowrap;
+      }
+
+      #panel-coop-request-approval .mock-table th:nth-child(3),
+      #panel-coop-request-approval .mock-table td:nth-child(3) {
+        min-width: 100px;
+        text-align: center;
+      }
+
+      #panel-coop-request-approval .mock-table th:nth-child(4),
+      #panel-coop-request-approval .mock-table td:nth-child(4) {
+        min-width: 180px;
+      }
+
+      #panel-coop-request-approval .mock-table th:nth-child(5),
+      #panel-coop-request-approval .mock-table td:nth-child(5) {
+        min-width: 145px;
+      }
+
+      #panel-coop-request-approval .mock-table th:nth-child(6),
+      #panel-coop-request-approval .mock-table td:nth-child(6) {
+        min-width: 105px;
+        white-space: nowrap;
+      }
+
+      #panel-coop-request-approval .mock-table th:nth-child(7),
+      #panel-coop-request-approval .mock-table td:nth-child(7) {
+        min-width: 120px;
+        text-align: center;
+      }
+
+      #panel-coop-request-approval .mock-table th:nth-child(8),
+      #panel-coop-request-approval .mock-table td:nth-child(8) {
+        min-width: 215px;
+      }
+
+      /* =====================================================
+   Tags / Status
+   ===================================================== */
+
+      #panel-coop-request-approval .tag {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        min-height: 28px;
+
+        padding: 5px 10px;
+
+        border-radius: 999px;
+
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 1;
+
+        white-space: nowrap;
+
+        border: none;
+      }
+
+      /* ประเภทสหกิจศึกษา */
+      #panel-coop-request-approval .tag-coop {
+        background: #fff7e8;
+        color: #b76a00;
+      }
+
+      /* ยื่นคำร้องแล้ว */
+      #panel-coop-request-approval .tag-blue {
+        background: #e7f0ff;
+        color: #1659b7;
+      }
+
+      /* อนุมัติแล้ว */
+      #panel-coop-request-approval .tag-green {
+        background: #e8f7ee;
+        color: #15803d;
+      }
+
+      /* ไม่อนุมัติ */
+      #panel-coop-request-approval .tag-red {
+        background: #feecec;
+        color: #dc2626;
+      }
+
+      /* =====================================================
+   Action Buttons
+   ===================================================== */
+
+      #panel-coop-request-approval .request-actions {
+        display: grid;
+
+        grid-template-columns: repeat(2, max-content);
+
+        gap: 7px;
+
+        align-items: center;
+        justify-content: start;
+      }
+
+      /* ปุ่มทั้งหมด */
+      #panel-coop-request-approval .request-actions .btn-mock-sm {
+        min-height: 34px;
+
+        padding: 7px 11px;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        gap: 6px;
+
+        border: 1px solid #1d5dbb;
+        border-radius: 8px;
+
+        background: #ffffff;
+        color: #1558b0;
+
+        font-family: "Noto Sans Thai", sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+
+        white-space: nowrap;
+
+        cursor: pointer;
+
+        transition:
+          background 0.18s ease,
+          color 0.18s ease,
+          border-color 0.18s ease,
+          transform 0.18s ease,
+          box-shadow 0.18s ease;
+      }
+
+      #panel-coop-request-approval .request-actions .btn-mock-sm i {
+        font-size: 12px;
+      }
+
+      /* Hover */
+      #panel-coop-request-approval .request-actions .btn-mock-sm:hover {
+        background: #eff6ff;
+
+        transform: translateY(-1px);
+
+        box-shadow: 0 3px 7px rgba(37, 99, 235, 0.1);
+      }
+
+      /* ปุ่มอนุมัติ */
+      #panel-coop-request-approval .request-actions .btn-mock-sm.solid {
+        background: #1659b7;
+        color: #ffffff;
+        border-color: #1659b7;
+      }
+
+      #panel-coop-request-approval .request-actions .btn-mock-sm.solid:hover {
+        background: #124d9f;
+      }
+
+      /* ปุ่มไม่อนุมัติ */
+      #panel-coop-request-approval .request-actions .btn-mock-sm:last-child {
+        color: #dc2626;
+        border-color: #fecaca;
+      }
+
+      #panel-coop-request-approval
+        .request-actions
+        .btn-mock-sm:last-child:hover {
+        background: #fff1f2;
+        border-color: #fca5a5;
+      }
+
+      /* =====================================================
+   Scrollbar
+   ===================================================== */
+
+      #panel-coop-request-approval .mock-table-wrapper::-webkit-scrollbar {
+        height: 8px;
+      }
+
+      #panel-coop-request-approval
+        .mock-table-wrapper::-webkit-scrollbar-track {
+        background: #f1f5f9;
+        border-radius: 999px;
+      }
+
+      #panel-coop-request-approval
+        .mock-table-wrapper::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 999px;
+      }
+
+      #panel-coop-request-approval
+        .mock-table-wrapper::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+
+      /* =====================================================
+   Responsive
+   ===================================================== */
+
+      @media (max-width: 900px) {
+        #panel-coop-request-approval .mock-table {
+          min-width: 1000px;
+        }
+      }
+
+      @media (max-width: 700px) {
+        #panel-coop-request-approval .panel-header h2 {
+          font-size: 20px;
+        }
+
+        #panel-coop-request-approval .mock-table th,
+        #panel-coop-request-approval .mock-table td {
+          padding: 13px 12px;
+        }
+
+        #panel-coop-request-approval .request-actions {
+          grid-template-columns: 1fr;
+        }
+      }
+      /* =====================================================
+   KIWI - กำหนดอาจารย์ที่ปรึกษาสหกิจ
+   ===================================================== */
+
+      #panel-coop-advisor {
+        width: 100%;
+      }
+
+      /* ---------- Header ---------- */
+
+      #panel-coop-advisor .panel-header {
+        margin-bottom: 20px;
+      }
+
+      #panel-coop-advisor .panel-header h2 {
+        margin: 0 0 5px;
+        font-family: "Sarabun", sans-serif;
+        font-size: 22px;
+        font-weight: 700;
+        color: #0f172a;
+      }
+
+      #panel-coop-advisor .panel-header p {
+        margin: 0;
+        font-size: 14px;
+        color: #64748b;
+      }
+
+      /* =====================================================
+   Search Box
+   ===================================================== */
+
+      #panel-coop-advisor .student-search-box {
+        display: grid;
+        grid-template-columns: minmax(280px, 1.5fr) minmax(180px, 0.8fr) auto;
+        align-items: end;
+        gap: 14px;
+
+        margin: 18px 0 20px;
+        padding: 18px;
+
+        background: #ffffff;
+        border: 1px solid #dbe3ee;
+        border-radius: 14px;
+
+        box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+      }
+
+      #panel-coop-advisor .search-field {
+        min-width: 0;
+      }
+
+      #panel-coop-advisor .search-field label {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+
+        margin-bottom: 8px;
+
+        font-size: 13px;
+        font-weight: 600;
+        color: #334155;
+      }
+
+      #panel-coop-advisor .search-field label i {
+        color: #1859ad;
+      }
+
+      #panel-coop-advisor .search-field input,
+      #panel-coop-advisor .search-field select {
+        width: 100%;
+        height: 44px;
+
+        padding: 0 13px;
+
+        border: 1px solid #d4dce7;
+        border-radius: 9px;
+
+        background: #ffffff;
+        color: #1e293b;
+
+        font-family: "Noto Sans Thai", sans-serif;
+        font-size: 14px;
+
+        outline: none;
+        box-sizing: border-box;
+
+        transition:
+          border-color 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      #panel-coop-advisor .search-field input::placeholder {
+        color: #94a3b8;
+      }
+
+      #panel-coop-advisor .search-field input:focus,
+      #panel-coop-advisor .search-field select:focus {
+        border-color: #1d5dbb;
+        box-shadow: 0 0 0 3px rgba(29, 93, 187, 0.08);
+      }
+
+      #panel-coop-advisor .student-search-btn {
+        height: 44px;
+        padding: 0 20px;
+
+        border: none;
+        border-radius: 9px;
+
+        background: #1859ad;
+        color: #ffffff;
+
+        font-weight: 600;
+        white-space: nowrap;
+
+        transition:
+          background 0.2s ease,
+          transform 0.2s ease;
+      }
+
+      #panel-coop-advisor .student-search-btn:hover {
+        background: #124b96;
+        transform: translateY(-1px);
+      }
+
+      /* =====================================================
+   Info Box
+   ===================================================== */
+
+      #panel-coop-advisor .advisor-info-box {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+
+        margin: 0 0 15px;
+        padding: 11px 14px;
+
+        background: #eff6ff;
+        border: 1px solid #dbeafe;
+        border-radius: 9px;
+
+        color: #1e3a5f;
+        font-size: 13px;
+      }
+
+      #panel-coop-advisor .advisor-info-box i {
+        color: #1859ad;
+      }
+
+      /* =====================================================
+   Table
+   ===================================================== */
+
+      #panel-coop-advisor .mock-table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+
+        box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+      }
+
+      #panel-coop-advisor .advisor-table {
+        width: 100%;
+        min-width: 950px;
+
+        border-collapse: separate;
+        border-spacing: 0;
+
+        font-size: 14px;
+      }
+
+      #panel-coop-advisor .advisor-table thead {
+        background: #f8fafc;
+      }
+
+      #panel-coop-advisor .advisor-table th {
+        padding: 13px 14px;
+
+        text-align: left;
+        vertical-align: middle;
+
+        color: #475569;
+
+        font-size: 13px;
+        font-weight: 700;
+
+        white-space: nowrap;
+
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      #panel-coop-advisor .advisor-table td {
+        padding: 14px;
+
+        vertical-align: middle;
+
+        color: #1e293b;
+
+        border-bottom: 1px solid #edf1f5;
+      }
+
+      #panel-coop-advisor .advisor-table tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      #panel-coop-advisor .advisor-table tbody tr {
+        transition: background 0.18s ease;
+      }
+
+      #panel-coop-advisor .advisor-table tbody tr:hover {
+        background: #f8fbff;
+      }
+
+      /* Column widths */
+
+      #panel-coop-advisor .advisor-table th:nth-child(1),
+      #panel-coop-advisor .advisor-table td:nth-child(1) {
+        min-width: 170px;
+      }
+
+      #panel-coop-advisor .advisor-table th:nth-child(2),
+      #panel-coop-advisor .advisor-table td:nth-child(2) {
+        min-width: 110px;
+        white-space: nowrap;
+      }
+
+      #panel-coop-advisor .advisor-table th:nth-child(3),
+      #panel-coop-advisor .advisor-table td:nth-child(3) {
+        min-width: 70px;
+      }
+
+      #panel-coop-advisor .advisor-table th:nth-child(4),
+      #panel-coop-advisor .advisor-table td:nth-child(4) {
+        min-width: 190px;
+      }
+
+      #panel-coop-advisor .advisor-table th:nth-child(5),
+      #panel-coop-advisor .advisor-table td:nth-child(5) {
+        min-width: 245px;
+      }
+
+      #panel-coop-advisor .advisor-table th:nth-child(6),
+      #panel-coop-advisor .advisor-table td:nth-child(6) {
+        min-width: 150px;
+      }
+
+      /* =====================================================
+   Advisor Dropdown
+   ===================================================== */
+
+      #panel-coop-advisor .advisor-select {
+        width: 100%;
+        min-width: 230px;
+        height: 38px;
+
+        padding: 0 34px 0 11px;
+
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+
+        background: #ffffff;
+        color: #1e293b;
+
+        font-family: "Noto Sans Thai", sans-serif;
+        font-size: 13px;
+
+        outline: none;
+        cursor: pointer;
+
+        transition:
+          border-color 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      #panel-coop-advisor .advisor-select:hover {
+        border-color: #94a3b8;
+      }
+
+      #panel-coop-advisor .advisor-select:focus {
+        border-color: #1859ad;
+        box-shadow: 0 0 0 3px rgba(24, 89, 173, 0.08);
+      }
+
+      /* =====================================================
+   Action Button
+   ===================================================== */
+
+      #panel-coop-advisor .advisor-table .btn-mock-sm {
+        min-height: 36px;
+
+        padding: 7px 12px;
+
+        border: 1px solid #1859ad;
+        border-radius: 8px;
+
+        background: #ffffff;
+        color: #1859ad;
+
+        font-family: "Noto Sans Thai", sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+
+        white-space: nowrap;
+
+        cursor: pointer;
+
+        transition:
+          background 0.2s ease,
+          color 0.2s ease,
+          transform 0.2s ease;
+      }
+
+      #panel-coop-advisor .advisor-table .btn-mock-sm:hover {
+        background: #eff6ff;
+        transform: translateY(-1px);
+      }
+
+      #panel-coop-advisor .advisor-table .btn-mock-sm.solid {
+        background: #1859ad;
+        color: #ffffff;
+      }
+
+      #panel-coop-advisor .advisor-table .btn-mock-sm.solid:hover {
+        background: #124b96;
+      }
+
+      /* =====================================================
+   Responsive
+   ===================================================== */
+
+      @media (max-width: 850px) {
+        #panel-coop-advisor .student-search-box {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        #panel-coop-advisor .student-search-btn {
+          grid-column: 1 / -1;
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 600px) {
+        #panel-coop-advisor .student-search-box {
+          grid-template-columns: 1fr;
+        }
+
+        #panel-coop-advisor .student-search-btn {
+          grid-column: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="brand">
+          <img src="images/logo_kiwi.png" alt="KIWI" class="brand-mark" />
+
+          <span> KIWI<br />ระบบจัดการสหกิจศึกษา </span>
+        </a>
+
+        <div class="nav-right">
+          <span
+            id="userNameDisplay"
+            style="font-weight: 600; font-size: 0.85rem"
+            >ผศ.ดร.ขนิษฐา นามี — หัวหน้าภาควิชา</span
+          >
+
+          <button class="btn-login" onclick="logout()">ออกจากระบบ</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="dashboard-layout">
+      <!-- ======================================== -->
+      <!-- เมนูด้านซ้าย -->
+      <!-- ======================================== -->
+
+      <aside class="dashboard-sidebar">
+        <!-- ภาพรวม -->
+
+        <a class="sidebar-item active" data-target="panel-overview">
+          <i class="fa-solid fa-gauge"></i>
+
+          ภาพรวม
+        </a>
+
+        <!-- จัดการข้อมูลส่วนตัว -->
+
+        <a class="sidebar-item" data-target="panel-profile">
+          <i class="fa-solid fa-user-pen"></i>
+
+          จัดการข้อมูลส่วนตัว
+        </a>
+
+        <!-- จัดการข้อมูลอาจารย์ -->
+
+        <a class="sidebar-item" data-target="panel-teachers">
+          <i class="fa-solid fa-chalkboard-user"></i>
+
+          จัดการข้อมูลอาจารย์
+        </a>
+
+        <!-- ค้นหาข้อมูลนักศึกษา -->
+
+        <a class="sidebar-item" data-target="panel-students">
+          <i class="fa-solid fa-user-graduate"></i>
+
+          ค้นหาข้อมูลนักศึกษา
+        </a>
+
+        <a class="sidebar-item" data-target="panel-coop-request-approval">
+          <i class="fa-solid fa-file-circle-check"></i>
+
+          อนุมัติคำร้องสหกิจศึกษา
+        </a>
+
+        <!-- กำหนดอาจารย์ที่ปรึกษานักศึกษาสหกิจ -->
+
+        <a class="sidebar-item" data-target="panel-coop-advisor">
+          <i class="fa-solid fa-user-tie"></i>
+
+          กำหนดอาจารย์ที่ปรึกษาสหกิจ
+        </a>
+      </aside>
+      <!-- เนื้อหาแต่ละเมนู -->
+      <div class="dashboard-content">
+        <!-- ================= ภาพรวม ================= -->
+        <!-- ========================= -->
+        <!-- ภาพรวม -->
+        <!-- ========================= -->
+
+        <section class="content-panel active" id="panel-overview">
+          <div class="dashboard-banner">
+            <b id="overviewGreeting"> ยินดีต้อนรับ, ผศ.ดร.ขนิษฐา นามี </b>
+
+            <span> ภาพรวมระบบจัดการสหกิจศึกษา </span>
+          </div>
+
+          <div
+            class="stat-row"
+            style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr))"
+          >
+            <div class="stat-box">
+              <b>4 คน</b
+              ><span
+                ><i class="fa-solid fa-user-graduate"></i>
+                นักศึกษาสหกิจศึกษาทั้งหมด</span
+              >
+            </div>
+            <div class="stat-box">
+              <b>3 รายการ</b
+              ><span
+                ><i class="fa-solid fa-file-circle-question"></i>
+                คำร้องรอพิจารณา</span
+              >
+            </div>
+            <div class="stat-box">
+              <b>2 คน</b
+              ><span
+                ><i class="fa-solid fa-user-tie"></i>
+                กำหนดอาจารย์ที่ปรึกษาแล้ว</span
+              >
+            </div>
+            <div class="stat-box">
+              <b>2 คน</b
+              ><span
+                ><i class="fa-solid fa-user-clock"></i>
+                ยังไม่ได้กำหนดอาจารย์ที่ปรึกษา</span
+              >
+            </div>
+            <div class="stat-box">
+              <b>20 คน</b
+              ><span
+                ><i class="fa-solid fa-chalkboard-user"></i> อาจารย์ในระบบ</span
+              >
+            </div>
+            <div class="stat-box">
+              <b>4 แห่ง</b
+              ><span><i class="fa-solid fa-building"></i> สถานประกอบการ</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================= -->
+        <!-- จัดการข้อมูลส่วนตัว -->
+        <!-- ========================= -->
+
+        <section class="content-panel" id="panel-profile">
+          <div class="panel-header">
+            <h2>จัดการข้อมูลส่วนตัว</h2>
+
+            <p>แก้ไขข้อมูลส่วนตัวของหัวหน้าภาควิชา</p>
+          </div>
+
+          <div class="advisor-info-box">
+            <i class="fa-solid fa-circle-info"></i>
+
+            <span> สามารถแก้ไขชื่อ-นามสกุล Email และรหัสผ่านได้ </span>
+          </div>
+
+          <div
+            style="
+              max-width: 760px;
+              margin-top: 18px;
+              padding: 24px;
+              background: #ffffff;
+              border: 1px solid #e5e7eb;
+              border-radius: 16px;
+            "
+          >
+            <form id="profileForm" onsubmit="saveProfile(event)">
+              <div class="mockup-grid">
+                <div class="mockup-field full">
+                  <label for="profileFullName">
+                    ชื่อ-นามสกุล
+
+                    <span style="color: #dc2626"> * </span>
+                  </label>
+
+                  <input
+                    type="text"
+                    id="profileFullName"
+                    placeholder="กรอกชื่อ-นามสกุล"
+                    required
+                  />
+                </div>
+
+                <div class="mockup-field full">
+                  <label for="profileEmail">
+                    Email
+
+                    <span style="color: #dc2626"> * </span>
+                  </label>
+
+                  <input
+                    type="email"
+                    id="profileEmail"
+                    placeholder="example@kmutnb.ac.th"
+                    required
+                  />
+                </div>
+
+                <div class="mockup-field">
+                  <label for="profilePassword"> รหัสผ่านใหม่ </label>
+
+                  <input
+                    type="password"
+                    id="profilePassword"
+                    placeholder="เว้นว่างหากไม่เปลี่ยนรหัสผ่าน"
+                    minlength="6"
+                  />
+                </div>
+
+                <div class="mockup-field">
+                  <label for="profileConfirmPassword">
+                    ยืนยันรหัสผ่านใหม่
+                  </label>
+
+                  <input
+                    type="password"
+                    id="profileConfirmPassword"
+                    placeholder="กรอกรหัสผ่านใหม่อีกครั้ง"
+                    minlength="6"
+                  />
+                </div>
+              </div>
+
+              <div
+                style="
+                  display: flex;
+                  justify-content: flex-end;
+                  gap: 10px;
+                  margin-top: 22px;
+                "
+              >
+                <button
+                  type="button"
+                  class="btn-mock-sm"
+                  onclick="loadProfileData()"
+                >
+                  <i class="fa-solid fa-rotate-left"></i>
+
+                  คืนค่าข้อมูล
+                </button>
+
+                <button type="submit" class="btn-mock-sm solid">
+                  <i class="fa-solid fa-floppy-disk"></i>
+
+                  บันทึกการแก้ไข
+                </button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- ======================================== -->
+        <!-- ค้นหาข้อมูลนักศึกษา -->
+        <!-- ======================================== -->
+
+        <section class="content-panel" id="panel-students">
+          <div class="panel-header">
+            <h2>ค้นหาข้อมูลนักศึกษา</h2>
+
+            <p>ค้นหาและตรวจสอบข้อมูลนักศึกษาสหกิจศึกษา</p>
+          </div>
+
+          <!-- ======================================== -->
+          <!-- ช่องค้นหา -->
+          <!-- ======================================== -->
+
+          <div class="student-search-box">
+            <div class="search-field">
+              <label>
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                ค้นหานักศึกษา
+              </label>
+
+              <input
+                type="text"
+                id="studentSearchInput"
+                placeholder="ค้นหาชื่อ รหัสนักศึกษา หรือสถานประกอบการ..."
+                oninput="filterHeadStudents()"
+              />
+            </div>
+
+            <div class="search-field">
+              <label>
+                <i class="fa-solid fa-filter"></i>
+
+                สาขา
+              </label>
+
+              <select id="studentMajorFilter" onchange="filterHeadStudents()">
+                <option value="">ทุกสาขา</option>
+
+                <option value="IT">IT</option>
+
+                <option value="INE">INE</option>
+              </select>
+            </div>
+
+            <button
+              type="button"
+              class="btn-mock-sm solid student-search-btn"
+              onclick="filterHeadStudents()"
+            >
+              <i class="fa-solid fa-search"></i>
+
+              ค้นหา
+            </button>
+          </div>
+
+          <!-- ======================================== -->
+          <!-- นักศึกษาสหกิจ -->
+          <!-- ======================================== -->
+
+          <div>
+            <div class="sub-block-title">
+              <i class="fa-solid fa-user-graduate"></i>
+
+              นักศึกษาสหกิจศึกษา
+            </div>
+
+            <div class="table-wrapper">
+              <table class="mock-table" id="headCoopStudentTable">
+                <thead>
+                  <tr>
+                    <th>นักศึกษา</th>
+
+                    <th>รหัสนักศึกษา</th>
+
+                    <th>สาขา</th>
+
+                    <th>สถานประกอบการ</th>
+
+                    <th>ตำแหน่ง</th>
+
+                    <th>ระยะเวลาสหกิจ</th>
+
+                    <th>อาจารย์ที่ปรึกษาโครงการ</th>
+
+                    <th>การดำเนินการ</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <!-- นางสาวพิมพ์ชนก สุขใจ -->
+                  <tr
+                    data-name="นางสาวพิมพ์ชนก สุขใจ"
+                    data-student-id="6702458196"
+                    data-major="INE"
+                    data-company="BlueWave Digital Co., Ltd."
+                  >
+                    <td>
+                      <div class="student-cell">
+                        <span class="avatar-sm">พ</span>
+                        นางสาวพิมพ์ชนก สุขใจ
+                      </div>
+                    </td>
+
+                    <td>6702458196</td>
+                    <td>INE</td>
+                    <td>BlueWave Digital Co., Ltd.</td>
+                    <td>Frontend Developer</td>
+                    <td>1 ก.ย. 2569 – 18 ธ.ค. 2569</td>
+                    <td>ผศ.ดร.นิติการ นาคเจือทอง</td>
+
+                    <td>
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="viewHeadStudent(this)"
+                      >
+                        <i class="fa-solid fa-eye"></i>
+                        ดูข้อมูล
+                      </button>
+                    </td>
+                  </tr>
+
+                  <!-- นายธนกฤต วัฒนศิริ -->
+                  <tr
+                    data-name="นายธนกฤต วัฒนศิริ"
+                    data-student-id="6702458198"
+                    data-major="INE"
+                    data-company="CloudNova Systems Co., Ltd."
+                  >
+                    <td>
+                      <div class="student-cell">
+                        <span class="avatar-sm">ธ</span>
+                        นายธนกฤต วัฒนศิริ
+                      </div>
+                    </td>
+
+                    <td>6702458198</td>
+                    <td>INE</td>
+                    <td>CloudNova Systems Co., Ltd.</td>
+                    <td>Cloud Engineer</td>
+                    <td>1 ก.ย. 2569 – 18 ธ.ค. 2569</td>
+                    <td>ผศ.ดร.สุปีติ กุลจันทร์</td>
+
+                    <td>
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="viewHeadStudent(this)"
+                      >
+                        <i class="fa-solid fa-eye"></i>
+                        ดูข้อมูล
+                      </button>
+                    </td>
+                  </tr>
+
+                  <!-- นางสาวอรุณี พงษ์สุวรรณ -->
+                  <tr
+                    data-name="นางสาวอรุณี พงษ์สุวรรณ"
+                    data-student-id="6702458202"
+                    data-major="IT"
+                    data-company="DataSphere Thailand"
+                  >
+                    <td>
+                      <div class="student-cell">
+                        <span class="avatar-sm">อ</span>
+                        นางสาวอรุณี พงษ์สุวรรณ
+                      </div>
+                    </td>
+
+                    <td>6702458202</td>
+                    <td>IT</td>
+                    <td>DataSphere Thailand</td>
+                    <td>Data Analyst</td>
+                    <td>1 ก.ย. 2569 – 18 ธ.ค. 2569</td>
+                    <td>รศ.ดร.อนิราช มิ่งขวัญ</td>
+
+                    <td>
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="viewHeadStudent(this)"
+                      >
+                        <i class="fa-solid fa-eye"></i>
+                        ดูข้อมูล
+                      </button>
+                    </td>
+                  </tr>
+
+                  <!-- นายกิตติพงศ์ สุวรรณชัย -->
+                  <tr
+                    data-name="นายกิตติพงศ์ สุวรรณชัย"
+                    data-student-id="6702458204"
+                    data-major="INE"
+                    data-company="NextWave Technology Co., Ltd."
+                  >
+                    <td>
+                      <div class="student-cell">
+                        <span class="avatar-sm">ก</span>
+                        นายกิตติพงศ์ สุวรรณชัย
+                      </div>
+                    </td>
+
+                    <td>6702458204</td>
+                    <td>INE</td>
+                    <td>NextWave Technology Co., Ltd.</td>
+                    <td>Network Engineer</td>
+                    <td>1 ก.ย. 2569 – 18 ธ.ค. 2569</td>
+                    <td>ผศ.ดร.วันทนี ประจวบศุภกิจ</td>
+
+                    <td>
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="viewHeadStudent(this)"
+                      >
+                        <i class="fa-solid fa-eye"></i>
+                        ดูข้อมูล
+                      </button>
+                    </td>
+                  </tr>
+
+                  <!-- นางสาวณิชารีย์ บุญส่ง -->
+                  <tr
+                    data-name="นางสาวณิชารีย์ บุญส่ง"
+                    data-student-id="6702458206"
+                    data-major="IT"
+                    data-company="BrightCode Solutions Co., Ltd."
+                  >
+                    <td>
+                      <div class="student-cell">
+                        <span class="avatar-sm">ณ</span>
+                        นางสาวณิชารีย์ บุญส่ง
+                      </div>
+                    </td>
+
+                    <td>6702458206</td>
+                    <td>IT</td>
+                    <td>BrightCode Solutions Co., Ltd.</td>
+                    <td>Mobile Application Developer</td>
+                    <td>1 ก.ย. 2569 – 18 ธ.ค. 2569</td>
+                    <td>ผศ.ดร.พาฝัน ดวงไพศาล</td>
+
+                    <td>
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="viewHeadStudent(this)"
+                      >
+                        <i class="fa-solid fa-eye"></i>
+                        ดูข้อมูล
+                      </button>
+                    </td>
+                  </tr>
+
+                  <!-- นายภูริช วัฒนกุล -->
+                  <tr
+                    data-name="นายภูริช วัฒนกุล"
+                    data-student-id="6702458208"
+                    data-major="INE"
+                    data-company="Business Intelligence Group"
+                  >
+                    <td>
+                      <div class="student-cell">
+                        <span class="avatar-sm">ภ</span>
+                        นายภูริช วัฒนกุล
+                      </div>
+                    </td>
+
+                    <td>6702458208</td>
+                    <td>INE</td>
+                    <td>Business Intelligence Group</td>
+                    <td>Business Analyst</td>
+                    <td>1 ก.ย. 2569 – 18 ธ.ค. 2569</td>
+                    <td>ผศ.ดร.อรบุษป์ วุฒิกมลชัย</td>
+
+                    <td>
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="viewHeadStudent(this)"
+                      >
+                        <i class="fa-solid fa-eye"></i>
+                        ดูข้อมูล
+                      </button>
+                    </td>
+                  </tr>
+
+                  <!-- นางสาวชลธิชา มณีวงศ์ -->
+                  <tr
+                    data-name="นางสาวชลธิชา มณีวงศ์"
+                    data-student-id="6702458210"
+                    data-major="IT"
+                    data-company="SecureLink Cyber Co., Ltd."
+                  >
+                    <td>
+                      <div class="student-cell">
+                        <span class="avatar-sm">ช</span>
+                        นางสาวชลธิชา มณีวงศ์
+                      </div>
+                    </td>
+
+                    <td>6702458210</td>
+                    <td>IT</td>
+                    <td>SecureLink Cyber Co., Ltd.</td>
+                    <td>Cybersecurity Analyst</td>
+                    <td>1 ก.ย. 2569 – 18 ธ.ค. 2569</td>
+                    <td>ผศ.ดร.สิวาลัย จินเจือ</td>
+
+                    <td>
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="viewHeadStudent(this)"
+                      >
+                        <i class="fa-solid fa-eye"></i>
+                        ดูข้อมูล
+                      </button>
+                    </td>
+                  </tr>
+
+                  <!-- นายพีรพัฒน์ จันทร์ดี -->
+                  <tr
+                    data-name="นายพีรพัฒน์ จันทร์ดี"
+                    data-student-id="6702458212"
+                    data-major="INE"
+                    data-company="Smart Factory Solutions Co., Ltd."
+                  >
+                    <td>
+                      <div class="student-cell">
+                        <span class="avatar-sm">พ</span>
+                        นายพีรพัฒน์ จันทร์ดี
+                      </div>
+                    </td>
+
+                    <td>6702458212</td>
+                    <td>INE</td>
+                    <td>Smart Factory Solutions Co., Ltd.</td>
+                    <td>IoT Developer</td>
+                    <td>1 ก.ย. 2569 – 18 ธ.ค. 2569</td>
+                    <td>ผศ.นพดล บูรณ์กุศล</td>
+
+                    <td>
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="viewHeadStudent(this)"
+                      >
+                        <i class="fa-solid fa-eye"></i>
+                        ดูข้อมูล
+                      </button>
+                    </td>
+                  </tr>
+
+                  <!-- นางสาวรินรดา ศรีสุข -->
+                  <tr
+                    data-name="นางสาวรินรดา ศรีสุข"
+                    data-student-id="6702458214"
+                    data-major="IT"
+                    data-company="Digital Vision Lab Co., Ltd."
+                  >
+                    <td>
+                      <div class="student-cell">
+                        <span class="avatar-sm">ร</span>
+                        นางสาวรินรดา ศรีสุข
+                      </div>
+                    </td>
+
+                    <td>6702458214</td>
+                    <td>IT</td>
+                    <td>Digital Vision Lab Co., Ltd.</td>
+                    <td>Software Developer</td>
+                    <td>1 ก.ย. 2569 – 18 ธ.ค. 2569</td>
+                    <td>
+                      <span class="tag tag-muted">ยังไม่ได้กำหนด</span>
+                    </td>
+
+                    <td>
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="viewHeadStudent(this)"
+                      >
+                        <i class="fa-solid fa-eye"></i>
+                        ดูข้อมูล
+                      </button>
+                    </td>
+                  </tr>
+
+                  <!-- นายณัฐพงษ์ แสงทอง -->
+                  <tr
+                    data-name="นายณัฐพงษ์ แสงทอง"
+                    data-student-id="6702458216"
+                    data-major="INE"
+                    data-company="Eastern Digital Solutions Co., Ltd."
+                  >
+                    <td>
+                      <div class="student-cell">
+                        <span class="avatar-sm">ณ</span>
+                        นายณัฐพงษ์ แสงทอง
+                      </div>
+                    </td>
+
+                    <td>6702458216</td>
+                    <td>INE</td>
+                    <td>Eastern Digital Solutions Co., Ltd.</td>
+                    <td>System Engineer</td>
+                    <td>1 ก.ย. 2569 – 18 ธ.ค. 2569</td>
+                    <td>
+                      <span class="tag tag-muted">ยังไม่ได้กำหนด</span>
+                    </td>
+
+                    <td>
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="viewHeadStudent(this)"
+                      >
+                        <i class="fa-solid fa-eye"></i>
+                        ดูข้อมูล
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- CSS/JS ส่วนเพิ่มสำหรับค้นหาและรับเป็นที่ปรึกษา -->
+        <style>
+          .student-search-box {
+            display: flex;
+            align-items: flex-end;
+            gap: 14px;
+            padding: 18px;
+            margin: 18px 0 22px;
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            flex-wrap: wrap;
+          }
+
+          .search-field {
+            flex: 1;
+            min-width: 220px;
+          }
+
+          .search-field label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-dark);
+          }
+
+          .search-field label i {
+            color: var(--primary-color);
+            margin-right: 5px;
+          }
+
+          .search-field input,
+          .search-field select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: #fff;
+            font-family: "Noto Sans Thai", sans-serif;
+            font-size: 0.85rem;
+            outline: none;
+            box-sizing: border-box;
+          }
+
+          .search-field input:focus,
+          .search-field select:focus {
+            border-color: var(--primary-color);
+          }
+
+          .student-search-btn {
+            height: 40px;
+            white-space: nowrap;
+          }
+
+          .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+          }
+
+          @media (max-width: 700px) {
+            .student-search-box {
+              align-items: stretch;
+              flex-direction: column;
+            }
+
+            .student-search-btn {
+              width: 100%;
+            }
+          }
+        </style>
+
+        <!-- ======================================== -->
+        <!-- จัดการข้อมูลอาจารย์ -->
+        <!-- ======================================== -->
+
+        <!-- ======================================== -->
+        <!-- จัดการข้อมูลอาจารย์ -->
+        <!-- ======================================== -->
+
+        <section class="content-panel" id="panel-teachers">
+          <div class="panel-header">
+            <h2>จัดการข้อมูลอาจารย์</h2>
+            <p>ค้นหา ตรวจสอบ และแก้ไขข้อมูลอาจารย์ภายในภาควิชา</p>
+          </div>
+
+          <!-- ค้นหาอาจารย์ -->
+          <!-- ค้นหาข้อมูลอาจารย์ -->
+          <div class="teacher-search-card">
+            <div class="teacher-search-info">
+              <div class="teacher-search-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </div>
+
+              <div>
+                <h3>ค้นหาข้อมูลอาจารย์</h3>
+                <p>ค้นหาจากชื่อ-นามสกุล หรืออีเมลอาจารย์</p>
+              </div>
+            </div>
+
+            <div class="teacher-search-form">
+              <div class="teacher-search-input-wrap">
+                <i class="fa-solid fa-user-tie"></i>
+
+                <input
+                  type="text"
+                  id="teacherSearchInput"
+                  placeholder="พิมพ์ชื่อหรืออีเมลอาจารย์..."
+                  oninput="searchTeachers()"
+                />
+              </div>
+
+              <button
+                type="button"
+                class="teacher-search-button"
+                onclick="searchTeachers()"
+              >
+                <i class="fa-solid fa-magnifying-glass"></i>
+                ค้นหา
+              </button>
+            </div>
+          </div>
+
+          <div class="mock-table-wrapper">
+            <table class="mock-table" id="teacherTable">
+              <thead>
+                <tr>
+                  <th>ชื่อ-นามสกุล</th>
+
+                  <!-- ซ่อนไว้เพื่อรักษาโครงสร้าง JavaScript เดิม -->
+                  <th style="display: none"></th>
+                  <th style="display: none"></th>
+
+                  <th>อีเมล</th>
+                  <th>สถานะ</th>
+                  <th>การดำเนินการ</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <!-- ผศ.ดร.นิติการ นาคเจือทอง -->
+                <tr
+                  data-id="T001"
+                  data-name="ผศ.ดร.นิติการ นาคเจือทอง"
+                  data-major="IT"
+                  data-email="nitikan@kmutnb.ac.th"
+                >
+                  <td>ผศ.ดร.นิติการ นาคเจือทอง</td>
+
+                  <!-- ข้อมูลเดิมซ่อนไว้ ไม่แสดงในตาราง -->
+                  <td style="display: none">T001</td>
+                  <td style="display: none">IT</td>
+
+                  <td>nitikan@kmutnb.ac.th</td>
+
+                  <td>
+                    <span class="tag tag-green">ปฏิบัติงาน</span>
+                  </td>
+
+                  <td>
+                    <button
+                      type="button"
+                      class="btn-mock-sm"
+                      onclick="openEditTeacher(this)"
+                    >
+                      <i class="fa-solid fa-pen"></i>
+                      แก้ไข
+                    </button>
+                  </td>
+                </tr>
+
+                <!-- ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ -->
+                <tr
+                  data-id="T002"
+                  data-name="ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ"
+                  data-major="INE"
+                  data-email="supaporn@kmutnb.ac.th"
+                >
+                  <td>ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ</td>
+
+                  <!-- ข้อมูลเดิมซ่อนไว้ ไม่แสดงในตาราง -->
+                  <td style="display: none">T002</td>
+                  <td style="display: none">INE</td>
+
+                  <td>supaporn@kmutnb.ac.th</td>
+
+                  <td>
+                    <span class="tag tag-green">ปฏิบัติงาน</span>
+                  </td>
+
+                  <td>
+                    <button
+                      type="button"
+                      class="btn-mock-sm"
+                      onclick="openEditTeacher(this)"
+                    >
+                      <i class="fa-solid fa-pen"></i>
+                      แก้ไข
+                    </button>
+                  </td>
+                </tr>
+
+                <!-- หัวหน้าภาควิชา -->
+                <tr
+                  data-id="T003"
+                  data-name="ผศ.ดร.ขนิษฐา นามี"
+                  data-major="IT"
+                  data-email="khanittha@kmutnb.ac.th"
+                >
+                  <td>ผศ.ดร.ขนิษฐา นามี</td>
+
+                  <!-- ข้อมูลเดิมซ่อนไว้ ไม่แสดงในตาราง -->
+                  <td style="display: none">T003</td>
+                  <td style="display: none">IT</td>
+
+                  <td>khanittha@kmutnb.ac.th</td>
+
+                  <td>
+                    <span class="tag tag-green">หัวหน้าภาควิชา</span>
+                  </td>
+
+                  <td>
+                    <button
+                      type="button"
+                      class="btn-mock-sm"
+                      onclick="openEditTeacher(this)"
+                    >
+                      <i class="fa-solid fa-pen"></i>
+                      แก้ไข
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ======================================== -->
+        <!-- อนุมัติคำร้องสหกิจศึกษา -->
+        <!-- ======================================== -->
+
+        <section class="content-panel" id="panel-coop-request-approval">
+          <div class="panel-header">
+            <h2>อนุมัติคำร้องสหกิจศึกษา</h2>
+            <p>ตรวจสอบและพิจารณาคำร้องสหกิจศึกษาของนักศึกษา</p>
+          </div>
+
+          <div class="mock-table-wrapper">
+            <table class="mock-table" id="coopRequestApprovalTable">
+              <thead>
+                <tr>
+                  <th>ชื่อนักศึกษา</th>
+                  <th>รหัสนักศึกษา</th>
+                  <th>ประเภท</th>
+                  <th>สถานประกอบการ</th>
+                  <th>ตำแหน่ง</th>
+                  <th>วันที่ยื่น</th>
+                  <th>สถานะ</th>
+                  <th>การดำเนินการ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  data-name="นางสาวพิมพ์ชนก สุขใจ"
+                  data-student-id="6702458196"
+                  data-company="BlueWave Digital Co., Ltd."
+                  data-province="ชลบุรี"
+                  data-position="Frontend Developer"
+                  data-submitted-date="3 ก.ย. 2569"
+                  data-duration="1 ก.ย. 2569 – 18 ธ.ค. 2569"
+                >
+                  <td>นางสาวพิมพ์ชนก สุขใจ</td>
+                  <td>6702458196</td>
+                  <td><span class="tag tag-coop">สหกิจศึกษา</span></td>
+                  <td>BlueWave Digital Co., Ltd.</td>
+                  <td>Frontend Developer</td>
+                  <td>3 ก.ย. 2569</td>
+                  <td><span class="tag tag-blue">ยื่นคำร้องแล้ว</span></td>
+                  <td>
+                    <div class="request-actions">
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="viewCoopRequest(this)"
+                      >
+                        <i class="fa-solid fa-eye"></i> ดูรายละเอียด
+                      </button>
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="printCoopRequest(this)"
+                      >
+                        <i class="fa-solid fa-file-pdf"></i> พิมพ์ PDF
+                      </button>
+                      <button
+                        type="button"
+                        class="btn-mock-sm solid"
+                        onclick="approveCoopRequest(this)"
+                      >
+                        <i class="fa-solid fa-circle-check"></i> อนุมัติ
+                      </button>
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="rejectCoopRequest(this)"
+                      >
+                        <i class="fa-solid fa-circle-xmark"></i> ไม่อนุมัติ
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr
+                  data-name="อรุณี พงษ์สุวรรณ"
+                  data-student-id="6702458202"
+                  data-company="DataSphere Thailand"
+                  data-province="-"
+                  data-position="Data Analyst"
+                  data-submitted-date="2 ก.ย. 2569"
+                >
+                  <td>อรุณี พงษ์สุวรรณ</td>
+                  <td>6702458202</td>
+                  <td><span class="tag tag-coop">สหกิจศึกษา</span></td>
+                  <td>DataSphere Thailand</td>
+                  <td>Data Analyst</td>
+                  <td>2 ก.ย. 2569</td>
+                  <td><span class="tag tag-blue">ยื่นคำร้องแล้ว</span></td>
+                  <td>
+                    <div class="request-actions">
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="viewCoopRequest(this)"
+                      >
+                        <i class="fa-solid fa-eye"></i> ดูรายละเอียด
+                      </button>
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="printCoopRequest(this)"
+                      >
+                        <i class="fa-solid fa-file-pdf"></i> พิมพ์ PDF
+                      </button>
+                      <button
+                        type="button"
+                        class="btn-mock-sm solid"
+                        onclick="approveCoopRequest(this)"
+                      >
+                        <i class="fa-solid fa-circle-check"></i> อนุมัติ
+                      </button>
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="rejectCoopRequest(this)"
+                      >
+                        <i class="fa-solid fa-circle-xmark"></i> ไม่อนุมัติ
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr
+                  data-name="ภูริช วัฒนกุล"
+                  data-student-id="6702458208"
+                  data-company="Business Intelligence Group"
+                  data-province="-"
+                  data-position="Business Analyst"
+                  data-submitted-date="30 ส.ค. 2569"
+                >
+                  <td>ภูริช วัฒนกุล</td>
+                  <td>6702458208</td>
+                  <td><span class="tag tag-coop">สหกิจศึกษา</span></td>
+                  <td>Business Intelligence Group</td>
+                  <td>Business Analyst</td>
+                  <td>30 ส.ค. 2569</td>
+                  <td><span class="tag tag-blue">ยื่นคำร้องแล้ว</span></td>
+                  <td>
+                    <div class="request-actions">
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="viewCoopRequest(this)"
+                      >
+                        <i class="fa-solid fa-eye"></i> ดูรายละเอียด
+                      </button>
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="printCoopRequest(this)"
+                      >
+                        <i class="fa-solid fa-file-pdf"></i> พิมพ์ PDF
+                      </button>
+                      <button
+                        type="button"
+                        class="btn-mock-sm solid"
+                        onclick="approveCoopRequest(this)"
+                      >
+                        <i class="fa-solid fa-circle-check"></i> อนุมัติ
+                      </button>
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="rejectCoopRequest(this)"
+                      >
+                        <i class="fa-solid fa-circle-xmark"></i> ไม่อนุมัติ
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ======================================== -->
+        <!-- กำหนดอาจารย์ที่ปรึกษาโครงการสหกิจ -->
+        <!-- ======================================== -->
+
+        <section class="content-panel" id="panel-coop-advisor">
+          <div class="panel-header">
+            <h2>กำหนดอาจารย์ที่ปรึกษาสหกิจ</h2>
+
+            <p>ค้นหาและกำหนดอาจารย์ที่ปรึกษาโครงการให้นักศึกษาสหกิจศึกษา</p>
+          </div>
+
+          <div class="student-search-box">
+            <div class="search-field">
+              <label>
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                ค้นหานักศึกษาสหกิจ
+              </label>
+
+              <input
+                type="text"
+                id="coopAdvisorSearch"
+                placeholder="ค้นหาชื่อหรือรหัสนักศึกษา..."
+                oninput="filterCoopAdvisorStudents()"
+              />
+            </div>
+
+            <div class="search-field">
+              <label>
+                <i class="fa-solid fa-filter"></i>
+
+                สาขา
+              </label>
+
+              <select
+                id="coopAdvisorMajor"
+                onchange="filterCoopAdvisorStudents()"
+              >
+                <option value="">ทุกสาขา</option>
+
+                <option value="IT">IT</option>
+
+                <option value="INE">INE</option>
+              </select>
+            </div>
+
+            <button
+              type="button"
+              class="btn-mock-sm solid student-search-btn"
+              onclick="filterCoopAdvisorStudents()"
+            >
+              <i class="fa-solid fa-search"></i>
+
+              ค้นหา
+            </button>
+          </div>
+
+          <div class="advisor-info-box">
+            <i class="fa-solid fa-circle-info"></i>
+
+            <span>
+              เลือกอาจารย์ที่ปรึกษาโครงการ แล้วกด “กำหนดอาจารย์ที่ปรึกษา”
+            </span>
+          </div>
+
+          <div class="mock-table-wrapper">
+            <table class="mock-table advisor-table" id="coopAdvisorTable">
+              <thead>
+                <tr>
+                  <th>นักศึกษาสหกิจ</th>
+
+                  <th>รหัสนักศึกษา</th>
+
+                  <th>สาขา</th>
+
+                  <th>สถานประกอบการ</th>
+
+                  <th>อาจารย์ที่ปรึกษา</th>
+
+                  <th>การดำเนินการ</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <!-- พิมพ์ชนก -->
+                <tr
+                  data-name="นางสาวพิมพ์ชนก สุขใจ"
+                  data-student-id="6702458196"
+                  data-major="INE"
+                >
+                  <td>
+                    <div class="student-cell">
+                      <span class="avatar-sm">พ</span>
+                      นางสาวพิมพ์ชนก สุขใจ
+                    </div>
+                  </td>
+
+                  <td>6702458196</td>
+                  <td>INE</td>
+                  <td>BlueWave Digital Co., Ltd.</td>
+
+                  <td>
+                    <select class="advisor-select">
+                      <option value="">-- ยังไม่ได้กำหนด --</option>
+                      <option selected>ผศ.ดร.นิติการ นาคเจือทอง</option>
+                      <option>ผศ.พีระศักดิ์ เสรีกุล</option>
+                      <option>รศ.ดร.อนิราช มิ่งขวัญ</option>
+                      <option>ผศ.ดร.สุปีติ กุลจันทร์</option>
+                      <option>ผศ.ดร.วันทนี ประจวบศุภกิจ</option>
+                      <option>ผศ.ดร.พาฝัน ดวงไพศาล</option>
+                      <option>ผศ.ดร.อรบุษป์ วุฒิกมลชัย</option>
+                      <option>ผศ.ดร.สิวาลัย จินเจือ</option>
+                      <option>ผศ.นพเก้า ทองใบ</option>
+                    </select>
+                  </td>
+
+                  <td>
+                    <button
+                      type="button"
+                      class="btn-mock-sm"
+                      onclick="assignCoopAdvisor(this)"
+                    >
+                      <i class="fa-solid fa-pen"></i>
+                      แก้ไขอาจารย์ที่ปรึกษา
+                    </button>
+                  </td>
+                </tr>
+
+                <!-- ธนกฤต -->
+                <tr
+                  data-name="นายธนกฤต วัฒนศิริ"
+                  data-student-id="6702458198"
+                  data-major="INE"
+                >
+                  <td>
+                    <div class="student-cell">
+                      <span class="avatar-sm">ธ</span>
+                      นายธนกฤต วัฒนศิริ
+                    </div>
+                  </td>
+
+                  <td>6702458198</td>
+                  <td>INE</td>
+                  <td>CloudNova Systems Co., Ltd.</td>
+
+                  <td>
+                    <select class="advisor-select">
+                      <option value="">-- ยังไม่ได้กำหนด --</option>
+                      <option>ผศ.ดร.นิติการ นาคเจือทอง</option>
+                      <option selected>ผศ.ดร.สุปีติ กุลจันทร์</option>
+                      <option>รศ.ดร.อนิราช มิ่งขวัญ</option>
+                      <option>ผศ.ดร.วันทนี ประจวบศุภกิจ</option>
+                      <option>ผศ.ดร.พาฝัน ดวงไพศาล</option>
+                    </select>
+                  </td>
+
+                  <td>
+                    <button
+                      type="button"
+                      class="btn-mock-sm"
+                      onclick="assignCoopAdvisor(this)"
+                    >
+                      <i class="fa-solid fa-pen"></i>
+                      แก้ไขอาจารย์ที่ปรึกษา
+                    </button>
+                  </td>
+                </tr>
+
+                <!-- อรุณี -->
+                <tr
+                  data-name="อรุณี พงษ์สุวรรณ"
+                  data-student-id="6702458202"
+                  data-major="IT"
+                >
+                  <td>
+                    <div class="student-cell">
+                      <span class="avatar-sm">อ</span>
+                      อรุณี พงษ์สุวรรณ
+                    </div>
+                  </td>
+
+                  <td>6702458202</td>
+                  <td>IT</td>
+                  <td>DataSphere Thailand</td>
+
+                  <td>
+                    <select class="advisor-select">
+                      <option value="">-- ยังไม่ได้กำหนด --</option>
+                      <option>ผศ.ดร.นิติการ นาคเจือทอง</option>
+                      <option selected>รศ.ดร.อนิราช มิ่งขวัญ</option>
+                      <option>ผศ.ดร.พาฝัน ดวงไพศาล</option>
+                      <option>ผศ.ดร.อรบุษป์ วุฒิกมลชัย</option>
+                    </select>
+                  </td>
+
+                  <td>
+                    <button
+                      type="button"
+                      class="btn-mock-sm"
+                      onclick="assignCoopAdvisor(this)"
+                    >
+                      <i class="fa-solid fa-pen"></i>
+                      แก้ไขอาจารย์ที่ปรึกษา
+                    </button>
+                  </td>
+                </tr>
+
+                <!-- กิตติพงศ์ -->
+                <tr
+                  data-name="นายกิตติพงศ์ สุวรรณชัย"
+                  data-student-id="6702458204"
+                  data-major="INE"
+                >
+                  <td>
+                    <div class="student-cell">
+                      <span class="avatar-sm">ก</span>
+                      นายกิตติพงศ์ สุวรรณชัย
+                    </div>
+                  </td>
+
+                  <td>6702458204</td>
+                  <td>INE</td>
+                  <td>NextWave Technology Co., Ltd.</td>
+
+                  <td>
+                    <select class="advisor-select">
+                      <option value="">-- ยังไม่ได้กำหนด --</option>
+                      <option>ผศ.ดร.นิติการ นาคเจือทอง</option>
+                      <option>ผศ.ดร.สุปีติ กุลจันทร์</option>
+                      <option selected>ผศ.ดร.วันทนี ประจวบศุภกิจ</option>
+                      <option>ผศ.ดร.พาฝัน ดวงไพศาล</option>
+                    </select>
+                  </td>
+
+                  <td>
+                    <button
+                      type="button"
+                      class="btn-mock-sm"
+                      onclick="assignCoopAdvisor(this)"
+                    >
+                      <i class="fa-solid fa-pen"></i>
+                      แก้ไขอาจารย์ที่ปรึกษา
+                    </button>
+                  </td>
+                </tr>
+
+                <!-- ณิชารีย์ : ยังไม่ได้กำหนด -->
+                <tr
+                  data-name="นางสาวณิชารีย์ บุญส่ง"
+                  data-student-id="6702458206"
+                  data-major="IT"
+                >
+                  <td>
+                    <div class="student-cell">
+                      <span class="avatar-sm">ณ</span>
+                      นางสาวณิชารีย์ บุญส่ง
+                    </div>
+                  </td>
+
+                  <td>6702458206</td>
+                  <td>IT</td>
+                  <td>BrightCode Solutions Co., Ltd.</td>
+
+                  <td>
+                    <select class="advisor-select">
+                      <option value="" selected>-- ยังไม่ได้กำหนด --</option>
+                      <option>ผศ.ดร.นิติการ นาคเจือทอง</option>
+                      <option>รศ.ดร.อนิราช มิ่งขวัญ</option>
+                      <option>ผศ.ดร.พาฝัน ดวงไพศาล</option>
+                      <option>ผศ.ดร.อรบุษป์ วุฒิกมลชัย</option>
+                      <option>ผศ.นพเก้า ทองใบ</option>
+                    </select>
+                  </td>
+
+                  <td>
+                    <button
+                      type="button"
+                      class="btn-mock-sm solid"
+                      onclick="assignCoopAdvisor(this)"
+                    >
+                      <i class="fa-solid fa-user-plus"></i>
+                      กำหนดอาจารย์ที่ปรึกษา
+                    </button>
+                  </td>
+                </tr>
+
+                <!-- ภูริช -->
+                <tr
+                  data-name="นายภูริช วัฒนกุล"
+                  data-student-id="6702458208"
+                  data-major="INE"
+                >
+                  <td>
+                    <div class="student-cell">
+                      <span class="avatar-sm">ภ</span>
+                      นายภูริช วัฒนกุล
+                    </div>
+                  </td>
+
+                  <td>6702458208</td>
+                  <td>INE</td>
+                  <td>Business Intelligence Group</td>
+
+                  <td>
+                    <select class="advisor-select">
+                      <option value="">-- ยังไม่ได้กำหนด --</option>
+                      <option>ผศ.ดร.นิติการ นาคเจือทอง</option>
+                      <option>ผศ.ดร.วันทนี ประจวบศุภกิจ</option>
+                      <option selected>ผศ.ดร.อรบุษป์ วุฒิกมลชัย</option>
+                      <option>ผศ.ดร.พาฝัน ดวงไพศาล</option>
+                    </select>
+                  </td>
+
+                  <td>
+                    <button
+                      type="button"
+                      class="btn-mock-sm"
+                      onclick="assignCoopAdvisor(this)"
+                    >
+                      <i class="fa-solid fa-pen"></i>
+                      แก้ไขอาจารย์ที่ปรึกษา
+                    </button>
+                  </td>
+                </tr>
+
+                <!-- รินรดา : ยังไม่ได้กำหนด -->
+                <tr
+                  data-name="นางสาวรินรดา ศรีสุข"
+                  data-student-id="6702458214"
+                  data-major="IT"
+                >
+                  <td>
+                    <div class="student-cell">
+                      <span class="avatar-sm">ร</span>
+                      นางสาวรินรดา ศรีสุข
+                    </div>
+                  </td>
+
+                  <td>6702458214</td>
+                  <td>IT</td>
+                  <td>Digital Vision Lab Co., Ltd.</td>
+
+                  <td>
+                    <select class="advisor-select">
+                      <option value="" selected>-- ยังไม่ได้กำหนด --</option>
+                      <option>ผศ.ดร.นิติการ นาคเจือทอง</option>
+                      <option>ผศ.ดร.พาฝัน ดวงไพศาล</option>
+                      <option>ผศ.ดร.สิวาลัย จินเจือ</option>
+                      <option>ผศ.นพเก้า ทองใบ</option>
+                    </select>
+                  </td>
+
+                  <td>
+                    <button
+                      type="button"
+                      class="btn-mock-sm solid"
+                      onclick="assignCoopAdvisor(this)"
+                    >
+                      <i class="fa-solid fa-user-plus"></i>
+                      กำหนดอาจารย์ที่ปรึกษา
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Modal แก้ไขข้อมูลอาจารย์ -->
+    <div id="editTeacherModal" class="mockup-modal" style="display: none">
+      <div class="mockup-card">
+        <div class="mockup-card-header">
+          <h3><i class="fa-solid fa-user-pen"></i> แก้ไขข้อมูลอาจารย์</h3>
+          <button
+            type="button"
+            class="mockup-close"
+            onclick="closeEditTeacher()"
+          >
+            ×
+          </button>
+        </div>
+        <div class="mockup-body">
+          <div class="mockup-grid">
+            <div class="mockup-field full">
+              <label>ชื่อ-นามสกุล</label>
+              <input
+                type="text"
+                id="editTeacherName"
+                placeholder="ชื่อ-นามสกุล"
+              />
+            </div>
+            <div class="mockup-field full">
+              <label>อีเมล</label>
+              <input
+                type="email"
+                id="editTeacherEmail"
+                placeholder="example@kmutnb.ac.th"
+              />
+            </div>
+            <div class="mockup-field">
+              <label>สาขาวิชา</label>
+              <select id="editTeacherMajor">
+                <option value="">-- เลือกสาขาวิชา --</option>
+                <option value="IT">IT</option>
+                <option value="ITI">ITI</option>
+                <option value="INET">INET</option>
+                <option value="INE">INE</option>
+              </select>
+            </div>
+            <div class="mockup-field">
+              <label>รหัสผ่านใหม่</label>
+              <input
+                type="password"
+                id="editTeacherPassword"
+                placeholder="เว้นว่างหากไม่เปลี่ยนรหัสผ่าน"
+              />
+            </div>
+          </div>
+          <div
+            style="
+              display: flex;
+              justify-content: flex-end;
+              gap: 10px;
+              margin-top: 22px;
+            "
+          >
+            <button
+              type="button"
+              class="btn-mock-sm"
+              onclick="closeEditTeacher()"
+            >
+              ยกเลิก
+            </button>
+            <button
+              type="button"
+              class="btn-mock-sm solid"
+              onclick="saveTeacherEdit()"
+            >
+              <i class="fa-solid fa-floppy-disk"></i> บันทึกการแก้ไข
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-copyright">
+        <p>© KIWI — Co-operative Education Management System</p>
+      </div>
+    </footer>
+
+    <script type="module" src="main.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const user = JSON.parse(localStorage.getItem("currentUser") || "null");
+
+        if (user) {
+          const greeting = document.getElementById("overviewGreeting");
+
+          if (greeting) {
+            greeting.textContent = `ยินดีต้อนรับ, ${user.name}`;
+          }
+        }
+
+        // =========================
+        // สลับเมนูด้านซ้าย
+        // =========================
+
+        document
+          .querySelectorAll(".sidebar-item[data-target]")
+          .forEach((item) => {
+            item.addEventListener("click", () => {
+              document.querySelectorAll(".sidebar-item").forEach((i) => {
+                i.classList.remove("active");
+              });
+
+              document.querySelectorAll(".content-panel").forEach((panel) => {
+                panel.classList.remove("active");
+              });
+
+              item.classList.add("active");
+
+              const targetPanel = document.getElementById(item.dataset.target);
+
+              if (targetPanel) {
+                targetPanel.classList.add("active");
+              }
+            });
+          });
+      });
+    </script>
+
+    <script>
+      // ========================================
+      // ค้นหาข้อมูลนักศึกษาสหกิจ
+      // ========================================
+
+      function filterHeadStudents() {
+        const keyword =
+          document
+            .getElementById("studentSearchInput")
+            ?.value.trim()
+            .toLowerCase() || "";
+
+        const major =
+          document.getElementById("studentMajorFilter")?.value || "";
+
+        const rows = document.querySelectorAll(
+          "#headCoopStudentTable tbody tr",
+        );
+
+        rows.forEach((row) => {
+          const name = (row.dataset.name || "").toLowerCase();
+          const studentId = (row.dataset.studentId || "").toLowerCase();
+          const company = (row.dataset.company || "").toLowerCase();
+          const rowMajor = row.dataset.major || "";
+
+          const matchKeyword =
+            !keyword ||
+            name.includes(keyword) ||
+            studentId.includes(keyword) ||
+            company.includes(keyword);
+
+          const matchMajor = !major || rowMajor === major;
+
+          row.style.display = matchKeyword && matchMajor ? "" : "none";
+        });
+      }
+
+      // ========================================
+      // ดูรายละเอียดนักศึกษา
+      // ========================================
+
+      function viewHeadStudent(button) {
+        const row = button.closest("tr");
+
+        if (!row) return;
+
+        const cells = row.querySelectorAll("td");
+
+        const name = row.dataset.name || "-";
+
+        const studentId = row.dataset.studentId || "-";
+
+        const major = row.dataset.major || "-";
+
+        const company = row.dataset.company || "-";
+
+        const position = cells[4]?.textContent.trim() || "-";
+
+        const duration = cells[5]?.textContent.trim() || "-";
+
+        const teacher = cells[6]?.textContent.trim() || "-";
+
+        alert(
+          `ข้อมูลนักศึกษา\n\n` +
+            `ชื่อ-นามสกุล: ${name}\n` +
+            `รหัสนักศึกษา: ${studentId}\n` +
+            `สาขา: ${major}\n` +
+            `สถานประกอบการ: ${company}\n` +
+            `ตำแหน่ง: ${position}\n` +
+            `ระยะเวลาสหกิจ: ${duration}\n` +
+            `อาจารย์ที่ดูแล: ${teacher}`,
+        );
+      }
+
+      // ========================================
+      // ค้นหานักศึกษาสหกิจ
+      // สำหรับกำหนดอาจารย์ที่ปรึกษา
+      // ========================================
+
+      function filterCoopAdvisorStudents() {
+        const keyword =
+          document
+            .getElementById("coopAdvisorSearch")
+            ?.value.trim()
+            .toLowerCase() || "";
+
+        const major = document.getElementById("coopAdvisorMajor")?.value || "";
+
+        const rows = document.querySelectorAll("#coopAdvisorTable tbody tr");
+
+        rows.forEach((row) => {
+          const name = (row.dataset.name || "").toLowerCase();
+
+          const studentId = (row.dataset.studentId || "").toLowerCase();
+
+          const rowMajor = row.dataset.major || "";
+
+          const matchKeyword =
+            !keyword || name.includes(keyword) || studentId.includes(keyword);
+
+          const matchMajor = !major || rowMajor === major;
+
+          row.style.display = matchKeyword && matchMajor ? "" : "none";
+        });
+      }
+
+      // ========================================
+      // กำหนดอาจารย์ที่ปรึกษานักศึกษาสหกิจ
+      // ========================================
+
+      function assignCoopAdvisor(button) {
+        const row = button.closest("tr");
+
+        if (!row) return;
+
+        const studentName = row.dataset.name || "นักศึกษา";
+
+        const select = row.querySelector(".advisor-select");
+
+        const advisor = select?.value || "";
+
+        if (!advisor) {
+          alert("กรุณาเลือกอาจารย์ที่ปรึกษาโครงการ");
+          return;
+        }
+
+        const confirmed = confirm(
+          `ยืนยันการกำหนดอาจารย์ที่ปรึกษาหรือไม่?\n\n` +
+            `นักศึกษา: ${studentName}\n` +
+            `อาจารย์ที่ปรึกษา: ${advisor}`,
+        );
+
+        if (!confirmed) return;
+
+        button.textContent = "แก้ไขอาจารย์ที่ปรึกษา";
+
+        button.classList.remove("solid");
+
+        alert(
+          `กำหนดอาจารย์ที่ปรึกษาเรียบร้อยแล้ว\n\n` +
+            `นักศึกษา: ${studentName}\n` +
+            `อาจารย์ที่ปรึกษา: ${advisor}`,
+        );
+      }
+
+      function openCoopRequestApproval() {
+        document
+          .querySelector('[data-target="panel-coop-request-approval"]')
+          ?.click();
+      }
+
+      function viewCoopRequest(button) {
+        const row = button.closest("tr");
+        if (!row) return;
+
+        const status = row.children[6]?.textContent.trim() || "-";
+        alert(
+          `รายละเอียดคำร้องสหกิจศึกษา\n\n` +
+            `ชื่อ-นามสกุล: ${row.dataset.name || "-"}\n` +
+            `รหัสนักศึกษา: ${row.dataset.studentId || "-"}\n` +
+            `ประเภท: สหกิจศึกษา\n` +
+            `สถานประกอบการ: ${row.dataset.company || "-"}\n` +
+            `จังหวัด: ${row.dataset.province || "-"}\n` +
+            `ตำแหน่ง: ${row.dataset.position || "-"}\n` +
+            `วันที่ยื่น: ${row.dataset.submittedDate || "-"}\n` +
+            `ระยะเวลาสหกิจศึกษา: ${row.dataset.duration || "-"}\n` +
+            `สถานะ: ${status}`,
+        );
+      }
+
+      function printCoopRequest(button) {
+        if (!button.closest("tr")) return;
+        window.print();
+      }
+
+      function approveCoopRequest(button) {
+        const row = button.closest("tr");
+        if (!row) return;
+
+        const studentName = row.dataset.name || "นักศึกษา";
+        if (
+          !confirm(
+            `ยืนยันการอนุมัติคำร้องสหกิจศึกษาของ\n${studentName} หรือไม่?`,
+          )
+        )
+          return;
+
+        row.children[6].innerHTML =
+          '<span class="tag tag-green">อนุมัติแล้ว</span>';
+      }
+
+      function rejectCoopRequest(button) {
+        const row = button.closest("tr");
+        if (!row) return;
+
+        const studentName = row.dataset.name || "นักศึกษา";
+        if (
+          !confirm(
+            `ยืนยันการไม่อนุมัติคำร้องสหกิจศึกษาของ\n${studentName} หรือไม่?`,
+          )
+        )
+          return;
+
+        row.children[6].innerHTML =
+          '<span class="tag tag-red">ไม่อนุมัติ</span>';
+      }
+    </script>
+
+    <script>
+      function searchTeachers() {
+        const input = document.getElementById("teacherSearchInput");
+        const keyword = (input?.value || "").trim().toLowerCase();
+        const rows = document.querySelectorAll("#teacherTable tbody tr");
+
+        rows.forEach((row) => {
+          const name = (row.dataset.name || "").toLowerCase();
+          const email = (row.dataset.email || "").toLowerCase();
+          const major = (row.dataset.major || "").toLowerCase();
+          const teacherId = (row.dataset.id || "").toLowerCase();
+          const match =
+            !keyword ||
+            name.includes(keyword) ||
+            email.includes(keyword) ||
+            major.includes(keyword) ||
+            teacherId.includes(keyword);
+          row.style.display = match ? "" : "none";
+        });
+      }
+
+      let currentTeacherRow = null;
+
+      function openEditTeacher(button) {
+        currentTeacherRow = button.closest("tr");
+        if (!currentTeacherRow) return;
+
+        document.getElementById("editTeacherName").value =
+          currentTeacherRow.dataset.name || "";
+        document.getElementById("editTeacherEmail").value =
+          currentTeacherRow.dataset.email || "";
+        document.getElementById("editTeacherMajor").value =
+          currentTeacherRow.dataset.major || "";
+        document.getElementById("editTeacherPassword").value = "";
+
+        const modal = document.getElementById("editTeacherModal");
+        if (modal) {
+          modal.style.display = "flex";
+          modal.classList.add("show");
+        }
+      }
+
+      function closeEditTeacher() {
+        const modal = document.getElementById("editTeacherModal");
+        if (modal) {
+          modal.style.display = "none";
+          modal.classList.remove("show");
+        }
+        currentTeacherRow = null;
+      }
+
+      function saveTeacherEdit() {
+        if (!currentTeacherRow) return;
+
+        const name = document.getElementById("editTeacherName").value.trim();
+        const email = document.getElementById("editTeacherEmail").value.trim();
+        const major = document.getElementById("editTeacherMajor").value;
+        const password = document.getElementById("editTeacherPassword").value;
+
+        if (!name) return alert("กรุณากรอกชื่อ-นามสกุล");
+        if (!email) return alert("กรุณากรอกอีเมล");
+        if (!major) return alert("กรุณาเลือกสาขาวิชา");
+
+        currentTeacherRow.dataset.name = name;
+        currentTeacherRow.dataset.email = email;
+        currentTeacherRow.dataset.major = major;
+        currentTeacherRow.children[0].textContent = name;
+        currentTeacherRow.children[2].textContent = major;
+        currentTeacherRow.children[3].textContent = email;
+
+        alert(
+          password
+            ? "แก้ไขข้อมูลอาจารย์และรหัสผ่านเรียบร้อยแล้ว"
+            : "แก้ไขข้อมูลอาจารย์เรียบร้อยแล้ว",
+        );
+        closeEditTeacher();
+      }
+
+      document
+        .getElementById("teacherSearchInput")
+        ?.addEventListener("input", searchTeachers);
+    </script>
+
+    <script>
+      // ================= จัดการข้อมูลส่วนตัว =================
+      document.addEventListener("DOMContentLoaded", function () {
+        loadProfileData();
+      });
+
+      function loadProfileData() {
+        const user = JSON.parse(localStorage.getItem("currentUser") || "{}");
+
+        const nameInput = document.getElementById("profileFullName");
+        const emailInput = document.getElementById("profileEmail");
+        const passwordInput = document.getElementById("profilePassword");
+        const confirmPasswordInput = document.getElementById(
+          "profileConfirmPassword",
+        );
+
+        if (nameInput) {
+          nameInput.value =
+            user.name ||
+            document.getElementById("userNameDisplay")?.textContent.trim() ||
+            "";
+        }
+
+        if (emailInput) {
+          emailInput.value = user.email || "";
+        }
+
+        if (passwordInput) {
+          passwordInput.value = "";
+        }
+
+        if (confirmPasswordInput) {
+          confirmPasswordInput.value = "";
+        }
+      }
+
+      function saveProfile(event) {
+        event.preventDefault();
+
+        const fullName =
+          document.getElementById("profileFullName")?.value.trim() || "";
+
+        const email =
+          document.getElementById("profileEmail")?.value.trim() || "";
+
+        const password =
+          document.getElementById("profilePassword")?.value || "";
+
+        const confirmPassword =
+          document.getElementById("profileConfirmPassword")?.value || "";
+
+        if (!fullName) {
+          alert("กรุณากรอกชื่อ-นามสกุล");
+          return;
+        }
+
+        if (!email) {
+          alert("กรุณากรอก Email");
+          return;
+        }
+
+        if (password && password.length < 6) {
+          alert("รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร");
+          return;
+        }
+
+        if (password !== confirmPassword) {
+          alert("รหัสผ่านใหม่และยืนยันรหัสผ่านไม่ตรงกัน");
+          return;
+        }
+
+        const currentUser = JSON.parse(
+          localStorage.getItem("currentUser") || "{}",
+        );
+
+        const updatedUser = {
+          ...currentUser,
+          name: fullName,
+          email: email,
+        };
+
+        localStorage.setItem("currentUser", JSON.stringify(updatedUser));
+
+        const userNameDisplay = document.getElementById("userNameDisplay");
+
+        if (userNameDisplay) {
+          userNameDisplay.textContent = fullName;
+        }
+
+        const overviewGreeting = document.getElementById("overviewGreeting");
+
+        if (overviewGreeting) {
+          overviewGreeting.textContent = `ยินดีต้อนรับ, ${fullName}`;
+        }
+
+        document.getElementById("profilePassword").value = "";
+        document.getElementById("profileConfirmPassword").value = "";
+
+        if (password) {
+          alert(
+            "บันทึกข้อมูลส่วนตัวเรียบร้อยแล้ว\n" +
+              "รหัสผ่านใหม่จะบันทึกจริงเมื่อเชื่อมต่อ Backend",
+          );
+        } else {
+          alert("บันทึกข้อมูลส่วนตัวเรียบร้อยแล้ว");
+        }
+      }
+    </script>
+  </body>
+</html>

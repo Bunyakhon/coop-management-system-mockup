@@ -1,0 +1,6696 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>แดชบอร์ดนักศึกษาสหกิจศึกษา | KIWI</title>
+
+    <link rel="stylesheet" href="style.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sarabun:wght@500;600;700&family=Noto+Sans+Thai:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      /* ==========================================
+         ส่วนเสริมเฉพาะหน้านักศึกษาสหกิจศึกษา
+         ========================================== */
+      .resume-status {
+        color: #ffffff !important;
+      }
+      .brand-logo {
+        width: 42px;
+        height: 42px;
+        object-fit: contain;
+      }
+
+      /* กริดข้อมูลแบบ label/value สำหรับประวัตินักศึกษา */
+      .info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px 20px;
+      }
+
+      .info-item span {
+        display: block;
+        color: var(--text-muted);
+        font-size: 0.78rem;
+        margin-bottom: 3px;
+      }
+
+      .info-item strong {
+        font-size: 0.92rem;
+        color: var(--text-dark);
+        font-weight: 600;
+      }
+
+      /* Stepper สถานะคำร้อง */
+      .stepper {
+        display: flex;
+        align-items: flex-start;
+        margin: 1.4rem 0 0.4rem;
+      }
+
+      .step {
+        flex: 1;
+        text-align: center;
+        position: relative;
+      }
+
+      .step:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        top: 15px;
+        left: 50%;
+        width: 100%;
+        height: 2px;
+        background: var(--border-color);
+        z-index: 0;
+      }
+
+      .step.completed:not(:last-child)::after {
+        background: var(--primary-color);
+      }
+
+      .step-dot {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: #fff;
+        border: 2px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 8px;
+        position: relative;
+        z-index: 1;
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: var(--text-muted);
+      }
+
+      .step.completed .step-dot {
+        background: var(--primary-color);
+        border-color: var(--primary-color);
+        color: #fff;
+      }
+
+      .step.current .step-dot {
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+        box-shadow: 0 0 0 4px var(--primary-light);
+      }
+
+      .step-label {
+        font-size: 0.74rem;
+        color: var(--text-muted);
+        max-width: 110px;
+        margin: 0 auto;
+        line-height: 1.35;
+      }
+
+      .step.current .step-label {
+        color: var(--primary-color);
+        font-weight: 600;
+      }
+
+      .step.completed .step-label {
+        color: var(--text-dark);
+      }
+
+      /* การ์ดคำร้องปัจจุบัน */
+      .request-card-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .request-card-head h4 {
+        font-family: "Sarabun", sans-serif;
+        font-size: 1rem;
+        margin-bottom: 3px;
+      }
+
+      .request-card-head p {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+      }
+
+      .request-meta {
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        margin-top: 1rem;
+      }
+
+      .request-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 1.1rem;
+        flex-wrap: wrap;
+      }
+
+      .btn-danger-outline {
+        background: #fff;
+        border: 1px solid #c94b4b;
+        color: #c94b4b;
+        padding: 7px 16px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        cursor: not-allowed;
+        transition: all 0.2s;
+      }
+
+      .tag-muted {
+        background: var(--bg-light);
+        color: var(--text-muted);
+        border: 1px solid var(--border-color);
+      }
+
+      /* การ์ดแนะนำสถานประกอบการ */
+      .recommend-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin-top: 1rem;
+      }
+
+      .recommend-card {
+        background: #fff;
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 16px 18px;
+      }
+
+      .recommend-card-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 4px;
+      }
+
+      .recommend-card-head b {
+        font-size: 0.92rem;
+        font-family: "Sarabun", sans-serif;
+      }
+
+      .recommend-card-head small {
+        display: block;
+        color: var(--text-muted);
+        font-size: 0.76rem;
+        margin-top: 2px;
+      }
+
+      .match-badge {
+        background: var(--primary-light);
+        color: var(--primary-color);
+        font-size: 0.74rem;
+        font-weight: 700;
+        padding: 3px 10px;
+        border-radius: 12px;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      .match-bar-track {
+        background: var(--bg-light);
+        height: 6px;
+        border-radius: 4px;
+        overflow: hidden;
+        margin: 10px 0 8px;
+      }
+
+      .match-bar-fill {
+        background: var(--primary-color);
+        height: 100%;
+        border-radius: 4px;
+      }
+
+      .skill-chip {
+        display: inline-block;
+        background: var(--bg-light);
+        color: var(--text-muted);
+        font-size: 0.72rem;
+        padding: 3px 9px;
+        border-radius: 10px;
+        margin: 2px 4px 0 0;
+      }
+
+      /* แฟ้มเรซูเม่ปัจจุบัน */
+      .resume-file-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+        background: #fff;
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        padding: 14px 18px;
+        margin-bottom: 1.1rem;
+      }
+
+      .resume-file-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .resume-file-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 8px;
+        background: var(--primary-light);
+        color: var(--primary-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+      }
+
+      .resume-file-info b {
+        display: block;
+        font-size: 0.88rem;
+      }
+
+      .resume-file-info span {
+        font-size: 0.76rem;
+        color: var(--text-muted);
+      }
+
+      .resume-file-actions {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+
+      /* ==================================================
+         ข้อมูลสหกิจศึกษา
+         ================================================== */
+
+      .coop-overview {
+        margin-top: 1.4rem;
+      }
+
+      .coop-overview-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+      }
+
+      .coop-overview-title h3 {
+        margin: 0;
+        font-family: "Sarabun", sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--text-dark);
+      }
+
+      .coop-overview-title p {
+        margin: 4px 0 0;
+        font-size: 0.76rem;
+        color: var(--text-muted);
+      }
+
+      .coop-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: #eaf8ef;
+        border: 1px solid #caead7;
+        color: #18864b;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 700;
+      }
+
+      .coop-status::before {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #22a95f;
+      }
+
+      .coop-main-card {
+        overflow: hidden;
+        background: #fff;
+        border: 1px solid var(--border-color);
+        border-radius: 14px;
+        box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+      }
+
+      .coop-company-header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 18px 20px;
+        background: linear-gradient(135deg, var(--primary-light), #fff 75%);
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .coop-company-icon {
+        width: 48px;
+        height: 48px;
+        flex: 0 0 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--primary-color);
+        color: #fff;
+        font-size: 1.1rem;
+      }
+
+      .coop-company-header span {
+        display: block;
+        font-size: 0.72rem;
+        color: var(--primary-color);
+        font-weight: 700;
+        margin-bottom: 3px;
+      }
+
+      .coop-company-header h4 {
+        margin: 0 0 4px;
+        font-family: "Sarabun", sans-serif;
+        font-size: 1rem;
+        color: var(--text-dark);
+      }
+
+      .coop-company-header p {
+        margin: 0;
+        font-size: 0.76rem;
+        color: var(--text-muted);
+      }
+
+      .coop-detail-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        padding: 4px 20px 12px;
+      }
+
+      .coop-detail-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 16px 7px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .coop-detail-item:nth-last-child(-n + 2) {
+        border-bottom: 0;
+      }
+
+      .coop-detail-icon {
+        width: 38px;
+        height: 38px;
+        flex: 0 0 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        background: var(--primary-light);
+        color: var(--primary-color);
+        font-size: 0.9rem;
+      }
+
+      .coop-detail-content {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .coop-detail-label {
+        display: block;
+        color: var(--text-muted);
+        font-size: 0.72rem;
+        margin-bottom: 3px;
+      }
+
+      .coop-detail-value {
+        display: block;
+        color: var(--text-dark);
+        font-size: 0.86rem;
+        font-weight: 600;
+        line-height: 1.5;
+      }
+
+      .coop-detail-sub {
+        display: block;
+        color: var(--text-muted);
+        font-size: 0.71rem;
+        margin-top: 3px;
+      }
+
+      .coop-progress {
+        width: 100%;
+        height: 6px;
+        background: var(--bg-light);
+        border-radius: 20px;
+        overflow: hidden;
+        margin-top: 8px;
+      }
+
+      .coop-progress-bar {
+        width: 30%;
+        height: 100%;
+        background: var(--primary-color);
+        border-radius: 20px;
+      }
+
+      .coop-period {
+        margin: 3px 20px 18px;
+        padding: 13px 15px;
+        border-radius: 11px;
+        background: var(--bg-light);
+        display: flex;
+        align-items: center;
+        gap: 11px;
+      }
+
+      .coop-period-icon {
+        width: 38px;
+        height: 38px;
+        flex: 0 0 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 9px;
+        background: #fff;
+        color: var(--primary-color);
+        border: 1px solid var(--border-color);
+      }
+
+      .coop-period small {
+        display: block;
+        font-size: 0.71rem;
+        color: var(--text-muted);
+        margin-bottom: 3px;
+      }
+
+      .coop-period strong {
+        font-size: 0.83rem;
+        color: var(--text-dark);
+      }
+
+      @media (max-width: 700px) {
+        .coop-detail-grid {
+          grid-template-columns: 1fr;
+          padding: 4px 15px 10px;
+        }
+
+        .coop-detail-item,
+        .coop-detail-item:nth-last-child(-n + 2) {
+          border-bottom: 1px solid var(--border-color);
+        }
+
+        .coop-detail-item:last-child {
+          border-bottom: 0;
+        }
+
+        .coop-company-header {
+          padding: 16px;
+        }
+
+        .coop-period {
+          margin-left: 15px;
+          margin-right: 15px;
+        }
+      }
+
+      .section-title-sm {
+        font-family: "Sarabun", sans-serif;
+        font-size: 0.98rem;
+        font-weight: 600;
+        margin: 1.6rem 0 0.6rem;
+      }
+
+      .helper-note {
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        margin-top: 10px;
+      }
+
+      .profile-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin: 12px 0 14px;
+      }
+
+      .profile-hero {
+        display: flex;
+        gap: 24px;
+        align-items: center;
+        margin-bottom: 14px;
+      }
+
+      .profile-photo-wrap {
+        width: 150px;
+        flex: 0 0 150px;
+        text-align: center;
+      }
+
+      .profile-photo {
+        width: 118px;
+        height: 118px;
+        margin: 0 auto 10px;
+        border-radius: 50%;
+        background: var(--primary-light);
+        border: 3px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary-color);
+        font-size: 3rem;
+        overflow: hidden;
+      }
+
+      .profile-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .profile-identity h3 {
+        font-family: "Sarabun", sans-serif;
+        font-size: 1.35rem;
+        margin: 4px 0 8px;
+      }
+
+      .profile-identity p {
+        font-size: 0.84rem;
+        color: var(--text-muted);
+        margin: 4px 0;
+      }
+
+      .profile-label {
+        color: var(--primary-color);
+        font-size: 0.76rem;
+        font-weight: 700;
+      }
+
+      .profile-section-card {
+        margin-top: 14px;
+      }
+
+      .profile-section-card h4 {
+        font-family: "Sarabun", sans-serif;
+        font-size: 1rem;
+        margin-bottom: 14px;
+        color: var(--text-dark);
+      }
+
+      .profile-section-card h4 i {
+        color: var(--primary-color);
+        margin-right: 7px;
+      }
+
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(20, 30, 40, 0.52);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        padding: 20px;
+      }
+
+      .modal-overlay.open {
+        display: flex;
+      }
+
+      .modal-box {
+        width: min(900px, 100%);
+        max-height: 90vh;
+        overflow: auto;
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 18px 60px rgba(0, 0, 0, 0.22);
+      }
+
+      .modal-box.small {
+        width: min(520px, 100%);
+      }
+
+      .modal-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: flex-start;
+        padding: 20px 22px;
+        border-bottom: 1px solid var(--border-color);
+        position: sticky;
+        top: 0;
+        background: #fff;
+        z-index: 2;
+      }
+
+      .modal-head h3 {
+        font-family: "Sarabun", sans-serif;
+        font-size: 1.15rem;
+        margin: 0 0 3px;
+      }
+
+      .modal-head p {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 0.76rem;
+      }
+
+      .modal-close {
+        border: 0;
+        background: var(--bg-light);
+        color: var(--text-muted);
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+
+      .modal-body {
+        padding: 20px 22px;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 13px 16px;
+      }
+
+      .form-grid.single {
+        grid-template-columns: 1fr;
+      }
+
+      .form-grid label {
+        color: var(--text-muted);
+        font-size: 0.77rem;
+        font-weight: 600;
+      }
+
+      .form-grid label.full {
+        grid-column: 1 / -1;
+      }
+
+      .form-grid input,
+      .form-grid textarea {
+        display: block;
+        width: 100%;
+        margin-top: 5px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 9px 10px;
+        font: inherit;
+        font-size: 0.83rem;
+        color: var(--text-dark);
+        background: #f8f9fa;
+        box-sizing: border-box;
+      }
+
+      .form-grid textarea {
+        min-height: 72px;
+        resize: none;
+      }
+
+      .form-grid input[readonly],
+      .form-grid textarea[readonly] {
+        cursor: not-allowed;
+      }
+
+      .modal-foot {
+        display: flex;
+        justify-content: flex-end;
+        gap: 9px;
+        padding: 14px 22px 20px;
+        border-top: 1px solid var(--border-color);
+      }
+
+      .mock-alert {
+        margin-top: 16px;
+        background: var(--primary-light);
+        color: var(--primary-color);
+        border-radius: 10px;
+        padding: 11px 13px;
+        font-size: 0.78rem;
+        line-height: 1.5;
+      }
+
+      .mock-alert i {
+        margin-right: 6px;
+      }
+
+      @media (max-width: 700px) {
+        .profile-hero {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .form-grid label.full {
+          grid-column: auto;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .info-grid,
+        .recommend-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .step-label {
+          display: none;
+        }
+      }
+
+      /* ===== Modal สำหรับคำร้องสหกิจศึกษา ===== */
+
+      .request-modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.48);
+        z-index: 9999;
+        padding: 24px;
+        overflow-y: auto;
+      }
+
+      .request-modal.show {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+      }
+
+      .request-modal-box {
+        width: min(980px, 100%);
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 18px 50px rgba(15, 23, 42, 0.22);
+        margin: 20px auto;
+        overflow: hidden;
+      }
+
+      .request-modal-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 20px 24px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .request-modal-head h3 {
+        font-family: "Sarabun", sans-serif;
+        font-size: 1.15rem;
+        margin: 0 0 4px;
+      }
+
+      .request-modal-head p {
+        color: var(--text-muted);
+        font-size: 0.78rem;
+        margin: 0;
+      }
+
+      .modal-close {
+        border: 0;
+        background: var(--bg-light);
+        color: var(--text-muted);
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1rem;
+        flex-shrink: 0;
+      }
+
+      .modal-close:hover {
+        background: var(--primary-light);
+        color: var(--primary-color);
+      }
+
+      .request-modal-body {
+        padding: 22px 24px;
+        max-height: 72vh;
+        overflow-y: auto;
+      }
+
+      .form-section {
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 16px;
+        margin-bottom: 16px;
+      }
+
+      .form-section h4 {
+        font-family: "Sarabun", sans-serif;
+        margin: 0 0 14px;
+        font-size: 0.98rem;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px 16px;
+      }
+
+      .form-field.full {
+        grid-column: 1 / -1;
+      }
+
+      .form-field label {
+        display: block;
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        margin-bottom: 5px;
+      }
+
+      .form-field input,
+      .form-field textarea {
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 9px 11px;
+        font: inherit;
+        font-size: 0.84rem;
+        color: var(--text-dark);
+        background: #fff;
+      }
+
+      .form-field textarea {
+        min-height: 72px;
+        resize: vertical;
+      }
+
+      .form-field input[readonly],
+      .form-field textarea[readonly] {
+        background: #f8fafc;
+        cursor: default;
+      }
+
+      .check-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 20px;
+        margin: 8px 0;
+      }
+
+      .check-item {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 0.82rem;
+      }
+
+      .check-item input {
+        accent-color: var(--primary-color);
+      }
+
+      .course-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.8rem;
+      }
+
+      .course-table th,
+      .course-table td {
+        border: 1px solid var(--border-color);
+        padding: 8px;
+        text-align: left;
+        vertical-align: middle;
+      }
+
+      .course-table th {
+        background: var(--bg-light);
+        font-weight: 600;
+      }
+
+      .course-table .mini-input {
+        width: 75px;
+        padding: 6px 7px;
+      }
+
+      .approval-box {
+        background: #fafafa;
+        border: 1px dashed var(--border-color);
+        border-radius: 10px;
+        padding: 13px;
+        margin-top: 12px;
+      }
+
+      .approval-box p {
+        font-size: 0.78rem;
+        margin: 0 0 8px;
+      }
+
+      .request-modal-foot {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        padding: 16px 24px;
+        border-top: 1px solid var(--border-color);
+        background: #fff;
+      }
+
+      .btn-modal-secondary {
+        border: 1px solid var(--border-color);
+        background: #fff;
+        color: var(--text-dark);
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .mock-notice {
+        background: var(--primary-light);
+        color: var(--primary-color);
+        border-radius: 9px;
+        padding: 10px 12px;
+        font-size: 0.78rem;
+        margin-bottom: 16px;
+      }
+
+      .cancel-confirm {
+        width: min(460px, 100%);
+      }
+
+      .cancel-confirm .request-modal-body {
+        text-align: center;
+        padding: 28px 24px;
+      }
+
+      .cancel-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        margin: 0 auto 12px;
+        background: #fff1f1;
+        color: #c94b4b;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+      }
+
+      @media (max-width: 700px) {
+        .request-modal {
+          padding: 10px;
+        }
+
+        .request-modal-box {
+          margin: 5px auto;
+        }
+
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .form-field.full {
+          grid-column: auto;
+        }
+
+        .request-modal-body {
+          padding: 16px;
+        }
+
+        .request-modal-foot {
+          padding: 12px 16px;
+        }
+
+        .course-table {
+          min-width: 650px;
+        }
+
+        .form-section {
+          overflow-x: auto;
+        }
+      }
+
+      /* ===== Modal บันทึกการปฏิบัติงานประจำวัน ===== */
+
+      .daily-log-modal .request-modal-box {
+        width: min(900px, 100%);
+      }
+
+      .daily-date-row {
+        display: grid;
+        grid-template-columns: 110px 1fr 130px;
+        gap: 12px;
+      }
+
+      .daily-log-title {
+        text-align: center;
+        font-family: "Sarabun", sans-serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin: 0 0 18px;
+        color: var(--text-dark);
+      }
+
+      .daily-section-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-family: "Sarabun", sans-serif;
+        font-size: 1rem;
+        margin: 0 0 14px;
+        color: var(--text-dark);
+      }
+
+      .daily-section-title i {
+        color: var(--primary-color);
+      }
+
+      .daily-signature {
+        text-align: center;
+        padding: 10px 0 0;
+      }
+
+      .daily-signature-line {
+        display: inline-block;
+        min-width: 260px;
+        border-bottom: 1px dotted #777;
+        height: 28px;
+        vertical-align: bottom;
+      }
+
+      .daily-signature-name {
+        margin-top: 4px;
+        color: var(--text-muted);
+        font-size: 0.82rem;
+      }
+
+      .daily-save-note {
+        margin-top: 10px;
+        font-size: 0.76rem;
+        color: var(--text-muted);
+      }
+
+      .daily-view-btn,
+      .daily-delete-btn {
+        margin-right: 6px;
+      }
+
+      @media (max-width: 700px) {
+        .daily-date-row {
+          grid-template-columns: 1fr;
+        }
+
+        .daily-signature-line {
+          min-width: 180px;
+        }
+      }
+
+      /* ===== ระบบส่งบันทึกประจำสัปดาห์ ===== */
+
+      .weekly-submit-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin: 14px 0;
+        padding: 14px 16px;
+        background: var(--primary-light);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+      }
+
+      .weekly-submit-info {
+        font-size: 0.82rem;
+        color: var(--text-dark);
+      }
+
+      .weekly-submit-info b {
+        color: var(--primary-color);
+      }
+
+      .mentor-link {
+        color: var(--primary-color);
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .mentor-link:hover {
+        text-decoration: underline;
+      }
+      /* ==========================================
+   KIWI Dashboard Navbar
+   ========================================== */
+
+      .navbar {
+        width: 100%;
+        background: #ffffff;
+        border-bottom: 1px solid #e8edf2;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 12px rgba(15, 23, 42, 0.04);
+      }
+
+      .nav-container {
+        min-height: 70px;
+        padding: 0 28px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 20px;
+      }
+
+      /* ==========================================
+   Brand
+   ========================================== */
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+
+        text-decoration: none;
+        color: var(--text-dark);
+      }
+
+      .brand-logo {
+        width: 46px;
+        height: 46px;
+        object-fit: contain;
+      }
+
+      .brand-text {
+        display: flex;
+        flex-direction: column;
+
+        line-height: 1.15;
+      }
+
+      .brand-text strong {
+        font-family: "Sarabun", sans-serif;
+
+        font-size: 1.05rem;
+        font-weight: 700;
+
+        color: var(--primary-color);
+
+        letter-spacing: 0.5px;
+      }
+
+      .brand-text span {
+        margin-top: 3px;
+
+        font-size: 0.78rem;
+
+        color: var(--text-muted);
+
+        white-space: nowrap;
+      }
+
+      /* ==========================================
+   User Navbar
+   ========================================== */
+
+      .nav-right {
+        display: flex;
+        align-items: center;
+
+        gap: 16px;
+      }
+
+      .nav-user {
+        display: flex;
+        align-items: center;
+
+        gap: 10px;
+      }
+
+      .nav-user-icon {
+        width: 38px;
+        height: 38px;
+
+        border-radius: 50%;
+
+        background: var(--primary-light);
+        color: var(--primary-color);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 0.9rem;
+      }
+
+      .nav-user-info {
+        display: flex;
+        flex-direction: column;
+
+        line-height: 1.25;
+      }
+
+      .nav-user-info small {
+        font-size: 0.68rem;
+
+        color: var(--text-muted);
+      }
+
+      .nav-user-info span {
+        margin-top: 2px;
+
+        font-size: 0.82rem;
+        font-weight: 600;
+
+        color: var(--text-dark);
+      }
+
+      /* ==========================================
+   Logout Button
+   ========================================== */
+
+      .btn-logout {
+        border: 1px solid #e1e6eb;
+
+        background: #ffffff;
+        color: #4b5563;
+
+        padding: 8px 14px;
+
+        border-radius: 22px;
+
+        font-family: inherit;
+
+        font-size: 0.78rem;
+        font-weight: 600;
+
+        cursor: pointer;
+
+        display: inline-flex;
+        align-items: center;
+
+        gap: 7px;
+
+        transition:
+          background 0.2s ease,
+          border-color 0.2s ease,
+          color 0.2s ease,
+          transform 0.2s ease;
+      }
+
+      .btn-logout:hover {
+        background: #fff1f1;
+
+        border-color: #f1c7c7;
+
+        color: #c74242;
+
+        transform: translateY(-1px);
+      }
+
+      /* ==========================================
+   Dashboard Layout
+   ========================================== */
+
+      .dashboard-layout {
+        display: grid;
+
+        grid-template-columns: 255px minmax(0, 1fr);
+
+        min-height: calc(100vh - 70px);
+
+        background: #f7f9fb;
+      }
+
+      /* ==========================================
+   Sidebar
+   ========================================== */
+
+      .dashboard-sidebar {
+        width: 100%;
+
+        background: #ffffff;
+
+        border-right: 1px solid #e8edf2;
+
+        padding: 20px 14px;
+
+        box-sizing: border-box;
+      }
+
+      /* ==========================================
+   Sidebar Header
+   ========================================== */
+
+      .sidebar-header {
+        padding: 4px 12px 18px;
+
+        border-bottom: 1px solid #edf0f3;
+
+        margin-bottom: 14px;
+      }
+
+      .sidebar-title {
+        display: flex;
+        align-items: center;
+
+        gap: 8px;
+
+        font-family: "Sarabun", sans-serif;
+
+        font-size: 0.9rem;
+        font-weight: 700;
+
+        color: var(--text-dark);
+      }
+
+      .sidebar-title i {
+        color: var(--primary-color);
+      }
+
+      .sidebar-header small {
+        display: block;
+
+        margin-top: 5px;
+
+        padding-left: 23px;
+
+        font-size: 0.7rem;
+
+        color: var(--text-muted);
+      }
+
+      /* ==========================================
+   Sidebar Menu
+   ========================================== */
+
+      .sidebar-menu {
+        display: flex;
+        flex-direction: column;
+
+        gap: 5px;
+      }
+
+      /* ==========================================
+   Sidebar Item
+   ========================================== */
+
+      .sidebar-item {
+        min-height: 44px;
+
+        padding: 8px 10px;
+
+        border-radius: 10px;
+
+        display: flex;
+        align-items: center;
+
+        gap: 10px;
+
+        text-decoration: none;
+
+        color: #525c69;
+
+        font-size: 0.81rem;
+        font-weight: 500;
+
+        cursor: pointer;
+
+        position: relative;
+
+        transition:
+          background 0.2s ease,
+          color 0.2s ease,
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      /* ==========================================
+   Sidebar Icon
+   ========================================== */
+
+      .sidebar-icon {
+        width: 33px;
+        height: 33px;
+
+        flex: 0 0 33px;
+
+        border-radius: 9px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background: #f4f6f8;
+
+        color: #77808b;
+
+        transition:
+          background 0.2s ease,
+          color 0.2s ease,
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .sidebar-icon i {
+        color: inherit;
+
+        font-size: 0.86rem;
+
+        transition: color 0.2s ease;
+      }
+
+      .sidebar-text {
+        flex: 1;
+
+        line-height: 1.35;
+      }
+
+      /* ==========================================
+   Sidebar Hover
+   ========================================== */
+
+      .sidebar-item:hover {
+        background: var(--primary-light);
+
+        color: var(--primary-color);
+
+        transform: translateX(2px);
+      }
+
+      .sidebar-item:hover .sidebar-icon {
+        background: var(--primary-color);
+
+        color: #ffffff;
+
+        box-shadow: 0 3px 10px rgba(15, 23, 42, 0.1);
+      }
+
+      .sidebar-item:hover .sidebar-icon i {
+        color: #ffffff !important;
+      }
+
+      /* ==========================================
+   Active Menu
+   ========================================== */
+
+      .sidebar-item.active {
+        background: var(--primary-light);
+
+        color: var(--primary-color);
+
+        font-weight: 700;
+
+        box-shadow: inset 3px 0 0 var(--primary-color);
+      }
+
+      .sidebar-item.active .sidebar-icon {
+        background: var(--primary-color);
+
+        color: #ffffff;
+
+        box-shadow: 0 3px 10px rgba(15, 23, 42, 0.1);
+      }
+
+      .sidebar-item.active .sidebar-icon i {
+        color: #ffffff !important;
+      }
+
+      /* ==========================================
+   Active + Hover
+   ========================================== */
+
+      .sidebar-item.active:hover {
+        background: var(--primary-light);
+
+        color: var(--primary-color);
+
+        transform: translateX(2px);
+      }
+
+      .sidebar-item.active:hover .sidebar-icon {
+        background: var(--primary-color);
+
+        color: #ffffff;
+      }
+
+      .sidebar-item.active:hover .sidebar-icon i {
+        color: #ffffff !important;
+      }
+
+      /* ==========================================
+   Sidebar Divider
+   ========================================== */
+
+      .sidebar-divider {
+        margin: 14px 8px 7px;
+
+        display: flex;
+        align-items: center;
+
+        gap: 8px;
+      }
+
+      .sidebar-divider::after {
+        content: "";
+
+        height: 1px;
+
+        flex: 1;
+
+        background: #edf0f3;
+      }
+
+      .sidebar-divider span {
+        font-size: 0.66rem;
+        font-weight: 700;
+
+        color: #9aa2ad;
+
+        white-space: nowrap;
+      }
+
+      /* ==========================================
+   Danger Menu
+   ========================================== */
+
+      .sidebar-item.sidebar-danger {
+        margin-top: 4px;
+
+        border: 1px solid #f1d1d1;
+
+        background: #fffafa;
+
+        color: #ba4545;
+      }
+
+      .sidebar-item.sidebar-danger .sidebar-icon {
+        background: #fff0f0;
+
+        color: #c94b4b;
+      }
+
+      .sidebar-item.sidebar-danger .sidebar-icon i {
+        color: inherit;
+      }
+
+      /* ==========================================
+   Danger Hover
+   ========================================== */
+
+      .sidebar-item.sidebar-danger:hover {
+        background: #fff0f0;
+
+        color: #af3333;
+
+        border-color: #efbcbc;
+      }
+
+      .sidebar-item.sidebar-danger:hover .sidebar-icon {
+        background: #c94b4b;
+
+        color: #ffffff;
+
+        box-shadow: 0 3px 10px rgba(201, 75, 75, 0.18);
+      }
+
+      .sidebar-item.sidebar-danger:hover .sidebar-icon i {
+        color: #ffffff !important;
+      }
+
+      /* ==========================================
+   Danger Active
+   ========================================== */
+
+      .sidebar-item.sidebar-danger.active {
+        background: #c94b4b;
+
+        color: #ffffff;
+
+        border-color: #c94b4b;
+
+        box-shadow: none;
+      }
+
+      .sidebar-item.sidebar-danger.active .sidebar-icon {
+        background: rgba(255, 255, 255, 0.18);
+
+        color: #ffffff;
+
+        box-shadow: none;
+      }
+
+      .sidebar-item.sidebar-danger.active .sidebar-icon i {
+        color: #ffffff !important;
+      }
+
+      /* ==========================================
+   Dashboard Content
+   ========================================== */
+
+      .dashboard-content {
+        min-width: 0;
+
+        padding: 28px;
+
+        background: #f7f9fb;
+      }
+
+      /* ==========================================
+   Tablet
+   ========================================== */
+
+      @media (max-width: 1000px) {
+        .dashboard-layout {
+          grid-template-columns: 220px minmax(0, 1fr);
+        }
+
+        .dashboard-sidebar {
+          padding-left: 10px;
+          padding-right: 10px;
+        }
+
+        .sidebar-item {
+          padding-left: 8px;
+          padding-right: 8px;
+
+          font-size: 0.78rem;
+        }
+
+        .dashboard-content {
+          padding: 22px;
+        }
+      }
+
+      /* ==========================================
+   Tablet Small
+   ========================================== */
+
+      @media (max-width: 900px) {
+        .dashboard-layout {
+          grid-template-columns: 210px minmax(0, 1fr);
+        }
+
+        .nav-user-info {
+          display: none;
+        }
+      }
+
+      /* ==========================================
+   Mobile
+   ========================================== */
+
+      @media (max-width: 700px) {
+        .navbar {
+          position: sticky;
+          top: 0;
+        }
+
+        .nav-container {
+          min-height: 62px;
+
+          padding: 0 14px;
+
+          gap: 10px;
+        }
+
+        .brand-logo {
+          width: 40px;
+          height: 40px;
+        }
+
+        .brand-text strong {
+          font-size: 0.95rem;
+        }
+
+        .brand-text span {
+          display: none;
+        }
+
+        .nav-right {
+          gap: 8px;
+        }
+
+        .nav-user {
+          display: none;
+        }
+
+        .btn-logout {
+          width: 38px;
+          height: 38px;
+
+          padding: 0;
+
+          justify-content: center;
+
+          border-radius: 50%;
+
+          font-size: 0;
+        }
+
+        .btn-logout i {
+          font-size: 0.9rem;
+        }
+
+        /* Dashboard */
+
+        .dashboard-layout {
+          display: block;
+
+          min-height: calc(100vh - 62px);
+        }
+
+        /* Sidebar */
+
+        .dashboard-sidebar {
+          width: 100%;
+
+          padding: 9px 10px;
+
+          border-right: 0;
+
+          border-bottom: 1px solid #e8edf2;
+
+          overflow: hidden;
+        }
+
+        .sidebar-header {
+          display: none;
+        }
+
+        .sidebar-divider {
+          display: none;
+        }
+
+        /* Menu Horizontal */
+
+        .sidebar-menu {
+          flex-direction: row;
+
+          overflow-x: auto;
+
+          gap: 7px;
+
+          padding-bottom: 4px;
+
+          scrollbar-width: thin;
+        }
+
+        .sidebar-menu::-webkit-scrollbar {
+          height: 4px;
+        }
+
+        .sidebar-menu::-webkit-scrollbar-track {
+          background: transparent;
+        }
+
+        .sidebar-menu::-webkit-scrollbar-thumb {
+          background: #d8dee6;
+
+          border-radius: 20px;
+        }
+
+        .sidebar-item {
+          flex: 0 0 auto;
+
+          min-height: 40px;
+
+          padding: 6px 10px;
+
+          white-space: nowrap;
+
+          border-radius: 9px;
+        }
+
+        .sidebar-item:hover {
+          transform: none;
+        }
+
+        .sidebar-item.active {
+          box-shadow: none;
+        }
+
+        .sidebar-icon {
+          width: 30px;
+          height: 30px;
+
+          flex: 0 0 30px;
+
+          border-radius: 8px;
+        }
+
+        .sidebar-text {
+          font-size: 0.76rem;
+        }
+
+        .sidebar-item.sidebar-danger {
+          margin-top: 0;
+        }
+
+        /* Content */
+
+        .dashboard-content {
+          padding: 16px;
+        }
+      }
+
+      /* ==========================================
+   Mobile Small
+   ========================================== */
+
+      @media (max-width: 480px) {
+        .nav-container {
+          padding-left: 10px;
+          padding-right: 10px;
+        }
+
+        .brand {
+          gap: 7px;
+        }
+
+        .brand-logo {
+          width: 36px;
+          height: 36px;
+        }
+
+        .brand-text strong {
+          font-size: 0.9rem;
+        }
+
+        .dashboard-content {
+          padding: 12px;
+        }
+      }
+      /* ==================================================
+   FIX: การ์ดข้อมูลสหกิจศึกษา
+  รูปแบบการ์ดข้อมูลสหกิจศึกษา
+   ================================================== */
+
+      .coop-overview {
+        margin-top: 1.4rem;
+      }
+
+      .coop-overview-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+      }
+
+      .coop-overview-title {
+        min-width: 0;
+      }
+
+      .coop-overview-title h3 {
+        margin: 0;
+
+        display: flex;
+        align-items: center;
+
+        font-family: "Sarabun", sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+
+        color: var(--text-dark);
+      }
+
+      .coop-overview-title h3 i {
+        color: var(--primary-color);
+        margin-right: 7px;
+      }
+
+      .coop-overview-title p {
+        margin: 5px 0 0;
+
+        font-size: 0.78rem;
+        line-height: 1.5;
+
+        color: var(--text-muted);
+      }
+
+      /* ==========================================
+   สถานะ
+   ========================================== */
+
+      .coop-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+
+        background: #eaf8ef;
+
+        border: 1px solid #caead7;
+
+        color: #18864b;
+
+        padding: 6px 12px;
+
+        border-radius: 999px;
+
+        font-size: 0.75rem;
+        font-weight: 700;
+
+        white-space: nowrap;
+      }
+
+      .coop-status::before {
+        content: "";
+
+        width: 7px;
+        height: 7px;
+
+        border-radius: 50%;
+
+        background: #22a95f;
+      }
+
+      /* ==========================================
+   Main Card
+   ========================================== */
+
+      .coop-main-card {
+        width: 100%;
+
+        overflow: hidden;
+
+        background: #ffffff;
+
+        border: 1px solid var(--border-color);
+
+        border-radius: 14px;
+
+        box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
+
+        box-sizing: border-box;
+      }
+
+      /* ==========================================
+   Company Header
+   ========================================== */
+
+      .coop-company-header {
+        display: flex;
+        align-items: center;
+
+        gap: 14px;
+
+        padding: 18px 20px;
+
+        background: linear-gradient(135deg, var(--primary-light), #ffffff 75%);
+
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .coop-company-icon {
+        width: 48px;
+        height: 48px;
+
+        flex: 0 0 48px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 12px;
+
+        background: var(--primary-color);
+
+        color: #ffffff;
+
+        font-size: 1.05rem;
+      }
+
+      .coop-company-icon i {
+        color: #ffffff !important;
+      }
+
+      .coop-company-header > div:last-child {
+        min-width: 0;
+      }
+
+      .coop-company-header span {
+        display: block;
+
+        margin-bottom: 3px;
+
+        font-size: 0.72rem;
+        font-weight: 700;
+
+        color: var(--primary-color);
+      }
+
+      .coop-company-header h4 {
+        margin: 0 0 4px;
+
+        font-family: "Sarabun", sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+
+        color: var(--text-dark);
+      }
+
+      .coop-company-header p {
+        margin: 0;
+
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        font-size: 0.76rem;
+
+        color: var(--text-muted);
+      }
+
+      /* ==========================================
+   Detail Grid
+   ========================================== */
+
+      .coop-detail-grid {
+        display: grid;
+
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        padding: 4px 20px 12px;
+      }
+
+      .coop-detail-item {
+        display: flex;
+        align-items: flex-start;
+
+        gap: 12px;
+
+        min-width: 0;
+
+        padding: 16px 7px;
+
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .coop-detail-item:nth-last-child(-n + 2) {
+        border-bottom: 0;
+      }
+
+      /* ==========================================
+   Detail Icon
+   ========================================== */
+
+      .coop-detail-icon {
+        width: 38px;
+        height: 38px;
+
+        flex: 0 0 38px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 10px;
+
+        background: var(--primary-light);
+
+        color: var(--primary-color);
+
+        font-size: 0.9rem;
+      }
+
+      .coop-detail-icon i {
+        color: var(--primary-color) !important;
+      }
+
+      /* ==========================================
+   Detail Content
+   ========================================== */
+
+      .coop-detail-content {
+        flex: 1;
+
+        min-width: 0;
+      }
+
+      .coop-detail-label {
+        display: block;
+
+        margin-bottom: 3px;
+
+        font-size: 0.72rem;
+
+        color: var(--text-muted);
+      }
+
+      .coop-detail-value {
+        display: block;
+
+        font-size: 0.86rem;
+        font-weight: 600;
+        line-height: 1.5;
+
+        color: var(--text-dark);
+
+        word-break: break-word;
+      }
+
+      .coop-detail-sub {
+        display: block;
+
+        margin-top: 3px;
+
+        font-size: 0.71rem;
+        line-height: 1.45;
+
+        color: var(--text-muted);
+      }
+
+      /* ==========================================
+   Progress
+   ========================================== */
+
+      .coop-progress {
+        width: 100%;
+        height: 6px;
+
+        margin-top: 8px;
+
+        background: #e9edf2;
+
+        border-radius: 999px;
+
+        overflow: hidden;
+      }
+
+      .coop-progress-bar {
+        width: 30%;
+        height: 100%;
+
+        background: var(--primary-color);
+
+        border-radius: 999px;
+      }
+
+      /* ==========================================
+   Period
+   ========================================== */
+
+      .coop-period {
+        margin: 3px 20px 18px;
+
+        padding: 13px 15px;
+
+        display: flex;
+        align-items: center;
+
+        gap: 11px;
+
+        background: var(--bg-light);
+
+        border-radius: 11px;
+      }
+
+      .coop-period-icon {
+        width: 38px;
+        height: 38px;
+
+        flex: 0 0 38px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 9px;
+
+        background: #ffffff;
+
+        border: 1px solid var(--border-color);
+
+        color: var(--primary-color);
+      }
+
+      .coop-period-icon i {
+        color: var(--primary-color) !important;
+      }
+
+      .coop-period small {
+        display: block;
+
+        margin-bottom: 3px;
+
+        font-size: 0.71rem;
+
+        color: var(--text-muted);
+      }
+
+      .coop-period strong {
+        display: block;
+
+        font-size: 0.83rem;
+        font-weight: 600;
+
+        color: var(--text-dark);
+      }
+      /* ==========================================
+   อาจารย์ที่ปรึกษาใน Profile
+   ========================================== */
+
+      .profile-advisor {
+        margin: 14px 0;
+
+        padding: 12px 14px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 14px;
+
+        background: #f8fafc;
+
+        border: 1px solid var(--border-color);
+
+        border-radius: 10px;
+      }
+
+      .profile-advisor-info {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .advisor-label {
+        display: block;
+
+        margin-bottom: 4px;
+
+        font-size: 0.74rem;
+        font-weight: 600;
+
+        color: var(--text-muted);
+      }
+
+      .advisor-label i {
+        margin-right: 5px;
+
+        color: var(--primary-color);
+      }
+
+      .profile-advisor-info strong {
+        display: block;
+
+        font-size: 0.86rem;
+        font-weight: 600;
+
+        color: var(--text-dark);
+      }
+
+      .advisor-select {
+        width: 100%;
+
+        max-width: 350px;
+
+        padding: 8px 10px;
+
+        border: 1px solid var(--border-color);
+
+        border-radius: 8px;
+
+        background: #ffffff;
+
+        color: var(--text-dark);
+
+        font-family: inherit;
+        font-size: 0.82rem;
+
+        outline: none;
+      }
+
+      .advisor-select:focus {
+        border-color: var(--primary-color);
+
+        box-shadow: 0 0 0 3px var(--primary-light);
+      }
+
+      /* ปุ่ม */
+
+      .advisor-actions {
+        display: flex;
+        align-items: center;
+
+        gap: 7px;
+
+        flex-wrap: wrap;
+      }
+
+      .btn-advisor-edit,
+      .btn-advisor-save,
+      .btn-advisor-cancel {
+        border: 0;
+
+        border-radius: 20px;
+
+        padding: 6px 12px;
+
+        font-family: inherit;
+        font-size: 0.74rem;
+        font-weight: 600;
+
+        cursor: pointer;
+
+        transition: all 0.2s ease;
+      }
+
+      /* แก้ไข */
+
+      .btn-advisor-edit {
+        background: var(--primary-light);
+
+        color: var(--primary-color);
+      }
+
+      .btn-advisor-edit:hover {
+        background: var(--primary-color);
+
+        color: #ffffff;
+      }
+
+      /* บันทึก */
+
+      .btn-advisor-save {
+        background: var(--primary-color);
+
+        color: #ffffff;
+      }
+
+      .btn-advisor-save:hover {
+        opacity: 0.88;
+      }
+
+      /* ยกเลิก */
+
+      .btn-advisor-cancel {
+        background: #f1f3f5;
+
+        color: #667085;
+      }
+
+      .btn-advisor-cancel:hover {
+        background: #e5e7eb;
+      }
+
+      /* Mobile */
+
+      @media (max-width: 700px) {
+      }
+
+      /* ==========================================
+   Responsive
+   ========================================== */
+
+      @media (max-width: 700px) {
+        .coop-overview-head {
+          align-items: flex-start;
+        }
+
+        .coop-detail-grid {
+          grid-template-columns: 1fr;
+
+          padding: 4px 15px 10px;
+        }
+
+        .coop-detail-item,
+        .coop-detail-item:nth-last-child(-n + 2) {
+          border-bottom: 1px solid var(--border-color);
+        }
+
+        .coop-detail-item:last-child {
+          border-bottom: 0;
+        }
+
+        .coop-company-header {
+          padding: 16px;
+        }
+
+        .coop-period {
+          margin-left: 15px;
+          margin-right: 15px;
+        }
+        .profile-advisor {
+          flex-direction: column;
+
+          align-items: stretch;
+        }
+
+        .advisor-select {
+          max-width: 100%;
+        }
+
+        .advisor-actions {
+          justify-content: flex-start;
+        }
+      }
+      /* ==================================================
+   ตารางบันทึกการปฏิบัติงานประจำวัน
+   ================================================== */
+
+      #panel-daily .daily-table-wrap {
+        width: 100%;
+        margin-top: 18px;
+
+        background: #ffffff;
+
+        border: 1px solid #dfe7f1;
+        border-radius: 14px;
+
+        overflow-x: auto;
+
+        box-shadow: 0 4px 14px rgba(15, 23, 42, 0.035);
+      }
+
+      /* ตาราง */
+
+      #panel-daily .mock-table {
+        width: 100%;
+
+        border-collapse: collapse;
+
+        background: #ffffff;
+
+        font-size: 0.82rem;
+
+        table-layout: auto;
+      }
+
+      /* ==============================
+   Header
+   ============================== */
+
+      #panel-daily .mock-table thead {
+        background: #f8fafc;
+      }
+
+      #panel-daily .mock-table th {
+        padding: 14px 16px;
+
+        text-align: left;
+
+        font-size: 0.76rem;
+        font-weight: 700;
+
+        color: #667085;
+
+        border-bottom: 1px solid #dfe7f1;
+
+        white-space: nowrap;
+      }
+
+      /* ==============================
+   Body
+   ============================== */
+
+      #panel-daily .mock-table td {
+        padding: 14px 16px;
+
+        vertical-align: middle;
+
+        color: var(--text-dark);
+
+        line-height: 1.55;
+
+        border-bottom: 1px solid #edf1f5;
+      }
+
+      #panel-daily .mock-table tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      /* Hover */
+
+      #panel-daily .mock-table tbody tr {
+        transition: background 0.18s ease;
+      }
+
+      #panel-daily .mock-table tbody tr:hover {
+        background: #f8fbff;
+      }
+
+      /* ==============================
+   ความกว้างแต่ละคอลัมน์
+   ============================== */
+
+      /* วันที่ */
+
+      #panel-daily .mock-table th:nth-child(1),
+      #panel-daily .mock-table td:nth-child(1) {
+        width: 100px;
+
+        white-space: nowrap;
+      }
+
+      /* งานที่ปฏิบัติ */
+
+      #panel-daily .mock-table th:nth-child(2),
+      #panel-daily .mock-table td:nth-child(2) {
+        min-width: 320px;
+      }
+
+      /* สถานะ */
+
+      #panel-daily .mock-table th:nth-child(3),
+      #panel-daily .mock-table td:nth-child(3) {
+        width: 125px;
+
+        text-align: center;
+
+        white-space: nowrap;
+      }
+
+      /* การดำเนินการ */
+
+      #panel-daily .mock-table th:nth-child(4),
+      #panel-daily .mock-table td:nth-child(4) {
+        width: 155px;
+
+        text-align: center;
+
+        white-space: nowrap;
+      }
+
+      /* ==================================================
+   Status Tag
+   ================================================== */
+
+      #panel-daily .mock-table .tag {
+        display: inline-flex;
+
+        align-items: center;
+        justify-content: center;
+
+        min-width: 72px;
+
+        padding: 6px 11px;
+
+        border-radius: 999px;
+
+        font-size: 0.72rem;
+        font-weight: 700;
+
+        line-height: 1;
+
+        white-space: nowrap;
+      }
+
+      /* ตรวจแล้ว */
+
+      #panel-daily .mock-table .tag-green {
+        background: #eaf3ff;
+
+        color: #1559ad;
+
+        border: 1px solid #cbdff7;
+      }
+
+      /* ส่งแล้ว */
+
+      #panel-daily .mock-table .tag-dark {
+        background: #111827;
+
+        color: #ffffff;
+
+        border: 1px solid #111827;
+      }
+
+      /* รอตรวจ */
+
+      #panel-daily .mock-table .tag-red {
+        background: #fff7e8;
+
+        color: #b66a00;
+
+        border: 1px solid #f4d59e;
+      }
+
+      /* ==================================================
+   ปุ่มในตาราง
+   ================================================== */
+
+      #panel-daily .mock-table td:last-child {
+        text-align: center;
+      }
+
+      #panel-daily .mock-table .btn-mock-sm {
+        min-width: 58px;
+
+        padding: 6px 12px;
+
+        margin: 2px;
+
+        border: 1px solid var(--primary-color);
+
+        border-radius: 8px;
+
+        background: #ffffff;
+
+        color: var(--primary-color);
+
+        font-family: inherit;
+
+        font-size: 0.73rem;
+        font-weight: 600;
+
+        cursor: pointer;
+
+        transition:
+          background 0.18s ease,
+          color 0.18s ease,
+          transform 0.18s ease;
+      }
+
+      #panel-daily .mock-table .btn-mock-sm:hover {
+        background: var(--primary-color);
+
+        color: #ffffff;
+
+        transform: translateY(-1px);
+      }
+
+      /* ปุ่มลบ */
+
+      #panel-daily .mock-table .btn-mock-sm:last-child:not(:only-child) {
+        border-color: #e3a7a7;
+
+        color: #c94b4b;
+      }
+
+      #panel-daily .mock-table .btn-mock-sm:last-child:not(:only-child):hover {
+        background: #c94b4b;
+
+        border-color: #c94b4b;
+
+        color: #ffffff;
+      }
+
+      /* ==================================================
+   Responsive
+   ================================================== */
+
+      @media (max-width: 900px) {
+        #panel-daily .mock-table {
+          min-width: 760px;
+        }
+      }
+
+      @media (max-width: 700px) {
+        #panel-daily .daily-table-wrap {
+          border-radius: 10px;
+        }
+
+        #panel-daily .mock-table th,
+        #panel-daily .mock-table td {
+          padding: 11px 12px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="brand">
+          <img src="images/logo_kiwi.png" alt="KIWI Logo" class="brand-logo" />
+
+          <div class="brand-text">
+            <strong>KIWI</strong>
+            <span>ระบบจัดการสหกิจศึกษา</span>
+          </div>
+        </a>
+
+        <div class="nav-right">
+          <div class="nav-user">
+            <div class="nav-user-icon">
+              <i class="fa-solid fa-user"></i>
+            </div>
+
+            <div class="nav-user-info">
+              <small>นักศึกษาสหกิจศึกษา</small>
+              <span id="userNameDisplay">พิมพ์ชนก สุขใจ</span>
+            </div>
+          </div>
+
+          <button class="btn-logout" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            ออกจากระบบ
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="dashboard-layout">
+      <!-- ===============================
+       Sidebar
+       =============================== -->
+
+      <aside class="dashboard-sidebar">
+        <div class="sidebar-header">
+          <span class="sidebar-title">
+            <i class="fa-solid fa-bars"></i>
+            เมนูนักศึกษา
+          </span>
+
+          <small> ระบบสหกิจศึกษา </small>
+        </div>
+
+        <div class="sidebar-menu">
+          <a class="sidebar-item active" data-target="panel-overview">
+            <span class="sidebar-icon">
+              <i class="fa-solid fa-gauge-high"></i>
+            </span>
+
+            <span class="sidebar-text"> ภาพรวม </span>
+          </a>
+
+          <a class="sidebar-item" data-target="panel-profile">
+            <span class="sidebar-icon">
+              <i class="fa-solid fa-id-card"></i>
+            </span>
+
+            <span class="sidebar-text"> ประวัตินักศึกษา </span>
+          </a>
+
+          <a class="sidebar-item" data-target="panel-resume">
+            <span class="sidebar-icon">
+              <i class="fa-solid fa-file-arrow-up"></i>
+            </span>
+
+            <span class="sidebar-text"> อัปโหลดเรซูเม่ </span>
+          </a>
+
+          <a class="sidebar-item" href="search_company.html">
+            <span class="sidebar-icon">
+              <i class="fa-solid fa-building-magnifying-glass"></i>
+            </span>
+
+            <span class="sidebar-text"> ค้นหาสถานประกอบการ </span>
+          </a>
+
+          <div class="sidebar-divider">
+            <span>การดำเนินงาน</span>
+          </div>
+
+          <a class="sidebar-item" data-target="panel-request">
+            <span class="sidebar-icon">
+              <i class="fa-solid fa-file-signature"></i>
+            </span>
+
+            <span class="sidebar-text"> คำร้องสหกิจศึกษา </span>
+          </a>
+
+          <a class="sidebar-item" data-target="panel-daily">
+            <span class="sidebar-icon">
+              <i class="fa-solid fa-calendar-check"></i>
+            </span>
+
+            <span class="sidebar-text"> บันทึกการปฏิบัติงาน </span>
+          </a>
+
+          <a class="sidebar-item" data-target="panel-coop">
+            <span class="sidebar-icon">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </span>
+
+            <span class="sidebar-text"> โครงการสหกิจศึกษา </span>
+          </a>
+
+          <a class="sidebar-item" data-target="panel-report-upload">
+            <span class="sidebar-icon">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+            </span>
+
+            <span class="sidebar-text"> อัปโหลดโครงการ </span>
+          </a>
+
+          <a class="sidebar-item" data-target="panel-mentor">
+            <span class="sidebar-icon">
+              <i class="fa-solid fa-user-tie"></i>
+            </span>
+
+            <span class="sidebar-text"> ข้อมูลพี่เลี้ยง </span>
+          </a>
+
+          <a class="sidebar-item" data-target="panel-evaluate">
+            <span class="sidebar-icon">
+              <i class="fa-solid fa-star"></i>
+            </span>
+
+            <span class="sidebar-text"> ประเมินสถานประกอบการ </span>
+          </a>
+
+          <div class="sidebar-divider">
+            <span>อื่น ๆ</span>
+          </div>
+
+          <a class="sidebar-item sidebar-danger" data-target="panel-transfer">
+            <span class="sidebar-icon">
+              <i class="fa-solid fa-arrow-right-arrow-left"></i>
+            </span>
+
+            <span class="sidebar-text"> ขอย้ายสถานประกอบการ </span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- เนื้อหาแต่ละเมนู -->
+      <div class="dashboard-content">
+        <!-- ==================================================
+           ภาพรวม
+           ================================================== -->
+
+        <section class="content-panel active" id="panel-overview">
+          <div class="dashboard-banner">
+            <b id="overviewGreeting">ยินดีต้อนรับ นางสาวพิมพ์ชนก สุขใจ</b>
+            <span>ภาพรวมสถานะการปฏิบัติงานสหกิจศึกษาของคุณ</span>
+          </div>
+
+          <div class="stat-row">
+            <div class="stat-box">
+              <b>2</b>
+              <span>คำร้องที่ยื่นแล้ว</span>
+            </div>
+
+            <div class="stat-box">
+              <b>6</b>
+              <span>บันทึกการปฏิบัติงานประจำวัน</span>
+            </div>
+
+            <div class="stat-box">
+              <b>อยู่ระหว่างปฏิบัติงานสหกิจศึกษา</b>
+              <span>สถานะปัจจุบัน</span>
+            </div>
+          </div>
+
+          <!-- ==================================================
+             ข้อมูลสหกิจศึกษา
+             แทนส่วนกิจกรรมล่าสุดเดิม
+             ================================================== -->
+
+          <div class="coop-overview">
+            <div class="coop-overview-head">
+              <div class="coop-overview-title">
+                <h3>
+                  <i
+                    class="fa-solid fa-briefcase"
+                    style="color: var(--primary-color); margin-right: 6px"
+                  ></i>
+                  ข้อมูลสหกิจศึกษา
+                </h3>
+
+                <p>รายละเอียดการปฏิบัติงานสหกิจศึกษาปัจจุบันของนักศึกษา</p>
+              </div>
+
+              <span class="coop-status"> กำลังปฏิบัติงานสหกิจศึกษา </span>
+            </div>
+
+            <div class="coop-main-card">
+              <!-- สถานประกอบการ -->
+              <div class="coop-company-header">
+                <div class="coop-company-icon">
+                  <i class="fa-solid fa-building"></i>
+                </div>
+
+                <div>
+                  <span>สถานประกอบการ</span>
+
+                  <h4>BlueWave Digital Co., Ltd.</h4>
+
+                  <p>
+                    <i class="fa-solid fa-location-dot"></i>
+                    จังหวัดชลบุรี
+                  </p>
+                </div>
+              </div>
+
+              <!-- รายละเอียด -->
+              <div class="coop-detail-grid">
+                <!-- พี่เลี้ยง -->
+                <div class="coop-detail-item">
+                  <div class="coop-detail-icon">
+                    <i class="fa-solid fa-user-tie"></i>
+                  </div>
+
+                  <div class="coop-detail-content">
+                    <span class="coop-detail-label"> พี่เลี้ยง </span>
+
+                    <strong class="coop-detail-value">
+                      คุณกมลชนก วัฒนชัย
+                    </strong>
+
+                    <span class="coop-detail-sub">
+                      Frontend Team Lead / พี่เลี้ยง
+                    </span>
+                  </div>
+                </div>
+
+                <!-- อาจารย์นิเทศ -->
+                <div class="coop-detail-item">
+                  <div class="coop-detail-icon">
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                  </div>
+
+                  <div class="coop-detail-content">
+                    <span class="coop-detail-label"> อาจารย์นิเทศ </span>
+
+                    <strong class="coop-detail-value">
+                      ผศ.ดร.นิติการ นาคเจือทอง
+                    </strong>
+
+                    <span class="coop-detail-sub">
+                      ภาควิชาเทคโนโลยีสารสนเทศ
+                    </span>
+                  </div>
+                </div>
+
+                <!-- ฝึกที่ไหน -->
+                <div class="coop-detail-item">
+                  <div class="coop-detail-icon">
+                    <i class="fa-solid fa-location-dot"></i>
+                  </div>
+
+                  <div class="coop-detail-content">
+                    <span class="coop-detail-label"> สถานที่ปฏิบัติงาน </span>
+
+                    <strong class="coop-detail-value">
+                      BlueWave Digital Co., Ltd.
+                    </strong>
+
+                    <span class="coop-detail-sub"> จังหวัดชลบุรี </span>
+                  </div>
+                </div>
+
+                <!-- บันทึกการปฏิบัติงาน -->
+                <div class="coop-detail-item">
+                  <div class="coop-detail-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                  </div>
+
+                  <div class="coop-detail-content">
+                    <span class="coop-detail-label"> บันทึกการปฏิบัติงาน </span>
+
+                    <strong class="coop-detail-value">
+                      ส่งแล้ว 6 รายการ
+                    </strong>
+
+                    <!--
+                  <span class="coop-detail-sub">
+                    จากทั้งหมด 20 รายการ
+                  </span>
+                  -->
+
+                    <div class="coop-progress">
+                      <div class="coop-progress-bar"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- วันเริ่ม -->
+                <div class="coop-detail-item">
+                  <div class="coop-detail-icon">
+                    <i class="fa-solid fa-calendar-check"></i>
+                  </div>
+
+                  <div class="coop-detail-content">
+                    <span class="coop-detail-label">
+                      วันที่เริ่มสหกิจศึกษา
+                    </span>
+
+                    <strong class="coop-detail-value"> 1 กันยายน 2569 </strong>
+                  </div>
+                </div>
+
+                <!-- วันจบ -->
+                <div class="coop-detail-item">
+                  <div class="coop-detail-icon">
+                    <i class="fa-solid fa-calendar-xmark"></i>
+                  </div>
+
+                  <div class="coop-detail-content">
+                    <span class="coop-detail-label">
+                      วันที่สิ้นสุดสหกิจศึกษา
+                    </span>
+
+                    <strong class="coop-detail-value"> 18 ธันวาคม 2569 </strong>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ระยะเวลารวม -->
+              <div class="coop-period">
+                <div class="coop-period-icon">
+                  <i class="fa-solid fa-calendar-days"></i>
+                </div>
+
+                <div>
+                  <small>ระยะเวลาสหกิจศึกษา</small>
+
+                  <strong> 1 กันยายน 2569 – 18 ธันวาคม 2569 </strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================
+     ประวัตินักศึกษา
+     ================================================== -->
+
+        <section class="content-panel" id="panel-profile">
+          <div class="panel-header">
+            <h2>ประวัตินักศึกษา</h2>
+            <p>
+              ข้อมูลประวัตินักศึกษาตามแบบฟอร์มของมหาวิทยาลัย —
+              ข้อมูลตัวอย่างสำหรับ Mockup
+            </p>
+          </div>
+
+          <div class="profile-actions">
+            <button class="btn-mock-sm solid" id="btnEditProfile">
+              <i class="fa-solid fa-pen"></i> แก้ไขประวัติ
+            </button>
+
+            <button class="btn-mock-sm" id="btnEditAccount">
+              <i class="fa-solid fa-key"></i> แก้ไขอีเมล / รหัสผ่าน
+            </button>
+          </div>
+
+          <div class="profile-hero mock-card">
+            <div class="profile-photo-wrap">
+              <div class="profile-photo" id="profilePhoto">
+                <i class="fa-solid fa-user"></i>
+              </div>
+
+              <button class="btn-mock-sm" id="btnChangePhoto">
+                <i class="fa-solid fa-camera"></i> เปลี่ยนรูปโปรไฟล์
+              </button>
+            </div>
+
+            <div class="profile-identity">
+              <span class="profile-label"> ข้อมูลนักศึกษา </span>
+
+              <h3>นางสาวพิมพ์ชนก สุขใจ</h3>
+
+              <p>
+                <b>รหัสประจำตัว:</b>
+                6702458196
+              </p>
+
+              <p>
+                <b>สาขาวิชา:</b>
+                วิศวกรรมสารสนเทศและเครือข่าย &nbsp; | &nbsp;
+
+                <b>ชั้นปีที่:</b>
+                4
+              </p>
+
+              <!-- อาจารย์ที่ปรึกษา -->
+              <div class="profile-advisor">
+                <div class="profile-advisor-info">
+                  <span class="advisor-label">
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                    อาจารย์ที่ปรึกษา
+                  </span>
+
+                  <!-- แสดงชื่อปัจจุบัน -->
+                  <strong id="profileAdvisorName">
+                    ผศ.ดร.นิติการ นาคเจือทอง
+                  </strong>
+
+                  <!-- Dropdown สำหรับแก้ไข -->
+                  <select
+                    id="profileAdvisorSelect"
+                    class="advisor-select"
+                    style="display: none"
+                  >
+                    <option value="ผศ.ดร.นิติการ นาคเจือทอง" selected>
+                      ผศ.ดร.นิติการ นาคเจือทอง
+                    </option>
+
+                    <option value="ผศ.ดร.ขนิษฐา นามี">ผศ.ดร.ขนิษฐา นามี</option>
+
+                    <option value="อ.ดร.ศิรินทรา แว่วศรี">
+                      อ.ดร.ศิรินทรา แว่วศรี
+                    </option>
+                    <option value="ผศ.ดร.สิวาลัย จินเจือ">
+                      ผศ.ดร.สิวาลัย จินเจือ
+                    </option>
+                    <option value="ผศ.ดร.สิวาลัย จินเจือ">
+                      ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ
+                    </option>
+                  </select>
+                </div>
+
+                <div class="advisor-actions">
+                  <button
+                    type="button"
+                    class="btn-advisor-edit"
+                    id="btnEditAdvisor"
+                  >
+                    <i class="fa-solid fa-pen"></i>
+                    แก้ไข
+                  </button>
+
+                  <button
+                    type="button"
+                    class="btn-advisor-save"
+                    id="btnSaveAdvisor"
+                    style="display: none"
+                  >
+                    <i class="fa-solid fa-check"></i>
+                    บันทึก
+                  </button>
+
+                  <button
+                    type="button"
+                    class="btn-advisor-cancel"
+                    id="btnCancelAdvisor"
+                    style="display: none"
+                  >
+                    ยกเลิก
+                  </button>
+                </div>
+              </div>
+
+              <span class="tag tag-green"> กำลังศึกษา </span>
+            </div>
+          </div>
+
+          <div class="mock-card profile-section-card">
+            <h4>
+              <i class="fa-solid fa-user"></i>
+              ข้อมูลส่วนตัว
+            </h4>
+
+            <div class="info-grid">
+              <div class="info-item">
+                <span>ชื่อ-สกุล</span>
+                <strong>นางสาวพิมพ์ชนก สุขใจ</strong>
+              </div>
+
+              <div class="info-item">
+                <span>รหัสประจำตัว</span>
+                <strong>6702458196</strong>
+              </div>
+
+              <div class="info-item">
+                <span>สาขาวิชา</span>
+                <strong>วิศวกรรมสารสนเทศและเครือข่าย</strong>
+              </div>
+
+              <div class="info-item">
+                <span>ชั้นปีที่</span>
+                <strong>4</strong>
+              </div>
+
+              <div class="info-item">
+                <span>เกรดเฉลี่ย</span>
+                <strong>3.71</strong>
+              </div>
+
+              <div class="info-item">
+                <span>วันเกิด</span>
+                <strong>12 ก.พ. 2547</strong>
+              </div>
+
+              <div class="info-item">
+                <span>อายุ</span>
+                <strong>22 ปี</strong>
+              </div>
+
+              <div class="info-item">
+                <span>ส่วนสูง</span>
+                <strong>160 ซม.</strong>
+              </div>
+
+              <div class="info-item">
+                <span>น้ำหนัก</span>
+                <strong>50 กก.</strong>
+              </div>
+
+              <div class="info-item">
+                <span>สัญชาติ</span>
+                <strong>ไทย</strong>
+              </div>
+
+              <div class="info-item">
+                <span>เชื้อชาติ</span>
+                <strong>ไทย</strong>
+              </div>
+
+              <div class="info-item">
+                <span>ศาสนา</span>
+                <strong>พุทธ</strong>
+              </div>
+
+              <div class="info-item">
+                <span>กลุ่มเลือด</span>
+                <strong>B</strong>
+              </div>
+
+              <div class="info-item">
+                <span>โรคประจำตัว</span>
+                <strong>ไม่มี</strong>
+              </div>
+
+              <div class="info-item">
+                <span>อาการแพ้</span>
+                <strong>ไม่มี</strong>
+              </div>
+
+              <div class="info-item">
+                <span>ความสามารถพิเศษ</span>
+                <strong>
+                  ออกแบบ UI/UX, พัฒนาเว็บไซต์ด้วย React, ออกแบบ Prototype ด้วย
+                  Figma และวิเคราะห์ข้อมูล
+                </strong>
+              </div>
+
+              <div class="info-item">
+                <span>ภูมิลำเนา</span>
+                <strong>จังหวัดฉะเชิงเทรา</strong>
+              </div>
+
+              <div class="info-item">
+                <span>โทรศัพท์</span>
+                <strong>092-684-7315</strong>
+              </div>
+
+              <div class="info-item" style="grid-column: 1 / -1">
+                <span>ที่อยู่ปัจจุบันที่สามารถติดต่อได้</span>
+                <strong>
+                  88/19 หมู่ 6 ต.ท่าข้าม อ.บางปะกง จ.ฉะเชิงเทรา 24130
+                </strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="mock-card profile-section-card">
+            <h4>
+              <i class="fa-solid fa-people-roof"></i>
+              ข้อมูลบิดา–มารดา
+            </h4>
+
+            <div class="info-grid">
+              <div class="info-item">
+                <span>ชื่อบิดา</span>
+                <strong>นายธนากร สุขใจ</strong>
+              </div>
+
+              <div class="info-item">
+                <span>อายุบิดา</span>
+                <strong>50 ปี</strong>
+              </div>
+
+              <div class="info-item">
+                <span>อาชีพบิดา</span>
+                <strong>ช่างเทคนิคระบบไฟฟ้า</strong>
+              </div>
+
+              <div class="info-item">
+                <span>ชื่อมารดา</span>
+                <strong>นางสาวิตรี สุขใจ</strong>
+              </div>
+
+              <div class="info-item">
+                <span>อายุมารดา</span>
+                <strong>48 ปี</strong>
+              </div>
+
+              <div class="info-item">
+                <span>อาชีพมารดา</span>
+                <strong>พนักงานบัญชี</strong>
+              </div>
+
+              <div class="info-item" style="grid-column: 1 / -1">
+                <span>ที่อยู่ที่สามารถติดต่อ</span>
+                <strong>
+                  88/19 หมู่ 6 ต.ท่าข้าม อ.บางปะกง จ.ฉะเชิงเทรา 24130
+                </strong>
+              </div>
+
+              <div class="info-item">
+                <span>เบอร์โทรศัพท์</span>
+                <strong>081-642-9057</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="mock-card profile-section-card">
+            <h4>
+              <i class="fa-solid fa-phone-volume"></i>
+              บุคคลที่สามารถติดต่อได้กรณีฉุกเฉิน
+            </h4>
+
+            <div class="info-grid">
+              <div class="info-item">
+                <span>ชื่อ-สกุล</span>
+                <strong>นางสาวพิมพ์มาดา สุขใจ</strong>
+              </div>
+
+              <div class="info-item">
+                <span>ความเกี่ยวข้อง</span>
+                <strong>พี่สาว</strong>
+              </div>
+
+              <div class="info-item" style="grid-column: 1 / -1">
+                <span>ที่อยู่</span>
+                <strong>
+                  88/19 หมู่ 6 ต.ท่าข้าม อ.บางปะกง จ.ฉะเชิงเทรา 24130
+                </strong>
+              </div>
+
+              <div class="info-item">
+                <span>โทรศัพท์</span>
+                <strong>095-317-8642</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="mock-card profile-section-card">
+            <h4>
+              <i class="fa-solid fa-chalkboard-user"></i>
+              ข้อมูลด้านสหกิจศึกษา
+            </h4>
+
+            <div class="info-grid">
+              <div class="info-item">
+                <span>ชื่ออาจารย์ที่ปรึกษา</span>
+                <strong>ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ</strong>
+              </div>
+
+              <div class="info-item" style="grid-column: 1 / -1">
+                <span>ความสามารถที่เกี่ยวข้องกับสหกิจศึกษา</span>
+                <strong>
+                  HTML, CSS, JavaScript, TypeScript, React, Figma, SQL, Git,
+                  REST API และการออกแบบ UI/UX
+                </strong>
+              </div>
+            </div>
+          </div>
+
+          <p class="helper-note">
+            *ข้อมูลทั้งหมดเป็นข้อมูลตัวอย่างสำหรับหน้า Mockup เท่านั้น
+            การแก้ไขข้อมูลและการอัปโหลดรูปจริงยังไม่เชื่อมต่อฐานข้อมูล
+          </p>
+        </section>
+
+        <!-- ==================================================
+     Modal: แก้ไขประวัติ
+     ================================================== -->
+
+        <div class="modal-overlay" id="profileModal" aria-hidden="true">
+          <div
+            class="modal-box"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="profileModalTitle"
+          >
+            <div class="modal-head">
+              <div>
+                <h3 id="profileModalTitle">แก้ไขประวัตินักศึกษา</h3>
+
+                <p>แสดงข้อมูลตัวอย่างในรูปแบบ Mockup</p>
+              </div>
+
+              <button
+                class="modal-close"
+                data-close-modal="profileModal"
+                aria-label="ปิด"
+              >
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+
+            <div class="modal-body">
+              <div class="form-grid">
+                <label>
+                  ชื่อ-สกุล
+                  <input value="นางสาวพิมพ์ชนก สุขใจ" readonly />
+                </label>
+
+                <label>
+                  รหัสประจำตัว
+                  <input value="6702458196" readonly />
+                </label>
+
+                <label>
+                  สาขาวิชา
+                  <input value="วิศวกรรมสารสนเทศและเครือข่าย" readonly />
+                </label>
+
+                <label>
+                  ชั้นปีที่
+                  <input value="4" readonly />
+                </label>
+
+                <label>
+                  เกรดเฉลี่ย
+                  <input value="3.71" readonly />
+                </label>
+
+                <label>
+                  วันเกิด
+                  <input value="12 ก.พ. 2547" readonly />
+                </label>
+
+                <label>
+                  อายุ
+                  <input value="22 ปี" readonly />
+                </label>
+
+                <label>
+                  ส่วนสูง
+                  <input value="160 ซม." readonly />
+                </label>
+
+                <label>
+                  น้ำหนัก
+                  <input value="50 กก." readonly />
+                </label>
+
+                <label>
+                  สัญชาติ
+                  <input value="ไทย" readonly />
+                </label>
+
+                <label>
+                  เชื้อชาติ
+                  <input value="ไทย" readonly />
+                </label>
+
+                <label>
+                  ศาสนา
+                  <input value="พุทธ" readonly />
+                </label>
+
+                <label>
+                  กลุ่มเลือด
+                  <input value="B" readonly />
+                </label>
+
+                <label>
+                  โรคประจำตัว
+                  <input value="ไม่มี" readonly />
+                </label>
+
+                <label>
+                  อาการแพ้
+                  <input value="ไม่มี" readonly />
+                </label>
+
+                <label>
+                  ความสามารถพิเศษ
+
+                  <input
+                    value="ออกแบบ UI/UX, React, Figma, วิเคราะห์ข้อมูล"
+                    readonly
+                  />
+                </label>
+
+                <label>
+                  ภูมิลำเนา
+
+                  <input value="จังหวัดฉะเชิงเทรา" readonly />
+                </label>
+
+                <label>
+                  โทรศัพท์
+
+                  <input value="092-684-7315" readonly />
+                </label>
+
+                <label class="full">
+                  ที่อยู่ปัจจุบันที่สามารถติดต่อได้
+
+                  <textarea readonly>
+88/19 หมู่ 6 ต.ท่าข้าม อ.บางปะกง จ.ฉะเชิงเทรา 24130</textarea
+                  >
+                </label>
+
+                <label>
+                  ชื่อบิดา
+
+                  <input value="นายธนากร สุขใจ" readonly />
+                </label>
+
+                <label>
+                  อายุบิดา
+
+                  <input value="50 ปี" readonly />
+                </label>
+
+                <label>
+                  อาชีพบิดา
+
+                  <input value="ช่างเทคนิคระบบไฟฟ้า" readonly />
+                </label>
+
+                <label>
+                  ชื่อมารดา
+
+                  <input value="นางสาวิตรี สุขใจ" readonly />
+                </label>
+
+                <label>
+                  อายุมารดา
+
+                  <input value="48 ปี" readonly />
+                </label>
+
+                <label>
+                  อาชีพมารดา
+
+                  <input value="พนักงานบัญชี" readonly />
+                </label>
+
+                <label class="full">
+                  ที่อยู่ที่สามารถติดต่อ
+
+                  <textarea readonly>
+88/19 หมู่ 6 ต.ท่าข้าม อ.บางปะกง จ.ฉะเชิงเทรา 24130</textarea
+                  >
+                </label>
+
+                <label>
+                  เบอร์โทรศัพท์
+
+                  <input value="081-642-9057" readonly />
+                </label>
+
+                <label>
+                  ผู้ติดต่อฉุกเฉิน
+
+                  <input value="นางสาวพิมพ์มาดา สุขใจ" readonly />
+                </label>
+
+                <label>
+                  ความเกี่ยวข้อง
+
+                  <input value="พี่สาว" readonly />
+                </label>
+
+                <label>
+                  โทรศัพท์ฉุกเฉิน
+
+                  <input value="095-317-8642" readonly />
+                </label>
+
+                <label class="full">
+                  ที่อยู่ผู้ติดต่อฉุกเฉิน
+
+                  <textarea readonly>
+88/19 หมู่ 6 ต.ท่าข้าม อ.บางปะกง จ.ฉะเชิงเทรา 24130</textarea
+                  >
+                </label>
+
+                <label>
+                  ชื่ออาจารย์ที่ปรึกษา
+
+                  <input value="ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ" readonly />
+                </label>
+
+                <label class="full">
+                  ความสามารถที่เกี่ยวข้องกับสหกิจศึกษา
+
+                  <textarea readonly>
+HTML, CSS, JavaScript, TypeScript, React, Figma, SQL, Git, REST API และการออกแบบ UI/UX</textarea
+                  >
+                </label>
+              </div>
+            </div>
+
+            <div class="modal-foot">
+              <button class="btn-mock-sm" data-close-modal="profileModal">
+                ยกเลิก
+              </button>
+
+              <button class="btn-mock-sm solid" id="btnSaveProfile">
+                บันทึกการเปลี่ยนแปลง
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal: แก้ไขอีเมล/รหัสผ่าน -->
+        <div class="modal-overlay" id="accountModal" aria-hidden="true">
+          <div
+            class="modal-box small"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="accountModalTitle"
+          >
+            <div class="modal-head">
+              <div>
+                <h3 id="accountModalTitle">แก้ไขอีเมล / รหัสผ่าน</h3>
+                <p>แสดงหน้าจอสำหรับระบบจริง แต่ยังไม่เปิดให้แก้ไขใน Mockup</p>
+              </div>
+
+              <button
+                class="modal-close"
+                data-close-modal="accountModal"
+                aria-label="ปิด"
+              >
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+
+            <div class="modal-body">
+              <div class="form-grid single">
+                <label>
+                  อีเมลปัจจุบัน
+                  <input value="studentcoop@email.kmutnb.ac.th" readonly />
+                </label>
+
+                <label>
+                  อีเมลใหม่
+                  <input value="studentcoop@email.kmutnb.ac.th" readonly />
+                </label>
+
+                <label>
+                  รหัสผ่านปัจจุบัน
+                  <input type="password" value="password123" readonly />
+                </label>
+
+                <label>
+                  รหัสผ่านใหม่
+                  <input type="password" value="password123" readonly />
+                </label>
+
+                <label>
+                  ยืนยันรหัสผ่านใหม่
+                  <input type="password" value="password123" readonly />
+                </label>
+              </div>
+
+              <div class="mock-alert">
+                <i class="fa-solid fa-circle-info"></i>
+                ฟังก์ชันแก้ไขอีเมลและรหัสผ่านอยู่ระหว่างการพัฒนา
+                ข้อมูลจะไม่ถูกเปลี่ยนแปลง
+              </div>
+            </div>
+
+            <div class="modal-foot">
+              <button class="btn-mock-sm" data-close-modal="accountModal">
+                ยกเลิก
+              </button>
+
+              <button class="btn-mock-sm solid" id="btnSaveAccount">
+                บันทึกการเปลี่ยนแปลง
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================================================
+     อัปโหลดเรซูเม่
+     ================================================== -->
+
+        <section class="content-panel" id="panel-resume">
+          <div class="panel-header">
+            <h2>อัปโหลดเรซูเม่</h2>
+
+            <p>
+              ระบบแนะนำสถานประกอบการที่เหมาะสมให้อัตโนมัติจากเรซูเม่ของคุณ
+              พร้อมเครื่องมือช่วยสร้างเรซูเม่ในตัว
+            </p>
+          </div>
+
+          <span class="status-chip planned"> ยังไม่เริ่มพัฒนา </span>
+
+          <!-- ไฟล์ Resume ปัจจุบัน -->
+          <div class="resume-file-row">
+            <div class="resume-file-info">
+              <div class="resume-file-icon">
+                <i class="fa-solid fa-file-pdf"></i>
+              </div>
+
+              <div>
+                <b>resume_พิมพ์ชนก_สุขใจ_2569.pdf</b>
+
+                <span>
+                  อัปโหลดเมื่อ 2 วันที่แล้ว · 486 KB ·
+
+                  <span class="tag tag-green resume-status">
+                    วิเคราะห์แล้ว
+                  </span>
+                </span>
+              </div>
+            </div>
+
+            <div class="resume-file-actions">
+              <button class="btn-mock-sm">ดูไฟล์</button>
+
+              <button class="btn-mock-sm solid">อัปโหลดใหม่</button>
+            </div>
+          </div>
+
+          <!-- พื้นที่ Upload -->
+          <div class="mock-empty">
+            <i
+              class="fa-solid fa-cloud-arrow-up"
+              style="font-size: 1.5rem; display: block; margin-bottom: 8px"
+            ></i>
+
+            ลากไฟล์เรซูเม่มาวาง หรือกดเพื่อเลือกไฟล์ (PDF)
+          </div>
+
+          <!--
+  <div class="section-title-sm">
+    <i
+      class="fa-solid fa-wand-magic-sparkles"
+      style="color: var(--primary-color)"
+    ></i>
+
+    ระบบสร้างเรซูเม่ (Resume Builder)
+  </div>
+
+  <div class="mock-card">
+
+    <div class="info-grid">
+
+      <div
+        class="info-item"
+        style="grid-column: 1 / -1"
+      >
+        <span>ทักษะเด่น</span>
+
+        <div style="margin-top: 4px">
+          <span class="skill-chip">HTML</span>
+          <span class="skill-chip">CSS</span>
+          <span class="skill-chip">JavaScript</span>
+          <span class="skill-chip">TypeScript</span>
+          <span class="skill-chip">React</span>
+          <span class="skill-chip">Figma</span>
+          <span class="skill-chip">SQL</span>
+          <span class="skill-chip">Git</span>
+        </div>
+      </div>
+
+      <div
+        class="info-item"
+        style="grid-column: 1 / -1"
+      >
+        <span>ประสบการณ์ / โครงงาน</span>
+
+        <strong>
+          โครงงานพัฒนาเว็บไซต์ระบบจัดการนักศึกษาสหกิจศึกษา
+          โดยรับผิดชอบการออกแบบ UI/UX และพัฒนา Frontend ด้วย React
+          พร้อมเชื่อมต่อ REST API
+        </strong>
+      </div>
+
+      <div class="info-item">
+        <span>ภาษาไทย</span>
+        <strong>เจ้าของภาษา</strong>
+      </div>
+
+      <div class="info-item">
+        <span>ภาษาอังกฤษ</span>
+        <strong>ระดับปานกลาง</strong>
+      </div>
+
+    </div>
+
+    <div class="request-actions">
+      <button class="btn-mock-sm">
+        แก้ไขข้อมูลเรซูเม่
+      </button>
+
+      <button class="btn-mock-sm solid">
+        สร้างไฟล์ PDF
+      </button>
+    </div>
+
+  </div>
+  -->
+
+          <!-- ==================================================
+       สถานประกอบการแนะนำ
+       ================================================== -->
+
+          <div class="section-title-sm">
+            <i
+              class="fa-solid fa-building-circle-check"
+              style="color: var(--primary-color)"
+            ></i>
+
+            สถานประกอบการแนะนำสำหรับคุณ
+          </div>
+
+          <div class="recommend-grid">
+            <!-- บริษัทที่ 1 -->
+            <div class="recommend-card">
+              <div class="recommend-card-head">
+                <div>
+                  <b>บริษัท อินโนเวฟ ดิจิทัล จำกัด</b>
+                  <small>
+                    นักศึกษาสหกิจศึกษาด้าน Frontend (React / TypeScript)
+                  </small>
+                </div>
+
+                <span class="match-badge"> ตรงกัน 95% </span>
+              </div>
+
+              <div class="match-bar-track">
+                <div class="match-bar-fill" style="width: 95%"></div>
+              </div>
+
+              <span class="skill-chip">React</span>
+              <span class="skill-chip">TypeScript</span>
+              <span class="skill-chip">JavaScript</span>
+              <span class="skill-chip">Git</span>
+            </div>
+
+            <!-- บริษัทที่ 2 -->
+            <div class="recommend-card">
+              <div class="recommend-card-head">
+                <div>
+                  <b>บริษัท ดีไซน์พลัส เทคโนโลยี จำกัด</b>
+                  <small> นักศึกษาสหกิจศึกษาด้าน UI/UX </small>
+                </div>
+
+                <span class="match-badge"> ตรงกัน 91% </span>
+              </div>
+
+              <div class="match-bar-track">
+                <div class="match-bar-fill" style="width: 91%"></div>
+              </div>
+
+              <span class="skill-chip">Figma</span>
+              <span class="skill-chip">UI/UX</span>
+              <span class="skill-chip">Prototype</span>
+            </div>
+
+            <!-- บริษัทที่ 3 -->
+            <div class="recommend-card">
+              <div class="recommend-card-head">
+                <div>
+                  <b>บริษัท อีสเทิร์น ซอฟต์แวร์ โซลูชัน จำกัด</b>
+                  <small> นักศึกษาสหกิจศึกษาด้าน Web Development </small>
+                </div>
+
+                <span class="match-badge"> ตรงกัน 86% </span>
+              </div>
+
+              <div class="match-bar-track">
+                <div class="match-bar-fill" style="width: 86%"></div>
+              </div>
+
+              <span class="skill-chip">HTML</span>
+              <span class="skill-chip">CSS</span>
+              <span class="skill-chip">JavaScript</span>
+              <span class="skill-chip">REST API</span>
+            </div>
+
+            <!-- บริษัทที่ 4 -->
+            <div class="recommend-card">
+              <div class="recommend-card-head">
+                <div>
+                  <b>บริษัท สมาร์ทดาต้า อินไซต์ จำกัด</b>
+                  <small> นักศึกษาสหกิจศึกษาด้าน Data Visualization </small>
+                </div>
+
+                <span class="match-badge"> ตรงกัน 79% </span>
+              </div>
+
+              <div class="match-bar-track">
+                <div class="match-bar-fill" style="width: 79%"></div>
+              </div>
+
+              <span class="skill-chip">SQL</span>
+              <span class="skill-chip">Data Visualization</span>
+              <span class="skill-chip">Dashboard</span>
+            </div>
+          </div>
+
+          <p class="helper-note">
+            *คำนวณจากความสอดคล้องระหว่างเรซูเม่และประกาศรับสมัครในระบบ —
+            ข้อมูลตัวอย่างในหน้า Mockup เท่านั้น
+          </p>
+        </section>
+
+        <!-- ==================================================
+    คำร้องสหกิจศึกษา
+     ================================================== -->
+
+        <section class="content-panel" id="panel-request">
+          <div class="panel-header">
+            <h2>คำร้องสหกิจศึกษา</h2>
+            <p>ติดตามสถานะคำร้องและเอกสารสำหรับการออกปฏิบัติงานสหกิจศึกษา</p>
+          </div>
+
+          <span class="status-chip planned"> Mockup </span>
+
+          <!-- ==================================================
+       คำร้องปัจจุบัน
+       ================================================== -->
+
+          <div class="mock-card">
+            <div class="request-card-head">
+              <div>
+                <h4>BlueWave Digital Co., Ltd. — Frontend Developer</h4>
+
+                <p>คำร้องสหกิจศึกษาปัจจุบัน · จังหวัดชลบุรี</p>
+              </div>
+
+              <span class="tag tag-green"> อนุมัติแล้ว </span>
+            </div>
+
+            <!-- ==================================================
+         ขั้นตอนการดำเนินงาน
+         ================================================== -->
+
+            <div class="stepper">
+              <div class="step completed">
+                <div class="step-dot">
+                  <i class="fa-solid fa-check"></i>
+                </div>
+                <div class="step-label">ยื่นคำร้อง</div>
+              </div>
+
+              <div class="step completed">
+                <div class="step-dot">
+                  <i class="fa-solid fa-check"></i>
+                </div>
+                <div class="step-label">เจ้าหน้าที่ตรวจสอบ</div>
+              </div>
+
+              <div class="step completed">
+                <div class="step-dot">
+                  <i class="fa-solid fa-check"></i>
+                </div>
+                <div class="step-label">อนุมัติคำร้อง</div>
+              </div>
+
+              <div class="step completed">
+                <div class="step-dot">
+                  <i class="fa-solid fa-check"></i>
+                </div>
+                <div class="step-label">ออกเอกสารส่งตัว</div>
+              </div>
+
+              <div class="step completed">
+                <div class="step-dot">
+                  <i class="fa-solid fa-check"></i>
+                </div>
+                <div class="step-label">เริ่มสหกิจศึกษา</div>
+              </div>
+            </div>
+
+            <!-- ข้อมูลคำร้อง -->
+
+            <div
+              class="info-grid"
+              style="
+                margin-top: 18px;
+                padding-top: 16px;
+                border-top: 1px solid var(--border-color);
+              "
+            >
+              <div class="info-item">
+                <span>สถานประกอบการ</span>
+
+                <strong> BlueWave Digital Co., Ltd. </strong>
+              </div>
+
+              <div class="info-item">
+                <span>ตำแหน่ง</span>
+
+                <strong> Frontend Developer </strong>
+              </div>
+
+              <div class="info-item">
+                <span>จังหวัด</span>
+
+                <strong> ชลบุรี </strong>
+              </div>
+
+              <div class="info-item">
+                <span>วันที่ยื่นคำร้อง</span>
+
+                <strong> 20 สิงหาคม 2569 </strong>
+              </div>
+
+              <div class="info-item">
+                <span>วันที่เริ่มสหกิจศึกษา</span>
+
+                <strong> 1 กันยายน 2569 </strong>
+              </div>
+
+              <div class="info-item">
+                <span>วันที่สิ้นสุดสหกิจศึกษา</span>
+
+                <strong> 18 ธันวาคม 2569 </strong>
+              </div>
+            </div>
+
+            <p class="request-meta">
+              คำร้องได้รับการอนุมัติแล้ว และนักศึกษาเริ่มปฏิบัติงานสหกิจศึกษา
+              เมื่อวันที่ 1 กันยายน 2569
+            </p>
+
+            <div class="request-actions">
+              <!-- เขียนคำร้อง -->
+              <button
+                type="button"
+                class="btn-mock-sm solid"
+                id="openCoopRequest"
+              >
+                <i class="fa-solid fa-pen"></i>
+                เขียนคำร้องสหกิจศึกษา
+              </button>
+
+              <!-- ดูรายละเอียดคำร้อง -->
+              <button type="button" class="btn-mock-sm" id="viewCoopRequest">
+                <i class="fa-solid fa-file-lines"></i>
+                ดูรายละเอียดคำร้อง
+              </button>
+
+              <!-- ยกเลิกคำร้อง -->
+              <button
+                type="button"
+                class="btn-danger-outline"
+                id="openCancelRequest"
+                style="cursor: pointer"
+              >
+                <i class="fa-solid fa-ban"></i>
+                ยกเลิกคำร้องสหกิจศึกษา
+              </button>
+            </div>
+          </div>
+
+          <!-- ==================================================
+       ประวัติคำร้อง
+       ================================================== -->
+
+          <div class="section-title-sm">ประวัติคำร้องสหกิจศึกษาทั้งหมด</div>
+
+          <div style="overflow-x: auto">
+            <div class="daily-table-wrap">
+              <table class="mock-table">
+                <thead>
+                  <tr>
+                    <th>สถานประกอบการ</th>
+                    <th>ตำแหน่ง</th>
+                    <th>วันที่ยื่น</th>
+                    <th>สถานะ</th>
+                  </tr>
+                </thead>
+
+                <tbody id="requestHistoryTableBody">
+                  <!-- คำร้องปัจจุบัน -->
+                  <tr>
+                    <td>BlueWave Digital Co., Ltd.</td>
+
+                    <td>Frontend Developer</td>
+
+                    <td>20 ส.ค. 2569</td>
+
+                    <td>
+                      <span class="tag tag-green"> อนุมัติแล้ว </span>
+                    </td>
+                  </tr>
+
+                  <!-- ประวัติคำร้องที่ 2 -->
+                  <tr>
+                    <td>บริษัท อินโนเวฟ ดิจิทัล จำกัด</td>
+
+                    <td>Frontend Developer</td>
+
+                    <td>8 ส.ค. 2569</td>
+
+                    <td>
+                      <span class="tag tag-muted"> ยกเลิกโดยนักศึกษา </span>
+                    </td>
+                  </tr>
+
+                  <!-- ประวัติคำร้องที่ 3 -->
+                  <tr>
+                    <td>บริษัท ดีไซน์พลัส เทคโนโลยี จำกัด</td>
+
+                    <td>UI/UX Designer</td>
+
+                    <td>28 ก.ค. 2569</td>
+
+                    <td>
+                      <span class="tag tag-dark"> ไม่ได้รับการอนุมัติ </span>
+                    </td>
+                  </tr>
+
+                  <!-- ประวัติคำร้องที่ 4 -->
+                  <tr>
+                    <td>บริษัท สมาร์ทดาต้า อินไซต์ จำกัด</td>
+
+                    <td>Data Visualization</td>
+
+                    <td>15 ก.ค. 2569</td>
+
+                    <td>
+                      <span class="tag tag-muted"> ยกเลิกโดยนักศึกษา </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="helper-note">
+            *ข้อมูลทั้งหมดเป็นข้อมูลตัวอย่างสำหรับหน้า Mockup เท่านั้น
+          </p>
+        </section>
+
+        <!-- ==================================================
+    Modal: เขียนคำร้องสหกิจศึกษา
+     ================================================== -->
+
+        <div class="request-modal" id="coopRequestModal" aria-hidden="true">
+          <div
+            class="request-modal-box"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="coopRequestTitle"
+          >
+            <!-- Header Modal -->
+            <div class="request-modal-head">
+              <div>
+                <h3 id="coopRequestTitle">
+                  ขอจัดทำหนังสือขอความอนุเคราะห์รับนักศึกษาสหกิจศึกษา
+                </h3>
+
+                <p>แบบคำร้องสำหรับยื่นต่อหัวหน้าภาควิชาเทคโนโลยีสารสนเทศ</p>
+              </div>
+
+              <button
+                type="button"
+                class="modal-close"
+                data-close-request="coopRequestModal"
+                aria-label="ปิด"
+              >
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+
+            <!-- Body Modal -->
+            <div class="request-modal-body">
+              <!-- แจ้งเตือน -->
+              <div class="mock-notice">
+                <i class="fa-solid fa-circle-info"></i>
+
+                แบบฟอร์มนี้เป็น Mockup สำหรับแสดงหน้าตาการทำงาน
+                ข้อมูลสามารถแสดงได้ แต่ยังไม่เชื่อมต่อการส่งคำร้องจริง
+              </div>
+
+              <!-- ==================================================
+           เรื่อง / เรียน
+           ================================================== -->
+
+              <div class="form-section">
+                <h4>เรื่อง / เรียน</h4>
+
+                <div class="form-grid">
+                  <div class="form-field full">
+                    <label> เรื่อง </label>
+
+                    <input
+                      readonly
+                      value="ขอจัดทำหนังสือขอความอนุเคราะห์รับนักศึกษาสหกิจศึกษา"
+                    />
+                  </div>
+
+                  <div class="form-field full">
+                    <label> เรียน </label>
+
+                    <input readonly value="หัวหน้าภาควิชาเทคโนโลยีสารสนเทศ" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- ==================================================
+           ข้อมูลนักศึกษา
+           ================================================== -->
+
+              <div class="form-section">
+                <h4>ข้อมูลนักศึกษา</h4>
+
+                <div class="form-grid">
+                  <div class="form-field">
+                    <label> ชื่อ-สกุล </label>
+
+                    <input readonly value="นางสาวพิมพ์ชนก สุขใจ" />
+                  </div>
+
+                  <div class="form-field">
+                    <label> รหัสประจำตัวนักศึกษา </label>
+
+                    <input readonly value="6702458196" />
+                  </div>
+
+                  <div class="form-field">
+                    <label> ชั้นปีที่ </label>
+
+                    <input readonly value="4" />
+                  </div>
+
+                  <div class="form-field">
+                    <label> เกรดเฉลี่ย </label>
+
+                    <input readonly value="3.71" />
+                  </div>
+
+                  <div class="form-field">
+                    <label> เบอร์โทร </label>
+
+                    <input readonly value="092-684-7315" />
+                  </div>
+
+                  <div class="form-field">
+                    <label> E-Mail </label>
+
+                    <input readonly value="studentcoop@email.kmutnb.ac.th" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- ==================================================
+           ข้อมูลหน่วยงาน / สถานประกอบการ
+           ================================================== -->
+
+              <div class="form-section">
+                <h4>ข้อมูลหน่วยงาน / สถานประกอบการ</h4>
+
+                <div class="form-grid">
+                  <div class="form-field full">
+                    <label> ชื่อบริษัท / หน่วยงาน (ชื่อภาษาไทย) </label>
+
+                    <input readonly value="บริษัท อินโนเวฟ ดิจิทัล จำกัด" />
+                  </div>
+
+                  <div class="form-field">
+                    <label> เรียนถึง </label>
+
+                    <input readonly value="ผู้จัดการฝ่ายทรัพยากรบุคคล" />
+                  </div>
+
+                  <div class="form-field">
+                    <label> ตำแหน่ง / หน่วยงาน </label>
+
+                    <input readonly value="ฝ่ายทรัพยากรบุคคลและพัฒนาองค์กร" />
+                  </div>
+
+                  <div class="form-field full">
+                    <label> ที่อยู่ </label>
+
+                    <textarea readonly>
+88/8 หมู่ 4 ถนนสุขุมวิท ต.สุรศักดิ์ อ.ศรีราชา จ.ชลบุรี 20110</textarea
+                    >
+                  </div>
+
+                  <div class="form-field">
+                    <label>
+                      กำหนดการปฏิบัติงานสหกิจศึกษา เริ่มตั้งแต่วันที่
+                    </label>
+
+                    <input readonly value="1 ก.ย. 2569" />
+                  </div>
+
+                  <div class="form-field">
+                    <label> ถึงวันที่ </label>
+
+                    <input readonly value="18 ธ.ค. 2569" />
+                  </div>
+                </div>
+
+                <p class="helper-note">
+                  การนี้ข้าพเจ้าได้ติดต่อกับทางบริษัท/หน่วยงานข้างต้น
+                  เป็นที่เรียบร้อยแล้ว
+                </p>
+              </div>
+
+              <!-- ==================================================
+           การดำเนินการจัดส่งหนังสือ
+           ================================================== -->
+
+              <div class="form-section">
+                <h4>การดำเนินการจัดส่งหนังสือ (กรุณาทำเครื่องหมาย ✓)</h4>
+
+                <div class="check-row">
+                  <label class="check-item">
+                    <input type="checkbox" checked disabled />
+
+                    นักศึกษานำหนังสือไปยื่นด้วยตนเอง
+                  </label>
+
+                  <label class="check-item">
+                    <input type="checkbox" disabled />
+
+                    ให้ภาควิชาฯ จัดส่งให้ทางไปรษณีย์
+                  </label>
+
+                  <label class="check-item">
+                    <input type="checkbox" disabled />
+
+                    จัดส่งให้ทาง E-mail
+                  </label>
+                </div>
+              </div>
+
+              <!-- ==================================================
+           รายวิชาที่ต้องผ่านเกณฑ์
+           ================================================== -->
+
+              <div class="form-section">
+                <h4>
+                  รายวิชาที่ต้องผ่านเกณฑ์ก่อนออกสหกิจศึกษา
+                  สำหรับหลักสูตรวิศวกรรมศาสตรบัณฑิต (เทียบโอน)
+                </h4>
+
+                <p class="helper-note" style="margin-top: 0">
+                  กรุณาทำเครื่องหมายตามช่องรหัสวิชาที่เรียนผ่าน
+                  และระบุเกรดที่ได้ หรือกำลังลงทะเบียนเรียนในเทอมนี้
+                </p>
+
+                <div style="overflow-x: auto">
+                  <table class="course-table">
+                    <thead>
+                      <tr>
+                        <th>ลำดับ</th>
+                        <th>ผ่าน (เกรด)</th>
+                        <th>กำลังศึกษา</th>
+                        <th>รหัสวิชา</th>
+                        <th>รายวิชา</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <!-- วิชาที่ 1 -->
+                      <tr>
+                        <td>1</td>
+
+                        <td>
+                          <input class="mini-input" readonly value="A" />
+                        </td>
+
+                        <td>
+                          <input type="checkbox" disabled />
+                        </td>
+
+                        <td>060233107</td>
+
+                        <td>ระบบฐานข้อมูล</td>
+                      </tr>
+
+                      <!-- วิชาที่ 2 -->
+                      <tr>
+                        <td>2</td>
+
+                        <td>
+                          <input class="mini-input" readonly value="A" />
+                        </td>
+
+                        <td>
+                          <input type="checkbox" disabled />
+                        </td>
+
+                        <td>060233112</td>
+
+                        <td>วิศวกรรมข้อมูล</td>
+                      </tr>
+
+                      <!-- วิชาที่ 3 -->
+                      <tr>
+                        <td>3</td>
+
+                        <td>
+                          <input class="mini-input" readonly value="B+" />
+                        </td>
+
+                        <td>
+                          <input type="checkbox" disabled />
+                        </td>
+
+                        <td>060233113</td>
+
+                        <td>การเขียนโปรแกรมคอมพิวเตอร์ขั้นสูง</td>
+                      </tr>
+
+                      <!-- วิชาที่ 4 -->
+                      <tr>
+                        <td>4</td>
+
+                        <td>
+                          <input class="mini-input" readonly value="A" />
+                        </td>
+
+                        <td>
+                          <input type="checkbox" disabled />
+                        </td>
+
+                        <td>060233201</td>
+
+                        <td>ปฏิบัติการวิศวกรรมเครือข่าย 1</td>
+                      </tr>
+
+                      <!-- วิชาที่ 5 -->
+                      <tr>
+                        <td>5</td>
+
+                        <td>
+                          <input class="mini-input" readonly value="B+" />
+                        </td>
+
+                        <td>
+                          <input type="checkbox" disabled />
+                        </td>
+
+                        <td>060233204</td>
+
+                        <td>การออกแบบและการจัดทำเครือข่ายคอมพิวเตอร์</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="approval-box">
+                  <p>
+                    <strong> หมายเหตุ : </strong>
+
+                    ต้องผ่านเกณฑ์การออกสหกิจศึกษา
+                    ต้องผ่านรายวิชาบังคับพื้นฐานและรายวิชาบังคับในแขนง
+                    โดยที่ไม่ติดสถานะวิทยาทัณฑ์
+                  </p>
+                </div>
+              </div>
+
+              <!-- ==================================================
+           ลงชื่อผู้ยื่นคำร้อง
+           ================================================== -->
+
+              <div class="form-section">
+                <h4>ลงชื่อผู้ยื่นคำร้อง</h4>
+
+                <div class="form-grid">
+                  <div class="form-field">
+                    <label> ลงชื่อ </label>
+
+                    <input readonly value="นางสาวพิมพ์ชนก สุขใจ" />
+                  </div>
+
+                  <div class="form-field">
+                    <label> ชื่อ-สกุล </label>
+
+                    <input readonly value="นางสาวพิมพ์ชนก สุขใจ" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- ==================================================
+           ความเห็นชอบของอาจารย์ที่ปรึกษา
+           ================================================== -->
+
+              <div class="form-section">
+                <h4>ความเห็นชอบของอาจารย์ที่ปรึกษา</h4>
+
+                <p style="font-size: 0.82rem">
+                  นักศึกษามีคุณสมบัติครบตามเกณฑ์ขอสหกิจศึกษา
+                </p>
+
+                <div class="check-row">
+                  <label class="check-item">
+                    <input type="checkbox" checked disabled />
+
+                    ครบ
+                  </label>
+
+                  <label class="check-item">
+                    <input type="checkbox" disabled />
+
+                    ไม่ครบ
+                  </label>
+                </div>
+
+                <p style="font-size: 0.82rem; margin-top: 12px">
+                  ให้เข้าทดสอบการปฏิบัติงานสหกิจศึกษา และออกสหกิจศึกษาครั้งนี้
+                </p>
+
+                <p style="font-size: 0.82rem; margin-top: 12px">
+                  ความเห็นชอบให้นักศึกษาสหกิจศึกษากับบริษัท/หน่วยงาน
+                </p>
+
+                <div class="check-row">
+                  <label class="check-item">
+                    <input type="checkbox" checked disabled />
+
+                    เห็นควรให้นักศึกษาสหกิจศึกษากับบริษัท/หน่วยงาน
+                  </label>
+
+                  <label class="check-item">
+                    <input type="checkbox" disabled />
+
+                    ไม่เห็นควรให้นักศึกษาสหกิจศึกษากับบริษัท/หน่วยงาน
+                  </label>
+                </div>
+
+                <div class="form-grid" style="margin-top: 12px">
+                  <div class="form-field">
+                    <label> อาจารย์ที่ปรึกษา </label>
+
+                    <input readonly value="ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ" />
+                  </div>
+
+                  <div class="form-field">
+                    <label> วันที่ </label>
+
+                    <input readonly value="21 ส.ค. 2569" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- ==================================================
+           ความเห็นชอบของหัวหน้าภาควิชา
+           ================================================== -->
+
+              <div class="form-section">
+                <h4>ความเห็นชอบของหัวหน้าภาควิชา</h4>
+
+                <div class="check-row">
+                  <label class="check-item">
+                    <input type="checkbox" disabled />
+
+                    อนุญาต และดำเนินการจัดทำหนังสือ
+                  </label>
+
+                  <label class="check-item">
+                    <input type="checkbox" disabled />
+
+                    ไม่อนุญาต
+                  </label>
+                </div>
+
+                <div class="form-field full" style="margin-top: 10px">
+                  <label> หมายเหตุ </label>
+
+                  <textarea readonly>
+....................................................................
+....................................................................</textarea
+                  >
+                </div>
+
+                <div class="form-grid" style="margin-top: 12px">
+                  <div class="form-field">
+                    <label> ลงชื่อ </label>
+
+                    <input readonly value="ผู้ช่วยศาสตราจารย์ ดร.ขนิษฐา นามี" />
+                  </div>
+
+                  <div class="form-field">
+                    <label> วันที่ </label>
+
+                    <input readonly value="........../........../.........." />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Footer Modal -->
+            <div class="request-modal-foot">
+              <button
+                type="button"
+                class="btn-modal-secondary"
+                data-close-request="coopRequestModal"
+              >
+                ปิด
+              </button>
+
+              <button
+                type="button"
+                class="btn-mock-sm solid"
+                id="submitCoopRequest"
+              >
+                <i class="fa-solid fa-paper-plane"></i>
+                ส่งคำร้อง
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================================================
+     Modal: ยกเลิกคำร้อง
+     ================================================== -->
+
+        <div class="request-modal" id="cancelRequestModal" aria-hidden="true">
+          <div
+            class="request-modal-box cancel-confirm"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="cancelRequestTitle"
+          >
+            <div class="request-modal-head">
+              <div>
+                <h3 id="cancelRequestTitle">ยกเลิกคำร้องสหกิจศึกษา</h3>
+
+                <p>ยืนยันการดำเนินการ</p>
+              </div>
+
+              <button
+                type="button"
+                class="modal-close"
+                data-close-request="cancelRequestModal"
+                aria-label="ปิด"
+              >
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+
+            <div class="request-modal-body">
+              <div class="cancel-icon">
+                <i class="fa-solid fa-ban"></i>
+              </div>
+
+              <h4
+                style="
+                  font-family: &quot;Sarabun&quot;, sans-serif;
+                  margin-bottom: 6px;
+                "
+              >
+                ต้องการยกเลิกคำร้องนี้หรือไม่?
+              </h4>
+
+              <p style="font-size: 0.82rem; color: var(--text-muted)">
+                บริษัท อินโนเวฟ ดิจิทัล จำกัด — นักศึกษาสหกิจศึกษาด้าน Frontend
+                (React / TypeScript)
+              </p>
+
+              <div
+                class="mock-notice"
+                style="text-align: left; margin-top: 16px"
+              >
+                <i class="fa-solid fa-circle-info"></i>
+
+                Mockup เท่านั้น การยกเลิกคำร้องจริงยังไม่เปิดใช้งาน
+                และข้อมูลจะไม่ถูกเปลี่ยนแปลง
+              </div>
+            </div>
+
+            <div class="request-modal-foot">
+              <button
+                type="button"
+                class="btn-modal-secondary"
+                data-close-request="cancelRequestModal"
+              >
+                ไม่ยกเลิก
+              </button>
+
+              <button
+                type="button"
+                class="btn-danger-outline"
+                id="confirmCancelRequest"
+                style="cursor: pointer"
+              >
+                <i class="fa-solid fa-ban"></i>
+                ยืนยันการยกเลิก
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- ==================================================
+     ข้อมูลพี่เลี้ยง
+     ================================================== -->
+
+        <section class="content-panel" id="panel-mentor">
+          <div class="panel-header">
+            <h2>ข้อมูลพี่เลี้ยง</h2>
+
+            <p>จัดการข้อมูลพี่เลี้ยงสำหรับสหกิจศึกษา</p>
+          </div>
+
+          <span class="status-chip planned"> Mockup </span>
+
+          <div class="mock-card">
+            <div class="request-card-head">
+              <div>
+                <h4>
+                  <i class="fa-solid fa-user-tie"></i>
+                  ข้อมูลพี่เลี้ยงปัจจุบัน
+                </h4>
+
+                <p>ข้อมูลที่ใช้ติดต่อและประสานงานระหว่างสหกิจศึกษา</p>
+              </div>
+            </div>
+
+            <div class="info-grid" style="margin-top: 14px">
+              <div class="info-item">
+                <span> Email </span>
+
+                <strong id="mentorEmail"> natcha.w@innowave.co.th </strong>
+              </div>
+
+              <div class="info-item">
+                <span> ชื่อ </span>
+
+                <strong id="mentorFirstName"> ณัฐชา </strong>
+              </div>
+
+              <div class="info-item">
+                <span> นามสกุล </span>
+
+                <strong id="mentorLastName"> วงศ์พิพัฒน์ </strong>
+              </div>
+
+              <div class="info-item">
+                <span> ตำแหน่ง </span>
+
+                <strong id="mentorPosition">
+                  Frontend Development Lead / พี่เลี้ยง
+                </strong>
+              </div>
+            </div>
+
+            <div class="request-actions">
+              <button type="button" class="btn-mock-sm solid" id="btnAddMentor">
+                <i class="fa-solid fa-plus"></i>
+                เพิ่มข้อมูลพี่เลี้ยง
+              </button>
+
+              <button type="button" class="btn-mock-sm" id="btnEditMentor">
+                <i class="fa-solid fa-pen"></i>
+                แก้ไขข้อมูลพี่เลี้ยง
+              </button>
+
+              <button
+                type="button"
+                class="btn-danger-outline"
+                id="btnDeleteMentor"
+                style="cursor: pointer"
+              >
+                <i class="fa-solid fa-trash"></i>
+                ลบข้อมูลพี่เลี้ยง
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================
+    บันทึกการปฏิบัติงานประจำวัน
+     ================================================== -->
+
+        <section class="content-panel" id="panel-daily">
+          <div class="panel-header">
+            <h2>บันทึกการปฏิบัติงานประจำวัน</h2>
+
+            <p>รวบรวมบันทึกประจำวันเป็นเล่มเสนออาจารย์นิเทศ</p>
+          </div>
+
+          <span class="status-chip planned"> ยังไม่เริ่มพัฒนา </span>
+
+          <div class="weekly-submit-bar">
+            <div class="weekly-submit-info">
+              <i class="fa-solid fa-user-tie"></i>
+
+              พี่เลี้ยง:
+
+              <a href="mentor_coop.html" class="mentor-link">
+                คุณณัฐชา วงศ์พิพัฒน์
+              </a>
+
+              <span style="color: var(--text-muted)">
+                · Frontend Development Lead / พี่เลี้ยง
+              </span>
+            </div>
+
+            <div
+              style="
+                display: flex;
+                gap: 8px;
+                flex-wrap: wrap;
+                justify-content: flex-end;
+              "
+            >
+              <button type="button" class="btn-mock-sm" id="btnWriteDaily">
+                <i class="fa-solid fa-pen"></i>
+                เขียนบันทึกประจำวัน
+              </button>
+
+              <button
+                type="button"
+                class="btn-mock-sm solid"
+                id="btnSubmitWeekly"
+              >
+                <i class="fa-solid fa-paper-plane"></i>
+                ส่งบันทึกประจำสัปดาห์ให้พี่เลี้ยงตรวจ
+              </button>
+            </div>
+          </div>
+
+          <table class="mock-table">
+            <thead>
+              <tr>
+                <th>วันที่</th>
+                <th>งานที่ปฏิบัติ</th>
+                <th>สถานะ</th>
+                <th>การดำเนินการ</th>
+              </tr>
+            </thead>
+
+            <tbody id="dailyLogTableBody">
+              <tr>
+                <td>6 ก.ย. 2569</td>
+
+                <td>
+                  ทดสอบ Responsive Design ของหน้า Dashboard บน Desktop, Tablet
+                  และ Mobile
+                </td>
+
+                <td>
+                  <span class="tag tag-green"> ตรวจแล้ว </span>
+                </td>
+
+                <td>
+                  <button class="btn-mock-sm">ดู</button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>5 ก.ย. 2569</td>
+
+                <td>
+                  พัฒนา Component สำหรับแสดงข้อมูลสถิติ และกราฟบนหน้า Dashboard
+                </td>
+
+                <td>
+                  <span class="tag tag-green"> ตรวจแล้ว </span>
+                </td>
+
+                <td>
+                  <button class="btn-mock-sm">ดู</button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>4 ก.ย. 2569</td>
+
+                <td>เชื่อมต่อ REST API สำหรับดึงข้อมูลมาแสดงบน Dashboard</td>
+
+                <td>
+                  <span class="tag tag-dark"> ส่งแล้ว </span>
+                </td>
+
+                <td>
+                  <button class="btn-mock-sm">แก้ไข</button>
+
+                  <button class="btn-mock-sm">ลบ</button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>3 ก.ย. 2569</td>
+
+                <td>
+                  ออกแบบหน้า Dashboard ใน Figma และปรับ Component
+                  ตามข้อเสนอแนะของพี่เลี้ยง
+                </td>
+
+                <td>
+                  <span class="tag tag-dark"> ส่งแล้ว </span>
+                </td>
+
+                <td>
+                  <button class="btn-mock-sm">แก้ไข</button>
+
+                  <button class="btn-mock-sm">ลบ</button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>2 ก.ย. 2569</td>
+
+                <td>
+                  ศึกษาโครงสร้าง React Project, Design System และ Git Flow
+                  ของบริษัท
+                </td>
+
+                <td>
+                  <span class="tag tag-red"> รอตรวจ </span>
+                </td>
+
+                <td>
+                  <button class="btn-mock-sm">แก้ไข</button>
+
+                  <button class="btn-mock-sm">ลบ</button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>1 ก.ย. 2569</td>
+
+                <td>
+                  ปฐมนิเทศ ฝึกใช้งานระบบภายในบริษัท และประชุม Sprint Planning
+                  กับทีม Frontend
+                </td>
+
+                <td>
+                  <span class="tag tag-red"> รอตรวจ </span>
+                </td>
+
+                <td>
+                  <button class="btn-mock-sm">แก้ไข</button>
+
+                  <button class="btn-mock-sm">ลบ</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p class="helper-note">*ข้อมูลตัวอย่างในหน้า mockup เท่านั้น</p>
+        </section>
+
+        <!-- ==================================================
+     โครงการสหกิจศึกษา
+     ================================================== -->
+
+        <section class="content-panel" id="panel-coop">
+          <div class="panel-header">
+            <h2>โครงการสหกิจศึกษา</h2>
+
+            <p>จัดการข้อมูลโครงการสำหรับนักศึกษาสหกิจศึกษา</p>
+          </div>
+
+          <span class="status-chip planned"> Mockup </span>
+
+          <!-- 7) จัดการข้อมูลอาจารย์ที่ปรึกษาโครงการ -->
+          <div class="mock-card" style="margin-top: 16px">
+            <div class="request-card-head">
+              <div>
+                <h4>
+                  <i class="fa-solid fa-chalkboard-user"></i>
+                  7) จัดการข้อมูลอาจารย์ที่ปรึกษาโครงการ
+                </h4>
+
+                <p>
+                  เลือกอาจารย์ที่ปรึกษาโครงการ กรณีมีอาจารย์ที่ปรึกษาโครงการ
+                </p>
+              </div>
+            </div>
+
+            <div style="margin-top: 14px">
+              <label
+                for="coopAdvisorSelect"
+                style="
+                  display: block;
+                  font-size: 0.78rem;
+                  color: var(--text-muted);
+                  font-weight: 600;
+                  margin-bottom: 6px;
+                "
+              >
+                อาจารย์ที่ปรึกษาโครงการ
+              </label>
+
+              <select
+                id="coopAdvisorSelect"
+                style="
+                  width: 100%;
+                  border: 1px solid var(--border-color);
+                  border-radius: 8px;
+                  padding: 10px 12px;
+                  font: inherit;
+                  font-size: 0.84rem;
+                  color: var(--text-dark);
+                  background: #fff;
+                "
+              >
+                <option value="">-- เลือกอาจารย์ที่ปรึกษาโครงการ --</option>
+
+                <option value="ผศ.ดร.นิติการ นาคเจือทอง">
+                  ผศ.ดร.นิติการ นาคเจือทอง
+                </option>
+
+                <option value="ผศ.ดร.ขนิษฐา นามี">ผศ.ดร.ขนิษฐา นามี</option>
+
+                <option value="ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ" selected>
+                  ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ
+                </option>
+
+                <option value="อ.ดร.ศิรินทรา แว่วศรี">
+                  อ.ดร.ศิรินทรา แว่วศรี
+                </option>
+              </select>
+            </div>
+
+            <div class="request-actions">
+              <button
+                type="button"
+                class="btn-mock-sm solid"
+                id="btnSaveCoopAdvisor"
+              >
+                <i class="fa-solid fa-floppy-disk"></i>
+                บันทึกอาจารย์ที่ปรึกษา
+              </button>
+            </div>
+
+            <p class="helper-note">
+              *รายชื่ออาจารย์เป็นข้อมูลตัวอย่างสำหรับ Mockup เท่านั้น
+            </p>
+          </div>
+
+          <!-- 8) ตรวจสอบและยืนยันข้อมูลอาจารย์ที่ปรึกษาโครงการ -->
+          <div class="mock-card" style="margin-top: 16px">
+            <div class="request-card-head">
+              <div>
+                <h4>
+                  <i class="fa-solid fa-circle-check"></i>
+                  8) ตรวจสอบและยืนยันข้อมูลอาจารย์ที่ปรึกษาโครงการ
+                </h4>
+
+                <p>ตรวจสอบชื่ออาจารย์ที่ปรึกษาโครงการและกดรับทราบ</p>
+              </div>
+            </div>
+
+            <div
+              style="
+                margin-top: 14px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 12px;
+                flex-wrap: wrap;
+                border: 1px solid var(--border-color);
+                border-radius: 10px;
+                padding: 14px 16px;
+                background: #fff;
+              "
+            >
+              <div>
+                <span
+                  style="
+                    display: block;
+                    color: var(--text-muted);
+                    font-size: 0.75rem;
+                    margin-bottom: 4px;
+                  "
+                >
+                  อาจารย์ที่ปรึกษาโครงการ
+                </span>
+
+                <strong id="coopAdvisorConfirmName">
+                  ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ
+                </strong>
+
+                <span
+                  id="coopAdvisorAckStatus"
+                  class="tag tag-red"
+                  style="margin-left: 8px"
+                >
+                  ยังไม่รับทราบ
+                </span>
+              </div>
+
+              <button
+                type="button"
+                class="btn-mock-sm solid"
+                id="btnAcknowledgeCoopAdvisor"
+              >
+                <i class="fa-solid fa-check"></i>
+                รับทราบ
+              </button>
+            </div>
+
+            <p class="helper-note">
+              *เมื่อกดรับทราบ ระบบ Mockup จะแสดงสถานะว่าได้รับทราบข้อมูลแล้ว
+            </p>
+          </div>
+
+          <!-- 9) จัดการข้อมูลหัวข้อสอบโครงการ -->
+          <div class="mock-card" style="margin-top: 16px">
+            <div class="request-card-head">
+              <div>
+                <h4>
+                  <i class="fa-solid fa-file-pen"></i>
+                  9) จัดการข้อมูลหัวข้อสอบโครงการ
+                </h4>
+
+                <p>กรอกชื่อหัวข้อโครงการ และสามารถบันทึกหรือแก้ไขข้อมูลได้</p>
+              </div>
+            </div>
+
+            <div style="margin-top: 14px">
+              <label
+                for="coopProjectTitle"
+                style="
+                  display: block;
+                  font-size: 0.78rem;
+                  color: var(--text-muted);
+                  font-weight: 600;
+                  margin-bottom: 6px;
+                "
+              >
+                ชื่อหัวข้อโครงการ
+              </label>
+
+              <input
+                type="text"
+                id="coopProjectTitle"
+                value="ระบบวิเคราะห์และแสดงผลข้อมูลการทำงานด้วย React Dashboard"
+                style="
+                  width: 100%;
+                  box-sizing: border-box;
+                  border: 1px solid var(--border-color);
+                  border-radius: 8px;
+                  padding: 10px 12px;
+                  font: inherit;
+                  font-size: 0.84rem;
+                  color: var(--text-dark);
+                  background: #fff;
+                "
+              />
+            </div>
+
+            <div class="request-actions">
+              <button
+                type="button"
+                class="btn-mock-sm solid"
+                id="btnSaveCoopProjectTitle"
+              >
+                <i class="fa-solid fa-floppy-disk"></i>
+                บันทึก
+              </button>
+
+              <button
+                type="button"
+                class="btn-mock-sm"
+                id="btnEditCoopProjectTitle"
+              >
+                <i class="fa-solid fa-pen"></i>
+                แก้ไข
+              </button>
+            </div>
+
+            <div
+              style="
+                margin-top: 14px;
+                border-top: 1px solid var(--border-color);
+                padding-top: 14px;
+              "
+            >
+              <span
+                style="
+                  display: block;
+                  color: var(--text-muted);
+                  font-size: 0.75rem;
+                  margin-bottom: 4px;
+                "
+              >
+                หัวข้อโครงการปัจจุบัน
+              </span>
+
+              <strong id="coopProjectTitleDisplay">
+                ระบบวิเคราะห์และแสดงผลข้อมูลการทำงานด้วย React Dashboard
+              </strong>
+            </div>
+
+            <p class="helper-note">
+              *ข้อมูลทั้งหมดเป็นข้อมูลตัวอย่างสำหรับหน้า Mockup
+              และยังไม่เชื่อมต่อฐานข้อมูล
+            </p>
+          </div>
+        </section>
+
+        <!-- ==================================================
+     อัปโหลดรายงาน
+     ================================================== -->
+
+        <section class="content-panel" id="panel-report-upload">
+          <div class="panel-header">
+            <h2>อัปโหลดรายงาน</h2>
+
+            <p>อัปโหลดเอกสารรายงานโครงการสหกิจศึกษาของนักศึกษา</p>
+          </div>
+
+          <span class="status-chip planned"> Mockup </span>
+
+          <!-- 2) เล่มโครงการ และโปสเตอร์ (นักศึกษาสหกิจ) -->
+          <div class="mock-card" style="margin-top: 16px">
+            <div class="request-card-head">
+              <div>
+                <h4>
+                  <i class="fa-solid fa-book"></i>
+                  เล่มโครงการ และโปสเตอร์ ของนักศึกษาสหกิจ
+                </h4>
+
+                <p>อัปโหลดเล่มโครงการและโปสเตอร์ สำหรับนักศึกษาสหกิจศึกษา</p>
+              </div>
+            </div>
+
+            <div style="margin-top: 14px">
+              <label
+                for="coopProjectBookFile"
+                style="
+                  display: block;
+                  font-size: 0.78rem;
+                  color: var(--text-muted);
+                  font-weight: 600;
+                  margin-bottom: 6px;
+                "
+              >
+                ไฟล์เล่มโครงการ
+              </label>
+
+              <input
+                type="file"
+                id="coopProjectBookFile"
+                accept=".pdf,.doc,.docx"
+                style="
+                  width: 100%;
+                  box-sizing: border-box;
+                  border: 1px solid var(--border-color);
+                  border-radius: 8px;
+                  padding: 10px 12px;
+                  font: inherit;
+                  font-size: 0.84rem;
+                  color: var(--text-dark);
+                  background: #fff;
+                "
+              />
+            </div>
+
+            <div style="margin-top: 14px">
+              <label
+                for="coopPosterFile"
+                style="
+                  display: block;
+                  font-size: 0.78rem;
+                  color: var(--text-muted);
+                  font-weight: 600;
+                  margin-bottom: 6px;
+                "
+              >
+                ไฟล์โปสเตอร์
+              </label>
+
+              <input
+                type="file"
+                id="coopPosterFile"
+                accept=".pdf,.jpg,.jpeg,.png"
+                style="
+                  width: 100%;
+                  box-sizing: border-box;
+                  border: 1px solid var(--border-color);
+                  border-radius: 8px;
+                  padding: 10px 12px;
+                  font: inherit;
+                  font-size: 0.84rem;
+                  color: var(--text-dark);
+                  background: #fff;
+                "
+              />
+            </div>
+
+            <div class="request-actions">
+              <button type="button" class="btn-mock-sm solid">
+                <i class="fa-solid fa-upload"></i>
+                อัปโหลดไฟล์
+              </button>
+            </div>
+
+            <p class="helper-note">
+              *ข้อมูลทั้งหมดเป็นข้อมูลตัวอย่างสำหรับหน้า Mockup
+              และยังไม่เชื่อมต่อฐานข้อมูล
+            </p>
+          </div>
+        </section>
+        <!-- ==================================================
+     ประเมิน
+     ================================================== -->
+
+        <section class="content-panel" id="panel-evaluate">
+          <div class="panel-header">
+            <h2>ประเมินสถานประกอบการ</h2>
+            <p>ประเมินสถานประกอบการที่นักศึกษากำลังปฏิบัติฝึกงานสหกิจศึกษา</p>
+          </div>
+
+          <div class="mock-card" style="margin-top: 16px">
+            <div class="request-card-head">
+              <div>
+                <h4>
+                  <i
+                    class="fa-solid fa-building"
+                    style="color: var(--primary-color); margin-right: 6px"
+                  ></i>
+
+                  บริษัท อินโนเวฟ ดิจิทัล จำกัด
+                </h4>
+
+                <p>ข้อมูลสถานประกอบการสำหรับการประเมิน</p>
+              </div>
+
+              <span class="tag tag-green"> กำลังปฏิบัติฝึกงานสหกิจศึกษา </span>
+            </div>
+
+            <div class="info-grid" style="margin-top: 18px">
+              <div class="info-item">
+                <span>ชื่อสถานประกอบการ</span>
+
+                <strong> บริษัท อินโนเวฟ ดิจิทัล จำกัด </strong>
+              </div>
+
+              <div class="info-item">
+                <span>จังหวัด</span>
+
+                <strong> ชลบุรี </strong>
+              </div>
+
+              <div class="info-item">
+                <span>ตำแหน่งสหกิจศึกษา</span>
+
+                <strong> นักศึกษาสหกิจศึกษาด้าน Frontend </strong>
+              </div>
+
+              <div class="info-item">
+                <span>พี่เลี้ยง</span>
+
+                <strong> คุณณัฐชา วงศ์พิพัฒน์ </strong>
+              </div>
+
+              <div class="info-item">
+                <span>วันที่เริ่มสหกิจศึกษา</span>
+
+                <strong> 1 กันยายน 2569 </strong>
+              </div>
+
+              <div class="info-item">
+                <span>วันที่สิ้นสุดสหกิจศึกษา</span>
+
+                <strong> 18 ธันวาคม 2569 </strong>
+              </div>
+            </div>
+
+            <div
+              class="request-actions"
+              style="
+                margin-top: 20px;
+                padding-top: 16px;
+                border-top: 1px solid var(--border-color);
+              "
+            >
+              <button
+                type="button"
+                class="btn-mock-sm solid"
+                id="btnEvaluateCompany"
+              >
+                <i class="fa-solid fa-star"></i>
+                ประเมินสถานประกอบการ
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================
+     ขอย้ายสถานประกอบการ
+     ================================================== -->
+
+        <section class="content-panel" id="panel-transfer">
+          <div class="panel-header">
+            <h2>ขอย้ายสถานประกอบการ</h2>
+
+            <p>
+              กรอกเหตุผลในการขอย้ายสถานประกอบการหรือสถานที่ปฏิบัติงานสหกิจศึกษา
+              เพื่อส่งเรื่องให้อาจารย์ที่ปรึกษาพิจารณาอนุมัติ
+            </p>
+          </div>
+
+          <div class="mock-card">
+            <div class="form-field full">
+              <label for="transferReason">
+                เหตุผลที่ต้องการย้ายสถานประกอบการ/สถานที่ปฏิบัติงานสหกิจศึกษา
+              </label>
+
+              <textarea
+                id="transferReason"
+                placeholder="กรอกเหตุผลที่ต้องการย้ายสถานประกอบการหรือสถานที่ปฏิบัติงานสหกิจศึกษา..."
+              ></textarea>
+            </div>
+
+            <div class="request-actions">
+              <button
+                type="button"
+                class="btn-mock-sm solid"
+                id="btnSubmitTransfer"
+              >
+                <i class="fa-solid fa-paper-plane"></i>
+                ส่งเรื่องให้อาจารย์ที่ปรึกษาอนุมัติ
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-copyright">
+        <p>
+          © Development of a Web Platform for Co-operative Education Management
+        </p>
+      </div>
+    </footer>
+
+    <!-- Modal: เขียนบันทึกการปฏิบัติงานประจำวัน -->
+
+    <div
+      class="modal-overlay daily-log-modal"
+      id="dailyLogModal"
+      aria-hidden="true"
+    >
+      <div
+        class="request-modal-box"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="dailyLogModalTitle"
+      >
+        <div class="request-modal-head">
+          <div>
+            <h3 id="dailyLogModalTitle">บันทึกการปฏิบัติงาน</h3>
+
+            <p>กรอกข้อมูลการปฏิบัติงานประจำวันของนักศึกษา</p>
+          </div>
+
+          <button
+            type="button"
+            class="modal-close"
+            data-close-modal="dailyLogModal"
+            aria-label="ปิด"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <div class="request-modal-body">
+          <div class="daily-log-title">บันทึกการปฏิบัติงาน</div>
+
+          <div class="form-section">
+            <div class="daily-date-row">
+              <div class="form-field">
+                <label> ประจำวันที่ </label>
+
+                <input
+                  id="dailyDay"
+                  type="number"
+                  min="1"
+                  max="31"
+                  placeholder="วัน"
+                />
+              </div>
+
+              <div class="form-field">
+                <label> เดือน </label>
+
+                <input id="dailyMonth" type="text" placeholder="เดือน" />
+              </div>
+
+              <div class="form-field">
+                <label> พ.ศ. </label>
+
+                <input
+                  id="dailyYear"
+                  type="number"
+                  min="2500"
+                  max="2700"
+                  placeholder="พ.ศ."
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h4 class="daily-section-title">
+              <i class="fa-solid fa-user-graduate"></i>
+
+              ส่วนที่ 1 (สำหรับนักศึกษา)
+            </h4>
+
+            <div class="form-grid">
+              <div class="form-field full">
+                <label> งานที่ได้รับมอบหมาย </label>
+
+                <textarea
+                  id="dailyAssigned"
+                  placeholder="กรอกรายละเอียดงานที่ได้รับมอบหมาย"
+                ></textarea>
+              </div>
+
+              <div class="form-field full">
+                <label> ผลการปฏิบัติงาน </label>
+
+                <textarea
+                  id="dailyResult"
+                  placeholder="กรอกรายละเอียดผลการปฏิบัติงาน"
+                ></textarea>
+              </div>
+
+              <div class="form-field full">
+                <label> ปัญหาและอุปสรรค </label>
+
+                <textarea
+                  id="dailyProblem"
+                  placeholder="กรอกปัญหาและอุปสรรคที่พบ"
+                ></textarea>
+              </div>
+
+              <div class="form-field full">
+                <label> การแก้ไข </label>
+
+                <textarea
+                  id="dailySolution"
+                  placeholder="กรอกวิธีการแก้ไขปัญหา"
+                ></textarea>
+              </div>
+
+              <div class="form-field full">
+                <label> หมายเหตุ </label>
+
+                <textarea
+                  id="dailyNote"
+                  placeholder="กรอกหมายเหตุเพิ่มเติม (ถ้ามี)"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="form-section">
+            <h4 class="daily-section-title">
+              <i class="fa-solid fa-user-tie"></i>
+
+              ส่วนที่ 2 (สำหรับผู้ดูแล)
+            </h4>
+
+            <div class="form-grid">
+              <div class="form-field full">
+                <label> ข้อเสนอแนะจากผู้ดูแล </label>
+
+                <textarea
+                  id="dailyFeedback"
+                  placeholder="กรอกข้อเสนอแนะจากผู้ดูแล"
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="daily-signature">
+              <div>
+                ลงชื่อ
+                <span class="daily-signature-line"></span>
+                ผู้ดูแล
+              </div>
+
+              <div class="daily-signature-name">
+                (...........................................................)
+              </div>
+
+              <div style="margin-top: 14px">
+                วันที่ ........... / ........................... /
+                ....................
+              </div>
+            </div>
+          </div> -->
+
+          <div class="mock-notice">
+            <i class="fa-solid fa-circle-info"></i>
+
+            แบบฟอร์มนี้เป็น Mockup ข้อมูลจะถูกเพิ่มลงในตารางด้านบนของหน้านี้
+          </div>
+        </div>
+
+        <div class="request-modal-foot">
+          <button
+            type="button"
+            class="btn-modal-secondary"
+            data-close-modal="dailyLogModal"
+          >
+            ยกเลิก
+          </button>
+
+          <button type="button" class="btn-mock-sm solid" id="btnSaveDaily">
+            <i class="fa-solid fa-floppy-disk"></i>
+            บันทึกการปฏิบัติงาน
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal ข้อมูลพี่เลี้ยง -->
+
+    <div class="modal-overlay" id="mentorModal" aria-hidden="true">
+      <div class="request-modal-box" style="max-width: 560px">
+        <div class="request-modal-head">
+          <div>
+            <h3 id="mentorModalTitle">เพิ่มข้อมูลพี่เลี้ยง</h3>
+
+            <p>กรอกข้อมูลพี่เลี้ยงสำหรับสหกิจศึกษา</p>
+          </div>
+
+          <button
+            type="button"
+            class="btn-close-modal"
+            data-close-modal="mentorModal"
+          >
+            &times;
+          </button>
+        </div>
+
+        <div class="request-modal-body">
+          <div class="form-grid">
+            <div class="form-field full">
+              <label> Email </label>
+
+              <input
+                id="mentorEmailInput"
+                type="email"
+                placeholder="mentor@example.com"
+              />
+            </div>
+
+            <div class="form-field">
+              <label> ชื่อ </label>
+
+              <input id="mentorFirstNameInput" type="text" placeholder="ชื่อ" />
+            </div>
+
+            <div class="form-field">
+              <label> นามสกุล </label>
+
+              <input
+                id="mentorLastNameInput"
+                type="text"
+                placeholder="นามสกุล"
+              />
+            </div>
+
+            <div class="form-field full">
+              <label> ตำแหน่ง </label>
+
+              <input
+                id="mentorPositionInput"
+                type="text"
+                placeholder="ตำแหน่ง"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="request-modal-foot">
+          <button
+            type="button"
+            class="btn-modal-secondary"
+            data-close-modal="mentorModal"
+          >
+            ยกเลิก
+          </button>
+
+          <button type="button" class="btn-mock-sm solid" id="btnSaveMentor">
+            บันทึกข้อมูล
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="main.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // =========================================================
+        // ข้อมูลผู้ใช้
+        // =========================================================
+
+        const user = JSON.parse(localStorage.getItem("currentUser") || "null");
+
+        if (user) {
+          const overviewGreeting = document.getElementById("overviewGreeting");
+
+          if (overviewGreeting) {
+            overviewGreeting.textContent = `ยินดีต้อนรับ, ${user.name}`;
+          }
+        }
+
+        // =========================================================
+        // Sidebar
+        // =========================================================
+
+        document
+          .querySelectorAll(".sidebar-item[data-target]")
+          .forEach((item) => {
+            item.addEventListener("click", () => {
+              document.querySelectorAll(".sidebar-item").forEach((i) => {
+                i.classList.remove("active");
+              });
+
+              document.querySelectorAll(".content-panel").forEach((panel) => {
+                panel.classList.remove("active");
+              });
+
+              item.classList.add("active");
+
+              const target = document.getElementById(item.dataset.target);
+
+              if (target) {
+                target.classList.add("active");
+              }
+            });
+          });
+
+        // =========================================================
+        // คำร้องสหกิจศึกษา
+        // =========================================================
+
+        const coopRequestModal = document.getElementById("coopRequestModal");
+
+        const cancelRequestModal =
+          document.getElementById("cancelRequestModal");
+
+        // เปิด request modal
+
+        const openRequestModal = (modal) => {
+          if (!modal) return;
+
+          modal.classList.add("show");
+
+          modal.setAttribute("aria-hidden", "false");
+
+          document.body.style.overflow = "hidden";
+        };
+
+        // ปิด request modal
+
+        const closeRequestModal = (modal) => {
+          if (!modal) return;
+
+          modal.classList.remove("show");
+
+          modal.setAttribute("aria-hidden", "true");
+
+          document.body.style.overflow = "";
+        };
+
+        // เปิดฟอร์มคำร้อง
+
+        document
+          .getElementById("openCoopRequest")
+          ?.addEventListener("click", () => {
+            openRequestModal(coopRequestModal);
+          });
+
+        // เปิดยกเลิกคำร้อง
+
+        document
+          .getElementById("openCancelRequest")
+          ?.addEventListener("click", () => {
+            openRequestModal(cancelRequestModal);
+          });
+
+        // ปุ่มปิด request modal
+
+        document.querySelectorAll("[data-close-request]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const modal = document.getElementById(btn.dataset.closeRequest);
+
+            closeRequestModal(modal);
+          });
+        });
+
+        // คลิกพื้นที่ด้านนอก modal
+
+        [coopRequestModal, cancelRequestModal].forEach((modal) => {
+          modal?.addEventListener("click", (e) => {
+            if (e.target === modal) {
+              closeRequestModal(modal);
+            }
+          });
+        });
+
+        // ESC ปิด Request Modal
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") {
+            closeRequestModal(coopRequestModal);
+
+            closeRequestModal(cancelRequestModal);
+          }
+        });
+
+        // ส่งคำร้อง
+
+        document
+          .getElementById("submitCoopRequest")
+          ?.addEventListener("click", () => {
+            alert(
+              "Mockup: ระบบแสดงแบบฟอร์มคำร้องเรียบร้อยแล้ว แต่ยังไม่สามารถส่งคำร้องจริงได้",
+            );
+          });
+
+        // ยืนยันยกเลิกคำร้อง
+
+        document
+          .getElementById("confirmCancelRequest")
+          ?.addEventListener("click", () => {
+            alert(
+              "Mockup: ฟังก์ชันยกเลิกคำร้องอยู่ระหว่างการพัฒนา ข้อมูลเดิมยังคงอยู่",
+            );
+
+            closeRequestModal(cancelRequestModal);
+          });
+
+        // =========================================================
+        // Modal ทั่วไป
+        // =========================================================
+
+        const openModal = (id) => {
+          const modal = document.getElementById(id);
+
+          if (!modal) return;
+
+          modal.classList.add("open");
+
+          modal.setAttribute("aria-hidden", "false");
+
+          document.body.style.overflow = "hidden";
+        };
+
+        const closeModal = (id) => {
+          const modal = document.getElementById(id);
+
+          if (!modal) return;
+
+          modal.classList.remove("open");
+
+          modal.setAttribute("aria-hidden", "true");
+
+          document.body.style.overflow = "";
+        };
+
+        // =========================================================
+        // Profile
+        // =========================================================
+
+        document
+          .getElementById("btnEditProfile")
+          ?.addEventListener("click", () => {
+            openModal("profileModal");
+          });
+
+        document
+          .getElementById("btnEditAccount")
+          ?.addEventListener("click", () => {
+            openModal("accountModal");
+          });
+
+        document
+          .getElementById("btnChangePhoto")
+          ?.addEventListener("click", () => {
+            alert(
+              "ฟังก์ชันอัปโหลดรูปโปรไฟล์อยู่ระหว่างการพัฒนา — Mockup เท่านั้น",
+            );
+          });
+
+        // ปิด modal ด้วยปุ่ม
+
+        document.querySelectorAll("[data-close-modal]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            closeModal(btn.dataset.closeModal);
+          });
+        });
+
+        // คลิกนอก modal
+
+        document.querySelectorAll(".modal-overlay").forEach((modal) => {
+          modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+              closeModal(modal.id);
+            }
+          });
+        });
+
+        // บันทึก Profile
+
+        document
+          .getElementById("btnSaveProfile")
+          ?.addEventListener("click", () => {
+            alert(
+              "ฟังก์ชันแก้ไขข้อมูลอยู่ระหว่างการพัฒนา — ข้อมูลใน Mockup จะไม่ถูกเปลี่ยนแปลง",
+            );
+          });
+
+        // บันทึก Account
+
+        document
+          .getElementById("btnSaveAccount")
+          ?.addEventListener("click", () => {
+            alert(
+              "ฟังก์ชันแก้ไขอีเมลและรหัสผ่านอยู่ระหว่างการพัฒนา — ข้อมูลใน Mockup จะไม่ถูกเปลี่ยนแปลง",
+            );
+          });
+
+        // ESC ปิด Modal
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") {
+            document
+              .querySelectorAll(".modal-overlay.open")
+              .forEach((modal) => {
+                closeModal(modal.id);
+              });
+          }
+        });
+
+        // =========================================================
+        // บันทึกการปฏิบัติงานประจำวัน
+        // =========================================================
+
+        const dailyLogModal = document.getElementById("dailyLogModal");
+
+        const openDailyLog = () => {
+          const now = new Date();
+
+          const thaiMonths = [
+            "มกราคม",
+            "กุมภาพันธ์",
+            "มีนาคม",
+            "เมษายน",
+            "พฤษภาคม",
+            "มิถุนายน",
+            "กรกฎาคม",
+            "สิงหาคม",
+            "กันยายน",
+            "ตุลาคม",
+            "พฤศจิกายน",
+            "ธันวาคม",
+          ];
+
+          const dayInput = document.getElementById("dailyDay");
+
+          const monthInput = document.getElementById("dailyMonth");
+
+          const yearInput = document.getElementById("dailyYear");
+
+          if (dayInput) {
+            dayInput.value = now.getDate();
+          }
+
+          if (monthInput) {
+            monthInput.value = thaiMonths[now.getMonth()];
+          }
+
+          if (yearInput) {
+            yearInput.value = now.getFullYear() + 543;
+          }
+
+          if (dailyLogModal) {
+            dailyLogModal.classList.add("open");
+
+            dailyLogModal.setAttribute("aria-hidden", "false");
+          }
+
+          document.body.style.overflow = "hidden";
+        };
+
+        const closeDailyLog = () => {
+          if (dailyLogModal) {
+            dailyLogModal.classList.remove("open");
+
+            dailyLogModal.setAttribute("aria-hidden", "true");
+          }
+
+          document.body.style.overflow = "";
+        };
+
+        // เปิดเขียนบันทึก
+
+        document
+          .getElementById("btnWriteDaily")
+          ?.addEventListener("click", openDailyLog);
+
+        // =========================================================
+        // บันทึก Daily Log
+        // =========================================================
+
+        document
+          .getElementById("btnSaveDaily")
+          ?.addEventListener("click", () => {
+            const day = document.getElementById("dailyDay")?.value.trim() || "";
+
+            const month =
+              document.getElementById("dailyMonth")?.value.trim() || "";
+
+            const year =
+              document.getElementById("dailyYear")?.value.trim() || "";
+
+            const assigned =
+              document.getElementById("dailyAssigned")?.value.trim() || "";
+
+            const result =
+              document.getElementById("dailyResult")?.value.trim() || "";
+
+            // ตรวจสอบข้อมูล
+
+            if (!day || !month || !year || !assigned || !result) {
+              alert(
+                "กรุณากรอก วันที่ เดือน พ.ศ. งานที่ได้รับมอบหมาย และผลการปฏิบัติงานให้ครบ",
+              );
+
+              return;
+            }
+
+            const tbody = document.getElementById("dailyLogTableBody");
+
+            const row = document.createElement("tr");
+
+            const dateText = `${day} ${month} ${year}`;
+
+            const safeWork =
+              assigned.length > 80
+                ? assigned.substring(0, 80) + "..."
+                : assigned;
+
+            row.innerHTML = `
+
+          <td>
+            ${dateText}
+          </td>
+
+          <td>
+            ${safeWork}
+          </td>
+
+          <td>
+            <span class="tag tag-red">
+              รอตรวจ
+            </span>
+          </td>
+
+          <td>
+
+            <button
+              type="button"
+              class="
+                btn-mock-sm
+                daily-view-btn
+              "
+            >
+              ดู
+            </button>
+
+            <button
+              type="button"
+              class="
+                btn-mock-sm
+                daily-delete-btn
+              "
+            >
+              ลบ
+            </button>
+
+          </td>
+
+        `;
+
+            if (tbody) {
+              tbody.insertBefore(row, tbody.firstElementChild);
+            }
+
+            // ดูรายละเอียด
+
+            row
+              .querySelector(".daily-view-btn")
+              ?.addEventListener("click", () => {
+                const problem =
+                  document.getElementById("dailyProblem")?.value.trim() || "-";
+
+                const solution =
+                  document.getElementById("dailySolution")?.value.trim() || "-";
+
+                const note =
+                  document.getElementById("dailyNote")?.value.trim() || "-";
+
+                alert(
+                  `วันที่ ${dateText}
+
+งานที่ได้รับมอบหมาย:
+${assigned}
+
+ผลการปฏิบัติงาน:
+${result}
+
+ปัญหาและอุปสรรค:
+${problem}
+
+การแก้ไข:
+${solution}
+
+หมายเหตุ:
+${note}`,
+                );
+              });
+
+            // ลบบันทึก
+
+            row
+              .querySelector(".daily-delete-btn")
+              ?.addEventListener("click", () => {
+                const ok = confirm(
+                  "ต้องการลบบันทึกประจำวันที่ " + dateText + " หรือไม่?",
+                );
+
+                if (ok) {
+                  row.remove();
+                }
+              });
+
+            alert("บันทึกการปฏิบัติงานเรียบร้อยแล้ว (Mockup)");
+
+            closeDailyLog();
+          });
+
+        // คลิกนอก Daily Modal
+
+        dailyLogModal?.addEventListener("click", (e) => {
+          if (e.target === dailyLogModal) {
+            closeDailyLog();
+          }
+        });
+
+        // =========================================================
+        // ส่งบันทึกประจำสัปดาห์
+        // =========================================================
+
+        document
+          .getElementById("btnSubmitWeekly")
+          ?.addEventListener("click", () => {
+            const mentorFirst =
+              document.getElementById("mentorFirstName")?.textContent.trim() ||
+              "";
+
+            const mentorLast =
+              document.getElementById("mentorLastName")?.textContent.trim() ||
+              "";
+
+            if (
+              mentorFirst === "-" ||
+              mentorLast === "-" ||
+              !mentorFirst ||
+              !mentorLast
+            ) {
+              alert("ยังไม่มีข้อมูลพี่เลี้ยง กรุณาเพิ่มข้อมูลพี่เลี้ยงก่อน");
+              // window.location.href = "mentor_coop.html"; // (หากต้องการให้ย้ายไปหน้าพี่เลี้ยงทันทีเมื่อยังไม่มีข้อมูล สามารถเอา // ออกได้ครับ)
+              return;
+            }
+
+            const ok = confirm(
+              `ต้องการส่งบันทึกประจำสัปดาห์ให้ คุณ${mentorFirst} ${mentorLast} ตรวจใช่หรือไม่?`,
+            );
+
+            if (ok) {
+              alert("ส่งบันทึกประจำสัปดาห์ให้พี่เลี้ยงเรียบร้อยแล้ว (Mockup)");
+              window.location.href = "mentor_coop.html"; // เปลี่ยนหน้าไปยัง mentor_coop.html
+            }
+          });
+
+        // =========================================================
+        // ระบบข้อมูลพี่เลี้ยง
+        // =========================================================
+
+        const mentorModal = document.getElementById("mentorModal");
+
+        // ใช้สำหรับตรวจว่า
+        // ตอนนี้กำลังเพิ่ม หรือ แก้ไข
+
+        let mentorMode = "add";
+
+        // =========================================================
+        // ฟังก์ชันนำข้อมูลเดิมใส่ลง Form
+        // =========================================================
+
+        const fillMentorForm = () => {
+          const email = document.getElementById("mentorEmail");
+
+          const firstName = document.getElementById("mentorFirstName");
+
+          const lastName = document.getElementById("mentorLastName");
+
+          const position = document.getElementById("mentorPosition");
+
+          const emailInput = document.getElementById("mentorEmailInput");
+
+          const firstInput = document.getElementById("mentorFirstNameInput");
+
+          const lastInput = document.getElementById("mentorLastNameInput");
+
+          const positionInput = document.getElementById("mentorPositionInput");
+
+          if (emailInput) {
+            emailInput.value = email?.textContent.trim() || "";
+          }
+
+          if (firstInput) {
+            firstInput.value = firstName?.textContent.trim() || "";
+          }
+
+          if (lastInput) {
+            lastInput.value = lastName?.textContent.trim() || "";
+          }
+
+          if (positionInput) {
+            positionInput.value = position?.textContent.trim() || "";
+          }
+        };
+
+        // =========================================================
+        // เพิ่มข้อมูลพี่เลี้ยง
+        // =========================================================
+
+        document
+          .getElementById("btnAddMentor")
+          ?.addEventListener("click", () => {
+            mentorMode = "add";
+
+            const title = document.getElementById("mentorModalTitle");
+
+            if (title) {
+              title.textContent = "เพิ่มข้อมูลพี่เลี้ยง";
+            }
+
+            // ล้าง Form
+
+            const emailInput = document.getElementById("mentorEmailInput");
+
+            const firstInput = document.getElementById("mentorFirstNameInput");
+
+            const lastInput = document.getElementById("mentorLastNameInput");
+
+            const positionInput = document.getElementById(
+              "mentorPositionInput",
+            );
+
+            if (emailInput) {
+              emailInput.value = "";
+            }
+
+            if (firstInput) {
+              firstInput.value = "";
+            }
+
+            if (lastInput) {
+              lastInput.value = "";
+            }
+
+            if (positionInput) {
+              positionInput.value = "";
+            }
+
+            openModal("mentorModal");
+          });
+
+        // =========================================================
+        // แก้ไขข้อมูลพี่เลี้ยง
+        // =========================================================
+
+        document
+          .getElementById("btnEditMentor")
+          ?.addEventListener("click", () => {
+            const first = document
+              .getElementById("mentorFirstName")
+              ?.textContent.trim();
+
+            // ถ้าไม่มีข้อมูล
+
+            if (!first || first === "-") {
+              alert("ยังไม่มีข้อมูลพี่เลี้ยง กรุณาเพิ่มข้อมูลพี่เลี้ยงก่อน");
+
+              return;
+            }
+
+            mentorMode = "edit";
+
+            const title = document.getElementById("mentorModalTitle");
+
+            if (title) {
+              title.textContent = "แก้ไขข้อมูลพี่เลี้ยง";
+            }
+
+            fillMentorForm();
+
+            openModal("mentorModal");
+          });
+
+        // =========================================================
+        // บันทึกข้อมูลพี่เลี้ยง
+        // =========================================================
+
+        document
+          .getElementById("btnSaveMentor")
+          ?.addEventListener("click", () => {
+            const email =
+              document.getElementById("mentorEmailInput")?.value.trim() || "";
+
+            const first =
+              document.getElementById("mentorFirstNameInput")?.value.trim() ||
+              "";
+
+            const last =
+              document.getElementById("mentorLastNameInput")?.value.trim() ||
+              "";
+
+            const position =
+              document.getElementById("mentorPositionInput")?.value.trim() ||
+              "";
+
+            // ตรวจสอบว่ากรอกครบหรือไม่
+
+            if (!email || !first || !last || !position) {
+              alert("กรุณากรอกข้อมูลพี่เลี้ยงให้ครบทุกช่อง");
+
+              return;
+            }
+
+            // ตรวจ Email เบื้องต้น
+
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailPattern.test(email)) {
+              alert("กรุณากรอก Email ให้ถูกต้อง");
+
+              return;
+            }
+
+            // ใส่ข้อมูลลงหน้า
+
+            const mentorEmail = document.getElementById("mentorEmail");
+
+            const mentorFirst = document.getElementById("mentorFirstName");
+
+            const mentorLast = document.getElementById("mentorLastName");
+
+            const mentorPosition = document.getElementById("mentorPosition");
+
+            if (mentorEmail) {
+              mentorEmail.textContent = email;
+            }
+
+            if (mentorFirst) {
+              mentorFirst.textContent = first;
+            }
+
+            if (mentorLast) {
+              mentorLast.textContent = last;
+            }
+
+            if (mentorPosition) {
+              mentorPosition.textContent = position;
+            }
+
+            // ปิด modal
+
+            closeModal("mentorModal");
+
+            // ===========================================
+            // ถ้าเป็นการเพิ่ม
+            // ===========================================
+
+            if (mentorMode === "add") {
+              alert(
+                `ส่งข้อมูลพี่เลี้ยงเรียบร้อยแล้ว
+
+กรุณารอการยืนยันข้อมูลจากพี่เลี้ยง`,
+              );
+            }
+
+            // ===========================================
+            // ถ้าเป็นการแก้ไข
+            // ===========================================
+            else {
+              alert("แก้ไขข้อมูลพี่เลี้ยงเรียบร้อยแล้ว");
+            }
+          });
+
+        // =========================================================
+        // สำหรับสหกิจ - Mockup
+        // =========================================================
+
+        const coopAdvisorSelect = document.getElementById("coopAdvisorSelect");
+
+        const coopAdvisorConfirmName = document.getElementById(
+          "coopAdvisorConfirmName",
+        );
+
+        const coopAdvisorAckStatus = document.getElementById(
+          "coopAdvisorAckStatus",
+        );
+
+        const btnAcknowledgeCoopAdvisor = document.getElementById(
+          "btnAcknowledgeCoopAdvisor",
+        );
+
+        document
+          .getElementById("btnSaveCoopAdvisor")
+          ?.addEventListener("click", () => {
+            const advisorName = coopAdvisorSelect?.value || "";
+
+            if (!advisorName) {
+              alert("กรุณาเลือกอาจารย์ที่ปรึกษาโครงการ");
+              return;
+            }
+
+            if (coopAdvisorConfirmName) {
+              coopAdvisorConfirmName.textContent = advisorName;
+            }
+
+            if (coopAdvisorAckStatus) {
+              coopAdvisorAckStatus.textContent = "ยังไม่รับทราบ";
+              coopAdvisorAckStatus.classList.remove("tag-green");
+              coopAdvisorAckStatus.classList.add("tag-red");
+            }
+
+            if (btnAcknowledgeCoopAdvisor) {
+              btnAcknowledgeCoopAdvisor.disabled = false;
+              btnAcknowledgeCoopAdvisor.style.opacity = "1";
+              btnAcknowledgeCoopAdvisor.style.cursor = "pointer";
+            }
+
+            alert("บันทึกอาจารย์ที่ปรึกษาโครงการเรียบร้อยแล้ว (Mockup)");
+          });
+
+        btnAcknowledgeCoopAdvisor?.addEventListener("click", () => {
+          if (coopAdvisorAckStatus) {
+            coopAdvisorAckStatus.textContent = "รับทราบแล้ว";
+            coopAdvisorAckStatus.classList.remove("tag-red");
+            coopAdvisorAckStatus.classList.add("tag-green");
+          }
+
+          if (btnAcknowledgeCoopAdvisor) {
+            btnAcknowledgeCoopAdvisor.disabled = true;
+            btnAcknowledgeCoopAdvisor.style.opacity = "0.65";
+            btnAcknowledgeCoopAdvisor.style.cursor = "not-allowed";
+          }
+
+          alert("รับทราบข้อมูลอาจารย์ที่ปรึกษาโครงการเรียบร้อยแล้ว (Mockup)");
+        });
+
+        const coopProjectTitle = document.getElementById("coopProjectTitle");
+
+        const coopProjectTitleDisplay = document.getElementById(
+          "coopProjectTitleDisplay",
+        );
+
+        document
+          .getElementById("btnSaveCoopProjectTitle")
+          ?.addEventListener("click", () => {
+            const title = coopProjectTitle?.value.trim() || "";
+
+            if (!title) {
+              alert("กรุณากรอกชื่อหัวข้อโครงการ");
+              return;
+            }
+
+            if (coopProjectTitleDisplay) {
+              coopProjectTitleDisplay.textContent = title;
+            }
+
+            if (coopProjectTitle) {
+              coopProjectTitle.readOnly = true;
+              coopProjectTitle.style.background = "#f8fafc";
+            }
+
+            alert("บันทึกหัวข้อโครงการเรียบร้อยแล้ว (Mockup)");
+          });
+
+        document
+          .getElementById("btnEditCoopProjectTitle")
+          ?.addEventListener("click", () => {
+            if (coopProjectTitle) {
+              coopProjectTitle.readOnly = false;
+              coopProjectTitle.style.background = "#fff";
+              coopProjectTitle.focus();
+              coopProjectTitle.select();
+            }
+          });
+
+        // =========================================================
+        // ลบข้อมูลพี่เลี้ยง
+        // =========================================================
+
+        document
+          .getElementById("btnDeleteMentor")
+          ?.addEventListener("click", () => {
+            const first = document
+              .getElementById("mentorFirstName")
+              ?.textContent.trim();
+
+            // ไม่มีข้อมูลให้ลบ
+
+            if (!first || first === "-") {
+              alert("ไม่มีข้อมูลพี่เลี้ยงให้ลบ");
+
+              return;
+            }
+
+            const confirmDelete = confirm(
+              "คุณต้องการลบข้อมูลพี่เลี้ยงใช่หรือไม่?",
+            );
+
+            if (!confirmDelete) {
+              return;
+            }
+
+            // เปลี่ยนข้อมูลเป็น -
+
+            const mentorEmail = document.getElementById("mentorEmail");
+
+            const mentorFirst = document.getElementById("mentorFirstName");
+
+            const mentorLast = document.getElementById("mentorLastName");
+
+            const mentorPosition = document.getElementById("mentorPosition");
+
+            if (mentorEmail) {
+              mentorEmail.textContent = "-";
+            }
+
+            if (mentorFirst) {
+              mentorFirst.textContent = "-";
+            }
+
+            if (mentorLast) {
+              mentorLast.textContent = "-";
+            }
+
+            if (mentorPosition) {
+              mentorPosition.textContent = "-";
+            }
+
+            alert("ลบข้อมูลพี่เลี้ยงเรียบร้อยแล้ว");
+          });
+      });
+      // =========================================================
+      // แก้ไขอาจารย์ที่ปรึกษา
+      // =========================================================
+
+      const profileAdvisorName = document.getElementById("profileAdvisorName");
+
+      const profileAdvisorSelect = document.getElementById(
+        "profileAdvisorSelect",
+      );
+
+      const btnEditAdvisor = document.getElementById("btnEditAdvisor");
+
+      const btnSaveAdvisor = document.getElementById("btnSaveAdvisor");
+
+      const btnCancelAdvisor = document.getElementById("btnCancelAdvisor");
+
+      let originalAdvisor = profileAdvisorName?.textContent.trim() || "";
+
+      /* =========================
+   กดแก้ไข
+   ========================= */
+
+      btnEditAdvisor?.addEventListener("click", () => {
+        if (!profileAdvisorName || !profileAdvisorSelect) {
+          return;
+        }
+
+        originalAdvisor = profileAdvisorName.textContent.trim();
+
+        profileAdvisorSelect.value = originalAdvisor;
+
+        profileAdvisorName.style.display = "none";
+        profileAdvisorSelect.style.display = "block";
+
+        btnEditAdvisor.style.display = "none";
+        btnSaveAdvisor.style.display = "inline-flex";
+        btnCancelAdvisor.style.display = "inline-flex";
+      });
+
+      /* =========================
+   บันทึก
+   ========================= */
+
+      btnSaveAdvisor?.addEventListener("click", () => {
+        if (!profileAdvisorName || !profileAdvisorSelect) {
+          return;
+        }
+
+        const advisorName = profileAdvisorSelect.value;
+
+        if (!advisorName) {
+          alert("กรุณาเลือกอาจารย์ที่ปรึกษา");
+          return;
+        }
+
+        profileAdvisorName.textContent = advisorName;
+
+        profileAdvisorName.style.display = "block";
+        profileAdvisorSelect.style.display = "none";
+
+        btnEditAdvisor.style.display = "inline-flex";
+        btnSaveAdvisor.style.display = "none";
+        btnCancelAdvisor.style.display = "none";
+
+        alert("แก้ไขอาจารย์ที่ปรึกษาเรียบร้อยแล้ว (Mockup)");
+      });
+
+      /* =========================
+   ยกเลิก
+   ========================= */
+
+      btnCancelAdvisor?.addEventListener("click", () => {
+        if (!profileAdvisorName || !profileAdvisorSelect) {
+          return;
+        }
+
+        profileAdvisorSelect.value = originalAdvisor;
+
+        profileAdvisorName.style.display = "block";
+        profileAdvisorSelect.style.display = "none";
+
+        btnEditAdvisor.style.display = "inline-flex";
+        btnSaveAdvisor.style.display = "none";
+        btnCancelAdvisor.style.display = "none";
+      });
+    </script>
+  </body>
+</html>

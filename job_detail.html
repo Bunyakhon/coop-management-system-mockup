@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>รายละเอียดตำแหน่งงาน - ระบบการจัดการนักศึกษาฝึกงานและสหกิจศึกษา</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@500;600;700&family=Noto+Sans+Thai:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .job-detail-container {
+      background: var(--white);
+      padding: 3rem;
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      margin-bottom: 2rem;
+    }
+    .detail-header {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 2rem;
+    }
+    .detail-logo {
+      width: 80px;
+      height: 80px;
+      background-color: var(--bg-light);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: var(--primary-color);
+    }
+    .detail-info h1 {
+      font-size: 1.8rem;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+    .detail-info p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .grid-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      background-color: #f8fafc;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+    }
+    .info-item span {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+    }
+    .info-item strong {
+      font-size: 1.05rem;
+      color: var(--text-dark);
+    }
+    .job-description {
+      line-height: 1.7;
+      color: var(--text-dark);
+      margin-bottom: 2.5rem;
+    }
+    .action-bar {
+      display: flex;
+      gap: 15px;
+    }
+    .btn-back {
+      background: var(--white);
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+      padding: 12px 24px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .btn-back:hover {
+      background: var(--bg-light);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand">
+        <div class="brand-mark">IT</div>
+        <span>ระบบฝึกงานและสหกิจศึกษา</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">หน้าแรก</a></li>
+        <li class="active"><a href="search_company.html">ค้นหาสถานประกอบการ</a></li>
+        <li><a href="#">คู่มือ</a></li>
+        <li><a href="#" id="navChatbotBtn">แชทบอท</a></li>
+      </ul>
+      <div class="auth-buttons">
+        <a href="login.html" class="btn-login">เข้าสู่ระบบ</a>
+        <a href="register.html" class="btn-register">สมัครสมาชิก</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content" style="max-width: 900px; margin: 3rem auto;">
+    
+    <div class="job-detail-container" id="jobDetailContent">
+      <!-- ข้อมูลจะถูกนำมาแสดงตรงนี้ผ่าน JS -->
+      <div style="text-align: center; padding: 3rem; color: var(--text-muted);">
+        กำลังโหลดข้อมูล...
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-copyright">
+      <p>© KIWI — Co-operative Education Management System</p>
+    </div>
+  </footer>
+
+  <script type="module" src="main.js"></script>
+
+  <!-- Script สำหรับดึงข้อมูลมาแสดง -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('jobDetailContent');
+      // ดึงข้อมูลที่เก็บไว้ตอนคลิกการ์ด
+      const jobData = JSON.parse(localStorage.getItem('currentViewJob'));
+
+      if (!jobData) {
+        container.innerHTML = `
+          <div style="text-align: center; color: red;">
+            <h3>ไม่พบข้อมูลตำแหน่งงาน</h3>
+            <p>กรุณากลับไปเลือกตำแหน่งงานอีกครั้ง</p>
+            <button class="btn-back" onclick="window.location.href='search_company.html'" style="margin-top: 1rem;">กลับไปหน้าค้นหา</button>
+          </div>
+        `;
+        return;
+      }
+
+      // นำ Tags มาสร้างเป็น HTML
+      const tagsHTML = jobData.tags.map(t => `<span class="tag ${t === 'ฝึกงาน' ? 'tag-green' : (t === 'Work from Home' ? 'tag-dark' : 'tag-red')}">${t}</span>`).join('');
+
+      // สร้างหน้าตาของรายละเอียด
+      container.innerHTML = `
+        <div class="detail-header">
+          <div class="detail-logo">
+            <i class="${jobData.icon || 'fa-solid fa-building'}"></i>
+          </div>
+          <div class="detail-info">
+            <h1>${jobData.title}</h1>
+            <p><i class="fa-solid fa-circle-check" style="color: #00cca3;"></i> <strong>${jobData.company}</strong></p>
+            <p><i class="fa-solid fa-location-dot"></i> ${jobData.location}</p>
+            <div style="display: flex; gap: 8px; margin-top: 10px;">
+              ${tagsHTML}
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-info">
+          <div class="info-item">
+            <span>หมวดหมู่งาน</span>
+            <strong>${jobData.category}</strong>
+          </div>
+          <div class="info-item">
+            <span>จำนวนรับสมัคร</span>
+            <strong>${jobData.quota}</strong>
+          </div>
+          <div class="info-item">
+            <span>เบี้ยเลี้ยง / ค่าตอบแทน</span>
+            <strong style="color: #059669;">${jobData.salary}</strong>
+          </div>
+          <div class="info-item">
+            <span>เวลาลงประกาศ</span>
+            <strong>${jobData.time || 'ไม่ระบุ'}</strong>
+          </div>
+          ${jobData.workDays ? `
+          <div class="info-item">
+            <span>จำนวนวันการทำงาน</span>
+            <strong>${jobData.workDays}</strong>
+          </div>` : ''}
+        </div>
+
+        <div class="job-description">
+          <h3>รายละเอียดและคุณสมบัติ (Mockup Data)</h3>
+          <ul style="margin-top: 10px; padding-left: 20px; color: var(--text-muted);">
+            <li style="margin-bottom: 8px;">กำลังศึกษาอยู่ระดับชั้น ปวส. หรือ ปริญญาตรี ในสาขาที่เกี่ยวข้อง</li>
+            <li style="margin-bottom: 8px;">มีความรับผิดชอบ กระตือรือร้น และพร้อมเรียนรู้สิ่งใหม่ๆ</li>
+            <li style="margin-bottom: 8px;">สามารถทำงานเป็นทีม และสื่อสารได้อย่างมีประสิทธิภาพ</li>
+            <li style="margin-bottom: 8px;">หากมีผลงาน (Portfolio) แนบมาด้วยจะได้รับการพิจารณาเป็นพิเศษ</li>
+          </ul>
+        </div>
+
+        <div class="action-bar">
+          <button class="btn-submit" style="padding: 14px 28px; font-size: 1.05rem;" onclick="applyJob()">
+            <i class="fa-solid fa-paper-plane"></i> ยื่นคำร้องขอฝึกงาน
+          </button>
+          <button class="btn-back" onclick="window.history.back()">
+            กลับหน้ารายการ
+          </button>
+        </div>
+      `;
+    });
+
+    // ฟังก์ชันจำลองการกดปุ่มยื่นคำร้อง
+    function applyJob() {
+      // ตรวจสอบว่านักศึกษาล็อกอินหรือยังผ่านตัวแปรใน localStorage ของเรา
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      
+      if (!currentUser) {
+        alert("กรุณาเข้าสู่ระบบในสิทธิ์ 'นักศึกษา' ก่อนยื่นคำร้องขอฝึกงาน");
+        window.location.href = 'login.html';
+        return;
+      }
+
+      if (currentUser.role !== 'student') {
+        alert("ขออภัย บัญชีของคุณไม่ใช่สิทธิ์นักศึกษา ไม่สามารถยื่นคำร้องได้");
+        return;
+      }
+
+      alert("🎉 ยื่นคำร้องขอฝึกงานสำเร็จ! สามารถติดตามสถานะได้ที่หน้า Dashboard นักศึกษา");
+      window.location.href = 'student.html';
+    }
+  </script>
+</body>
+</html>
