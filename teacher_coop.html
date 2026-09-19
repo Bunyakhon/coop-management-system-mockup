@@ -1,5 +1,4 @@
 <!doctype html>
-
 <html lang="th">
   <head>
     <meta charset="UTF-8" />
@@ -19,7 +18,682 @@
        ส่วนเสริมเฉพาะหน้าอาจารย์นิเทศ — สอดคล้องกับ
        ธีมสีและ component เดิมใน style.css
        ========================================== */
+      /* =========================================================
+   VISIT MODAL
+   บันทึกผลนิเทศ
+========================================================= */
 
+      .visit-modal {
+        display: none;
+
+        position: fixed;
+
+        inset: 0;
+
+        z-index: 10000;
+
+        align-items: center;
+        justify-content: center;
+
+        padding: 20px;
+
+        background: rgba(15, 23, 42, 0.55);
+
+        backdrop-filter: blur(2px);
+      }
+
+      .visit-modal.show {
+        display: flex;
+      }
+
+      /* =========================================================
+   MODAL CARD
+========================================================= */
+
+      .visit-modal-card {
+        width: min(720px, 100%);
+
+        max-height: 92vh;
+
+        display: flex;
+        flex-direction: column;
+
+        overflow: hidden;
+
+        background: #ffffff;
+
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+
+        box-shadow: 0 24px 70px rgba(15, 23, 42, 0.25);
+      }
+
+      /* =========================================================
+   HEADER
+========================================================= */
+
+      .visit-modal-header {
+        display: flex;
+
+        align-items: flex-start;
+        justify-content: space-between;
+
+        gap: 16px;
+
+        flex-shrink: 0;
+
+        padding: 18px 22px;
+
+        background: #ffffff;
+
+        border-bottom: 1px solid #e5e7eb;
+      }
+
+      .visit-modal-title {
+        display: flex;
+
+        align-items: center;
+
+        gap: 12px;
+      }
+
+      .visit-modal-title-icon {
+        width: 42px;
+        height: 42px;
+
+        flex-shrink: 0;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        background: #eaf3ff;
+
+        color: #1757a6;
+
+        border-radius: 11px;
+
+        font-size: 1rem;
+      }
+
+      .visit-modal-title h3 {
+        margin: 0;
+
+        color: #172033;
+
+        font-family: "Sarabun", sans-serif;
+
+        font-size: 1.05rem;
+        font-weight: 700;
+      }
+
+      .visit-modal-title p {
+        margin: 4px 0 0;
+
+        color: #64748b;
+
+        font-size: 0.76rem;
+
+        line-height: 1.5;
+      }
+
+      /* ปุ่มปิด */
+
+      .visit-modal-close {
+        width: 34px;
+        height: 34px;
+
+        flex-shrink: 0;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        padding: 0;
+
+        background: transparent;
+
+        border: 0;
+        border-radius: 8px;
+
+        color: #64748b;
+
+        font-size: 26px;
+
+        line-height: 1;
+
+        cursor: pointer;
+
+        transition:
+          background-color 0.2s ease,
+          color 0.2s ease;
+      }
+
+      .visit-modal-close:hover {
+        background: #f1f5f9;
+
+        color: #172033;
+      }
+
+      /* =========================================================
+   BODY
+========================================================= */
+
+      .visit-modal-body {
+        flex: 1;
+
+        overflow-y: auto;
+
+        padding: 22px;
+      }
+
+      .visit-modal-body::-webkit-scrollbar {
+        width: 7px;
+      }
+
+      .visit-modal-body::-webkit-scrollbar-track {
+        background: #f1f5f9;
+      }
+
+      .visit-modal-body::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+
+        border-radius: 999px;
+      }
+
+      /* =========================================================
+   STUDENT INFO
+========================================================= */
+
+      .visit-student-info-box {
+        display: flex;
+
+        align-items: flex-start;
+
+        gap: 13px;
+
+        margin-bottom: 20px;
+
+        padding: 15px;
+
+        background: linear-gradient(135deg, #f8fbff 0%, #f3f8ff 100%);
+
+        border: 1px solid #dce8f5;
+        border-radius: 13px;
+      }
+
+      .visit-student-info-icon {
+        width: 42px;
+        height: 42px;
+
+        flex-shrink: 0;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        background: #eaf3ff;
+
+        color: #1757a6;
+
+        border-radius: 11px;
+      }
+
+      .visit-student-info-content {
+        flex: 1;
+
+        display: grid;
+
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 10px 18px;
+      }
+
+      .visit-info-row {
+        min-width: 0;
+      }
+
+      .visit-info-row.full {
+        grid-column: 1 / -1;
+      }
+
+      .visit-info-row span {
+        display: block;
+
+        margin-bottom: 3px;
+
+        color: #64748b;
+
+        font-size: 0.68rem;
+      }
+
+      .visit-info-row strong {
+        display: block;
+
+        color: #172033;
+
+        font-size: 0.8rem;
+
+        line-height: 1.45;
+
+        word-break: break-word;
+      }
+
+      /* =========================================================
+   FORM GRID
+========================================================= */
+
+      .visit-form-grid {
+        display: grid;
+
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 16px;
+      }
+
+      .visit-field {
+        min-width: 0;
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 7px;
+      }
+
+      .visit-field.full {
+        grid-column: 1 / -1;
+      }
+
+      .visit-field label {
+        color: #334155;
+
+        font-size: 0.8rem;
+        font-weight: 700;
+      }
+
+      .visit-required {
+        color: #dc2626;
+      }
+
+      /* =========================================================
+   INPUT
+========================================================= */
+
+      .visit-field input,
+      .visit-field select,
+      .visit-field textarea {
+        width: 100%;
+
+        min-height: 43px;
+
+        box-sizing: border-box;
+
+        padding: 9px 11px;
+
+        background: #ffffff;
+
+        border: 1px solid #cbd5e1;
+        border-radius: 9px;
+
+        color: #172033;
+
+        font-family: "Noto Sans Thai", sans-serif;
+        font-size: 0.8rem;
+
+        outline: none;
+
+        transition:
+          border-color 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .visit-field input:focus,
+      .visit-field select:focus,
+      .visit-field textarea:focus {
+        border-color: #1757a6;
+
+        box-shadow: 0 0 0 3px rgba(23, 87, 166, 0.08);
+      }
+
+      .visit-field input[readonly] {
+        background: #f8fafc;
+
+        color: #475569;
+
+        cursor: default;
+      }
+
+      /* =========================================================
+   READONLY WITH ICON
+========================================================= */
+
+      .visit-readonly-wrap {
+        position: relative;
+      }
+
+      .visit-readonly-wrap > i {
+        position: absolute;
+
+        left: 13px;
+        top: 50%;
+
+        transform: translateY(-50%);
+
+        color: #64748b;
+
+        pointer-events: none;
+      }
+
+      .visit-readonly-wrap input {
+        padding-left: 38px;
+      }
+
+      /* =========================================================
+   UPLOAD
+========================================================= */
+
+      .visit-upload-box {
+        display: flex;
+
+        align-items: center;
+
+        gap: 14px;
+
+        padding: 16px;
+
+        background: #f8fafc;
+
+        border: 1px dashed #b8c7d9;
+        border-radius: 12px;
+
+        transition:
+          background-color 0.2s ease,
+          border-color 0.2s ease;
+      }
+
+      .visit-upload-box:hover {
+        background: #f5f9ff;
+
+        border-color: #8eb0d8;
+      }
+
+      .visit-upload-icon {
+        width: 48px;
+        height: 48px;
+
+        flex-shrink: 0;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        background: #eaf3ff;
+
+        color: #1757a6;
+
+        border-radius: 12px;
+
+        font-size: 1.15rem;
+      }
+
+      .visit-upload-content {
+        min-width: 0;
+
+        flex: 1;
+      }
+
+      .visit-upload-content strong {
+        display: block;
+
+        margin-bottom: 2px;
+
+        color: #172033;
+
+        font-size: 0.82rem;
+      }
+
+      .visit-upload-content p {
+        margin: 0 0 8px;
+
+        color: #64748b;
+
+        font-size: 0.7rem;
+      }
+
+      .visit-upload-content input[type="file"] {
+        min-height: auto;
+
+        padding: 5px 0;
+
+        background: transparent;
+
+        border: 0;
+
+        border-radius: 0;
+
+        font-size: 0.74rem;
+
+        box-shadow: none;
+      }
+
+      /* ปุ่ม Choose Files */
+
+      .visit-upload-content input[type="file"]::file-selector-button {
+        margin-right: 10px;
+
+        padding: 7px 12px;
+
+        background: #ffffff;
+
+        border: 1px solid #1757a6;
+        border-radius: 7px;
+
+        color: #1757a6;
+
+        font-family: inherit;
+        font-size: 0.72rem;
+        font-weight: 600;
+
+        cursor: pointer;
+
+        transition:
+          background-color 0.2s ease,
+          color 0.2s ease;
+      }
+
+      .visit-upload-content input[type="file"]::file-selector-button:hover {
+        background: #1757a6;
+
+        color: #ffffff;
+      }
+
+      /* =========================================================
+   FILE STATUS
+========================================================= */
+
+      .visit-photo-file-status {
+        margin-top: 7px;
+
+        color: #64748b;
+
+        font-size: 0.7rem;
+      }
+
+      .visit-photo-file-status.success {
+        color: #16814b;
+
+        font-weight: 600;
+      }
+
+      .visit-photo-file-status.error {
+        color: #dc2626;
+
+        font-weight: 600;
+      }
+
+      /* =========================================================
+   HELP
+========================================================= */
+
+      .visit-help {
+        display: flex;
+
+        align-items: flex-start;
+
+        gap: 6px;
+
+        margin-top: 2px;
+
+        color: #64748b;
+
+        font-size: 0.69rem;
+
+        line-height: 1.5;
+      }
+
+      .visit-help i {
+        margin-top: 2px;
+
+        color: #1757a6;
+      }
+
+      /* =========================================================
+   FOOTER
+========================================================= */
+
+      .visit-modal-footer {
+        display: flex;
+
+        justify-content: flex-end;
+
+        gap: 9px;
+
+        flex-shrink: 0;
+
+        padding: 15px 22px;
+
+        background: #f8fafc;
+
+        border-top: 1px solid #e5e7eb;
+      }
+
+      /* =========================================================
+   BUTTON
+========================================================= */
+
+      .visit-modal-btn {
+        min-height: 39px;
+
+        display: inline-flex;
+
+        align-items: center;
+        justify-content: center;
+
+        gap: 7px;
+
+        padding: 8px 16px;
+
+        border-radius: 9px;
+
+        font-family: "Noto Sans Thai", sans-serif;
+
+        font-size: 0.78rem;
+        font-weight: 600;
+
+        cursor: pointer;
+
+        transition:
+          background-color 0.2s ease,
+          border-color 0.2s ease,
+          color 0.2s ease;
+      }
+
+      .visit-modal-btn.primary {
+        background: #1757a6;
+
+        color: #ffffff;
+
+        border: 1px solid #1757a6;
+      }
+
+      .visit-modal-btn.primary:hover {
+        background: #124b91;
+
+        border-color: #124b91;
+      }
+
+      .visit-modal-btn.secondary {
+        background: #ffffff;
+
+        color: #475569;
+
+        border: 1px solid #cbd5e1;
+      }
+
+      .visit-modal-btn.secondary:hover {
+        background: #f1f5f9;
+      }
+
+      /* =========================================================
+   Responsive
+========================================================= */
+
+      @media (max-width: 650px) {
+        .visit-modal {
+          padding: 10px;
+        }
+
+        .visit-modal-card {
+          max-height: 95vh;
+
+          border-radius: 14px;
+        }
+
+        .visit-modal-header,
+        .visit-modal-body,
+        .visit-modal-footer {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+
+        .visit-form-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .visit-field.full {
+          grid-column: auto;
+        }
+
+        .visit-student-info-content {
+          grid-template-columns: 1fr;
+        }
+
+        .visit-info-row.full {
+          grid-column: auto;
+        }
+
+        .visit-upload-box {
+          align-items: flex-start;
+        }
+
+        .visit-upload-icon {
+          width: 42px;
+          height: 42px;
+        }
+
+        .visit-modal-footer {
+          flex-direction: column-reverse;
+        }
+
+        .visit-modal-btn {
+          width: 100%;
+        }
+      }
       .brand-logo {
         width: 46px;
         height: 46px;
@@ -1989,458 +2663,1862 @@
    Company Evaluation
 ========================================== */
 
-.company-eval-card {
-  margin-top: 20px;
+      .company-eval-card {
+        margin-top: 20px;
 
-  background: #ffffff;
+        background: #ffffff;
 
-  border: 1px solid #e2e8f0;
-  border-radius: 18px;
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
 
-  overflow: hidden;
+        overflow: hidden;
 
-  box-shadow: 0 8px 28px rgba(15, 23, 42, 0.05);
-}
+        box-shadow: 0 8px 28px rgba(15, 23, 42, 0.05);
+      }
 
+      .company-eval-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
 
-.company-eval-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+        gap: 16px;
 
-  gap: 16px;
+        padding: 20px;
 
-  padding: 20px;
+        background: linear-gradient(135deg, #ffffff, #f8fbff);
 
-  background: linear-gradient(
-    135deg,
-    #ffffff,
-    #f8fbff
-  );
+        border-bottom: 1px solid #edf2f7;
+      }
 
-  border-bottom: 1px solid #edf2f7;
-}
+      .company-eval-company {
+        display: flex;
+        align-items: center;
 
+        gap: 13px;
+      }
 
-.company-eval-company {
-  display: flex;
-  align-items: center;
+      .company-eval-icon {
+        width: 48px;
+        height: 48px;
 
-  gap: 13px;
-}
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
+        border-radius: 13px;
 
-.company-eval-icon {
-  width: 48px;
-  height: 48px;
+        background: #eaf3ff;
+        color: #1757a6;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+        font-size: 1.1rem;
+      }
 
-  border-radius: 13px;
+      .company-eval-company h3 {
+        margin: 0;
 
-  background: #eaf3ff;
-  color: #1757a6;
+        color: #172033;
 
-  font-size: 1.1rem;
-}
+        font-family: "Sarabun", sans-serif;
+        font-size: 1rem;
+      }
 
+      .company-eval-company p {
+        margin: 5px 0 0;
 
-.company-eval-company h3 {
-  margin: 0;
+        color: #64748b;
 
-  color: #172033;
+        font-size: 0.76rem;
+      }
 
-  font-family: "Sarabun", sans-serif;
-  font-size: 1rem;
-}
+      .company-eval-status {
+        display: inline-flex;
+        align-items: center;
 
+        gap: 6px;
 
-.company-eval-company p {
-  margin: 5px 0 0;
+        padding: 7px 12px;
 
-  color: #64748b;
+        border-radius: 999px;
 
-  font-size: 0.76rem;
-}
+        font-size: 0.76rem;
+        font-weight: 700;
+      }
 
+      .company-eval-status.pending {
+        color: #9a6700;
+        background: #fff4d6;
+      }
 
-.company-eval-status {
-  display: inline-flex;
-  align-items: center;
+      .company-eval-status.done {
+        color: #16814b;
+        background: #eaf8ef;
+      }
 
-  gap: 6px;
+      /* นักศึกษา */
 
-  padding: 7px 12px;
+      .company-eval-student {
+        display: grid;
 
-  border-radius: 999px;
+        grid-template-columns:
+          auto
+          minmax(170px, 1fr)
+          minmax(160px, 1fr)
+          minmax(200px, 1fr);
 
-  font-size: 0.76rem;
-  font-weight: 700;
-}
+        gap: 18px;
 
+        align-items: center;
 
-.company-eval-status.pending {
-  color: #9a6700;
-  background: #fff4d6;
-}
+        padding: 18px 20px;
 
+        border-bottom: 1px solid #edf2f7;
+      }
 
-.company-eval-status.done {
-  color: #16814b;
-  background: #eaf8ef;
-}
+      .company-student-avatar {
+        width: 44px;
+        height: 44px;
 
+        border-radius: 50%;
 
-/* นักศึกษา */
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-.company-eval-student {
-  display: grid;
+        background: #edf4ff;
+        color: #1757a6;
 
-  grid-template-columns:
-    auto
-    minmax(170px, 1fr)
-    minmax(160px, 1fr)
-    minmax(200px, 1fr);
+        font-weight: 700;
+      }
 
-  gap: 18px;
+      .company-eval-student span {
+        display: block;
 
-  align-items: center;
+        margin-bottom: 4px;
 
-  padding: 18px 20px;
+        color: #64748b;
 
-  border-bottom: 1px solid #edf2f7;
-}
+        font-size: 0.72rem;
+      }
 
+      .company-eval-student strong {
+        display: block;
 
-.company-student-avatar {
-  width: 44px;
-  height: 44px;
+        color: #172033;
 
-  border-radius: 50%;
+        font-size: 0.86rem;
+      }
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+      .company-eval-student small {
+        display: block;
 
-  background: #edf4ff;
-  color: #1757a6;
+        margin-top: 3px;
 
-  font-weight: 700;
-}
+        color: #7c8ca1;
 
+        font-size: 0.72rem;
+      }
 
-.company-eval-student span {
-  display: block;
+      /* สรุปคะแนน */
 
-  margin-bottom: 4px;
+      .company-eval-summary {
+        display: grid;
 
-  color: #64748b;
+        grid-template-columns: 190px 1fr;
 
-  font-size: 0.72rem;
-}
+        gap: 18px;
 
+        padding: 20px;
+      }
 
-.company-eval-student strong {
-  display: block;
+      .company-score-box {
+        padding: 18px;
 
-  color: #172033;
+        text-align: center;
 
-  font-size: 0.86rem;
-}
+        background: #f8fbff;
 
+        border: 1px solid #e0ebf7;
+        border-radius: 14px;
+      }
 
-.company-eval-student small {
-  display: block;
+      .company-score-box span,
+      .company-score-box small {
+        display: block;
 
-  margin-top: 3px;
+        color: #64748b;
 
-  color: #7c8ca1;
+        font-size: 0.75rem;
+      }
 
-  font-size: 0.72rem;
-}
+      .company-score-box strong {
+        display: block;
 
+        margin: 7px 0;
 
-/* สรุปคะแนน */
+        color: #1757a6;
 
-.company-eval-summary {
-  display: grid;
+        font-size: 1.8rem;
+      }
 
-  grid-template-columns: 190px 1fr;
+      .company-score-detail {
+        display: grid;
 
-  gap: 18px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
 
-  padding: 20px;
-}
+        gap: 12px;
+      }
 
+      .company-score-detail > div {
+        padding: 14px;
 
-.company-score-box {
-  padding: 18px;
+        background: #f8fafc;
 
-  text-align: center;
+        border: 1px solid #e7edf4;
+        border-radius: 12px;
+      }
 
-  background: #f8fbff;
+      .company-score-detail span {
+        display: block;
 
-  border: 1px solid #e0ebf7;
-  border-radius: 14px;
-}
+        margin-bottom: 5px;
 
+        color: #64748b;
 
-.company-score-box span,
-.company-score-box small {
-  display: block;
+        font-size: 0.72rem;
+      }
 
-  color: #64748b;
+      .company-score-detail strong {
+        color: #172033;
 
-  font-size: 0.75rem;
-}
+        font-size: 0.86rem;
+      }
 
+      /* footer */
 
-.company-score-box strong {
-  display: block;
+      .company-eval-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
 
-  margin: 7px 0;
+        gap: 14px;
 
-  color: #1757a6;
+        padding: 15px 20px;
 
-  font-size: 1.8rem;
-}
+        background: #fbfdff;
 
+        border-top: 1px solid #edf2f7;
+      }
 
-.company-score-detail {
-  display: grid;
+      .company-eval-note {
+        color: #64748b;
 
-  grid-template-columns:
-    repeat(2, minmax(0, 1fr));
+        font-size: 0.76rem;
+      }
 
-  gap: 12px;
-}
+      /* ================= Modal ================= */
 
+      .company-evaluation-modal {
+        width: min(800px, 94vw);
+      }
 
-.company-score-detail > div {
-  padding: 14px;
+      .company-evaluation-info {
+        display: grid;
 
-  background: #f8fafc;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
 
-  border: 1px solid #e7edf4;
-  border-radius: 12px;
-}
+        gap: 10px;
 
+        margin-bottom: 18px;
+      }
 
-.company-score-detail span {
-  display: block;
+      .company-evaluation-info > div {
+        padding: 12px;
 
-  margin-bottom: 5px;
+        background: #f8fafc;
 
-  color: #64748b;
+        border: 1px solid #e5edf5;
+        border-radius: 10px;
+      }
 
-  font-size: 0.72rem;
-}
+      .company-evaluation-info span {
+        display: block;
 
+        margin-bottom: 4px;
 
-.company-score-detail strong {
-  color: #172033;
+        color: #64748b;
 
-  font-size: 0.86rem;
-}
+        font-size: 0.72rem;
+      }
 
+      .company-evaluation-info strong {
+        color: #172033;
 
-/* footer */
+        font-size: 0.82rem;
+      }
 
-.company-eval-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+      .company-evaluation-form {
+        display: grid;
+        gap: 10px;
+      }
 
-  gap: 14px;
+      .company-evaluation-item {
+        display: grid;
 
-  padding: 15px 20px;
+        grid-template-columns: 1fr 170px;
 
-  background: #fbfdff;
+        align-items: center;
 
-  border-top: 1px solid #edf2f7;
-}
+        gap: 16px;
 
+        padding: 13px 14px;
 
-.company-eval-note {
-  color: #64748b;
+        border: 1px solid #e5eaf0;
+        border-radius: 11px;
 
-  font-size: 0.76rem;
-}
+        background: #ffffff;
+      }
 
+      .company-evaluation-item strong {
+        display: block;
 
-/* ================= Modal ================= */
+        color: #172033;
 
-.company-evaluation-modal {
-  width: min(800px, 94vw);
-}
+        font-size: 0.84rem;
+      }
 
+      .company-evaluation-item span {
+        display: block;
 
-.company-evaluation-info {
-  display: grid;
+        margin-top: 4px;
 
-  grid-template-columns:
-    repeat(3, minmax(0, 1fr));
+        color: #64748b;
 
-  gap: 10px;
+        font-size: 0.74rem;
 
-  margin-bottom: 18px;
-}
+        line-height: 1.5;
+      }
 
+      .company-evaluation-item select {
+        width: 100%;
 
-.company-evaluation-info > div {
-  padding: 12px;
+        padding: 9px 10px;
 
-  background: #f8fafc;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
 
-  border: 1px solid #e5edf5;
-  border-radius: 10px;
-}
+        background: #fff;
 
+        font-family: inherit;
+      }
 
-.company-evaluation-info span {
-  display: block;
+      .company-comment-box {
+        display: flex;
+        flex-direction: column;
 
-  margin-bottom: 4px;
+        gap: 7px;
 
-  color: #64748b;
+        margin-top: 16px;
+      }
 
-  font-size: 0.72rem;
-}
+      .company-comment-box label {
+        color: #374151;
 
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
 
-.company-evaluation-info strong {
-  color: #172033;
+      .company-comment-box textarea {
+        padding: 10px 12px;
 
-  font-size: 0.82rem;
-}
+        border: 1px solid #cbd5e1;
+        border-radius: 9px;
 
+        resize: vertical;
 
-.company-evaluation-form {
-  display: grid;
-  gap: 10px;
-}
+        font-family: inherit;
+      }
 
+      @media (max-width: 800px) {
+        .company-eval-student {
+          grid-template-columns: auto 1fr;
+        }
 
-.company-evaluation-item {
-  display: grid;
+        .company-eval-summary {
+          grid-template-columns: 1fr;
+        }
 
-  grid-template-columns: 1fr 170px;
+        .company-evaluation-info {
+          grid-template-columns: 1fr;
+        }
+      }
 
-  align-items: center;
+      @media (max-width: 600px) {
+        .company-eval-header,
+        .company-eval-footer {
+          flex-direction: column;
+          align-items: stretch;
+        }
 
-  gap: 16px;
+        .company-score-detail {
+          grid-template-columns: 1fr;
+        }
 
-  padding: 13px 14px;
+        .company-evaluation-item {
+          grid-template-columns: 1fr;
+        }
+      }
+      /* =========================================================
+   PANEL SELECT
+   นักศึกษาที่ดูแล
+========================================================= */
 
-  border: 1px solid #e5eaf0;
-  border-radius: 11px;
+      #panel-select {
+        width: 100%;
+        max-width: 100%;
+      }
 
-  background: #ffffff;
-}
+      /* =========================================================
+   FILTER CARD
+========================================================= */
 
+      #panel-select .student-filter-card {
+        margin-top: 18px;
+        margin-bottom: 20px;
 
-.company-evaluation-item strong {
-  display: block;
+        padding: 20px;
 
-  color: #172033;
+        background: linear-gradient(135deg, #f8fbff 0%, #f1f7ff 100%);
 
-  font-size: 0.84rem;
-}
+        border: 1px solid #dbe7f4;
+        border-radius: 18px;
 
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+      }
 
-.company-evaluation-item span {
-  display: block;
+      #panel-select .student-filter-header {
+        margin-bottom: 18px;
+      }
 
-  margin-top: 4px;
+      #panel-select .student-filter-header h3 {
+        display: flex;
+        align-items: center;
 
-  color: #64748b;
+        gap: 8px;
 
-  font-size: 0.74rem;
+        margin: 0 0 6px;
 
-  line-height: 1.5;
-}
+        color: #172033;
 
+        font-family: "Sarabun", sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+      }
 
-.company-evaluation-item select {
-  width: 100%;
+      #panel-select .student-filter-header h3 i {
+        color: #1757a6;
+      }
 
-  padding: 9px 10px;
+      #panel-select .student-filter-header p {
+        margin: 0;
 
-  border: 1px solid #cbd5e1;
-  border-radius: 8px;
+        color: #64748b;
 
-  background: #fff;
+        font-size: 0.84rem;
+        line-height: 1.6;
+      }
 
-  font-family: inherit;
-}
+      /* =========================================================
+   FILTER GRID
+========================================================= */
 
+      #panel-select .student-filter-grid {
+        display: grid;
 
-.company-comment-box {
-  display: flex;
-  flex-direction: column;
+        grid-template-columns:
+          minmax(280px, 2fr)
+          minmax(170px, 0.8fr)
+          auto;
 
-  gap: 7px;
+        gap: 14px;
 
-  margin-top: 16px;
-}
+        align-items: end;
+      }
 
+      #panel-select .filter-field {
+        display: flex;
+        flex-direction: column;
 
-.company-comment-box label {
-  color: #374151;
+        gap: 8px;
+      }
 
-  font-size: 0.82rem;
-  font-weight: 700;
-}
+      #panel-select .filter-field label {
+        color: #334155;
 
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
 
-.company-comment-box textarea {
-  padding: 10px 12px;
+      #panel-select .filter-control {
+        position: relative;
+      }
 
-  border: 1px solid #cbd5e1;
-  border-radius: 9px;
+      #panel-select .filter-control > i {
+        position: absolute;
 
-  resize: vertical;
+        left: 14px;
+        top: 50%;
 
-  font-family: inherit;
-}
+        transform: translateY(-50%);
 
+        color: #718096;
 
-@media (max-width: 800px) {
+        font-size: 0.9rem;
 
-  .company-eval-student {
-    grid-template-columns: auto 1fr;
-  }
+        pointer-events: none;
+      }
 
-  .company-eval-summary {
-    grid-template-columns: 1fr;
-  }
+      #panel-select .filter-control input,
+      #panel-select .filter-control select {
+        width: 100%;
+        height: 44px;
 
-  .company-evaluation-info {
-    grid-template-columns: 1fr;
-  }
+        box-sizing: border-box;
 
-}
+        padding: 0 14px 0 42px;
 
+        background: #ffffff;
 
-@media (max-width: 600px) {
+        border: 1px solid #cfdbe8;
+        border-radius: 11px;
 
-  .company-eval-header,
-  .company-eval-footer {
-    flex-direction: column;
-    align-items: stretch;
-  }
+        color: #172033;
 
-  .company-score-detail {
-    grid-template-columns: 1fr;
-  }
+        font-family: "Noto Sans Thai", sans-serif;
+        font-size: 0.84rem;
 
-  .company-evaluation-item {
-    grid-template-columns: 1fr;
-  }
+        outline: none;
 
-}
+        transition:
+          border-color 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      #panel-select .filter-control input::placeholder {
+        color: #94a3b8;
+      }
+
+      #panel-select .filter-control input:focus,
+      #panel-select .filter-control select:focus {
+        border-color: #1757a6;
+
+        box-shadow: 0 0 0 4px rgba(23, 87, 166, 0.08);
+      }
+
+      /* =========================================================
+   FILTER BUTTON
+========================================================= */
+
+      #panel-select .filter-button-group {
+        display: flex;
+
+        align-items: center;
+
+        gap: 8px;
+      }
+
+      #panel-select .filter-button-group .btn-mock-sm {
+        min-height: 44px;
+
+        display: inline-flex;
+
+        align-items: center;
+        justify-content: center;
+
+        gap: 7px;
+
+        padding: 0 15px;
+
+        border-radius: 10px;
+
+        white-space: nowrap;
+      }
+
+      /* =========================================================
+   TABLE WRAPPER
+========================================================= */
+
+      #panel-select .student-table-wrapper {
+        width: 100%;
+
+        overflow-x: auto;
+
+        background: #ffffff;
+
+        border: 1px solid #dfe7f0;
+        border-radius: 16px;
+
+        box-shadow: 0 8px 25px rgba(15, 23, 42, 0.04);
+      }
+
+      #panel-select .student-table-wrapper::-webkit-scrollbar {
+        height: 8px;
+      }
+
+      #panel-select .student-table-wrapper::-webkit-scrollbar-track {
+        background: #f1f5f9;
+      }
+
+      #panel-select .student-table-wrapper::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+
+        border-radius: 999px;
+      }
+
+      #panel-select .student-table-wrapper::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+
+      /* =========================================================
+   TABLE
+========================================================= */
+
+      #coopStudentTable {
+        width: 100%;
+
+        min-width: 1080px;
+
+        border-collapse: collapse;
+
+        table-layout: fixed;
+
+        background: #ffffff;
+      }
+
+      /* =========================================================
+   TABLE HEADER
+========================================================= */
+
+      #coopStudentTable thead th {
+        padding: 14px 13px;
+
+        background: #f8fafc;
+
+        color: #475569;
+
+        border-bottom: 1px solid #dbe4ee;
+
+        font-size: 0.75rem;
+        font-weight: 700;
+
+        line-height: 1.45;
+
+        text-align: left;
+        vertical-align: middle;
+      }
+
+      /* =========================================================
+   TABLE BODY
+========================================================= */
+
+      #coopStudentTable tbody td {
+        padding: 15px 13px;
+
+        color: #1e293b;
+
+        border-bottom: 1px solid #edf2f7;
+
+        font-size: 0.78rem;
+
+        line-height: 1.5;
+
+        vertical-align: middle;
+      }
+
+      #coopStudentTable tbody tr {
+        transition: background-color 0.2s ease;
+      }
+
+      #coopStudentTable tbody tr:hover {
+        background: #f8fbff;
+      }
+
+      #coopStudentTable tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      /* =========================================================
+   COLUMN WIDTH
+========================================================= */
+
+      /* นักศึกษา */
+
+      #coopStudentTable th:nth-child(1),
+      #coopStudentTable td:nth-child(1) {
+        width: 185px;
+      }
+
+      /* สาขา */
+
+      #coopStudentTable th:nth-child(2),
+      #coopStudentTable td:nth-child(2) {
+        width: 120px;
+      }
+
+      /* บริษัท */
+
+      #coopStudentTable th:nth-child(3),
+      #coopStudentTable td:nth-child(3) {
+        width: 190px;
+      }
+
+      /* ตำแหน่ง */
+
+      #coopStudentTable th:nth-child(4),
+      #coopStudentTable td:nth-child(4) {
+        width: 145px;
+      }
+
+      /* สถานะที่ปรึกษา / นิเทศ */
+
+      #coopStudentTable th:nth-child(5),
+      #coopStudentTable td:nth-child(5) {
+        width: 170px;
+
+        text-align: center;
+      }
+
+      /* ยืนยันข้อมูล */
+
+      #coopStudentTable th:nth-child(6),
+      #coopStudentTable td:nth-child(6) {
+        width: 150px;
+
+        text-align: center;
+      }
+
+      /* การดำเนินการ */
+
+      #coopStudentTable th:nth-child(7),
+      #coopStudentTable td:nth-child(7) {
+        width: 220px;
+      }
+
+      /* =========================================================
+   STUDENT INFO
+========================================================= */
+
+      #coopStudentTable .student-table-user {
+        display: flex;
+
+        align-items: center;
+
+        gap: 10px;
+      }
+
+      #coopStudentTable .student-table-avatar {
+        width: 38px;
+        height: 38px;
+
+        flex-shrink: 0;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 50%;
+
+        background: #eaf3ff;
+
+        color: #1757a6;
+
+        font-size: 0.8rem;
+        font-weight: 700;
+      }
+
+      #coopStudentTable .student-table-name {
+        min-width: 0;
+      }
+
+      #coopStudentTable .student-table-name strong {
+        display: block;
+
+        color: #172033;
+
+        font-size: 0.8rem;
+        font-weight: 600;
+
+        line-height: 1.5;
+      }
+
+      #coopStudentTable .major-code {
+        display: block;
+
+        color: #172033;
+
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+
+      /* =========================================================
+   SMALL TEXT
+========================================================= */
+
+      #coopStudentTable td small {
+        display: block;
+
+        margin-top: 4px;
+
+        color: #718096;
+
+        font-size: 0.68rem;
+
+        line-height: 1.45;
+      }
+
+      #coopStudentTable td small i {
+        margin-right: 3px;
+
+        color: #94a3b8;
+      }
+
+      #coopStudentTable .role-note {
+        display: block;
+
+        margin-top: 6px;
+
+        color: #64748b;
+
+        font-size: 0.65rem;
+
+        line-height: 1.4;
+      }
+
+      /* =========================================================
+   STATUS
+========================================================= */
+
+      #coopStudentTable .student-status {
+        display: inline-flex;
+
+        align-items: center;
+        justify-content: center;
+
+        gap: 5px;
+
+        min-height: 31px;
+
+        padding: 6px 10px;
+
+        border-radius: 999px;
+
+        font-size: 0.69rem;
+        font-weight: 700;
+
+        line-height: 1;
+
+        white-space: nowrap;
+      }
+
+      #coopStudentTable .student-status.success {
+        background: #eaf8ef;
+
+        color: #16814b;
+
+        border: 1px solid #ccebd7;
+      }
+
+      #coopStudentTable .student-status.warning {
+        background: #fff4d6;
+
+        color: #9a6700;
+
+        border: 1px solid #f5dfaa;
+      }
+
+      #coopStudentTable .student-status.neutral {
+        min-width: 38px;
+
+        background: #f1f5f9;
+
+        color: #64748b;
+
+        border: 1px solid #e2e8f0;
+      }
+
+      /* =========================================================
+   ACTION BUTTON
+========================================================= */
+
+      #coopStudentTable .student-action-group {
+        display: flex;
+
+        align-items: center;
+
+        flex-wrap: wrap;
+
+        gap: 7px;
+      }
+
+      #coopStudentTable .student-action-btn {
+        min-height: 34px;
+
+        display: inline-flex;
+
+        align-items: center;
+        justify-content: center;
+
+        gap: 6px;
+
+        padding: 7px 10px;
+
+        border-radius: 8px;
+
+        font-family: "Noto Sans Thai", sans-serif;
+
+        font-size: 0.7rem;
+        font-weight: 600;
+
+        white-space: nowrap;
+
+        cursor: pointer;
+
+        transition:
+          background-color 0.2s ease,
+          border-color 0.2s ease,
+          color 0.2s ease;
+      }
+
+      /* ปุ่มหลัก */
+
+      #coopStudentTable .student-action-btn.primary {
+        background: #1757a6;
+
+        color: #ffffff;
+
+        border: 1px solid #1757a6;
+      }
+
+      #coopStudentTable .student-action-btn.primary:hover {
+        background: #124b91;
+
+        border-color: #124b91;
+      }
+
+      /* ปุ่ม Outline */
+
+      #coopStudentTable .student-action-btn.outline {
+        background: #ffffff;
+
+        color: #1757a6;
+
+        border: 1px solid #1757a6;
+      }
+
+      #coopStudentTable .student-action-btn.outline:hover {
+        background: #edf5ff;
+      }
+
+      /* =========================================================
+   NOTE
+========================================================= */
+
+      #panel-select .student-advisor-note {
+        display: flex;
+
+        align-items: flex-start;
+
+        gap: 10px;
+
+        margin-top: 16px;
+
+        padding: 13px 15px;
+
+        background: #f8fbff;
+
+        border: 1px solid #dbe7f4;
+        border-radius: 11px;
+
+        color: #475569;
+
+        font-size: 0.78rem;
+
+        line-height: 1.6;
+      }
+
+      #panel-select .student-advisor-note i {
+        margin-top: 3px;
+
+        color: #1757a6;
+      }
+
+      /* =========================================================
+   RESPONSIVE
+========================================================= */
+
+      @media (max-width: 1100px) {
+        #panel-select .student-filter-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        #panel-select .filter-button-group {
+          grid-column: 1 / -1;
+        }
+      }
+
+      @media (max-width: 700px) {
+        #panel-select .student-filter-card {
+          padding: 16px;
+        }
+
+        #panel-select .student-filter-grid {
+          grid-template-columns: 1fr;
+        }
+
+        #panel-select .filter-button-group {
+          grid-column: auto;
+
+          width: 100%;
+        }
+
+        #panel-select .filter-button-group .btn-mock-sm {
+          flex: 1;
+        }
+
+        #coopStudentTable {
+          min-width: 1050px;
+        }
+      }
+      /* =========================================================
+   APPOINTMENT PANEL
+========================================================= */
+
+      #panel-appointment {
+        width: 100%;
+      }
+
+      /* =========================================================
+   INFO
+========================================================= */
+
+      .appointment-info-box {
+        display: flex;
+        align-items: flex-start;
+
+        gap: 12px;
+
+        margin: 16px 0 20px;
+
+        padding: 14px 16px;
+
+        background: #f8fbff;
+
+        border: 1px solid #dbe7f4;
+        border-radius: 12px;
+      }
+
+      .appointment-info-box > i {
+        margin-top: 3px;
+
+        color: #1757a6;
+      }
+
+      .appointment-info-box strong {
+        display: block;
+
+        margin-bottom: 4px;
+
+        color: #172033;
+
+        font-size: 0.84rem;
+      }
+
+      .appointment-info-box span {
+        display: block;
+
+        color: #64748b;
+
+        font-size: 0.78rem;
+
+        line-height: 1.6;
+      }
+
+      /* =========================================================
+   LIST
+========================================================= */
+
+      .appointment-list {
+        display: grid;
+
+        gap: 20px;
+
+        margin-top: 18px;
+      }
+
+      /* =========================================================
+   CARD
+========================================================= */
+
+      .appointment-card {
+        width: 100%;
+
+        overflow: hidden;
+
+        background: #ffffff;
+
+        border: 1px solid #dfe7f0;
+        border-radius: 18px;
+
+        box-shadow: 0 8px 28px rgba(15, 23, 42, 0.05);
+      }
+
+      /* =========================================================
+   HEADER
+========================================================= */
+
+      .appointment-card-header {
+        display: flex;
+
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 16px;
+
+        padding: 18px 20px;
+
+        background: linear-gradient(135deg, #ffffff, #f8fbff);
+
+        border-bottom: 1px solid #edf2f7;
+      }
+
+      .appointment-title-wrap {
+        display: flex;
+
+        align-items: center;
+
+        gap: 13px;
+      }
+
+      .appointment-round {
+        width: 46px;
+        height: 46px;
+
+        flex-shrink: 0;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 13px;
+
+        background: #1757a6;
+
+        color: #ffffff;
+
+        font-size: 1.05rem;
+        font-weight: 700;
+      }
+
+      .appointment-title-wrap h3 {
+        margin: 0 0 4px;
+
+        color: #172033;
+
+        font-family: "Sarabun", sans-serif;
+
+        font-size: 1rem;
+      }
+
+      .appointment-title-wrap p {
+        margin: 0;
+
+        color: #718096;
+
+        font-size: 0.76rem;
+      }
+
+      /* =========================================================
+   MAIN STATUS
+========================================================= */
+
+      .appointment-main-status {
+        display: inline-flex;
+
+        align-items: center;
+
+        gap: 6px;
+
+        padding: 7px 12px;
+
+        border-radius: 999px;
+
+        font-size: 0.74rem;
+        font-weight: 700;
+
+        white-space: nowrap;
+      }
+
+      .appointment-main-status.confirmed {
+        background: #eaf8ef;
+
+        color: #16814b;
+      }
+
+      .appointment-main-status.pending {
+        background: #fff4d6;
+
+        color: #9a6700;
+      }
+
+      .appointment-main-status.not-created {
+        background: #f1f5f9;
+
+        color: #64748b;
+      }
+
+      /* =========================================================
+   STUDENT
+========================================================= */
+
+      .appointment-student {
+        display: flex;
+
+        align-items: center;
+
+        gap: 12px;
+
+        padding: 17px 20px;
+
+        background: #fbfdff;
+
+        border-bottom: 1px solid #edf2f7;
+      }
+
+      .appointment-avatar {
+        width: 42px;
+        height: 42px;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        flex-shrink: 0;
+
+        border-radius: 50%;
+
+        background: #edf4ff;
+
+        color: #1757a6;
+
+        font-weight: 700;
+      }
+
+      .appointment-student strong {
+        display: block;
+
+        color: #172033;
+
+        font-size: 0.88rem;
+      }
+
+      .appointment-student span {
+        display: block;
+
+        margin-top: 3px;
+
+        color: #718096;
+
+        font-size: 0.74rem;
+      }
+
+      /* =========================================================
+   DETAILS
+========================================================= */
+
+      .appointment-detail-grid {
+        display: grid;
+
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+
+        gap: 14px;
+
+        padding: 20px;
+      }
+
+      .appointment-detail {
+        min-width: 0;
+
+        display: flex;
+
+        align-items: flex-start;
+
+        gap: 11px;
+
+        padding: 14px;
+
+        background: #f8fafc;
+
+        border: 1px solid #e7edf4;
+        border-radius: 13px;
+      }
+
+      .appointment-detail-icon {
+        width: 36px;
+        height: 36px;
+
+        flex-shrink: 0;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 10px;
+
+        background: #eaf3ff;
+
+        color: #1757a6;
+      }
+
+      .appointment-detail-icon.confirmed-icon {
+        background: #eaf8ef;
+
+        color: #16814b;
+      }
+
+      .appointment-detail-icon.pending-icon {
+        background: #fff4d6;
+
+        color: #9a6700;
+      }
+
+      .appointment-detail-icon.representative-icon {
+        background: #f3e8ff;
+
+        color: #7e22ce;
+      }
+
+      .appointment-detail-icon.neutral-icon {
+        background: #f1f5f9;
+
+        color: #64748b;
+      }
+
+      .appointment-detail > div:last-child {
+        min-width: 0;
+      }
+
+      .appointment-detail span {
+        display: block;
+
+        margin-bottom: 5px;
+
+        color: #718096;
+
+        font-size: 0.7rem;
+      }
+
+      .appointment-detail strong {
+        display: block;
+
+        color: #172033;
+
+        font-size: 0.8rem;
+
+        line-height: 1.5;
+
+        word-break: break-word;
+      }
+
+      .appointment-detail small {
+        display: block;
+
+        margin-top: 4px;
+
+        color: #7c8ca1;
+
+        font-size: 0.69rem;
+
+        line-height: 1.4;
+      }
+
+      /* =========================================================
+   CONFIRM TEXT
+========================================================= */
+
+      .confirmed-text {
+        color: #16814b !important;
+      }
+
+      .pending-text {
+        color: #9a6700 !important;
+      }
+
+      .representative-text {
+        color: #7e22ce !important;
+      }
+
+      .neutral-text {
+        color: #64748b !important;
+      }
+
+      /* =========================================================
+   FOOTER
+========================================================= */
+
+      .appointment-card-footer {
+        display: flex;
+
+        justify-content: space-between;
+        align-items: center;
+
+        gap: 14px;
+
+        padding: 14px 20px;
+
+        background: #fbfdff;
+
+        border-top: 1px solid #edf2f7;
+      }
+
+      .appointment-note {
+        display: inline-flex;
+
+        align-items: center;
+
+        gap: 7px;
+
+        max-width: 420px;
+
+        font-size: 0.74rem;
+
+        line-height: 1.5;
+      }
+
+      .confirmed-note {
+        color: #16814b;
+      }
+
+      .pending-note {
+        color: #9a6700;
+      }
+
+      .representative-note {
+        color: #7e22ce;
+      }
+
+      .neutral-note {
+        color: #64748b;
+      }
+
+      /* =========================================================
+   ACTION
+========================================================= */
+
+      .appointment-actions {
+        display: flex;
+
+        align-items: center;
+
+        justify-content: flex-end;
+
+        flex-wrap: wrap;
+
+        gap: 7px;
+      }
+
+      .appointment-actions .btn-mock-sm {
+        display: inline-flex;
+
+        align-items: center;
+        justify-content: center;
+
+        gap: 6px;
+
+        min-height: 35px;
+
+        white-space: nowrap;
+      }
+
+      .appointment-actions button:disabled {
+        opacity: 0.45;
+
+        cursor: not-allowed;
+      }
+
+      /* =========================================================
+   MODAL
+========================================================= */
+
+      .appointment-modal {
+        display: none;
+
+        position: fixed;
+
+        inset: 0;
+
+        z-index: 10000;
+
+        align-items: center;
+        justify-content: center;
+
+        padding: 20px;
+
+        background: rgba(15, 23, 42, 0.55);
+      }
+
+      .appointment-modal.show {
+        display: flex;
+      }
+
+      .appointment-modal-card {
+        width: min(720px, 100%);
+
+        max-height: 92vh;
+
+        overflow-y: auto;
+
+        background: #ffffff;
+
+        border-radius: 18px;
+
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22);
+      }
+
+      .mentor-confirm-modal-card {
+        width: min(760px, 100%);
+      }
+
+      /* =========================================================
+   MODAL HEADER
+========================================================= */
+
+      .appointment-modal-header {
+        display: flex;
+
+        align-items: flex-start;
+        justify-content: space-between;
+
+        gap: 15px;
+
+        padding: 18px 22px;
+
+        background: #ffffff;
+
+        border-bottom: 1px solid #e5e7eb;
+
+        position: sticky;
+
+        top: 0;
+
+        z-index: 2;
+      }
+
+      .appointment-modal-header h3 {
+        margin: 0;
+
+        color: #172033;
+
+        font-family: "Sarabun", sans-serif;
+
+        font-size: 1.05rem;
+      }
+
+      .appointment-modal-header p {
+        margin: 5px 0 0;
+
+        color: #64748b;
+
+        font-size: 0.76rem;
+      }
+
+      .appointment-modal-close {
+        padding: 0;
+
+        border: 0;
+
+        background: transparent;
+
+        color: #64748b;
+
+        font-size: 27px;
+
+        cursor: pointer;
+      }
+
+      /* =========================================================
+   BODY
+========================================================= */
+
+      .appointment-modal-body {
+        padding: 22px;
+      }
+
+      .appointment-form-grid {
+        display: grid;
+
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 14px;
+      }
+
+      .appointment-form-field {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 7px;
+      }
+
+      .appointment-form-field.full {
+        grid-column: 1 / -1;
+      }
+
+      .appointment-form-field label {
+        color: #374151;
+
+        font-size: 0.8rem;
+
+        font-weight: 700;
+      }
+
+      .required {
+        color: #dc2626;
+      }
+
+      .appointment-form-field input,
+      .appointment-form-field select,
+      .appointment-form-field textarea {
+        width: 100%;
+
+        box-sizing: border-box;
+
+        padding: 10px 12px;
+
+        background: #ffffff;
+
+        border: 1px solid #cbd5e1;
+        border-radius: 9px;
+
+        color: #172033;
+
+        font-family: inherit;
+
+        outline: none;
+      }
+
+      .appointment-form-field input:focus,
+      .appointment-form-field select:focus,
+      .appointment-form-field textarea:focus {
+        border-color: #1757a6;
+
+        box-shadow: 0 0 0 3px rgba(23, 87, 166, 0.08);
+      }
+
+      .appointment-form-field input[readonly] {
+        background: #f8fafc;
+
+        color: #64748b;
+      }
+
+      /* =========================================================
+   MODAL FOOTER
+========================================================= */
+
+      .appointment-modal-footer {
+        display: flex;
+
+        justify-content: flex-end;
+
+        gap: 8px;
+
+        padding: 15px 22px;
+
+        background: #f8fafc;
+
+        border-top: 1px solid #e5e7eb;
+
+        position: sticky;
+
+        bottom: 0;
+      }
+
+      /* =========================================================
+   MENTOR CONFIRM INFO
+========================================================= */
+
+      .mentor-confirm-info {
+        display: grid;
+
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+
+        gap: 10px;
+
+        margin-bottom: 15px;
+      }
+
+      .mentor-confirm-info > div {
+        padding: 12px;
+
+        background: #f8fafc;
+
+        border: 1px solid #e7edf4;
+        border-radius: 10px;
+      }
+
+      .mentor-confirm-info span {
+        display: block;
+
+        margin-bottom: 4px;
+
+        color: #64748b;
+
+        font-size: 0.7rem;
+      }
+
+      .mentor-confirm-info strong {
+        color: #172033;
+
+        font-size: 0.79rem;
+      }
+
+      .mentor-mockup-warning {
+        display: flex;
+
+        align-items: flex-start;
+
+        gap: 9px;
+
+        margin-bottom: 16px;
+
+        padding: 11px 13px;
+
+        background: #fffaf0;
+
+        border: 1px solid #f1d39d;
+        border-radius: 10px;
+
+        color: #7b5b18;
+
+        font-size: 0.73rem;
+
+        line-height: 1.6;
+      }
+
+      /* =========================================================
+   REPRESENTATIVE
+========================================================= */
+
+      .representative-section {
+        margin-top: 18px;
+
+        padding-top: 18px;
+
+        border-top: 1px solid #e5e7eb;
+      }
+
+      .representative-title {
+        display: flex;
+
+        align-items: center;
+
+        gap: 7px;
+
+        margin-bottom: 14px;
+
+        color: #172033;
+
+        font-size: 0.85rem;
+
+        font-weight: 700;
+      }
+
+      .representative-title i {
+        color: #7e22ce;
+      }
+
+      /* =========================================================
+   DETAIL MODAL
+========================================================= */
+
+      .appointment-detail-modal-grid {
+        display: grid;
+
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 11px;
+      }
+
+      .appointment-detail-modal-item {
+        padding: 13px;
+
+        background: #f8fafc;
+
+        border: 1px solid #e7edf4;
+        border-radius: 11px;
+      }
+
+      .appointment-detail-modal-item.full {
+        grid-column: 1 / -1;
+      }
+
+      .appointment-detail-modal-item span {
+        display: block;
+
+        margin-bottom: 5px;
+
+        color: #64748b;
+
+        font-size: 0.7rem;
+      }
+
+      .appointment-detail-modal-item strong {
+        color: #172033;
+
+        font-size: 0.8rem;
+
+        line-height: 1.5;
+      }
+
+      /* =========================================================
+   RESPONSIVE
+========================================================= */
+
+      @media (max-width: 1050px) {
+        .appointment-detail-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 700px) {
+        .appointment-card-header,
+        .appointment-card-footer {
+          flex-direction: column;
+
+          align-items: stretch;
+        }
+
+        .appointment-detail-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .appointment-actions {
+          justify-content: flex-start;
+        }
+
+        .appointment-form-grid,
+        .mentor-confirm-info,
+        .appointment-detail-modal-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .appointment-form-field.full,
+        .appointment-detail-modal-item.full {
+          grid-column: auto;
+        }
+      }
     </style>
   </head>
   <body>
@@ -2483,7 +4561,7 @@
         <a class="sidebar-item" data-target="panel-select"
           ><span class="sidebar-icon"
             ><i class="fa-solid fa-user-check"></i></span
-          ><span class="sidebar-text">นักศึกษาที่ดูแล</span></a
+          ><span class="sidebar-text">นักศึกษาสหกิจศึกษา</span></a
         >
         <a class="sidebar-item" data-target="panel-appointment"
           ><span class="sidebar-icon"
@@ -3353,22 +5431,38 @@
         <section class="content-panel" id="panel-select">
           <div class="panel-header">
             <h2>นักศึกษาที่ดูแล</h2>
-            <p>ค้นหาและตรวจสอบนักศึกษาสหกิจศึกษาในความดูแล</p>
+            <p>
+              ค้นหาและเลือกรับนักศึกษาสหกิจศึกษาเป็นนักศึกษาที่ปรึกษาโครงการ
+              โดยอาจารย์ที่ปรึกษาโครงการทำหน้าที่เป็นอาจารย์นิเทศด้วย
+            </p>
           </div>
+
+          <!-- =========================================
+       ค้นหาและกรองข้อมูลนักศึกษา
+  ========================================== -->
           <div class="student-filter-card">
             <div class="student-filter-header">
               <h3>
                 <i class="fa-solid fa-magnifying-glass"></i>
                 ค้นหาและกรองข้อมูลนักศึกษา
               </h3>
-              <p>ค้นหาจากชื่อ รหัสนักศึกษา สถานประกอบการ และกรองตามสาขาวิชา</p>
+
+              <p>
+                ค้นหาจากชื่อ รหัสนักศึกษา หรือสถานประกอบการ
+                และสามารถกรองตามสาขาวิชาได้
+              </p>
             </div>
 
             <div class="student-filter-grid">
+              <!-- ค้นหา -->
               <div class="filter-field filter-field-search">
-                <label for="studentSearchInput">ค้นหานักศึกษา</label>
+                <label for="studentSearchInput">
+                  ค้นหานักศึกษา / สถานประกอบการ
+                </label>
+
                 <div class="filter-control">
                   <i class="fa-solid fa-user-graduate"></i>
+
                   <input
                     type="text"
                     id="studentSearchInput"
@@ -3378,18 +5472,24 @@
                 </div>
               </div>
 
+              <!-- กรองสาขา -->
               <div class="filter-field filter-field-major">
-                <label for="majorFilter">สาขา</label>
+                <label for="majorFilter"> สาขา </label>
+
                 <div class="filter-control">
                   <i class="fa-solid fa-filter"></i>
+
                   <select id="majorFilter" onchange="filterStudents()">
                     <option value="">ทุกสาขา</option>
+
                     <option value="IT">IT</option>
+
                     <option value="INE">INE</option>
                   </select>
                 </div>
               </div>
 
+              <!-- ปุ่มค้นหา -->
               <div class="filter-button-group">
                 <button
                   type="button"
@@ -3411,140 +5511,616 @@
               </div>
             </div>
           </div>
-          <div class="table-wrapper">
-            <table class="mock-table" id="coopStudentTable">
+
+          <!-- =========================================
+       ตารางนักศึกษาสหกิจศึกษา
+  ========================================== -->
+          <div class="student-table-wrapper">
+            <table
+              class="mock-table student-management-table"
+              id="coopStudentTable"
+            >
               <thead>
                 <tr>
                   <th>นักศึกษา</th>
-                  <th>รหัสนักศึกษา</th>
+
                   <th>สาขา</th>
+
                   <th>สถานประกอบการ</th>
+
                   <th>ตำแหน่ง</th>
-                  <th>สถานะอาจารย์นิเทศ</th>
-                  <th>อาจารย์ที่ปรึกษาโครงการ</th>
+
+                  <th>สถานะอาจารย์ที่ปรึกษา / นิเทศ</th>
+
+                  <th>ยืนยันข้อมูลที่ปรึกษา</th>
+
+                  <th>การดำเนินการ</th>
                 </tr>
               </thead>
+
               <tbody>
+                <!-- =====================================
+             นักศึกษา 1
+        ====================================== -->
                 <tr
                   data-name="นางสาวพิมพ์ชนก สุขใจ"
                   data-student-id="6702458196"
                   data-major="INE"
                   data-company="BlueWave Digital Co., Ltd."
                 >
-                  <td>นางสาวพิมพ์ชนก สุขใจ</td>
-                  <td>6702458196</td>
-                  <td>INE<br /><small>วิศวกรรมสารสนเทศและเครือข่าย</small></td>
-                  <td>BlueWave Digital Co., Ltd.<br /><small>ชลบุรี</small></td>
+                  <td>
+                    <div class="student-table-user">
+                      <span class="student-table-avatar"> พ </span>
+
+                      <div class="student-table-name">
+                        <strong> นางสาวพิมพ์ชนก สุขใจ </strong>
+
+                        <small> นักศึกษาสหกิจศึกษา </small>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td>
+                    <strong class="major-code"> INE </strong>
+
+                    <small> วิศวกรรมสารสนเทศและเครือข่าย </small>
+                  </td>
+
+                  <td>
+                    <strong> BlueWave Digital Co., Ltd. </strong>
+
+                    <small>
+                      <i class="fa-solid fa-location-dot"></i>
+                      ชลบุรี
+                    </small>
+                  </td>
+
                   <td>Frontend Developer</td>
-                  <td><span class="tag tag-green">ยืนยันแล้ว</span></td>
-                  <td>ผศ.ดร.นิติการ นาคเจือทอง</td>
+
+                  <td class="advisor-status">
+                    <span class="student-status success">
+                      <i class="fa-solid fa-circle-check"></i>
+
+                      เป็นที่ปรึกษาแล้ว
+                    </span>
+
+                    <small class="role-note"> ทำหน้าที่อาจารย์นิเทศด้วย </small>
+                  </td>
+
+                  <td class="advisor-confirm-status">
+                    <span class="student-status success">
+                      <i class="fa-solid fa-circle-check"></i>
+
+                      ยืนยันข้อมูลแล้ว
+                    </span>
+                  </td>
+
+                  <td>
+                    <div class="student-action-group">
+                      <button
+                        type="button"
+                        class="student-action-btn outline"
+                        onclick="viewStudentDetail(this)"
+                      >
+                        <i class="fa-regular fa-eye"></i>
+
+                        ดูข้อมูล
+                      </button>
+
+                      <button
+                        type="button"
+                        class="student-action-btn outline"
+                        onclick="confirmAdvisorStudent(this)"
+                      >
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        ข้อมูลที่ยืนยัน
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- =====================================
+             นักศึกษา 2
+        ====================================== -->
+                <tr
+                  data-name="นายกิตติพงศ์ ศรีสวัสดิ์"
+                  data-student-id="6702458101"
+                  data-major="IT"
+                  data-company="TechSphere Solutions Co., Ltd."
+                >
+                  <td>
+                    <div class="student-table-user">
+                      <span class="student-table-avatar"> ก </span>
+
+                      <div class="student-table-name">
+                        <strong> นายกิตติพงศ์ ศรีสวัสดิ์ </strong>
+
+                        <small> นักศึกษาสหกิจศึกษา </small>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td>
+                    <strong class="major-code"> IT </strong>
+
+                    <small> เทคโนโลยีสารสนเทศ </small>
+                  </td>
+
+                  <td>
+                    <strong> TechSphere Solutions Co., Ltd. </strong>
+
+                    <small>
+                      <i class="fa-solid fa-location-dot"></i>
+                      กรุงเทพมหานคร
+                    </small>
+                  </td>
+
+                  <td>Web Developer</td>
+
+                  <td class="advisor-status">
+                    <span class="student-status warning">
+                      <i class="fa-regular fa-clock"></i>
+
+                      ยังไม่ได้รับ
+                    </span>
+                  </td>
+
+                  <td class="advisor-confirm-status">
+                    <span class="student-status neutral"> - </span>
+                  </td>
+
+                  <td>
+                    <div class="student-action-group">
+                      <button
+                        type="button"
+                        class="student-action-btn primary"
+                        onclick="advisorProject(this)"
+                      >
+                        <i class="fa-solid fa-user-plus"></i>
+
+                        รับเป็นที่ปรึกษา
+                      </button>
+
+                      <button
+                        type="button"
+                        class="student-action-btn outline"
+                        onclick="viewStudentDetail(this)"
+                      >
+                        <i class="fa-regular fa-eye"></i>
+
+                        ดูข้อมูล
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- =====================================
+             นักศึกษา 3
+        ====================================== -->
+                <tr
+                  data-name="นางสาวชลธิชา พรหมมา"
+                  data-student-id="6702458102"
+                  data-major="IT"
+                  data-company="Siam Digital Innovation Co., Ltd."
+                >
+                  <td>
+                    <div class="student-table-user">
+                      <span class="student-table-avatar"> ช </span>
+
+                      <div class="student-table-name">
+                        <strong> นางสาวชลธิชา พรหมมา </strong>
+
+                        <small> นักศึกษาสหกิจศึกษา </small>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td>
+                    <strong class="major-code"> IT </strong>
+
+                    <small> เทคโนโลยีสารสนเทศ </small>
+                  </td>
+
+                  <td>
+                    <strong> Siam Digital Innovation Co., Ltd. </strong>
+
+                    <small>
+                      <i class="fa-solid fa-location-dot"></i>
+                      นนทบุรี
+                    </small>
+                  </td>
+
+                  <td>UX/UI Developer</td>
+
+                  <td class="advisor-status">
+                    <span class="student-status success">
+                      <i class="fa-solid fa-circle-check"></i>
+
+                      เป็นที่ปรึกษาแล้ว
+                    </span>
+
+                    <small class="role-note"> ทำหน้าที่อาจารย์นิเทศด้วย </small>
+                  </td>
+
+                  <td class="advisor-confirm-status">
+                    <span class="student-status warning">
+                      <i class="fa-regular fa-clock"></i>
+
+                      รอยืนยันข้อมูล
+                    </span>
+                  </td>
+
+                  <td>
+                    <div class="student-action-group">
+                      <button
+                        type="button"
+                        class="student-action-btn primary"
+                        onclick="confirmAdvisorStudent(this)"
+                      >
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        ตรวจสอบและยืนยัน
+                      </button>
+
+                      <button
+                        type="button"
+                        class="student-action-btn outline"
+                        onclick="viewStudentDetail(this)"
+                      >
+                        <i class="fa-regular fa-eye"></i>
+
+                        ดูข้อมูล
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- =====================================
+             นักศึกษา 4
+        ====================================== -->
+                <tr
+                  data-name="นายณัฐวุฒิ คำแสน"
+                  data-student-id="6702458103"
+                  data-major="INE"
+                  data-company="NextGen Software Studio"
+                >
+                  <td>
+                    <div class="student-table-user">
+                      <span class="student-table-avatar"> ณ </span>
+
+                      <div class="student-table-name">
+                        <strong> นายณัฐวุฒิ คำแสน </strong>
+
+                        <small> นักศึกษาสหกิจศึกษา </small>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td>
+                    <strong class="major-code"> INE </strong>
+
+                    <small> วิศวกรรมสารสนเทศและเครือข่าย </small>
+                  </td>
+
+                  <td>
+                    <strong> NextGen Software Studio </strong>
+
+                    <small>
+                      <i class="fa-solid fa-location-dot"></i>
+                      ปทุมธานี
+                    </small>
+                  </td>
+
+                  <td>Backend Developer</td>
+
+                  <td class="advisor-status">
+                    <span class="student-status warning">
+                      <i class="fa-regular fa-clock"></i>
+
+                      ยังไม่ได้รับ
+                    </span>
+                  </td>
+
+                  <td class="advisor-confirm-status">
+                    <span class="student-status neutral"> - </span>
+                  </td>
+
+                  <td>
+                    <div class="student-action-group">
+                      <button
+                        type="button"
+                        class="student-action-btn primary"
+                        onclick="advisorProject(this)"
+                      >
+                        <i class="fa-solid fa-user-plus"></i>
+
+                        รับเป็นที่ปรึกษา
+                      </button>
+
+                      <button
+                        type="button"
+                        class="student-action-btn outline"
+                        onclick="viewStudentDetail(this)"
+                      >
+                        <i class="fa-regular fa-eye"></i>
+
+                        ดูข้อมูล
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- =====================================
+             นักศึกษา 5
+        ====================================== -->
+                <tr
+                  data-name="นางสาวปวีณา จันทร์แก้ว"
+                  data-student-id="6702458104"
+                  data-major="INE"
+                  data-company="CloudNova Technology Co., Ltd."
+                >
+                  <td>
+                    <div class="student-table-user">
+                      <span class="student-table-avatar"> ป </span>
+
+                      <div class="student-table-name">
+                        <strong> นางสาวปวีณา จันทร์แก้ว </strong>
+
+                        <small> นักศึกษาสหกิจศึกษา </small>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td>
+                    <strong class="major-code"> INE </strong>
+
+                    <small> วิศวกรรมสารสนเทศและเครือข่าย </small>
+                  </td>
+
+                  <td>
+                    <strong> CloudNova Technology Co., Ltd. </strong>
+
+                    <small>
+                      <i class="fa-solid fa-location-dot"></i>
+                      ชลบุรี
+                    </small>
+                  </td>
+
+                  <td>Cloud Support Engineer</td>
+
+                  <td class="advisor-status">
+                    <span class="student-status success">
+                      <i class="fa-solid fa-circle-check"></i>
+
+                      เป็นที่ปรึกษาแล้ว
+                    </span>
+
+                    <small class="role-note"> ทำหน้าที่อาจารย์นิเทศด้วย </small>
+                  </td>
+
+                  <td class="advisor-confirm-status">
+                    <span class="student-status success">
+                      <i class="fa-solid fa-circle-check"></i>
+
+                      ยืนยันข้อมูลแล้ว
+                    </span>
+                  </td>
+
+                  <td>
+                    <div class="student-action-group">
+                      <button
+                        type="button"
+                        class="student-action-btn outline"
+                        onclick="confirmAdvisorStudent(this)"
+                      >
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        ข้อมูลที่ยืนยัน
+                      </button>
+
+                      <button
+                        type="button"
+                        class="student-action-btn outline"
+                        onclick="viewStudentDetail(this)"
+                      >
+                        <i class="fa-regular fa-eye"></i>
+
+                        ดูข้อมูล
+                      </button>
+                    </div>
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <div class="advisor-info-box">
-            ระยะเวลาสหกิจศึกษา 1 กันยายน 2569 – 18 ธันวาคม 2569 · พี่เลี้ยง
-            คุณณัฐชา วงศ์พิพัฒน์ · Frontend Development Lead ·
-            natcha.w@bluewave.co.th
+
+          <!-- =========================================
+       หมายเหตุ
+  ========================================== -->
+          <div class="advisor-info-box student-advisor-note">
+            <i class="fa-solid fa-circle-info"></i>
+
+            <span>
+              เมื่ออาจารย์รับนักศึกษาเป็นนักศึกษาที่ปรึกษาโครงการ
+              อาจารย์จะทำหน้าที่เป็นอาจารย์นิเทศของนักศึกษาคนนั้นด้วย
+              จากนั้นต้องตรวจสอบและยืนยันข้อมูลนักศึกษาก่อนดำเนินการขั้นต่อไป
+            </span>
           </div>
         </section>
-        <!-- ================= นัดหมายนิเทศ ================= -->
         <!-- ================= นัดหมายนิเทศ ================= -->
         <section class="content-panel" id="panel-appointment">
           <div class="panel-header">
             <h2>นัดหมายนิเทศ</h2>
-            <p>กำหนดและติดตามนัดหมายการนิเทศนักศึกษาสหกิจศึกษา</p>
+            <p>
+              สร้างและจัดการนัดหมายนิเทศ ส่งข้อมูลให้พี่เลี้ยงยืนยัน
+              และกำหนดผู้แทนกรณีพี่เลี้ยงไม่สะดวก
+            </p>
+          </div>
+
+          <!-- =====================================================
+       คำอธิบาย
+  ====================================================== -->
+          <div class="appointment-info-box">
+            <i class="fa-solid fa-circle-info"></i>
+
+            <div>
+              <strong>ขั้นตอนการนัดหมายนิเทศ</strong>
+
+              <span>
+                สร้างนัดหมาย → ส่งข้อมูลให้พี่เลี้ยงยืนยัน → ตรวจสอบผลตอบกลับ →
+                กรณีพี่เลี้ยงไม่สะดวกสามารถกำหนดผู้แทนได้
+              </span>
+            </div>
           </div>
 
           <div class="appointment-list">
-            <!-- ================= ครั้งที่ 1 ================= -->
-            <div class="appointment-card" data-round="1">
+            <!-- =====================================================
+         ครั้งที่ 1
+    ====================================================== -->
+            <div
+              class="appointment-card"
+              data-round="1"
+              data-student-name="นางสาวพิมพ์ชนก สุขใจ"
+              data-student-id="6702458196"
+              data-major="INE"
+              data-company="BlueWave Digital Co., Ltd."
+              data-province="ชลบุรี"
+              data-mentor-name="คุณณัฐชา วงศ์พิพัฒน์"
+              data-mentor-position="Frontend Development Lead"
+              data-date="2026-10-15"
+              data-time="10:00"
+              data-place="BlueWave Digital Co., Ltd."
+              data-note="นิเทศ ณ สถานประกอบการ"
+              data-appointment-status="saved"
+              data-confirm-status="confirmed"
+              data-confirm-date="2026-10-10"
+              data-representative-name=""
+              data-representative-position=""
+              data-representative-phone=""
+              data-representative-reason=""
+            >
+              <!-- Header -->
               <div class="appointment-card-header">
                 <div class="appointment-title-wrap">
                   <div class="appointment-round">1</div>
 
                   <div>
                     <h3>นัดหมายนิเทศครั้งที่ 1</h3>
+
                     <p>ข้อมูลนัดหมายและสถานะการยืนยันจากพี่เลี้ยง</p>
                   </div>
                 </div>
 
                 <span class="appointment-main-status confirmed">
                   <i class="fa-solid fa-circle-check"></i>
-                  นัดหมายแล้ว
+
+                  <span class="appointment-main-status-text">
+                    นัดหมายแล้ว
+                  </span>
                 </span>
               </div>
 
+              <!-- Student -->
               <div class="appointment-student">
                 <div class="appointment-avatar">พ</div>
 
                 <div>
-                  <strong>นางสาวพิมพ์ชนก สุขใจ</strong>
-                  <span>รหัสนักศึกษา 6702458196 · INE</span>
+                  <strong> นางสาวพิมพ์ชนก สุขใจ </strong>
+
+                  <span> INE · BlueWave Digital Co., Ltd. </span>
                 </div>
               </div>
 
+              <!-- Detail -->
               <div class="appointment-detail-grid">
+                <!-- บริษัท -->
                 <div class="appointment-detail">
                   <div class="appointment-detail-icon">
                     <i class="fa-solid fa-building"></i>
                   </div>
 
                   <div>
-                    <span>สถานประกอบการ</span>
-                    <strong>BlueWave Digital Co., Ltd.</strong>
-                    <small>จังหวัดชลบุรี</small>
+                    <span> สถานประกอบการ </span>
+
+                    <strong> BlueWave Digital Co., Ltd. </strong>
+
+                    <small> จังหวัดชลบุรี </small>
                   </div>
                 </div>
 
+                <!-- พี่เลี้ยง -->
                 <div class="appointment-detail">
                   <div class="appointment-detail-icon">
                     <i class="fa-solid fa-user-tie"></i>
                   </div>
 
                   <div>
-                    <span>พี่เลี้ยง</span>
-                    <strong>คุณณัฐชา วงศ์พิพัฒน์</strong>
-                    <small>Frontend Development Lead</small>
+                    <span> พี่เลี้ยง / ผู้แทน </span>
+
+                    <strong class="appointment-mentor-display">
+                      คุณณัฐชา วงศ์พิพัฒน์
+                    </strong>
+
+                    <small class="appointment-mentor-position-display">
+                      Frontend Development Lead
+                    </small>
                   </div>
                 </div>
 
+                <!-- วันที่ -->
                 <div class="appointment-detail">
                   <div class="appointment-detail-icon">
                     <i class="fa-regular fa-calendar"></i>
                   </div>
 
                   <div>
-                    <span>วันนัดหมาย</span>
-                    <strong>15 ตุลาคม 2569</strong>
-                    <small>เวลา 10:00 น.</small>
+                    <span> วันนัดหมาย </span>
+
+                    <strong class="appointment-date-display">
+                      15 ตุลาคม 2569
+                    </strong>
+
+                    <small class="appointment-time-display">
+                      เวลา 10:00 น.
+                    </small>
                   </div>
                 </div>
 
+                <!-- สถานะยืนยัน -->
                 <div class="appointment-detail">
-                  <div class="appointment-detail-icon confirmed-icon">
+                  <div
+                    class="appointment-detail-icon appointment-confirm-icon confirmed-icon"
+                  >
                     <i class="fa-solid fa-circle-check"></i>
                   </div>
 
                   <div>
-                    <span>การยืนยันจากพี่เลี้ยง</span>
+                    <span> การยืนยันจากพี่เลี้ยง </span>
 
                     <strong class="confirmation-text confirmed-text">
                       ยืนยันแล้ว
                     </strong>
 
-                    <small>ยืนยันเมื่อ 10 ต.ค. 2569</small>
+                    <small class="confirmation-detail-text">
+                      ยืนยันเมื่อ 10 ต.ค. 2569
+                    </small>
                   </div>
                 </div>
               </div>
 
+              <!-- Footer -->
               <div class="appointment-card-footer">
                 <div class="appointment-note confirmed-note">
                   <i class="fa-solid fa-circle-check"></i>
-                  พี่เลี้ยงยืนยันวันและเวลานัดหมายเรียบร้อยแล้ว
+
+                  <span class="appointment-note-text">
+                    พี่เลี้ยงยืนยันวันและเวลานัดหมายเรียบร้อยแล้ว
+                  </span>
                 </div>
 
                 <div class="appointment-actions">
+                  <!-- ดู -->
                   <button
                     type="button"
                     class="btn-mock-sm"
@@ -3554,106 +6130,186 @@
                     ดูรายละเอียด
                   </button>
 
+                  <!-- แก้ไข -->
                   <button
                     type="button"
                     class="btn-mock-sm solid"
                     onclick="openAppointmentForButton(this)"
                   >
                     <i class="fa-solid fa-pen"></i>
-                    แก้ไขนัดหมาย
+
+                    <span class="appointment-edit-button-text">
+                      แก้ไขนัดหมาย
+                    </span>
+                  </button>
+
+                  <!-- ส่งยืนยัน -->
+                  <button
+                    type="button"
+                    class="btn-mock-sm appointment-send-btn"
+                    onclick="sendMentorConfirmation(this)"
+                  >
+                    <i class="fa-solid fa-paper-plane"></i>
+                    ส่งข้อมูลยืนยันอีกครั้ง
+                  </button>
+
+                  <!-- ตรวจสอบการยืนยัน -->
+                  <button
+                    type="button"
+                    class="btn-mock-sm"
+                    onclick="openMentorConfirmation(this)"
+                  >
+                    <i class="fa-solid fa-user-check"></i>
+                    ตรวจสอบการยืนยัน
                   </button>
                 </div>
               </div>
             </div>
 
-            <!-- ================= ครั้งที่ 2 ================= -->
-            <div class="appointment-card" data-round="2">
+            <!-- =====================================================
+         ครั้งที่ 2
+    ====================================================== -->
+            <div
+              class="appointment-card"
+              data-round="2"
+              data-student-name="นางสาวพิมพ์ชนก สุขใจ"
+              data-student-id="6702458196"
+              data-major="INE"
+              data-company="BlueWave Digital Co., Ltd."
+              data-province="ชลบุรี"
+              data-mentor-name="คุณณัฐชา วงศ์พิพัฒน์"
+              data-mentor-position="Frontend Development Lead"
+              data-date=""
+              data-time=""
+              data-place=""
+              data-note=""
+              data-appointment-status="none"
+              data-confirm-status="none"
+              data-confirm-date=""
+              data-representative-name=""
+              data-representative-position=""
+              data-representative-phone=""
+              data-representative-reason=""
+            >
+              <!-- Header -->
               <div class="appointment-card-header">
                 <div class="appointment-title-wrap">
                   <div class="appointment-round">2</div>
 
                   <div>
                     <h3>นัดหมายนิเทศครั้งที่ 2</h3>
+
                     <p>ข้อมูลนัดหมายและสถานะการยืนยันจากพี่เลี้ยง</p>
                   </div>
                 </div>
 
-                <span class="appointment-main-status pending">
-                  <i class="fa-regular fa-clock"></i>
-                  รอการยืนยัน
+                <span class="appointment-main-status not-created">
+                  <i class="fa-regular fa-calendar"></i>
+
+                  <span class="appointment-main-status-text">
+                    ยังไม่สร้างนัดหมาย
+                  </span>
                 </span>
               </div>
 
+              <!-- Student -->
               <div class="appointment-student">
                 <div class="appointment-avatar">พ</div>
 
                 <div>
-                  <strong>นางสาวพิมพ์ชนก สุขใจ</strong>
-                  <span>รหัสนักศึกษา 6702458196 · INE</span>
+                  <strong> นางสาวพิมพ์ชนก สุขใจ </strong>
+
+                  <span> INE · BlueWave Digital Co., Ltd. </span>
                 </div>
               </div>
 
+              <!-- Detail -->
               <div class="appointment-detail-grid">
+                <!-- บริษัท -->
                 <div class="appointment-detail">
                   <div class="appointment-detail-icon">
                     <i class="fa-solid fa-building"></i>
                   </div>
 
                   <div>
-                    <span>สถานประกอบการ</span>
-                    <strong>BlueWave Digital Co., Ltd.</strong>
-                    <small>จังหวัดชลบุรี</small>
+                    <span> สถานประกอบการ </span>
+
+                    <strong> BlueWave Digital Co., Ltd. </strong>
+
+                    <small> จังหวัดชลบุรี </small>
                   </div>
                 </div>
 
+                <!-- พี่เลี้ยง -->
                 <div class="appointment-detail">
                   <div class="appointment-detail-icon">
                     <i class="fa-solid fa-user-tie"></i>
                   </div>
 
                   <div>
-                    <span>พี่เลี้ยง</span>
-                    <strong>คุณณัฐชา วงศ์พิพัฒน์</strong>
-                    <small>Frontend Development Lead</small>
+                    <span> พี่เลี้ยง / ผู้แทน </span>
+
+                    <strong class="appointment-mentor-display">
+                      คุณณัฐชา วงศ์พิพัฒน์
+                    </strong>
+
+                    <small class="appointment-mentor-position-display">
+                      Frontend Development Lead
+                    </small>
                   </div>
                 </div>
 
+                <!-- วันที่ -->
                 <div class="appointment-detail">
                   <div class="appointment-detail-icon">
                     <i class="fa-regular fa-calendar"></i>
                   </div>
 
                   <div>
-                    <span>วันนัดหมาย</span>
-                    <strong>20 พฤศจิกายน 2569</strong>
-                    <small>เวลา 13:30 น.</small>
+                    <span> วันนัดหมาย </span>
+
+                    <strong class="appointment-date-display">
+                      ยังไม่ได้กำหนด
+                    </strong>
+
+                    <small class="appointment-time-display"> - </small>
                   </div>
                 </div>
 
+                <!-- สถานะยืนยัน -->
                 <div class="appointment-detail">
-                  <div class="appointment-detail-icon pending-icon">
-                    <i class="fa-regular fa-clock"></i>
+                  <div
+                    class="appointment-detail-icon appointment-confirm-icon neutral-icon"
+                  >
+                    <i class="fa-solid fa-minus"></i>
                   </div>
 
                   <div>
-                    <span>การยืนยันจากพี่เลี้ยง</span>
+                    <span> การยืนยันจากพี่เลี้ยง </span>
 
-                    <strong class="confirmation-text pending-text">
-                      รอการยืนยัน
+                    <strong class="confirmation-text neutral-text">
+                      ยังไม่ส่งข้อมูล
                     </strong>
 
-                    <small>ส่งคำขอยืนยันแล้ว</small>
+                    <small class="confirmation-detail-text">
+                      กรุณาสร้างนัดหมายก่อน
+                    </small>
                   </div>
                 </div>
               </div>
 
+              <!-- Footer -->
               <div class="appointment-card-footer">
-                <div class="appointment-note pending-note">
-                  <i class="fa-regular fa-clock"></i>
-                  ส่งคำขอยืนยันให้พี่เลี้ยงแล้ว กำลังรอการตอบรับ
+                <div class="appointment-note neutral-note">
+                  <i class="fa-solid fa-circle-info"></i>
+
+                  <span class="appointment-note-text">
+                    กรุณาสร้างนัดหมายก่อนส่งข้อมูลให้พี่เลี้ยง
+                  </span>
                 </div>
 
                 <div class="appointment-actions">
+                  <!-- ดู -->
                   <button
                     type="button"
                     class="btn-mock-sm"
@@ -3663,19 +6319,354 @@
                     ดูรายละเอียด
                   </button>
 
+                  <!-- สร้าง -->
                   <button
                     type="button"
                     class="btn-mock-sm solid"
                     onclick="openAppointmentForButton(this)"
                   >
-                    <i class="fa-solid fa-pen"></i>
-                    แก้ไขนัดหมาย
+                    <i class="fa-solid fa-calendar-plus"></i>
+
+                    <span class="appointment-edit-button-text">
+                      สร้างนัดหมาย
+                    </span>
+                  </button>
+
+                  <!-- ส่งยืนยัน -->
+                  <button
+                    type="button"
+                    class="btn-mock-sm appointment-send-btn"
+                    onclick="sendMentorConfirmation(this)"
+                    disabled
+                  >
+                    <i class="fa-solid fa-paper-plane"></i>
+                    ส่งข้อมูลยืนยัน
+                  </button>
+
+                  <!-- ตรวจสอบ -->
+                  <button
+                    type="button"
+                    class="btn-mock-sm"
+                    onclick="openMentorConfirmation(this)"
+                    disabled
+                  >
+                    <i class="fa-solid fa-user-check"></i>
+                    ตรวจสอบการยืนยัน
                   </button>
                 </div>
               </div>
             </div>
           </div>
         </section>
+
+        <!-- =====================================================
+     MODAL : สร้าง / แก้ไขนัดหมาย
+====================================================== -->
+        <div
+          id="appointmentMockup"
+          class="appointment-modal"
+          aria-hidden="true"
+        >
+          <div class="appointment-modal-card">
+            <div class="appointment-modal-header">
+              <div>
+                <h3 id="appointmentModalTitle">สร้างนัดหมาย</h3>
+
+                <p>กำหนดวัน เวลา และสถานที่สำหรับการนิเทศ</p>
+              </div>
+
+              <button
+                type="button"
+                class="appointment-modal-close"
+                onclick="closeAppointmentModal()"
+              >
+                &times;
+              </button>
+            </div>
+
+            <div class="appointment-modal-body">
+              <div class="appointment-form-grid">
+                <div class="appointment-form-field full">
+                  <label> นักศึกษา </label>
+
+                  <input type="text" id="appointmentStudent" readonly />
+                </div>
+
+                <div class="appointment-form-field">
+                  <label> ครั้งที่ </label>
+
+                  <input type="text" id="appointmentRound" readonly />
+                </div>
+
+                <div class="appointment-form-field">
+                  <label> พี่เลี้ยง </label>
+
+                  <input type="text" id="appointmentMentor" readonly />
+                </div>
+
+                <div class="appointment-form-field">
+                  <label>
+                    วันที่นัดหมาย
+                    <span class="required">*</span>
+                  </label>
+
+                  <input type="date" id="appointmentDate" />
+                </div>
+
+                <div class="appointment-form-field">
+                  <label>
+                    เวลา
+                    <span class="required">*</span>
+                  </label>
+
+                  <input type="time" id="appointmentTime" />
+                </div>
+
+                <div class="appointment-form-field full">
+                  <label>
+                    สถานที่ / ช่องทางนิเทศ
+                    <span class="required">*</span>
+                  </label>
+
+                  <input
+                    type="text"
+                    id="appointmentPlace"
+                    placeholder="เช่น บริษัท / Google Meet / Microsoft Teams"
+                  />
+                </div>
+
+                <div class="appointment-form-field full">
+                  <label> หมายเหตุ </label>
+
+                  <textarea
+                    id="appointmentNote"
+                    rows="3"
+                    placeholder="รายละเอียดเพิ่มเติม"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="appointment-modal-footer">
+              <button
+                type="button"
+                class="btn-mock-sm"
+                onclick="closeAppointmentModal()"
+              >
+                ยกเลิก
+              </button>
+
+              <button
+                type="button"
+                class="btn-mock-sm solid"
+                onclick="saveAppointmentMockup()"
+              >
+                <i class="fa-solid fa-floppy-disk"></i>
+                บันทึกนัดหมาย
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- =====================================================
+     MODAL : ตรวจสอบการยืนยันพี่เลี้ยง
+====================================================== -->
+        <div
+          id="mentorConfirmationModal"
+          class="appointment-modal"
+          aria-hidden="true"
+        >
+          <div class="appointment-modal-card mentor-confirm-modal-card">
+            <div class="appointment-modal-header">
+              <div>
+                <h3>ตรวจสอบการยืนยันจากพี่เลี้ยง</h3>
+
+                <p>ตรวจสอบสถานะและกำหนดผู้แทนกรณีพี่เลี้ยงไม่สะดวก</p>
+              </div>
+
+              <button
+                type="button"
+                class="appointment-modal-close"
+                onclick="closeMentorConfirmation()"
+              >
+                &times;
+              </button>
+            </div>
+
+            <div class="appointment-modal-body">
+              <div class="mentor-confirm-info">
+                <div>
+                  <span> นักศึกษา </span>
+
+                  <strong id="mentorConfirmStudent"> - </strong>
+                </div>
+
+                <div>
+                  <span> นิเทศครั้งที่ </span>
+
+                  <strong id="mentorConfirmRound"> - </strong>
+                </div>
+
+                <div>
+                  <span> พี่เลี้ยงหลัก </span>
+
+                  <strong id="mentorConfirmName"> - </strong>
+                </div>
+              </div>
+
+              <div class="mentor-mockup-warning">
+                <i class="fa-solid fa-circle-info"></i>
+
+                <span>
+                  ส่วนนี้เป็น Mockup สำหรับจำลองผลตอบกลับ
+                  ระบบจริงพี่เลี้ยงสามารถตอบรับผ่าน Token Link ที่ระบบส่งให้
+                </span>
+              </div>
+
+              <div class="appointment-form-field full">
+                <label> ผลการตอบรับจากพี่เลี้ยง </label>
+
+                <select
+                  id="mentorConfirmStatus"
+                  onchange="toggleRepresentativeFields()"
+                >
+                  <option value="pending">รอการตอบรับ</option>
+
+                  <option value="confirmed">พี่เลี้ยงยืนยันเข้าร่วม</option>
+
+                  <option value="unavailable">
+                    พี่เลี้ยงไม่สะดวก / ใช้ผู้แทน
+                  </option>
+                </select>
+              </div>
+
+              <!-- ================= ผู้แทน ================= -->
+              <div
+                id="representativeFields"
+                class="representative-section"
+                style="display: none"
+              >
+                <div class="representative-title">
+                  <i class="fa-solid fa-user-group"></i>
+
+                  ข้อมูลผู้แทนพี่เลี้ยง
+                </div>
+
+                <div class="appointment-form-grid">
+                  <div class="appointment-form-field full">
+                    <label>
+                      ชื่อ-นามสกุลผู้แทน
+                      <span class="required">*</span>
+                    </label>
+
+                    <input
+                      type="text"
+                      id="representativeName"
+                      placeholder="กรอกชื่อผู้แทน"
+                    />
+                  </div>
+
+                  <div class="appointment-form-field">
+                    <label>
+                      ตำแหน่ง
+                      <span class="required">*</span>
+                    </label>
+
+                    <input
+                      type="text"
+                      id="representativePosition"
+                      placeholder="ตำแหน่งของผู้แทน"
+                    />
+                  </div>
+
+                  <div class="appointment-form-field">
+                    <label> เบอร์โทรศัพท์ </label>
+
+                    <input
+                      type="text"
+                      id="representativePhone"
+                      placeholder="เบอร์โทรศัพท์"
+                    />
+                  </div>
+
+                  <div class="appointment-form-field full">
+                    <label>
+                      เหตุผลที่พี่เลี้ยงหลักไม่สะดวก
+                      <span class="required">*</span>
+                    </label>
+
+                    <textarea
+                      id="representativeReason"
+                      rows="3"
+                      placeholder="เช่น ติดประชุม / เดินทางต่างจังหวัด"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="appointment-modal-footer">
+              <button
+                type="button"
+                class="btn-mock-sm"
+                onclick="closeMentorConfirmation()"
+              >
+                ยกเลิก
+              </button>
+
+              <button
+                type="button"
+                class="btn-mock-sm solid"
+                onclick="saveMentorConfirmation()"
+              >
+                <i class="fa-solid fa-floppy-disk"></i>
+                บันทึกผลการยืนยัน
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- =====================================================
+     MODAL : ดูรายละเอียด
+====================================================== -->
+        <div
+          id="appointmentDetailModal"
+          class="appointment-modal"
+          aria-hidden="true"
+        >
+          <div class="appointment-modal-card">
+            <div class="appointment-modal-header">
+              <div>
+                <h3>รายละเอียดนัดหมายนิเทศ</h3>
+
+                <p>ตรวจสอบรายละเอียดของนัดหมาย</p>
+              </div>
+
+              <button
+                type="button"
+                class="appointment-modal-close"
+                onclick="closeAppointmentDetail()"
+              >
+                &times;
+              </button>
+            </div>
+
+            <div
+              class="appointment-modal-body"
+              id="appointmentDetailBody"
+            ></div>
+
+            <div class="appointment-modal-footer">
+              <button
+                type="button"
+                class="btn-mock-sm solid"
+                onclick="closeAppointmentDetail()"
+              >
+                ปิด
+              </button>
+            </div>
+          </div>
+        </div>
         <!-- ================= บันทึกผลนิเทศ ================= -->
         <section class="content-panel" id="panel-visit">
           <div class="panel-header">
@@ -3922,7 +6913,10 @@
 
               <div class="evaluation-item-content">
                 <h3>เล่มบันทึกฝึกงานสหกิจศึกษา</h3>
-                <p>ประเมินความสมบูรณ์ เนื้อหา รูปแบบ และคุณภาพของล่มบันทึกฝึกงานสหกิจศึกษา</p>
+                <p>
+                  ประเมินความสมบูรณ์ เนื้อหา รูปแบบ
+                  และคุณภาพของล่มบันทึกฝึกงานสหกิจศึกษา
+                </p>
 
                 <div class="evaluation-result">
                   <span>คะแนน</span>
@@ -3956,7 +6950,8 @@
               <div class="evaluation-item-content">
                 <h3>เล่มโครงการสหกิจ</h3>
                 <p>
-                  ประเมินคุณภาพเล่มโครงการ ความถูกต้อง การใช้งาน และความเหมาะสมของชิ้นงาน
+                  ประเมินคุณภาพเล่มโครงการ ความถูกต้อง การใช้งาน
+                  และความเหมาะสมของชิ้นงาน
                 </p>
 
                 <div class="evaluation-result">
@@ -4053,125 +7048,123 @@
           </div>
         </section>
         <!-- ================= ประเมินสถานประกอบการ ================= -->
-<section class="content-panel" id="panel-evalcompany">
+        <!-- ================= ประเมินสถานประกอบการ ================= -->
+        <section class="content-panel" id="panel-evalcompany">
+          <div class="panel-header">
+            <h2>ประเมินสถานประกอบการ</h2>
+            <p>
+              ประเมินความเหมาะสมของสถานประกอบการสำหรับการปฏิบัติงานสหกิจศึกษา
+            </p>
+          </div>
 
-  <div class="panel-header">
-    <h2>ประเมินสถานประกอบการ</h2>
-    <p>
-      ประเมินความเหมาะสมของสถานประกอบการสำหรับการปฏิบัติงานสหกิจศึกษา
-    </p>
-  </div>
+          <!-- ================= ข้อมูลสถานประกอบการ ================= -->
+          <div class="company-eval-card">
+            <!-- Header -->
+            <div class="company-eval-header">
+              <div class="company-eval-company">
+                <div class="company-eval-icon">
+                  <i class="fa-solid fa-building"></i>
+                </div>
 
-  <!-- ข้อมูลสถานประกอบการ -->
-  <div class="company-eval-card">
+                <div>
+                  <h3>BlueWave Digital Co., Ltd.</h3>
 
-    <div class="company-eval-header">
+                  <p>
+                    <i class="fa-solid fa-location-dot"></i>
+                    ชลบุรี
+                  </p>
+                </div>
+              </div>
 
-      <div class="company-eval-company">
-        <div class="company-eval-icon">
-          <i class="fa-solid fa-building"></i>
-        </div>
+              <!-- สถานะ -->
+              <div class="company-eval-actions">
+                <span
+                  class="company-eval-status pending"
+                  id="companyEvaluationStatus"
+                >
+                  <i class="fa-regular fa-clock"></i>
+                  ยังไม่ประเมิน
+                </span>
+              </div>
+            </div>
 
-        <div>
-          <h3>BlueWave Digital Co., Ltd.</h3>
-          <p>
-            <i class="fa-solid fa-location-dot"></i>
-            ชลบุรี
-          </p>
-        </div>
-      </div>
+            <!-- ================= นักศึกษา ================= -->
+            <div class="company-eval-student">
+              <div class="company-student-avatar">พ</div>
 
-      <div class="company-eval-actions">
-        class="company-eval-status pending"
-        id="companyEvaluationStatus"
-      >
-        <i class="fa-regular fa-clock"></i>
-        ยังไม่ประเมิน
-      </span>
+              <div>
+                <span> นักศึกษาที่ปฏิบัติงาน </span>
 
-    </div>
+                <strong> นางสาวพิมพ์ชนก สุขใจ </strong>
 
+                <small> 6702458196 · INE </small>
+              </div>
 
-    <!-- นักศึกษา -->
-    <div class="company-eval-student">
+              <div>
+                <span> ตำแหน่ง </span>
 
-      <div class="company-student-avatar">
-        พ
-      </div>
+                <strong> Frontend Developer </strong>
+              </div>
 
-      <div>
-        <span>นักศึกษาที่ปฏิบัติงาน</span>
-        <strong>นางสาวพิมพ์ชนก สุขใจ</strong>
-        <small>6702458196 · INE</small>
-      </div>
+              <div>
+                <span> พี่เลี้ยง </span>
 
-      <div>
-        <span>ตำแหน่ง</span>
-        <strong>Frontend Developer</strong>
-      </div>
+                <strong> คุณณัฐชา วงศ์พิพัฒน์ </strong>
 
-      <div>
-        <span>พี่เลี้ยง</span>
-        <strong>คุณณัฐชา วงศ์พิพัฒน์</strong>
-        <small>Frontend Development Lead</small>
-      </div>
+                <small> Frontend Development Lead </small>
+              </div>
+            </div>
 
-    </div>
+            <!-- ================= ผลการประเมิน ================= -->
+            <div class="company-eval-summary">
+              <!-- คะแนน -->
+              <div class="company-score-box">
+                <span> คะแนนเฉลี่ย </span>
 
+                <strong id="companyEvaluationScore"> - </strong>
 
-    <!-- ผลการประเมิน -->
-    <div class="company-eval-summary">
+                <small> จาก 5 คะแนน </small>
+              </div>
 
-      <div class="company-score-box">
-        <span>คะแนน</span>
-      </div>
+              <!-- รายละเอียด -->
+              <div class="company-score-detail">
+                <div>
+                  <span> ผลการประเมิน </span>
 
+                  <strong id="companyEvaluationResult">
+                    ยังไม่ได้ประเมิน
+                  </strong>
+                </div>
 
-      <div class="company-score-detail">
+                <div>
+                  <span> วันที่ประเมิน </span>
 
-        <div>
-          <span>ผลการประเมิน</span>
+                  <strong id="companyEvaluationDate"> - </strong>
+                </div>
+              </div>
+            </div>
 
-          <strong id="companyEvaluationResult">
-            ยังไม่ได้ประเมิน
-          </strong>
-        </div>
+            <!-- ================= Footer ================= -->
+            <div class="company-eval-footer">
+              <div class="company-eval-note">
+                <i class="fa-solid fa-circle-info"></i>
 
-        <div>
-          <span>วันที่ประเมิน</span>
+                ประเมินสถานประกอบการตามประสบการณ์จากการนิเทศนักศึกษาสหกิจศึกษา
+              </div>
 
-          <strong id="companyEvaluationDate">
-            -
-          </strong>
-        </div>
+              <button
+                type="button"
+                class="btn-mock-sm solid"
+                id="companyEvaluationButton"
+                onclick="openCompanyEvaluation()"
+              >
+                <i class="fa-solid fa-star"></i>
 
-      </div>
-
-    </div>
-
-
-    <div class="company-eval-footer">
-
-      <div class="company-eval-note">
-        <i class="fa-solid fa-circle-info"></i>
-        ประเมินสถานประกอบการตามประสบการณ์จากการนิเทศนักศึกษาสหกิจศึกษา
-      </div>
-
-      <button
-        type="button"
-        class="btn-mock-sm solid"
-        id="companyEvaluationButton"
-        onclick="openCompanyEvaluation()"
-      >
-        <i class="fa-solid fa-star"></i>
-        ประเมินสถานประกอบการ
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
+                ประเมินสถานประกอบการ
+              </button>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
 
@@ -4184,106 +7177,401 @@
     <script type="module" src="main.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        const user = JSON.parse(localStorage.getItem("currentUser") || "null");
-        const teacherName = user?.name || "ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ";
-        document.getElementById("overviewGreeting").textContent =
-          `ยินดีต้อนรับ, ${teacherName}`;
-        document.getElementById("userNameDisplay").textContent = teacherName;
+        // =====================================================
+        // ข้อมูลอาจารย์ผู้ใช้งาน
+        // =====================================================
 
+        const user = JSON.parse(localStorage.getItem("currentUser") || "null");
+
+        const teacherName = user?.name || "ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ";
+
+        // =====================================================
+        // แสดงชื่ออาจารย์
+        // =====================================================
+
+        const overviewGreeting = document.getElementById("overviewGreeting");
+
+        if (overviewGreeting) {
+          overviewGreeting.textContent = `ยินดีต้อนรับ, ${teacherName}`;
+        }
+
+        const userNameDisplay = document.getElementById("userNameDisplay");
+
+        if (userNameDisplay) {
+          userNameDisplay.textContent = teacherName;
+        }
+
+        // =====================================================
         // สลับเมนูด้านซ้าย
+        // =====================================================
+
         document
           .querySelectorAll(".sidebar-item[data-target]")
           .forEach((item) => {
             item.addEventListener("click", () => {
-              document
-                .querySelectorAll(".sidebar-item")
-                .forEach((i) => i.classList.remove("active"));
-              document
-                .querySelectorAll(".content-panel")
-                .forEach((p) => p.classList.remove("active"));
+              document.querySelectorAll(".sidebar-item").forEach((menu) => {
+                menu.classList.remove("active");
+              });
+
+              document.querySelectorAll(".content-panel").forEach((panel) => {
+                panel.classList.remove("active");
+              });
+
               item.classList.add("active");
-              document
-                .getElementById(item.dataset.target)
-                .classList.add("active");
+
+              const targetPanel = document.getElementById(item.dataset.target);
+
+              if (targetPanel) {
+                targetPanel.classList.add("active");
+              }
             });
           });
 
-        // ค้นหานักศึกษา + กรองตามสาขา
+        // =====================================================
+        // ค้นหานักศึกษา
+        // =====================================================
+
         window.filterStudents = function () {
-          const input = document.getElementById("studentSearchInput");
-          const select = document.getElementById("studentMajorFilter");
+          const searchInput = document.getElementById("studentSearchInput");
 
-          if (!input || !select) return;
+          const majorSelect = document.getElementById("majorFilter");
 
-          const keyword = input.value.trim().toLowerCase();
-          const major = select.value.trim().toLowerCase();
-
-          document
-            .querySelectorAll("#coopStudentTable tbody tr")
-            .forEach((row) => {
-              const name = (row.dataset.name || "").toLowerCase();
-              const rowMajor = (row.dataset.major || "").toLowerCase();
-              const company = (row.dataset.company || "").toLowerCase();
-
-              const matchKeyword =
-                !keyword ||
-                name.includes(keyword) ||
-                rowMajor.includes(keyword) ||
-                company.includes(keyword);
-
-              const matchMajor = !major || rowMajor === major;
-
-              row.style.display = matchKeyword && matchMajor ? "" : "none";
-            });
-        };
-
-        // รับเป็นอาจารย์นิเทศ
-        window.confirmStudent = function (button) {
-          const row = button.closest("tr");
-          const name = row.dataset.name;
-
-          if (
-            confirm(
-              `ต้องการรับ "${name}" เป็นนักศึกษาที่อยู่ในความดูแลหรือไม่?`,
-            )
-          ) {
-            row.children[4].innerHTML =
-              '<span class="tag tag-green">ยืนยันแล้ว</span>';
-
-            button.textContent = "ดูข้อมูล";
-            button.classList.remove("solid");
-            button.onclick = null;
-
-            alert(`ยืนยันรับ ${name} เป็นนักศึกษาที่ดูแลเรียบร้อยแล้ว`);
+          if (!searchInput || !majorSelect) {
+            return;
           }
+
+          const keyword = searchInput.value.trim().toLowerCase();
+
+          const selectedMajor = majorSelect.value.trim().toLowerCase();
+
+          const rows = document.querySelectorAll("#coopStudentTable tbody tr");
+
+          rows.forEach((row) => {
+            const studentName = (row.dataset.name || "").toLowerCase();
+
+            const studentId = (row.dataset.studentId || "").toLowerCase();
+
+            const studentMajor = (row.dataset.major || "").toLowerCase();
+
+            const company = (row.dataset.company || "").toLowerCase();
+
+            // ค้นหาได้จาก
+            // ชื่อ / รหัส / บริษัท
+
+            const matchKeyword =
+              !keyword ||
+              studentName.includes(keyword) ||
+              studentId.includes(keyword) ||
+              company.includes(keyword);
+
+            // กรองสาขา
+
+            const matchMajor = !selectedMajor || studentMajor === selectedMajor;
+
+            row.style.display = matchKeyword && matchMajor ? "" : "none";
+          });
         };
 
+        // =====================================================
+        // รีเซ็ตการค้นหา
+        // =====================================================
+
+        window.resetStudentFilters = function () {
+          const searchInput = document.getElementById("studentSearchInput");
+
+          const majorSelect = document.getElementById("majorFilter");
+
+          if (searchInput) {
+            searchInput.value = "";
+          }
+
+          if (majorSelect) {
+            majorSelect.value = "";
+          }
+
+          filterStudents();
+        };
+
+        // =====================================================
         // รับเป็นอาจารย์ที่ปรึกษาโครงการ
+        //
+        // หมายเหตุ:
+        // เมื่อรับเป็นที่ปรึกษาแล้ว
+        // ให้ถือว่าเป็นอาจารย์นิเทศด้วยทันที
+        // =====================================================
+
         window.advisorProject = function (button) {
           const row = button.closest("tr");
-          const name = row.dataset.name;
 
-          if (
-            confirm(`ต้องการรับ "${name}" เป็นอาจารย์ที่ปรึกษาโครงการหรือไม่?`)
-          ) {
-            row.children[5].innerHTML =
-              '<span class="tag tag-green">เป็นที่ปรึกษาแล้ว</span>';
-
-            button.textContent = "เป็นที่ปรึกษาแล้ว";
-            button.classList.remove("solid");
-            button.disabled = true;
-
-            alert(`รับ ${name} เป็นอาจารย์ที่ปรึกษาโครงการเรียบร้อยแล้ว`);
+          if (!row) {
+            return;
           }
+
+          const studentName = row.dataset.name || "นักศึกษา";
+
+          const advisorStatus = row.querySelector(".advisor-status");
+
+          const advisorConfirmStatus = row.querySelector(
+            ".advisor-confirm-status",
+          );
+
+          const confirmed = confirm(
+            `ต้องการรับ "${studentName}" ` +
+              `เป็นนักศึกษาที่ปรึกษาโครงการหรือไม่?\n\n` +
+              `เมื่อรับแล้ว อาจารย์จะทำหน้าที่เป็นอาจารย์นิเทศของนักศึกษาคนนี้ด้วย`,
+          );
+
+          if (!confirmed) {
+            return;
+          }
+
+          // =====================================
+          // เปลี่ยนสถานะอาจารย์
+          // =====================================
+
+          if (advisorStatus) {
+            advisorStatus.innerHTML = `
+
+            <span class="student-status success">
+
+              <i class="fa-solid fa-circle-check"></i>
+
+              เป็นที่ปรึกษาแล้ว
+
+            </span>
+
+            <small class="role-note">
+
+              ทำหน้าที่อาจารย์นิเทศด้วย
+
+            </small>
+
+          `;
+          }
+
+          // =====================================
+          // รอตรวจสอบข้อมูลนักศึกษา
+          // =====================================
+
+          if (advisorConfirmStatus) {
+            advisorConfirmStatus.innerHTML = `
+
+            <span class="student-status warning">
+
+              <i class="fa-regular fa-clock"></i>
+
+              รอยืนยันข้อมูล
+
+            </span>
+
+          `;
+          }
+
+          // =====================================
+          // เปลี่ยนปุ่มเดิม
+          // เป็น ตรวจสอบและยืนยัน
+          // =====================================
+
+          button.innerHTML = `
+
+          <i class="fa-solid fa-circle-check"></i>
+
+          ตรวจสอบและยืนยัน
+
+        `;
+
+          button.onclick = function () {
+            confirmAdvisorStudent(this);
+          };
+
+          alert(
+            `รับ ${studentName} ` +
+              `เป็นนักศึกษาที่ปรึกษาโครงการเรียบร้อยแล้ว\n\n` +
+              `อาจารย์จะทำหน้าที่เป็นอาจารย์นิเทศของนักศึกษาคนนี้ด้วย`,
+          );
         };
 
+        // =====================================================
+        // ตรวจสอบและยืนยันข้อมูล
+        // นักศึกษาที่ปรึกษา
+        // =====================================================
+
+        window.confirmAdvisorStudent = function (button) {
+          const row = button.closest("tr");
+
+          if (!row) {
+            return;
+          }
+
+          const studentName = row.dataset.name || "-";
+
+          const studentId = row.dataset.studentId || "-";
+
+          const major = row.dataset.major || "-";
+
+          const company = row.dataset.company || "-";
+
+          const advisorStatus = row.querySelector(".advisor-status");
+
+          const confirmStatus = row.querySelector(".advisor-confirm-status");
+
+          // =====================================
+          // ตรวจว่ารับเป็นที่ปรึกษาแล้วหรือยัง
+          // =====================================
+
+          if (
+            !advisorStatus ||
+            !advisorStatus.textContent.includes("เป็นที่ปรึกษาแล้ว")
+          ) {
+            alert("กรุณารับนักศึกษาเป็นนักศึกษาที่ปรึกษาโครงการก่อน");
+
+            return;
+          }
+
+          // =====================================
+          // ถ้ายืนยันไปแล้ว
+          // ให้แสดงข้อมูลแทน
+          // =====================================
+
+          if (
+            confirmStatus &&
+            confirmStatus.textContent.includes("ยืนยันข้อมูลแล้ว")
+          ) {
+            alert(
+              `ข้อมูลนักศึกษาที่ได้รับการยืนยันแล้ว\n\n` +
+                `ชื่อ: ${studentName}\n` +
+                `รหัสนักศึกษา: ${studentId}\n` +
+                `สาขา: ${major}\n` +
+                `สถานประกอบการ: ${company}\n\n` +
+                `อาจารย์ที่ปรึกษา / อาจารย์นิเทศ:\n` +
+                `${teacherName}`,
+            );
+
+            return;
+          }
+
+          // =====================================
+          // แสดงข้อมูลก่อนยืนยัน
+          // =====================================
+
+          const message =
+            `ตรวจสอบข้อมูลนักศึกษาที่ปรึกษาโครงการ\n\n` +
+            `ชื่อ: ${studentName}\n` +
+            `รหัสนักศึกษา: ${studentId}\n` +
+            `สาขา: ${major}\n` +
+            `สถานประกอบการ: ${company}\n\n` +
+            `อาจารย์ที่ปรึกษา / อาจารย์นิเทศ:\n` +
+            `${teacherName}\n\n` +
+            `ข้อมูลถูกต้องและต้องการยืนยันหรือไม่?`;
+
+          const confirmed = confirm(message);
+
+          if (!confirmed) {
+            return;
+          }
+
+          // =====================================
+          // เปลี่ยนสถานะเป็นยืนยันแล้ว
+          // =====================================
+
+          if (confirmStatus) {
+            confirmStatus.innerHTML = `
+
+            <span class="student-status success">
+
+              <i class="fa-solid fa-circle-check"></i>
+
+              ยืนยันข้อมูลแล้ว
+
+            </span>
+
+          `;
+          }
+
+          // =====================================
+          // เปลี่ยนปุ่ม
+          // =====================================
+
+          button.innerHTML = `
+
+          <i class="fa-solid fa-circle-check"></i>
+
+          ข้อมูลที่ยืนยัน
+
+        `;
+
+          button.classList.remove("primary");
+
+          button.classList.add("outline");
+
+          alert(`ยืนยันข้อมูลของ ${studentName} เรียบร้อยแล้ว`);
+        };
+
+        // =====================================================
+        // ดูข้อมูลนักศึกษา
+        // =====================================================
+
+        window.viewStudentDetail = function (button) {
+          const row = button.closest("tr");
+
+          if (!row) {
+            return;
+          }
+
+          const studentName = row.dataset.name || "-";
+
+          const studentId = row.dataset.studentId || "-";
+
+          const major = row.dataset.major || "-";
+
+          const company = row.dataset.company || "-";
+
+          const cells = row.querySelectorAll("td");
+
+          // หลังจากเอาคอลัมน์รหัสออก
+          // ตำแหน่งอยู่ index 3
+
+          const position = cells[3]?.textContent.trim() || "-";
+
+          const advisorStatus =
+            row.querySelector(".advisor-status")?.textContent.trim() || "-";
+
+          const advisorConfirmStatus =
+            row.querySelector(".advisor-confirm-status")?.textContent.trim() ||
+            "-";
+
+          alert(
+            `ข้อมูลนักศึกษาสหกิจศึกษา\n\n` +
+              `ชื่อ: ${studentName}\n` +
+              `รหัสนักศึกษา: ${studentId}\n` +
+              `สาขา: ${major}\n` +
+              `สถานประกอบการ: ${company}\n` +
+              `ตำแหน่ง: ${position}\n\n` +
+              `สถานะอาจารย์ที่ปรึกษา / นิเทศ:\n` +
+              `${advisorStatus}\n\n` +
+              `สถานะยืนยันข้อมูล:\n` +
+              `${advisorConfirmStatus}`,
+          );
+        };
+
+        // =====================================================
+        // กด Enter เพื่อค้นหา
+        // =====================================================
+
         const studentSearch = document.getElementById("studentSearchInput");
+
         if (studentSearch) {
-          studentSearch.addEventListener("keydown", (event) => {
-            if (event.key === "Enter") {
-              filterStudents();
-            }
-          });
+          studentSearch.addEventListener(
+            "keydown",
+
+            (event) => {
+              if (event.key === "Enter") {
+                event.preventDefault();
+
+                filterStudents();
+              }
+            },
+          );
         }
       });
     </script>
@@ -4527,137 +7815,105 @@
     </div>
 
     <script>
+      /* ========================================================
+     เปิด Modal ทั่วไป
+  ======================================================== */
+
       function openMockup(id) {
         const modal = document.getElementById(id);
+
         if (!modal) return;
+
         modal.classList.add("show");
+
         modal.setAttribute("aria-hidden", "false");
       }
 
+      /* ========================================================
+     ปิด Modal ทั่วไป
+  ======================================================== */
+
       function closeMockup(id) {
         const modal = document.getElementById(id);
+
         if (!modal) return;
+
         modal.classList.remove("show");
+
         modal.setAttribute("aria-hidden", "true");
       }
 
-      let activeAppointmentButton = null;
+      /* ========================================================
+     ตัวแปรสำหรับพี่เลี้ยง
+  ======================================================== */
+
       let activeMentorButton = null;
 
-      function openAppointmentForButton(button) {
-        activeAppointmentButton = button;
-
-        const row = button.closest("tr");
-        const cells = row ? row.querySelectorAll("td") : [];
-        const student = cells.length ? cells[0].textContent.trim() : "นักศึกษา";
-
-        const studentInput = document.getElementById("appointmentStudent");
-        if (studentInput) studentInput.value = student;
-
-        const dateInput = document.getElementById("appointmentDate");
-        if (dateInput && !dateInput.value) {
-          dateInput.value = new Date().toISOString().split("T")[0];
-        }
-
-        openMockup("appointmentMockup");
-      }
-
-      function saveAppointmentMockup() {
-        const student =
-          document.getElementById("appointmentStudent")?.value || "นักศึกษา";
-        const date = document.getElementById("appointmentDate")?.value;
-        const time = document.getElementById("appointmentTime")?.value;
-        const place = document.getElementById("appointmentPlace")?.value.trim();
-
-        if (!date) {
-          alert("กรุณาเลือกวันที่นัดหมาย");
-          return;
-        }
-
-        if (!time) {
-          alert("กรุณาเลือกเวลานัดหมาย");
-          return;
-        }
-
-        if (!place) {
-          alert("กรุณาระบุสถานที่ / ช่องทางนิเทศ");
-          return;
-        }
-
-        if (activeAppointmentButton) {
-          const row = activeAppointmentButton.closest("tr");
-          if (row) {
-            const cells = row.querySelectorAll("td");
-
-            if (cells[1]) {
-              const d = new Date(date + "T00:00:00");
-              const formattedDate = d.toLocaleDateString("th-TH", {
-                day: "numeric",
-                month: "short",
-                year: "numeric",
-              });
-              cells[1].textContent = `${formattedDate}, ${time} น.`;
-            }
-
-            if (cells[3]) {
-              cells[3].innerHTML = '<span class="tag tag-green">นัดแล้ว</span>';
-            }
-
-            if (activeAppointmentButton.textContent.includes("สร้างนัดหมาย")) {
-              activeAppointmentButton.textContent = "ดูรายละเอียด";
-              activeAppointmentButton.classList.remove("solid");
-              activeAppointmentButton.onclick = function () {
-                alert(
-                  `นัดหมายของ ${student}\\nวันที่ ${cells[1]?.textContent || "-"}\\nสถานที่: ${place}`,
-                );
-              };
-            } else if (
-              activeAppointmentButton.textContent.includes("สร้างนัดหมายใหม่")
-            ) {
-              activeAppointmentButton.textContent = "ดูรายละเอียด";
-              activeAppointmentButton.classList.remove("solid");
-            }
-          }
-        }
-
-        alert(`บันทึกนัดหมายของ ${student} เรียบร้อยแล้ว (Mockup)`);
-        closeMockup("appointmentMockup");
-        activeAppointmentButton = null;
-      }
+      /* ========================================================
+     บันทึกข้อมูลพี่เลี้ยง
+     ใช้เฉพาะ Modal พี่เลี้ยงเก่า
+  ======================================================== */
 
       function saveMentorMockup() {
         const modal = document.getElementById("mentorMockup");
-        const inputs = modal ? modal.querySelectorAll("input") : [];
+
+        if (!modal) {
+          return;
+        }
+
+        const inputs = modal.querySelectorAll("input");
+
         const firstName = inputs[0]?.value.trim() || "";
+
         const lastName = inputs[1]?.value.trim() || "";
+
         const mentorName = `${firstName} ${lastName}`.trim();
 
         if (!mentorName) {
           alert("กรุณาระบุชื่อพี่เลี้ยง");
+
           return;
         }
 
         if (activeMentorButton) {
           const row = activeMentorButton.closest("tr");
+
           const badge = row?.querySelector(".mentor-badge");
+
           if (badge) {
             badge.className = "mentor-badge reassigned";
-            badge.innerHTML =
-              '<i class="fa-solid fa-user-pen"></i> มอบหมายพี่เลี้ยงใหม่';
+
+            badge.innerHTML = `
+          <i class="fa-solid fa-user-pen"></i>
+          มอบหมายพี่เลี้ยงใหม่
+        `;
           }
         }
 
-        alert(`บันทึกข้อมูลพี่เลี้ยง "${mentorName}" เรียบร้อยแล้ว (Mockup)`);
+        alert(`บันทึกข้อมูลพี่เลี้ยง "${mentorName}" เรียบร้อยแล้ว`);
+
         closeMockup("mentorMockup");
+
         activeMentorButton = null;
       }
 
+      /* ========================================================
+     ดูข้อมูลจากตารางทั่วไป
+  ======================================================== */
+
       function showButtonInfo(button) {
         const row = button.closest("tr");
-        const cells = row ? row.querySelectorAll("td") : [];
+
+        if (!row) {
+          return;
+        }
+
+        const cells = row.querySelectorAll("td");
+
         const student = cells.length ? cells[0].textContent.trim() : "นักศึกษา";
 
         const values = [];
+
         cells.forEach((cell, index) => {
           if (index > 0 && cell.textContent.trim()) {
             values.push(cell.textContent.trim());
@@ -4665,57 +7921,53 @@
         });
 
         alert(
-          `ข้อมูลของ ${student}\\n\\n${values.join("\\n") || "ยังไม่มีข้อมูลเพิ่มเติม"}`,
+          `ข้อมูลของ ${student}\n\n` +
+            `${values.join("\n") || "ยังไม่มีข้อมูลเพิ่มเติม"}`,
         );
       }
 
-      function viewVisitRecord(button) {
-        const row = button.closest("tr");
-        const student =
-          row?.querySelector("td")?.textContent.trim() || "นักศึกษา";
-        alert(
-          `บันทึกนิเทศของ ${student}\\n\\nMockup: สามารถเปิดดูรายละเอียดบันทึกนิเทศได้ในขั้นตอนถัดไป`,
-        );
-      }
-
-      function createVisitPdf(button) {
-        const row = button.closest("tr");
-        const student =
-          row?.querySelector("td")?.textContent.trim() || "นักศึกษา";
-
-        alert(
-          `เตรียมสร้าง PDF สำหรับ ${student}\\n\\nระบบ Mockup จะเปิดหน้าพิมพ์ เพื่อให้เลือก "Save as PDF" ได้`,
-        );
-        window.print();
-      }
-
-      function viewVisitResult(button) {
-        const row = button.closest("tr");
-        const student =
-          row?.querySelector("td")?.textContent.trim() || "นักศึกษา";
-        alert(
-          `ผลนิเทศของ ${student}\\n\\nMockup: แสดงผลบันทึกนิเทศและรายละเอียดการประเมิน`,
-        );
-      }
+      /* ========================================================
+     ประเมินนักศึกษาแบบ Mockup เดิม
+     เก็บไว้สำหรับเมนูที่ยังใช้ตารางเดิม
+  ======================================================== */
 
       function evaluateStudent(button) {
         const row = button.closest("tr");
+
+        if (!row) {
+          return;
+        }
+
         const student =
-          row?.querySelector("td")?.textContent.trim() || "นักศึกษา";
+          row.querySelector("td")?.textContent.trim() || "นักศึกษา";
+
         const score = prompt(
-          `กรอกคะแนนประเมินนักศึกษา\\n${student}\\n\\nตัวอย่าง: 45/50 หรือ 90/100`,
+          `กรอกคะแนนประเมินนักศึกษา\n${student}\n\nตัวอย่าง: 45/50 หรือ 90/100`,
           "",
         );
 
-        if (score === null || score.trim() === "") return;
+        if (score === null || score.trim() === "") {
+          return;
+        }
 
-        const statusCell = row?.querySelector("td:last-child");
-        const scoreCell = row?.querySelector("td:nth-child(2)");
+        const statusCell = row.querySelector("td:last-child");
 
-        if (scoreCell) scoreCell.innerHTML = `<strong>${score.trim()}</strong>`;
+        const scoreCell = row.querySelector("td:nth-child(2)");
+
+        if (scoreCell) {
+          scoreCell.innerHTML = `<strong>${score.trim()}</strong>`;
+        }
+
         if (statusCell) {
-          statusCell.innerHTML =
-            '<button type="button" class="btn-mock-sm">แก้ไขคะแนน</button>';
+          statusCell.innerHTML = `
+        <button
+          type="button"
+          class="btn-mock-sm"
+        >
+          แก้ไขคะแนน
+        </button>
+      `;
+
           statusCell
             .querySelector("button")
             .addEventListener("click", function () {
@@ -4723,96 +7975,145 @@
             });
         }
 
-        alert(
-          `บันทึกคะแนนของ ${student} เป็น ${score.trim()} เรียบร้อยแล้ว (Mockup)`,
-        );
+        alert(`บันทึกคะแนนของ ${student} เป็น ${score.trim()} เรียบร้อยแล้ว`);
       }
+
+      /* ========================================================
+     ประเมินสถานประกอบการแบบ Mockup เดิม
+  ======================================================== */
 
       function rateEstablishment(button) {
         const card =
-          button.closest(".est-card, .company-card, .evaluation-card") ||
-          button.parentElement?.parentElement;
+          button.closest(
+            ".est-card, .company-card, .evaluation-card, .company-eval-card",
+          ) || button.parentElement?.parentElement;
+
         const company =
           card?.querySelector("strong, h3, h4")?.textContent.trim() ||
           "สถานประกอบการ";
+
         const score = prompt(
-          `ให้คะแนนสถานประกอบการ\\n${company}\\n\\nกรอกคะแนน 1-5`,
+          `ให้คะแนนสถานประกอบการ\n${company}\n\nกรอกคะแนน 1-5`,
           "",
         );
 
-        if (score === null || score.trim() === "") return;
+        if (score === null || score.trim() === "") {
+          return;
+        }
 
         const numeric = Number(score);
+
         if (Number.isNaN(numeric) || numeric < 1 || numeric > 5) {
           alert("กรุณากรอกคะแนนตั้งแต่ 1 ถึง 5");
+
           return;
         }
 
         button.textContent = "ประเมินแล้ว";
+
         button.classList.remove("solid");
 
         const existing = card?.querySelector(".mock-rating-result");
+
         if (existing) {
           existing.textContent = `คะแนน ${numeric}/5`;
         } else if (card) {
           const result = document.createElement("div");
+
           result.className = "mock-rating-result";
+
           result.style.marginTop = "8px";
+
           result.style.fontWeight = "600";
+
           result.textContent = `คะแนน ${numeric}/5`;
+
           card.appendChild(result);
         }
 
-        alert(
-          `บันทึกคะแนน ${numeric}/5 สำหรับ ${company} เรียบร้อยแล้ว (Mockup)`,
-        );
+        alert(`บันทึกคะแนน ${numeric}/5 สำหรับ ${company} เรียบร้อยแล้ว`);
       }
+
+      /* ========================================================
+     Event สำหรับปุ่มเก่าที่ยังไม่มี onclick
+  ======================================================== */
 
       document.addEventListener("click", function (e) {
         const target = e.target.closest("button.btn-mock-sm");
-        if (!target) return;
+
+        if (!target) {
+          return;
+        }
+
+        /*
+        ถ้าปุ่มมี onclick อยู่แล้ว
+        ให้ใช้ function ของปุ่มนั้น
+        ไม่ให้ Event ตัวนี้เข้าไปแทรก
+      */
+        if (target.getAttribute("onclick")) {
+          return;
+        }
 
         const buttonText = target.textContent.trim();
 
-        if (target.onclick) return;
+        /* =============================
+         พี่เลี้ยง
+      ============================= */
 
-        if (buttonText.includes("สร้างนัดหมายใหม่")) {
+        if (buttonText.includes("แก้ไขพี่เลี้ยง")) {
           e.preventDefault();
-          openAppointmentForButton(target);
-        } else if (buttonText.includes("สร้างนัดหมาย")) {
-          e.preventDefault();
-          openAppointmentForButton(target);
-        } else if (buttonText.includes("แก้ไขพี่เลี้ยง")) {
-          e.preventDefault();
+
           activeMentorButton = target;
+
           openMockup("mentorMockup");
-        } else if (buttonText.includes("ดูข้อมูล")) {
+
+          return;
+        }
+
+        /* =============================
+         ดูข้อมูลทั่วไป
+      ============================= */
+
+        if (buttonText.includes("ดูข้อมูล")) {
           e.preventDefault();
+
           showButtonInfo(target);
-        } else if (buttonText.includes("ดูรายละเอียด")) {
+
+          return;
+        }
+
+        /* =============================
+         ให้คะแนนสถานประกอบการ
+      ============================= */
+
+        if (buttonText.includes("ให้คะแนน")) {
           e.preventDefault();
-          showButtonInfo(target);
-        } else if (buttonText.includes("ดูผลนิเทศ")) {
-          e.preventDefault();
-          viewVisitResult(target);
-        } else if (buttonText.includes("ดูบันทึก")) {
-          e.preventDefault();
-          viewVisitRecord(target);
-        } else if (buttonText.includes("สร้าง PDF")) {
-          e.preventDefault();
-          createVisitPdf(target);
-        } else if (buttonText.includes("ให้คะแนน")) {
-          e.preventDefault();
+
           rateEstablishment(target);
-        } else if (buttonText.includes("ประเมิน")) {
+
+          return;
+        }
+
+        /* =============================
+         ประเมินนักศึกษา
+      ============================= */
+
+        if (buttonText.includes("ประเมิน")) {
           e.preventDefault();
+
           evaluateStudent(target);
         }
       });
 
+      /* ========================================================
+     ปิด Mockup Modal เมื่อคลิกพื้นหลัง
+  ======================================================== */
+
       document.querySelectorAll(".mockup-modal").forEach(function (modal) {
         modal.addEventListener("click", function (e) {
-          if (e.target === modal) closeMockup(modal.id);
+          if (e.target === modal) {
+            closeMockup(modal.id);
+          }
         });
       });
     </script>
@@ -5264,134 +8565,175 @@
       }
     </style>
 
-    <!-- Visit record modal -->
+    <!-- ==========================================
+     Modal : บันทึกผลนิเทศ
+========================================== -->
     <div id="visitMockup" class="visit-modal" aria-hidden="true">
-      <div class="visit-card">
-        <div class="visit-card-header">
-          <h3 id="visitModalTitle">เขียนบันทึกนิเทศ</h3>
+      <div class="visit-modal-card">
+        <!-- ================= Header ================= -->
+        <div class="visit-modal-header">
+          <div class="visit-modal-title">
+            <div class="visit-modal-title-icon">
+              <i class="fa-solid fa-clipboard-check"></i>
+            </div>
+
+            <div>
+              <h3 id="visitModalTitle">บันทึกผลนิเทศ</h3>
+
+              <p>บันทึกข้อมูลการนิเทศและแนบรูปภาพประกอบจำนวน 2 รูป</p>
+            </div>
+          </div>
+
           <button
-            class="visit-close"
             type="button"
+            class="visit-modal-close"
             onclick="closeVisitMockup()"
+            aria-label="ปิด"
           >
             &times;
           </button>
         </div>
 
-        <div class="visit-body">
-          <div class="visit-student-info">
-            <div><b>นักศึกษา:</b> <span id="visitStudentName">-</span></div>
-            <div style="margin-top: 4px">
-              <b>ครั้งที่:</b> <span id="visitRound">-</span>
+        <!-- ================= Body ================= -->
+        <div class="visit-modal-body">
+          <!-- ================= ข้อมูลนักศึกษา ================= -->
+          <div class="visit-student-info-box">
+            <div class="visit-student-info-icon">
+              <i class="fa-solid fa-user-graduate"></i>
+            </div>
+
+            <div class="visit-student-info-content">
+              <div class="visit-info-row">
+                <span>นักศึกษา</span>
+
+                <strong id="visitStudentName"> - </strong>
+              </div>
+
+              <div class="visit-info-row">
+                <span>นิเทศครั้งที่</span>
+
+                <strong id="visitRound"> - </strong>
+              </div>
+
+              <div class="visit-info-row full">
+                <span>สถานประกอบการ</span>
+
+                <strong id="visitCompany"> - </strong>
+              </div>
             </div>
           </div>
 
+          <!-- ================= Form ================= -->
           <div class="visit-form-grid">
+            <!-- วันที่นิเทศ -->
             <div class="visit-field">
-              <label for="visitDate">วันที่นิเทศ *</label>
-              <input id="visitDate" type="date" />
+              <label for="visitDate">
+                วันที่นิเทศ
+
+                <span class="visit-required"> * </span>
+              </label>
+
+              <input type="date" id="visitDate" />
             </div>
 
+            <!-- รูปแบบการนิเทศ -->
             <div class="visit-field">
-              <label for="visitType">รูปแบบการนิเทศ</label>
+              <label for="visitType"> รูปแบบการนิเทศ </label>
+
               <select id="visitType">
                 <option value="onsite">นิเทศ ณ สถานประกอบการ</option>
+
                 <option value="online">นิเทศออนไลน์</option>
               </select>
             </div>
 
+            <!-- พี่เลี้ยง -->
             <div class="visit-field full">
-              <label for="visitWork">สรุปผลการปฏิบัติงานของนักศึกษา *</label>
-              <textarea
-                id="visitWork"
-                rows="4"
-                placeholder="บันทึกงานที่นักศึกษาปฏิบัติ ความก้าวหน้า และสิ่งที่ได้เรียนรู้"
-              ></textarea>
+              <label for="visitMentor">
+                พี่เลี้ยง / ผู้แทนที่เข้าร่วมการนิเทศ
+              </label>
+
+              <div class="visit-readonly-wrap">
+                <input type="text" id="visitMentor" readonly />
+              </div>
             </div>
 
+            <!-- ================= Upload รูปช่องเดียว ================= -->
             <div class="visit-field full">
-              <label for="visitBehavior">พฤติกรรม / การปฏิบัติงาน</label>
-              <textarea
-                id="visitBehavior"
-                rows="3"
-                placeholder="เช่น ความรับผิดชอบ การตรงต่อเวลา การทำงานร่วมกับผู้อื่น"
-              ></textarea>
-            </div>
+              <label for="visitPhotos">
+                รูปภาพประกอบการนิเทศ
 
-            <div class="visit-field full">
-              <label for="visitProblem">ปัญหาและอุปสรรค</label>
-              <textarea
-                id="visitProblem"
-                rows="3"
-                placeholder="ระบุปัญหา อุปสรรค หรือสิ่งที่ต้องติดตาม"
-              ></textarea>
-            </div>
+                <span class="visit-required"> * </span>
+              </label>
 
-            <div class="visit-field full">
-              <label for="visitSuggestion">ข้อเสนอแนะจากอาจารย์นิเทศ</label>
-              <textarea
-                id="visitSuggestion"
-                rows="3"
-                placeholder="ข้อเสนอแนะสำหรับนักศึกษาและสถานประกอบการ"
-              ></textarea>
-            </div>
-
-            <div class="visit-field full">
-              <label>รูปภาพประกอบการนิเทศ</label>
               <div class="visit-upload-box">
-                <input id="visitPhotos" type="file" accept="image/*" multiple />
-                <div class="visit-help">
-                  Mockup: สามารถเลือกรูปภาพได้หลายรูปเพื่อแนบกับบันทึกนิเทศ
+                <div class="visit-upload-icon">
+                  <i class="fa-solid fa-cloud-arrow-up"></i>
+                </div>
+
+                <div class="visit-upload-content">
+                  <strong> อัปโหลดรูปภาพการนิเทศ </strong>
+
+                  <p>กรุณาเลือกรูปภาพจำนวน 2 รูปพร้อมกัน</p>
+
+                  <input
+                    id="visitPhotos"
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onchange="validateVisitPhotoSelection(this)"
+                  />
+
+                  <div
+                    id="visitPhotoFileStatus"
+                    class="visit-photo-file-status"
+                  >
+                    ยังไม่ได้เลือกไฟล์
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="visit-field">
-              <label for="visitMentor">พี่เลี้ยงผู้ร่วมการนิเทศ</label>
-              <div class="visit-mentor-row">
-                <input
-                  id="visitMentor"
-                  class="visit-input"
-                  type="text"
-                  value="คุณณัฐชา วงศ์พิพัฒน์"
-                  readonly
-                />
-                <button
-                  type="button"
-                  class="btn-mock-sm"
-                  onclick="editVisitMentor()"
-                >
-                  แก้ไขชื่อ
-                </button>
+              <div class="visit-help">
+                <i class="fa-solid fa-circle-info"></i>
+
+                ต้องเลือกไฟล์รูปภาพจำนวน 2 รูปพอดี หากมีข้อมูลเดิมอยู่แล้ว
+                สามารถเปิดแก้ไขโดยไม่ต้องเลือกรูปใหม่ได้
               </div>
             </div>
 
-            <div class="visit-field">
-              <label for="visitSignature">สถานะการลงนาม</label>
-              <input
-                id="visitSignature"
-                class="visit-input"
-                type="text"
-                value="รอลงนาม"
-                readonly
-              />
+            <!-- สถานะลงนาม -->
+            <div class="visit-field full">
+              <label for="visitSignature"> สถานะการลงนาม </label>
+
+              <div class="visit-readonly-wrap">
+                <input
+                  type="text"
+                  id="visitSignature"
+                  value="รอลงนาม"
+                  readonly
+                />
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="visit-actions">
+        <!-- ================= Footer ================= -->
+        <div class="visit-modal-footer">
           <button
-            class="visit-btn secondary"
             type="button"
+            class="visit-modal-btn secondary"
             onclick="closeVisitMockup()"
           >
             ยกเลิก
           </button>
+
           <button
-            class="visit-btn primary"
             type="button"
+            class="visit-modal-btn primary"
             onclick="saveVisitMockup()"
           >
+            <i class="fa-solid fa-floppy-disk"></i>
+
             บันทึกผลนิเทศ
           </button>
         </div>
@@ -6258,6 +9600,1896 @@
           progress.textContent = `ประเมินแล้ว ${completed} / ${cards.length}`;
         }
       }
+    </script>
+    <script>
+      /* ========================================================
+     ตัวแปรเก็บ Card ปัจจุบัน
+  ======================================================== */
+
+      let activeAppointmentCard = null;
+
+      let activeMentorConfirmationCard = null;
+
+      /* ========================================================
+     วันที่ไทย
+  ======================================================== */
+
+      function formatAppointmentThaiDate(dateString) {
+        if (!dateString) {
+          return "ยังไม่ได้กำหนด";
+        }
+
+        const months = [
+          "มกราคม",
+          "กุมภาพันธ์",
+          "มีนาคม",
+          "เมษายน",
+          "พฤษภาคม",
+          "มิถุนายน",
+          "กรกฎาคม",
+          "สิงหาคม",
+          "กันยายน",
+          "ตุลาคม",
+          "พฤศจิกายน",
+          "ธันวาคม",
+        ];
+
+        const parts = dateString.split("-");
+
+        if (parts.length !== 3) {
+          return dateString;
+        }
+
+        const year = Number(parts[0]) + 543;
+
+        const month = Number(parts[1]) - 1;
+
+        const day = Number(parts[2]);
+
+        return `${day} ` + `${months[month]} ` + `${year}`;
+      }
+
+      /* ========================================================
+     วันที่ไทยแบบสั้น
+  ======================================================== */
+
+      function formatAppointmentShortDate(dateString) {
+        if (!dateString) {
+          return "-";
+        }
+
+        const date = new Date(dateString + "T00:00:00");
+
+        return date.toLocaleDateString("th-TH", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        });
+      }
+
+      /* ========================================================
+     เปิด Modal นัดหมาย
+  ======================================================== */
+
+      function openAppointmentForButton(button) {
+        const card = button.closest(".appointment-card");
+
+        if (!card) {
+          return;
+        }
+
+        activeAppointmentCard = card;
+
+        const round = card.dataset.round;
+
+        const studentName = card.dataset.studentName;
+
+        const mentorName = getAppointmentEffectiveMentor(card).name;
+
+        const modalTitle = document.getElementById("appointmentModalTitle");
+
+        modalTitle.textContent =
+          card.dataset.appointmentStatus === "saved"
+            ? `แก้ไขนัดหมายนิเทศครั้งที่ ${round}`
+            : `สร้างนัดหมายนิเทศครั้งที่ ${round}`;
+
+        document.getElementById("appointmentStudent").value = studentName;
+
+        document.getElementById("appointmentRound").value = `ครั้งที่ ${round}`;
+
+        document.getElementById("appointmentMentor").value = mentorName;
+
+        document.getElementById("appointmentDate").value =
+          card.dataset.date || "";
+
+        document.getElementById("appointmentTime").value =
+          card.dataset.time || "";
+
+        document.getElementById("appointmentPlace").value =
+          card.dataset.place || "";
+
+        document.getElementById("appointmentNote").value =
+          card.dataset.note || "";
+
+        const modal = document.getElementById("appointmentMockup");
+
+        modal.classList.add("show");
+
+        modal.setAttribute("aria-hidden", "false");
+      }
+
+      /* ========================================================
+     ปิด Modal นัดหมาย
+  ======================================================== */
+
+      function closeAppointmentModal() {
+        const modal = document.getElementById("appointmentMockup");
+
+        modal.classList.remove("show");
+
+        modal.setAttribute("aria-hidden", "true");
+
+        activeAppointmentCard = null;
+      }
+
+      /* ========================================================
+     บันทึกนัดหมาย
+  ======================================================== */
+
+      function saveAppointmentMockup() {
+        if (!activeAppointmentCard) {
+          return;
+        }
+
+        const date = document.getElementById("appointmentDate").value;
+
+        const time = document.getElementById("appointmentTime").value;
+
+        const place = document.getElementById("appointmentPlace").value.trim();
+
+        const note = document.getElementById("appointmentNote").value.trim();
+
+        if (!date) {
+          alert("กรุณาเลือกวันที่นัดหมาย");
+
+          return;
+        }
+
+        if (!time) {
+          alert("กรุณาเลือกเวลานัดหมาย");
+
+          return;
+        }
+
+        if (!place) {
+          alert("กรุณาระบุสถานที่ / ช่องทางนิเทศ");
+
+          return;
+        }
+
+        activeAppointmentCard.dataset.date = date;
+
+        activeAppointmentCard.dataset.time = time;
+
+        activeAppointmentCard.dataset.place = place;
+
+        activeAppointmentCard.dataset.note = note;
+
+        activeAppointmentCard.dataset.appointmentStatus = "saved";
+
+        /*
+      เมื่อแก้ไขวันหรือเวลา
+      ให้พี่เลี้ยงยืนยันใหม่
+    */
+
+        activeAppointmentCard.dataset.confirmStatus = "none";
+
+        activeAppointmentCard.dataset.confirmDate = "";
+
+        renderAppointmentCard(activeAppointmentCard);
+
+        const student = activeAppointmentCard.dataset.studentName;
+
+        const round = activeAppointmentCard.dataset.round;
+
+        closeAppointmentModal();
+
+        alert(
+          `บันทึกนัดหมายนิเทศครั้งที่ ${round}\n` +
+            `${student}\n\n` +
+            `เรียบร้อยแล้ว\n` +
+            `กรุณาส่งข้อมูลให้พี่เลี้ยงยืนยัน`,
+        );
+      }
+
+      /* ========================================================
+     ส่งข้อมูลให้พี่เลี้ยงยืนยัน
+  ======================================================== */
+
+      function sendMentorConfirmation(button) {
+        const card = button.closest(".appointment-card");
+
+        if (!card) {
+          return;
+        }
+
+        if (card.dataset.appointmentStatus !== "saved") {
+          alert("กรุณาสร้างนัดหมายก่อนส่งข้อมูลให้พี่เลี้ยง");
+
+          return;
+        }
+
+        const student = card.dataset.studentName;
+
+        const round = card.dataset.round;
+
+        const date = formatAppointmentThaiDate(card.dataset.date);
+
+        const time = card.dataset.time;
+
+        const mentor = card.dataset.mentorName;
+
+        const confirmed = confirm(
+          `ส่งข้อมูลนัดหมายให้พี่เลี้ยงยืนยันหรือไม่?\n\n` +
+            `นักศึกษา: ${student}\n` +
+            `นิเทศครั้งที่: ${round}\n` +
+            `วันที่: ${date}\n` +
+            `เวลา: ${time} น.\n` +
+            `พี่เลี้ยง: ${mentor}`,
+        );
+
+        if (!confirmed) {
+          return;
+        }
+
+        card.dataset.confirmStatus = "pending";
+
+        card.dataset.confirmDate = "";
+
+        renderAppointmentCard(card);
+
+        alert(
+          `ส่งข้อมูลนัดหมายให้ ${mentor} เรียบร้อยแล้ว\n\n` +
+            `ขณะนี้อยู่ในสถานะรอการยืนยัน`,
+        );
+      }
+
+      /* ========================================================
+     เปิดตรวจสอบการยืนยัน
+  ======================================================== */
+
+      function openMentorConfirmation(button) {
+        const card = button.closest(".appointment-card");
+
+        if (!card) {
+          return;
+        }
+
+        if (card.dataset.appointmentStatus !== "saved") {
+          alert("ยังไม่มีนัดหมายสำหรับตรวจสอบ");
+
+          return;
+        }
+
+        activeMentorConfirmationCard = card;
+
+        document.getElementById("mentorConfirmStudent").textContent =
+          card.dataset.studentName;
+
+        document.getElementById("mentorConfirmRound").textContent =
+          `ครั้งที่ ${card.dataset.round}`;
+
+        document.getElementById("mentorConfirmName").textContent =
+          card.dataset.mentorName;
+
+        const status = card.dataset.confirmStatus;
+
+        const select = document.getElementById("mentorConfirmStatus");
+
+        if (status === "confirmed") {
+          select.value = "confirmed";
+        } else if (status === "representative") {
+          select.value = "unavailable";
+        } else {
+          select.value = "pending";
+        }
+
+        document.getElementById("representativeName").value =
+          card.dataset.representativeName || "";
+
+        document.getElementById("representativePosition").value =
+          card.dataset.representativePosition || "";
+
+        document.getElementById("representativePhone").value =
+          card.dataset.representativePhone || "";
+
+        document.getElementById("representativeReason").value =
+          card.dataset.representativeReason || "";
+
+        toggleRepresentativeFields();
+
+        const modal = document.getElementById("mentorConfirmationModal");
+
+        modal.classList.add("show");
+
+        modal.setAttribute("aria-hidden", "false");
+      }
+
+      /* ========================================================
+     แสดง/ซ่อนฟอร์มผู้แทน
+  ======================================================== */
+
+      function toggleRepresentativeFields() {
+        const value = document.getElementById("mentorConfirmStatus").value;
+
+        const fields = document.getElementById("representativeFields");
+
+        fields.style.display = value === "unavailable" ? "block" : "none";
+      }
+
+      /* ========================================================
+     บันทึกผลตอบรับ
+  ======================================================== */
+
+      function saveMentorConfirmation() {
+        if (!activeMentorConfirmationCard) {
+          return;
+        }
+
+        const card = activeMentorConfirmationCard;
+
+        const status = document.getElementById("mentorConfirmStatus").value;
+
+        /* ========================
+       รอการตอบรับ
+    ======================== */
+
+        if (status === "pending") {
+          card.dataset.confirmStatus = "pending";
+
+          card.dataset.confirmDate = "";
+
+          renderAppointmentCard(card);
+
+          closeMentorConfirmation();
+
+          return;
+        }
+
+        /* ========================
+       พี่เลี้ยงยืนยัน
+    ======================== */
+
+        if (status === "confirmed") {
+          card.dataset.confirmStatus = "confirmed";
+
+          card.dataset.confirmDate = new Date().toISOString().split("T")[0];
+
+          card.dataset.representativeName = "";
+
+          card.dataset.representativePosition = "";
+
+          card.dataset.representativePhone = "";
+
+          card.dataset.representativeReason = "";
+
+          renderAppointmentCard(card);
+
+          closeMentorConfirmation();
+
+          alert("บันทึกการยืนยันจากพี่เลี้ยงเรียบร้อยแล้ว");
+
+          return;
+        }
+
+        /* ========================
+       พี่เลี้ยงไม่สะดวก
+       ใช้ผู้แทน
+    ======================== */
+
+        if (status === "unavailable") {
+          const name = document
+            .getElementById("representativeName")
+            .value.trim();
+
+          const position = document
+            .getElementById("representativePosition")
+            .value.trim();
+
+          const phone = document
+            .getElementById("representativePhone")
+            .value.trim();
+
+          const reason = document
+            .getElementById("representativeReason")
+            .value.trim();
+
+          if (!name) {
+            alert("กรุณาระบุชื่อผู้แทน");
+
+            return;
+          }
+
+          if (!position) {
+            alert("กรุณาระบุตำแหน่งผู้แทน");
+
+            return;
+          }
+
+          if (!reason) {
+            alert("กรุณาระบุเหตุผลที่พี่เลี้ยงหลักไม่สะดวก");
+
+            return;
+          }
+
+          card.dataset.confirmStatus = "representative";
+
+          card.dataset.confirmDate = new Date().toISOString().split("T")[0];
+
+          card.dataset.representativeName = name;
+
+          card.dataset.representativePosition = position;
+
+          card.dataset.representativePhone = phone;
+
+          card.dataset.representativeReason = reason;
+
+          renderAppointmentCard(card);
+
+          closeMentorConfirmation();
+
+          alert(`บันทึกผู้แทนพี่เลี้ยงเรียบร้อยแล้ว\n\n` + `ผู้แทน: ${name}`);
+        }
+      }
+
+      /* ========================================================
+     ปิด Modal พี่เลี้ยง
+  ======================================================== */
+
+      function closeMentorConfirmation() {
+        const modal = document.getElementById("mentorConfirmationModal");
+
+        modal.classList.remove("show");
+
+        modal.setAttribute("aria-hidden", "true");
+
+        activeMentorConfirmationCard = null;
+      }
+
+      /* ========================================================
+     หาพี่เลี้ยงที่ใช้จริง
+     พี่เลี้ยงหลัก หรือ ผู้แทน
+  ======================================================== */
+
+      function getAppointmentEffectiveMentor(card) {
+        if (
+          card.dataset.confirmStatus === "representative" &&
+          card.dataset.representativeName
+        ) {
+          return {
+            name: card.dataset.representativeName,
+
+            position: card.dataset.representativePosition,
+
+            type: "ผู้แทนพี่เลี้ยง",
+          };
+        }
+
+        return {
+          name: card.dataset.mentorName,
+
+          position: card.dataset.mentorPosition,
+
+          type: "พี่เลี้ยงหลัก",
+        };
+      }
+
+      /* ========================================================
+     Render Card
+  ======================================================== */
+
+      function renderAppointmentCard(card) {
+        const appointmentStatus = card.dataset.appointmentStatus;
+
+        const confirmStatus = card.dataset.confirmStatus;
+
+        const mainStatus = card.querySelector(".appointment-main-status");
+
+        const mainStatusText = card.querySelector(
+          ".appointment-main-status-text",
+        );
+
+        const editButtonText = card.querySelector(
+          ".appointment-edit-button-text",
+        );
+
+        const sendButton = card.querySelector(".appointment-send-btn");
+
+        const actionButtons = card.querySelectorAll(
+          ".appointment-actions button",
+        );
+
+        const confirmButton = actionButtons[3];
+
+        const dateDisplay = card.querySelector(".appointment-date-display");
+
+        const timeDisplay = card.querySelector(".appointment-time-display");
+
+        const confirmIcon = card.querySelector(".appointment-confirm-icon");
+
+        const confirmText = card.querySelector(".confirmation-text");
+
+        const confirmDetail = card.querySelector(".confirmation-detail-text");
+
+        const note = card.querySelector(".appointment-note");
+
+        const noteText = card.querySelector(".appointment-note-text");
+
+        const mentorDisplay = card.querySelector(".appointment-mentor-display");
+
+        const mentorPositionDisplay = card.querySelector(
+          ".appointment-mentor-position-display",
+        );
+
+        /* ===============================
+       ยังไม่สร้างนัดหมาย
+    =============================== */
+
+        if (appointmentStatus !== "saved") {
+          mainStatus.className = "appointment-main-status not-created";
+
+          mainStatus.innerHTML = `
+          <i class="fa-regular fa-calendar"></i>
+
+          <span class="appointment-main-status-text">
+            ยังไม่สร้างนัดหมาย
+          </span>
+        `;
+
+          editButtonText.textContent = "สร้างนัดหมาย";
+
+          dateDisplay.textContent = "ยังไม่ได้กำหนด";
+
+          timeDisplay.textContent = "-";
+
+          sendButton.disabled = true;
+
+          confirmButton.disabled = true;
+
+          return;
+        }
+
+        /* ===============================
+       นัดหมายแล้ว
+    =============================== */
+
+        mainStatus.className = "appointment-main-status confirmed";
+
+        mainStatus.innerHTML = `
+        <i class="fa-solid fa-circle-check"></i>
+
+        <span class="appointment-main-status-text">
+          นัดหมายแล้ว
+        </span>
+      `;
+
+        editButtonText.textContent = "แก้ไขนัดหมาย";
+
+        dateDisplay.textContent = formatAppointmentThaiDate(card.dataset.date);
+
+        timeDisplay.textContent = `เวลา ${card.dataset.time} น.`;
+
+        sendButton.disabled = false;
+
+        confirmButton.disabled = false;
+
+        /* ===============================
+       Mentor
+    =============================== */
+
+        const effectiveMentor = getAppointmentEffectiveMentor(card);
+
+        mentorDisplay.textContent = effectiveMentor.name;
+
+        mentorPositionDisplay.textContent = `${effectiveMentor.type} · ${effectiveMentor.position}`;
+
+        /* ===============================
+       ยังไม่ส่ง
+    =============================== */
+
+        if (confirmStatus === "none") {
+          confirmIcon.className =
+            "appointment-detail-icon appointment-confirm-icon neutral-icon";
+
+          confirmIcon.innerHTML = '<i class="fa-solid fa-minus"></i>';
+
+          confirmText.className = "confirmation-text neutral-text";
+
+          confirmText.textContent = "ยังไม่ส่งข้อมูล";
+
+          confirmDetail.textContent = "กรุณาส่งข้อมูลให้พี่เลี้ยงยืนยัน";
+
+          note.className = "appointment-note neutral-note";
+
+          noteText.textContent =
+            "สร้างนัดหมายแล้ว กรุณาส่งข้อมูลให้พี่เลี้ยงยืนยัน";
+
+          sendButton.innerHTML =
+            '<i class="fa-solid fa-paper-plane"></i> ส่งข้อมูลยืนยัน';
+        } else if (confirmStatus === "pending") {
+
+        /* ===============================
+       รอยืนยัน
+    =============================== */
+          confirmIcon.className =
+            "appointment-detail-icon appointment-confirm-icon pending-icon";
+
+          confirmIcon.innerHTML = '<i class="fa-regular fa-clock"></i>';
+
+          confirmText.className = "confirmation-text pending-text";
+
+          confirmText.textContent = "รอการยืนยัน";
+
+          confirmDetail.textContent = "ส่งข้อมูลให้พี่เลี้ยงแล้ว";
+
+          note.className = "appointment-note pending-note";
+
+          noteText.textContent =
+            "ส่งคำขอยืนยันแล้ว กำลังรอการตอบรับจากพี่เลี้ยง";
+
+          sendButton.innerHTML =
+            '<i class="fa-solid fa-paper-plane"></i> ส่งข้อมูลอีกครั้ง';
+        } else if (confirmStatus === "confirmed") {
+
+        /* ===============================
+       ยืนยัน
+    =============================== */
+          confirmIcon.className =
+            "appointment-detail-icon appointment-confirm-icon confirmed-icon";
+
+          confirmIcon.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+
+          confirmText.className = "confirmation-text confirmed-text";
+
+          confirmText.textContent = "ยืนยันแล้ว";
+
+          confirmDetail.textContent = `ยืนยันเมื่อ ${formatAppointmentShortDate(
+            card.dataset.confirmDate,
+          )}`;
+
+          note.className = "appointment-note confirmed-note";
+
+          noteText.textContent =
+            "พี่เลี้ยงยืนยันวันและเวลานัดหมายเรียบร้อยแล้ว";
+
+          sendButton.innerHTML =
+            '<i class="fa-solid fa-paper-plane"></i> ส่งข้อมูลอีกครั้ง';
+        } else if (confirmStatus === "representative") {
+
+        /* ===============================
+       ใช้ผู้แทน
+    =============================== */
+          confirmIcon.className =
+            "appointment-detail-icon appointment-confirm-icon representative-icon";
+
+          confirmIcon.innerHTML = '<i class="fa-solid fa-user-group"></i>';
+
+          confirmText.className = "confirmation-text representative-text";
+
+          confirmText.textContent = "ใช้ผู้แทนพี่เลี้ยง";
+
+          confirmDetail.textContent = effectiveMentor.name;
+
+          note.className = "appointment-note representative-note";
+
+          noteText.textContent = `พี่เลี้ยงหลักไม่สะดวก ผู้แทนคือ ${effectiveMentor.name}`;
+
+          sendButton.innerHTML =
+            '<i class="fa-solid fa-paper-plane"></i> ส่งข้อมูลอีกครั้ง';
+        }
+      }
+
+      /* ========================================================
+     ดูรายละเอียดนัดหมาย
+  ======================================================== */
+
+      function viewAppointmentDetail(button) {
+        const card = button.closest(".appointment-card");
+
+        if (!card) {
+          return;
+        }
+
+        const mentor = getAppointmentEffectiveMentor(card);
+
+        let confirmationText = "ยังไม่ส่งข้อมูล";
+
+        if (card.dataset.confirmStatus === "pending") {
+          confirmationText = "รอการยืนยันจากพี่เลี้ยง";
+        } else if (card.dataset.confirmStatus === "confirmed") {
+          confirmationText = "พี่เลี้ยงยืนยันแล้ว";
+        } else if (card.dataset.confirmStatus === "representative") {
+          confirmationText = "พี่เลี้ยงหลักไม่สะดวก ใช้ผู้แทน";
+        }
+
+        let representativeHtml = "";
+
+        if (card.dataset.confirmStatus === "representative") {
+          representativeHtml = `
+
+        <div class="appointment-detail-modal-item">
+
+          <span>
+            ผู้แทนพี่เลี้ยง
+          </span>
+
+          <strong>
+            ${card.dataset.representativeName}
+          </strong>
+
+        </div>
+
+
+        <div class="appointment-detail-modal-item">
+
+          <span>
+            ตำแหน่งผู้แทน
+          </span>
+
+          <strong>
+            ${card.dataset.representativePosition}
+          </strong>
+
+        </div>
+
+
+        <div class="appointment-detail-modal-item full">
+
+          <span>
+            เหตุผลที่พี่เลี้ยงหลักไม่สะดวก
+          </span>
+
+          <strong>
+            ${card.dataset.representativeReason}
+          </strong>
+
+        </div>
+
+      `;
+        }
+
+        document.getElementById("appointmentDetailBody").innerHTML = `
+
+      <div class="appointment-detail-modal-grid">
+
+        <div class="appointment-detail-modal-item">
+
+          <span>
+            นักศึกษา
+          </span>
+
+          <strong>
+            ${card.dataset.studentName}
+          </strong>
+
+        </div>
+
+
+        <div class="appointment-detail-modal-item">
+
+          <span>
+            นิเทศครั้งที่
+          </span>
+
+          <strong>
+            ${card.dataset.round}
+          </strong>
+
+        </div>
+
+
+        <div class="appointment-detail-modal-item">
+
+          <span>
+            สาขา
+          </span>
+
+          <strong>
+            ${card.dataset.major}
+          </strong>
+
+        </div>
+
+
+        <div class="appointment-detail-modal-item">
+
+          <span>
+            สถานประกอบการ
+          </span>
+
+          <strong>
+            ${card.dataset.company}
+          </strong>
+
+        </div>
+
+
+        <div class="appointment-detail-modal-item">
+
+          <span>
+            วันที่
+          </span>
+
+          <strong>
+            ${formatAppointmentThaiDate(card.dataset.date)}
+          </strong>
+
+        </div>
+
+
+        <div class="appointment-detail-modal-item">
+
+          <span>
+            เวลา
+          </span>
+
+          <strong>
+            ${card.dataset.time ? card.dataset.time + " น." : "-"}
+          </strong>
+
+        </div>
+
+
+        <div class="appointment-detail-modal-item full">
+
+          <span>
+            สถานที่ / ช่องทางนิเทศ
+          </span>
+
+          <strong>
+            ${card.dataset.place || "-"}
+          </strong>
+
+        </div>
+
+
+        <div class="appointment-detail-modal-item">
+
+          <span>
+            พี่เลี้ยงที่เข้าร่วม
+          </span>
+
+          <strong>
+            ${mentor.name}
+          </strong>
+
+        </div>
+
+
+        <div class="appointment-detail-modal-item">
+
+          <span>
+            สถานะการยืนยัน
+          </span>
+
+          <strong>
+            ${confirmationText}
+          </strong>
+
+        </div>
+
+
+        ${representativeHtml}
+
+
+        <div class="appointment-detail-modal-item full">
+
+          <span>
+            หมายเหตุ
+          </span>
+
+          <strong>
+            ${card.dataset.note || "-"}
+          </strong>
+
+        </div>
+
+      </div>
+
+    `;
+
+        const modal = document.getElementById("appointmentDetailModal");
+
+        modal.classList.add("show");
+
+        modal.setAttribute("aria-hidden", "false");
+      }
+
+      /* ========================================================
+     ปิดรายละเอียด
+  ======================================================== */
+
+      function closeAppointmentDetail() {
+        const modal = document.getElementById("appointmentDetailModal");
+
+        modal.classList.remove("show");
+
+        modal.setAttribute("aria-hidden", "true");
+      }
+
+      /* ========================================================
+     คลิกพื้นที่ดำเพื่อปิด Modal
+  ======================================================== */
+
+      document.addEventListener("DOMContentLoaded", function () {
+        document
+          .querySelectorAll(".appointment-modal")
+          .forEach(function (modal) {
+            modal.addEventListener("click", function (event) {
+              if (event.target === modal) {
+                modal.classList.remove("show");
+
+                modal.setAttribute("aria-hidden", "true");
+              }
+            });
+          });
+
+        /*
+        Render Card ตอนเปิดหน้า
+      */
+
+        document.querySelectorAll(".appointment-card").forEach(function (card) {
+          renderAppointmentCard(card);
+        });
+      });
+    </script>
+    <script>
+      /* ========================================================
+     ตัวแปรเก็บ Card ที่กำลังเปิด
+  ======================================================== */
+
+      let activeVisitCard = null;
+
+      /*
+    เก็บรูปภาพของแต่ละ Card
+
+    WeakMap:
+    Card ครั้งที่ 1 -> [รูป1, รูป2]
+    Card ครั้งที่ 2 -> [รูป1, รูป2]
+  */
+
+      const visitPhotoStore = new WeakMap();
+
+      /* ========================================================
+     เปิด Modal บันทึกผลนิเทศ
+  ======================================================== */
+
+      function openVisitMockup(button) {
+        const card = button.closest(".visit-result-card");
+
+        if (!card) {
+          return;
+        }
+
+        activeVisitCard = card;
+
+        /* ===============================
+       ดึงข้อมูลจาก Card
+    =============================== */
+
+        const round = card.dataset.round || "-";
+
+        const studentName =
+          card
+            .querySelector(".visit-student-name strong")
+            ?.textContent.trim() || "-";
+
+        const company =
+          card
+            .querySelector(".visit-student-company strong")
+            ?.textContent.trim() || "-";
+
+        const mentor =
+          card
+            .querySelector(".visit-student-mentor strong")
+            ?.textContent.trim() || "-";
+
+        /* ===============================
+       แสดงข้อมูล
+    =============================== */
+
+        document.getElementById("visitModalTitle").textContent =
+          `บันทึกผลนิเทศครั้งที่ ${round}`;
+
+        document.getElementById("visitStudentName").textContent = studentName;
+
+        document.getElementById("visitRound").textContent = `ครั้งที่ ${round}`;
+
+        document.getElementById("visitCompany").textContent = company;
+
+        document.getElementById("visitMentor").value = mentor;
+
+        /* ===============================
+       โหลดข้อมูลเดิมกรณีแก้ไข
+    =============================== */
+
+        document.getElementById("visitDate").value =
+          card.dataset.visitDate || "";
+
+        document.getElementById("visitType").value =
+          card.dataset.visitType || "onsite";
+
+        document.getElementById("visitSignature").value =
+          card.dataset.signature || "รอลงนาม";
+
+        /* ===============================
+       Reset File Input
+
+       Browser ไม่อนุญาตให้ใส่
+       file input เดิมกลับเข้าไป
+    =============================== */
+
+        const photoInput = document.getElementById("visitPhotos");
+
+        if (photoInput) {
+          photoInput.value = "";
+        }
+
+        /* ===============================
+       แสดงสถานะรูปเดิม
+    =============================== */
+
+        updateVisitPhotoFileStatus(card);
+
+        /* ===============================
+       เปิด Modal
+    =============================== */
+
+        const modal = document.getElementById("visitMockup");
+
+        if (!modal) {
+          return;
+        }
+
+        modal.classList.add("show");
+
+        modal.setAttribute("aria-hidden", "false");
+      }
+
+      /* ========================================================
+     ปิด Modal
+  ======================================================== */
+
+      function closeVisitMockup() {
+        const modal = document.getElementById("visitMockup");
+
+        if (!modal) {
+          return;
+        }
+
+        modal.classList.remove("show");
+
+        modal.setAttribute("aria-hidden", "true");
+
+        activeVisitCard = null;
+      }
+
+      /* ========================================================
+     ตรวจจำนวนรูปที่เลือก
+  ======================================================== */
+
+      function validateVisitPhotoSelection(input) {
+        const status = document.getElementById("visitPhotoFileStatus");
+
+        if (!status) {
+          return;
+        }
+
+        const files = Array.from(input.files || []);
+
+        /* ===============================
+       ยังไม่เลือก
+    =============================== */
+
+        if (files.length === 0) {
+          status.className = "visit-photo-file-status";
+
+          status.textContent = "ยังไม่ได้เลือกไฟล์";
+
+          return;
+        }
+
+        /* ===============================
+       จำนวนไม่ใช่ 2
+    =============================== */
+
+        if (files.length !== 2) {
+          status.className = "visit-photo-file-status error";
+
+          status.textContent = `เลือกมา ${files.length} รูป กรุณาเลือกจำนวน 2 รูป`;
+
+          return;
+        }
+
+        /* ===============================
+       ตรวจชนิดไฟล์
+    =============================== */
+
+        const invalidFile = files.some(
+          (file) => !file.type.startsWith("image/"),
+        );
+
+        if (invalidFile) {
+          status.className = "visit-photo-file-status error";
+
+          status.textContent = "พบไฟล์ที่ไม่ใช่รูปภาพ";
+
+          return;
+        }
+
+        /* ===============================
+       ถูกต้อง
+    =============================== */
+
+        status.className = "visit-photo-file-status success";
+
+        status.innerHTML =
+          '<i class="fa-solid fa-circle-check"></i> เลือกรูปภาพครบ 2 รูปแล้ว';
+      }
+
+      /* ========================================================
+     แสดงสถานะรูปเดิม
+  ======================================================== */
+
+      function updateVisitPhotoFileStatus(card) {
+        const status = document.getElementById("visitPhotoFileStatus");
+
+        if (!status) {
+          return;
+        }
+
+        const photos = visitPhotoStore.get(card) || [];
+
+        if (photos.length === 2 && photos[0] && photos[1]) {
+          status.className = "visit-photo-file-status success";
+
+          status.innerHTML = `
+          <i class="fa-solid fa-circle-check"></i>
+          มีรูปภาพที่บันทึกไว้แล้ว 2 รูป
+        `;
+        } else {
+          status.className = "visit-photo-file-status";
+
+          status.textContent = "ยังไม่ได้เลือกไฟล์";
+        }
+      }
+
+      /* ========================================================
+     File -> Base64
+  ======================================================== */
+
+      function visitFileToDataURL(file) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+
+          reader.onload = function () {
+            resolve(reader.result);
+          };
+
+          reader.onerror = function () {
+            reject(new Error("ไม่สามารถอ่านไฟล์ได้"));
+          };
+
+          reader.readAsDataURL(file);
+        });
+      }
+
+      /* ========================================================
+     บันทึกผลนิเทศ
+  ======================================================== */
+
+      async function saveVisitMockup() {
+        if (!activeVisitCard) {
+          return;
+        }
+
+        const card = activeVisitCard;
+
+        const round = card.dataset.round || "-";
+
+        const studentName =
+          card
+            .querySelector(".visit-student-name strong")
+            ?.textContent.trim() || "นักศึกษา";
+
+        /* ===============================
+       วันที่
+    =============================== */
+
+        const date = document.getElementById("visitDate").value;
+
+        /* ===============================
+       รูปแบบ
+    =============================== */
+
+        const type = document.getElementById("visitType").value;
+
+        /* ===============================
+       File Input
+    =============================== */
+
+        const photoInput = document.getElementById("visitPhotos");
+
+        /* ===============================
+       Validate วันที่
+    =============================== */
+
+        if (!date) {
+          alert("กรุณาระบุวันที่นิเทศ");
+
+          return;
+        }
+
+        /* ===============================
+       รูปเดิม
+    =============================== */
+
+        let photos = visitPhotoStore.get(card) || [];
+
+        /* ===============================
+       ถ้ามีการเลือกรูปใหม่
+    =============================== */
+
+        if (photoInput && photoInput.files.length > 0) {
+          const selectedFiles = Array.from(photoInput.files);
+
+          /* ต้อง 2 รูป */
+
+          if (selectedFiles.length !== 2) {
+            alert("กรุณาเลือกรูปภาพจำนวน 2 รูปพอดี");
+
+            return;
+          }
+
+          /* ตรวจว่าเป็นรูป */
+
+          const invalidFile = selectedFiles.some(
+            (file) => !file.type.startsWith("image/"),
+          );
+
+          if (invalidFile) {
+            alert("กรุณาเลือกเฉพาะไฟล์รูปภาพ");
+
+            return;
+          }
+
+          /* อ่านรูป */
+
+          try {
+            photos = await Promise.all(
+              selectedFiles.map((file) => visitFileToDataURL(file)),
+            );
+          } catch (error) {
+            console.error(error);
+
+            alert("เกิดข้อผิดพลาดในการอ่านไฟล์รูปภาพ");
+
+            return;
+          }
+        }
+
+        /* ===============================
+       ถ้าไม่มีรูปเดิมและไม่ได้เลือกใหม่
+    =============================== */
+
+        if (photos.length !== 2 || !photos[0] || !photos[1]) {
+          alert("กรุณาแนบรูปภาพประกอบจำนวน 2 รูป");
+
+          return;
+        }
+
+        /* ===============================
+       บันทึกรูป
+    =============================== */
+
+        visitPhotoStore.set(card, photos);
+
+        /* ===============================
+       บันทึกข้อมูลลง Card
+    =============================== */
+
+        card.dataset.visitDate = date;
+
+        card.dataset.visitType = type;
+
+        card.dataset.signature = "รอลงนาม";
+
+        card.dataset.saved = "true";
+
+        /* ===============================
+       วันที่บน Card
+    =============================== */
+
+        const dateDisplay = card.querySelector(".visit-date-display");
+
+        if (dateDisplay) {
+          dateDisplay.textContent = formatVisitThaiDate(date);
+        }
+
+        /* ===============================
+       รูปภาพบน Card
+    =============================== */
+
+        const photoDisplay = card.querySelector(".visit-photo-display");
+
+        if (photoDisplay) {
+          photoDisplay.textContent = "แนบแล้ว 2 รูป";
+        }
+
+        /* ===============================
+       ผลการบันทึก
+    =============================== */
+
+        const recordDisplay = card.querySelector(".visit-record-display");
+
+        if (recordDisplay) {
+          recordDisplay.textContent = "บันทึกเรียบร้อยแล้ว";
+        }
+
+        /* ===============================
+       Status ด้านบน
+    =============================== */
+
+        const status = card.querySelector(".visit-result-status");
+
+        if (status) {
+          status.className = "visit-result-status saved";
+
+          status.innerHTML = `
+          <i class="fa-solid fa-circle-check"></i>
+          บันทึกแล้ว
+        `;
+        }
+
+        /* ===============================
+       ปุ่มบันทึก
+    =============================== */
+
+        const saveButton = card.querySelector(".visit-save-button");
+
+        if (saveButton) {
+          saveButton.innerHTML = `
+          <i class="fa-solid fa-pen"></i>
+          แก้ไขผลนิเทศ
+        `;
+        }
+
+        /* ===============================
+       เปิดปุ่ม PDF
+    =============================== */
+
+        const pdfButton = card.querySelector(".visit-pdf-button");
+
+        if (pdfButton) {
+          pdfButton.disabled = false;
+        }
+
+        /* ===============================
+       Note
+    =============================== */
+
+        const note = card.querySelector(".visit-result-note");
+
+        if (note) {
+          note.innerHTML = `
+          <i class="fa-solid fa-circle-check"></i>
+
+          บันทึกผลนิเทศครั้งที่ ${round}
+          เรียบร้อยแล้ว สามารถสร้าง PDF ได้
+        `;
+        }
+
+        /* ===============================
+       ปิด Modal
+    =============================== */
+
+        closeVisitMockup();
+
+        alert(`บันทึกผลนิเทศครั้งที่ ${round}\n${studentName}\nเรียบร้อยแล้ว`);
+      }
+
+      /* ========================================================
+     Format วันที่ไทย
+  ======================================================== */
+
+      function formatVisitThaiDate(dateString) {
+        if (!dateString) {
+          return "-";
+        }
+
+        const months = [
+          "มกราคม",
+          "กุมภาพันธ์",
+          "มีนาคม",
+          "เมษายน",
+          "พฤษภาคม",
+          "มิถุนายน",
+          "กรกฎาคม",
+          "สิงหาคม",
+          "กันยายน",
+          "ตุลาคม",
+          "พฤศจิกายน",
+          "ธันวาคม",
+        ];
+
+        const parts = dateString.split("-").map(Number);
+
+        if (parts.length !== 3) {
+          return dateString;
+        }
+
+        const year = parts[0];
+
+        const month = parts[1];
+
+        const day = parts[2];
+
+        return `${day} ` + `${months[month - 1]} ` + `${year + 543}`;
+      }
+
+      /* ========================================================
+     สร้าง PDF
+  ======================================================== */
+
+      function createVisitPDF(button) {
+        const card = button.closest(".visit-result-card");
+
+        if (!card) {
+          return;
+        }
+
+        /* ===============================
+       ต้องบันทึกก่อน
+    =============================== */
+
+        if (card.dataset.saved !== "true") {
+          alert("กรุณาบันทึกผลนิเทศก่อนสร้าง PDF");
+
+          return;
+        }
+
+        /* ===============================
+       รูปภาพ
+    =============================== */
+
+        const photos = visitPhotoStore.get(card) || [];
+
+        if (photos.length !== 2 || !photos[0] || !photos[1]) {
+          alert("ไม่พบรูปภาพประกอบจำนวน 2 รูป");
+
+          return;
+        }
+
+        /* ===============================
+       ข้อมูล
+    =============================== */
+
+        const round = card.dataset.round || "-";
+
+        const studentName =
+          card
+            .querySelector(".visit-student-name strong")
+            ?.textContent.trim() || "-";
+
+        const studentInfo =
+          card.querySelector(".visit-student-name span")?.textContent.trim() ||
+          "-";
+
+        const company =
+          card
+            .querySelector(".visit-student-company strong")
+            ?.textContent.trim() || "-";
+
+        const mentor =
+          card
+            .querySelector(".visit-student-mentor strong")
+            ?.textContent.trim() || "-";
+
+        const date = formatVisitThaiDate(card.dataset.visitDate);
+
+        const visitType =
+          card.dataset.visitType === "online"
+            ? "นิเทศออนไลน์"
+            : "นิเทศ ณ สถานประกอบการ";
+
+        /* ===============================
+       อาจารย์
+    =============================== */
+
+        const user = JSON.parse(localStorage.getItem("currentUser") || "null");
+
+        const teacherName = user?.name || "ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ";
+
+        /* ===============================
+       เปิดหน้า PDF
+    =============================== */
+
+        const printWindow = window.open("", "_blank");
+
+        if (!printWindow) {
+          alert("กรุณาอนุญาต Pop-up ก่อนสร้าง PDF");
+
+          return;
+        }
+
+        printWindow.document.write(`
+
+      <!doctype html>
+
+      <html lang="th">
+
+      <head>
+
+        <meta charset="UTF-8">
+
+
+        <title>
+          บันทึกผลนิเทศครั้งที่ ${round}
+        </title>
+
+
+        <style>
+
+          * {
+            box-sizing: border-box;
+          }
+
+
+          body {
+            margin: 0;
+
+            padding: 32px 40px;
+
+            color: #111827;
+
+            font-family:
+              "Tahoma",
+              "Sarabun",
+              sans-serif;
+          }
+
+
+          h1 {
+            margin: 0 0 5px;
+
+            text-align: center;
+
+            font-size: 20px;
+          }
+
+
+          h2 {
+            margin: 0 0 24px;
+
+            text-align: center;
+
+            font-size: 16px;
+
+            font-weight: 500;
+          }
+
+
+          .info-table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            margin-bottom: 22px;
+          }
+
+
+          .info-table td {
+            padding: 9px 11px;
+
+            border: 1px solid #9ca3af;
+
+            font-size: 13px;
+
+            vertical-align: top;
+          }
+
+
+          .info-table td:first-child {
+            width: 180px;
+
+            background: #f8fafc;
+
+            font-weight: 700;
+          }
+
+
+          .section-title {
+            margin: 20px 0 10px;
+
+            font-size: 15px;
+
+            font-weight: 700;
+          }
+
+
+          .photos {
+            display: grid;
+
+            grid-template-columns:
+              repeat(2, minmax(0, 1fr));
+
+            gap: 14px;
+          }
+
+
+          .photo-box {
+            overflow: hidden;
+
+            border: 1px solid #9ca3af;
+          }
+
+
+          .photo-box img {
+            width: 100%;
+            height: 260px;
+
+            display: block;
+
+            object-fit: cover;
+          }
+
+
+          .signature-grid {
+            display: grid;
+
+            grid-template-columns:
+              repeat(2, minmax(0, 1fr));
+
+            gap: 90px;
+
+            margin-top: 80px;
+          }
+
+
+          .signature-box {
+            text-align: center;
+
+            font-size: 13px;
+          }
+
+
+          .signature-line {
+            margin-top: 55px;
+
+            padding-top: 7px;
+
+            border-top: 1px solid #111827;
+          }
+
+
+          @media print {
+
+            body {
+              padding: 20px;
+            }
+
+          }
+
+        </style>
+
+      </head>
+
+
+      <body>
+
+
+        <h1>
+          แบบบันทึกผลการนิเทศนักศึกษาสหกิจศึกษา
+        </h1>
+
+
+        <h2>
+          การนิเทศครั้งที่ ${round}
+        </h2>
+
+
+
+        <table class="info-table">
+
+          <tr>
+            <td>
+              นักศึกษา
+            </td>
+
+            <td>
+              ${studentName}
+            </td>
+          </tr>
+
+
+          <tr>
+            <td>
+              ข้อมูลนักศึกษา
+            </td>
+
+            <td>
+              ${studentInfo}
+            </td>
+          </tr>
+
+
+          <tr>
+            <td>
+              สถานประกอบการ
+            </td>
+
+            <td>
+              ${company}
+            </td>
+          </tr>
+
+
+          <tr>
+            <td>
+              วันที่นิเทศ
+            </td>
+
+            <td>
+              ${date}
+            </td>
+          </tr>
+
+
+          <tr>
+            <td>
+              รูปแบบการนิเทศ
+            </td>
+
+            <td>
+              ${visitType}
+            </td>
+          </tr>
+
+
+          <tr>
+            <td>
+              อาจารย์นิเทศ
+            </td>
+
+            <td>
+              ${teacherName}
+            </td>
+          </tr>
+
+
+          <tr>
+            <td>
+              พี่เลี้ยง / ผู้แทน
+            </td>
+
+            <td>
+              ${mentor}
+            </td>
+          </tr>
+
+        </table>
+
+
+
+        <div class="section-title">
+          รูปภาพประกอบการนิเทศ
+        </div>
+
+
+        <div class="photos">
+
+          <div class="photo-box">
+
+            <img
+              src="${photos[0]}"
+              alt="รูปประกอบการนิเทศ"
+            >
+
+          </div>
+
+
+          <div class="photo-box">
+
+            <img
+              src="${photos[1]}"
+              alt="รูปประกอบการนิเทศ"
+            >
+
+          </div>
+
+        </div>
+
+
+
+        <div class="signature-grid">
+
+          <div class="signature-box">
+
+            <div class="signature-line">
+
+              (${teacherName})
+
+              <br>
+
+              อาจารย์นิเทศ
+
+            </div>
+
+          </div>
+
+
+          <div class="signature-box">
+
+            <div class="signature-line">
+
+              (${mentor})
+
+              <br>
+
+              พี่เลี้ยง / ผู้แทนสถานประกอบการ
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <script>
+
+          window.onload = function () {
+
+            setTimeout(
+              function () {
+
+                window.print();
+
+              },
+              300
+            );
+
+          };
+
+        <\/script>
+
+
+      </body>
+
+      </html>
+
+    `);
+
+        printWindow.document.close();
+      }
+
+      /* ========================================================
+     คลิกพื้นหลังเพื่อปิด Modal
+  ======================================================== */
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const modal = document.getElementById("visitMockup");
+
+        if (!modal) {
+          return;
+        }
+
+        modal.addEventListener("click", function (event) {
+          if (event.target === modal) {
+            closeVisitMockup();
+          }
+        });
+      });
     </script>
   </body>
 </html>

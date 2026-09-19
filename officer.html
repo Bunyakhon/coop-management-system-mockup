@@ -5,9 +5,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>
-      แดชบอร์ดเจ้าหน้าที่ภาควิชา | KIWI — ระบบจัดการสหกิจศึกษา
-    </title>
+    <title>แดชบอร์ดเจ้าหน้าที่ภาควิชา | KIWI — ระบบจัดการสหกิจศึกษา</title>
 
     <!-- CSS หลัก -->
     <link rel="stylesheet" href="style.css" />
@@ -26,16 +24,17 @@
 
     <style>
       .btn-mock-sm:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-  background: #eef1f5;
-  color: #8793a5;
-  border-color: #d5dce5;
-}
+        opacity: 0.45;
+        cursor: not-allowed;
+        background: #eef1f5;
+        color: #8793a5;
+        border-color: #d5dce5;
+      }
 
-.btn-mock-sm:disabled:hover {
-  background: #eef1f5;
-}
+      .btn-mock-sm:disabled:hover {
+        background: #eef1f5;
+      }
+
       /* =========================================================
          ตรวจสอบสถานะเอกสาร
          ========================================================= */
@@ -1200,12 +1199,18 @@
 
         <a class="sidebar-item" data-target="panel-approve">
           <i class="fa-solid fa-clipboard-check"></i>
-          อนุมัติ/ยกเลิกคำร้อง
+          จัดการคำร้องฝึกงานสหกิจศึกษา
         </a>
 
         <a class="sidebar-item" data-target="panel-print">
           <i class="fa-solid fa-print"></i>
-          พิมพ์เอกสารขอความอนุเคราะห์
+          จัดการเอกสารขอความอนุเคราะห์
+        </a>
+
+        <!-- เพิ่มเมนูใหม่ -->
+        <a class="sidebar-item" data-target="panel-send-document">
+          <i class="fa-solid fa-file-arrow-up"></i>
+          จัดการหนังสือส่งตัว
         </a>
 
         <a class="sidebar-item" data-target="panel-chatbot">
@@ -1237,1174 +1242,1323 @@
         <!-- =====================================================
              ภาพรวม
              ===================================================== -->
-<section class="content-panel active" id="panel-overview">
-  <div class="dashboard-banner">
-    <b id="overviewGreeting"> ยินดีต้อนรับ </b>
+        <section class="content-panel active" id="panel-overview">
+          <div class="dashboard-banner">
+            <b id="overviewGreeting"> ยินดีต้อนรับ </b>
 
-    <span>
-      ภาพรวมสถานะการดำเนินงานด้านสหกิจศึกษาของภาควิชา
-    </span>
-  </div>
+            <span> ภาพรวมสถานะการดำเนินงานด้านสหกิจศึกษาของภาควิชา </span>
+          </div>
 
-  <div class="officer-overview-head">
-    <div class="officer-overview-title">
-      <h2>
-        <i class="fa-solid fa-chart-simple"></i>
-        สรุปข้อมูลการดำเนินงานสหกิจศึกษา
-      </h2>
+          <div class="officer-overview-head">
+            <div class="officer-overview-title">
+              <h2>
+                <i class="fa-solid fa-chart-simple"></i>
+                สรุปข้อมูลการดำเนินงานสหกิจศึกษา
+              </h2>
 
-      <p>
-        แสดงจำนวนรายการสำคัญที่เจ้าหน้าที่ใช้ติดตามคำร้อง เอกสาร
-        การตอบรับจากสถานประกอบการ และนักศึกษาสหกิจศึกษาที่ยังไม่ได้ยื่นคำร้อง
-      </p>
-    </div>
+              <p>
+                แสดงจำนวนรายการสำคัญที่เจ้าหน้าที่ใช้ติดตามคำร้อง เอกสาร
+                การตอบรับจากสถานประกอบการ
+                และนักศึกษาสหกิจศึกษาที่ยังไม่ได้ยื่นคำร้อง
+              </p>
+            </div>
 
-    <span class="overview-badge">
-      <i class="fa-solid fa-circle-info"></i>
-      ข้อมูลภาพรวมสหกิจศึกษา
-    </span>
-  </div>
+            <span class="overview-badge">
+              <i class="fa-solid fa-circle-info"></i>
+              ข้อมูลภาพรวมสหกิจศึกษา
+            </span>
+          </div>
 
-  <div class="overview-stat-grid">
+          <div class="overview-stat-grid">
+            <!-- คำร้องขอสหกิจศึกษา -->
+            <article class="overview-stat-card tone-blue">
+              <div class="overview-stat-top">
+                <div class="overview-stat-icon">
+                  <i class="fa-solid fa-file-signature"></i>
+                </div>
+              </div>
 
-    <!-- คำร้องขอสหกิจศึกษา -->
-    <article class="overview-stat-card tone-blue">
-      <div class="overview-stat-top">
-        <div class="overview-stat-icon">
-          <i class="fa-solid fa-file-signature"></i>
-        </div>
-      </div>
+              <div class="overview-stat-number">7</div>
 
-      <div class="overview-stat-number">7</div>
+              <span class="overview-stat-label"> คำร้องขอสหกิจศึกษา </span>
 
-      <span class="overview-stat-label">
-        คำร้องขอสหกิจศึกษา
-      </span>
+              <span class="overview-stat-note">
+                คำร้องสหกิจศึกษาที่อยู่ในกระบวนการตรวจสอบและดำเนินการ
+              </span>
+            </article>
 
-      <span class="overview-stat-note">
-        คำร้องสหกิจศึกษาที่อยู่ในกระบวนการตรวจสอบและดำเนินการ
-      </span>
-    </article>
+            <!-- เอกสารขอความอนุเคราะห์ -->
+            <article class="overview-stat-card tone-orange">
+              <div class="overview-stat-top">
+                <div class="overview-stat-icon">
+                  <i class="fa-solid fa-file-circle-check"></i>
+                </div>
+              </div>
 
-    <!-- เอกสารขอความอนุเคราะห์ -->
-    <article class="overview-stat-card tone-orange">
-      <div class="overview-stat-top">
-        <div class="overview-stat-icon">
-          <i class="fa-solid fa-file-circle-check"></i>
-        </div>
-      </div>
+              <div class="overview-stat-number">4</div>
 
-      <div class="overview-stat-number">4</div>
+              <span class="overview-stat-label"> เอกสารขอความอนุเคราะห์ </span>
 
-      <span class="overview-stat-label">
-        เอกสารขอความอนุเคราะห์
-      </span>
+              <span class="overview-stat-note">
+                เอกสารของนักศึกษาสหกิจศึกษาที่อยู่ในขั้นตอนจัดทำหรือรอส่ง
+              </span>
+            </article>
 
-      <span class="overview-stat-note">
-        เอกสารของนักศึกษาสหกิจศึกษาที่อยู่ในขั้นตอนจัดทำหรือรอส่ง
-      </span>
-    </article>
+            <!-- สถานประกอบการตอบรับ -->
+            <article class="overview-stat-card tone-green">
+              <div class="overview-stat-top">
+                <div class="overview-stat-icon">
+                  <i class="fa-solid fa-building-circle-check"></i>
+                </div>
+              </div>
 
-    <!-- สถานประกอบการตอบรับ -->
-    <article class="overview-stat-card tone-green">
-      <div class="overview-stat-top">
-        <div class="overview-stat-icon">
-          <i class="fa-solid fa-building-circle-check"></i>
-        </div>
-      </div>
+              <div class="overview-stat-number">5</div>
 
-      <div class="overview-stat-number">5</div>
+              <span class="overview-stat-label">
+                สถานประกอบการตอบรับนักศึกษาสหกิจศึกษา
+              </span>
 
-      <span class="overview-stat-label">
-        สถานประกอบการตอบรับนักศึกษาสหกิจศึกษา
-      </span>
+              <span class="overview-stat-note">
+                จำนวนนักศึกษาสหกิจศึกษาที่ได้รับการตอบรับจากสถานประกอบการ
+              </span>
+            </article>
 
-      <span class="overview-stat-note">
-        จำนวนนักศึกษาสหกิจศึกษาที่ได้รับการตอบรับจากสถานประกอบการ
-      </span>
-    </article>
+            <!-- สถานประกอบการปฏิเสธ -->
+            <article class="overview-stat-card tone-red">
+              <div class="overview-stat-top">
+                <div class="overview-stat-icon">
+                  <i class="fa-solid fa-building-circle-xmark"></i>
+                </div>
+              </div>
 
-    <!-- สถานประกอบการปฏิเสธ -->
-    <article class="overview-stat-card tone-red">
-      <div class="overview-stat-top">
-        <div class="overview-stat-icon">
-          <i class="fa-solid fa-building-circle-xmark"></i>
-        </div>
-      </div>
+              <div class="overview-stat-number">2</div>
 
-      <div class="overview-stat-number">2</div>
+              <span class="overview-stat-label">
+                สถานประกอบการปฏิเสธรับนักศึกษาสหกิจศึกษา
+              </span>
 
-      <span class="overview-stat-label">
-        สถานประกอบการปฏิเสธรับนักศึกษาสหกิจศึกษา
-      </span>
+              <span class="overview-stat-note">
+                รายการที่นักศึกษาต้องดำเนินการเลือกสถานประกอบการใหม่
+              </span>
+            </article>
 
-      <span class="overview-stat-note">
-        รายการที่นักศึกษาต้องดำเนินการเลือกสถานประกอบการใหม่
-      </span>
-    </article>
+            <!-- สถานประกอบการในระบบ -->
+            <article class="overview-stat-card tone-purple">
+              <div class="overview-stat-top">
+                <div class="overview-stat-icon">
+                  <i class="fa-solid fa-building"></i>
+                </div>
+              </div>
 
-    <!-- สถานประกอบการในระบบ -->
-    <article class="overview-stat-card tone-purple">
-      <div class="overview-stat-top">
-        <div class="overview-stat-icon">
-          <i class="fa-solid fa-building"></i>
-        </div>
-      </div>
+              <div class="overview-stat-number">32</div>
 
-      <div class="overview-stat-number">32</div>
+              <span class="overview-stat-label"> สถานประกอบการในระบบ </span>
 
-      <span class="overview-stat-label">
-        สถานประกอบการในระบบ
-      </span>
+              <span class="overview-stat-note">
+                จำนวนสถานประกอบการที่รองรับนักศึกษาสหกิจศึกษา
+              </span>
+            </article>
 
-      <span class="overview-stat-note">
-        จำนวนสถานประกอบการที่รองรับนักศึกษาสหกิจศึกษา
-      </span>
-    </article>
+            <!-- เอกสารส่งตัว -->
+            <article class="overview-stat-card tone-cyan">
+              <div class="overview-stat-top">
+                <div class="overview-stat-icon">
+                  <i class="fa-solid fa-paper-plane"></i>
+                </div>
+              </div>
 
-    <!-- เอกสารส่งตัว -->
-    <article class="overview-stat-card tone-cyan">
-      <div class="overview-stat-top">
-        <div class="overview-stat-icon">
-          <i class="fa-solid fa-paper-plane"></i>
-        </div>
-      </div>
+              <div class="overview-stat-number">6</div>
 
-      <div class="overview-stat-number">6</div>
+              <span class="overview-stat-label">
+                เอกสารส่งตัวนักศึกษาสหกิจศึกษา
+              </span>
 
-      <span class="overview-stat-label">
-        เอกสารส่งตัวนักศึกษาสหกิจศึกษา
-      </span>
+              <span class="overview-stat-note">
+                รายการเอกสารส่งตัวที่อยู่ในกระบวนการดำเนินงาน
+              </span>
+            </article>
 
-      <span class="overview-stat-note">
-        รายการเอกสารส่งตัวที่อยู่ในกระบวนการดำเนินงาน
-      </span>
-    </article>
+            <!-- ยังไม่ทำคำร้อง -->
+            <article class="overview-stat-card tone-gray">
+              <div class="overview-stat-top">
+                <div class="overview-stat-icon">
+                  <i class="fa-solid fa-user-clock"></i>
+                </div>
+              </div>
 
-    <!-- ยังไม่ทำคำร้อง -->
-    <article class="overview-stat-card tone-gray">
-      <div class="overview-stat-top">
-        <div class="overview-stat-icon">
-          <i class="fa-solid fa-user-clock"></i>
-        </div>
-      </div>
+              <div class="overview-stat-number">11</div>
 
-      <div class="overview-stat-number">11</div>
+              <span class="overview-stat-label">
+                นักศึกษาที่ยังไม่ทำคำร้องสหกิจศึกษา
+              </span>
 
-      <span class="overview-stat-label">
-        นักศึกษาที่ยังไม่ทำคำร้องสหกิจศึกษา
-      </span>
+              <span class="overview-stat-note">
+                นักศึกษาสหกิจศึกษาที่ควรติดตามให้ดำเนินการยื่นคำร้อง
+              </span>
+            </article>
+          </div>
 
-      <span class="overview-stat-note">
-        นักศึกษาสหกิจศึกษาที่ควรติดตามให้ดำเนินการยื่นคำร้อง
-      </span>
-    </article>
+          <div class="overview-footnote">
+            <i class="fa-solid fa-circle-info"></i>
 
-  </div>
+            <span>
+              ตัวเลขในหน้า Mockup นี้เป็นข้อมูลตัวอย่างสำหรับแสดงรูปแบบ
+              Dashboard ของระบบสหกิจศึกษา
+              และสามารถเปลี่ยนให้ดึงค่าจากฐานข้อมูลจริงภายหลังได้
+            </span>
+          </div>
+        </section>
 
-  <div class="overview-footnote">
-    <i class="fa-solid fa-circle-info"></i>
-
-    <span>
-      ตัวเลขในหน้า Mockup นี้เป็นข้อมูลตัวอย่างสำหรับแสดงรูปแบบ
-      Dashboard ของระบบสหกิจศึกษา
-      และสามารถเปลี่ยนให้ดึงค่าจากฐานข้อมูลจริงภายหลังได้
-    </span>
-  </div>
-</section>
-
-<!-- =====================================================
+        <!-- =====================================================
      ตรวจสอบสถานะเอกสาร
      ===================================================== -->
 
-<section class="content-panel" id="panel-docstatus">
-  <div class="panel-header">
-    <h2>ตรวจสอบสถานะเอกสาร</h2>
+        <section class="content-panel" id="panel-docstatus">
+          <div class="panel-header">
+            <h2>ตรวจสอบสถานะเอกสาร</h2>
 
-    <p>
-      ตรวจสอบสถานะเอกสารของนักศึกษาสหกิจศึกษา
-      โดยแยกตามประเภทเอกสาร
-    </p>
-  </div>
-
-  <!-- ================= เอกสารคำร้อง ================= -->
-
-  <div class="doc-status-section">
-    <div class="doc-status-section-header">
-      <div class="doc-status-icon">
-        <i class="fa-solid fa-file-signature"></i>
-      </div>
-
-      <div>
-        <h3>เอกสารคำร้องสหกิจศึกษา</h3>
-
-        <p>
-          ตรวจสอบสถานะคำร้องของนักศึกษาสหกิจศึกษา
-        </p>
-      </div>
-    </div>
-
-    <div
-      class="doc-status-grid"
-      style="grid-template-columns: 1fr;"
-    >
-      <div class="doc-status-box">
-        <div class="doc-status-type-title">
-          <div>
-            <i class="fa-solid fa-briefcase"></i>
-            นักศึกษาสหกิจศึกษา
+            <p>ตรวจสอบสถานะเอกสารของนักศึกษาสหกิจศึกษา โดยแยกตามประเภทเอกสาร</p>
           </div>
 
-          <span class="type-tag coop">
-            สหกิจศึกษา
-          </span>
-        </div>
+          <!-- =====================================================
+       1. เอกสารคำร้องสหกิจศึกษา
+       สถานะ:
+       - อนุมัติ
+       - ไม่อนุมัติ
+       - ยื่นแล้ว
+       - ยังไม่ได้ยื่น
+       ===================================================== -->
 
-        <div class="table-wrapper">
-          <table class="mock-table">
-            <thead>
-              <tr>
-                <th>ชื่อนักศึกษา</th>
-                <th>ประเภทเอกสาร</th>
-                <th class="status-cell">สถานะ</th>
-              </tr>
-            </thead>
+          <div class="doc-status-section">
+            <div class="doc-status-section-header">
+              <div class="doc-status-icon">
+                <i class="fa-solid fa-file-signature"></i>
+              </div>
 
-            <tbody>
-              <tr>
-                <td>อรุณี พงษ์สุวรรณ</td>
+              <div>
+                <h3>เอกสารคำร้องสหกิจศึกษา</h3>
 
-                <td>
-                  คำร้องขอสหกิจศึกษา
-                </td>
+                <p>ตรวจสอบสถานะคำร้องของนักศึกษาสหกิจศึกษา</p>
+              </div>
+            </div>
 
-                <td class="status-cell">
-                  <span class="tag tag-green">
-                    ส่งแล้ว
-                  </span>
-                </td>
-              </tr>
+            <div class="doc-status-grid" style="grid-template-columns: 1fr">
+              <div class="doc-status-box">
+                <div class="doc-status-type-title">
+                  <div>
+                    <i class="fa-solid fa-briefcase"></i>
+                    นักศึกษาสหกิจศึกษา
+                  </div>
 
-              <tr>
-                <td>ภูริช วัฒนกุล</td>
+                  <span class="type-tag coop"> สหกิจศึกษา </span>
+                </div>
 
-                <td>
-                  คำร้องขอสหกิจศึกษา
-                </td>
+                <div class="table-wrapper">
+                  <table class="mock-table">
+                    <thead>
+                      <tr>
+                        <th>ชื่อนักศึกษา</th>
+                        <th>ประเภทเอกสาร</th>
+                        <th class="status-cell">สถานะ</th>
+                      </tr>
+                    </thead>
 
-                <td class="status-cell">
-                  <span class="tag tag-red">
-                    ยังไม่ส่ง
-                  </span>
-                </td>
-              </tr>
+                    <tbody>
+                      <!-- อนุมัติ -->
+                      <tr>
+                        <td>อรุณี พงษ์สุวรรณ</td>
 
-              <tr>
-                <td>ชนากานต์ อินทร์แก้ว</td>
+                        <td>คำร้องขอสหกิจศึกษา</td>
 
-                <td>
-                  คำร้องขอสหกิจศึกษา
-                </td>
+                        <td class="status-cell">
+                          <span class="tag tag-green"> อนุมัติ </span>
+                        </td>
+                      </tr>
 
-                <td class="status-cell">
-                  <span class="tag tag-green">
-                    ส่งแล้ว
-                  </span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
+                      <!-- ไม่อนุมัติ -->
+                      <tr>
+                        <td>ชนากานต์ อินทร์แก้ว</td>
 
+                        <td>คำร้องขอสหกิจศึกษา</td>
 
-  <!-- ================= หนังสือขอความอนุเคราะห์ ================= -->
+                        <td class="status-cell">
+                          <span class="tag tag-red"> ไม่อนุมัติ </span>
+                        </td>
+                      </tr>
 
-  <div class="doc-status-section">
-    <div class="doc-status-section-header">
-      <div class="doc-status-icon orange">
-        <i class="fa-solid fa-envelope-open-text"></i>
-      </div>
+                      <!-- ยื่นแล้ว -->
+                      <tr>
+                        <td>ณัฐวุฒิ เพชรรัตน์</td>
 
-      <div>
-        <h3>เอกสารขอความอนุเคราะห์</h3>
+                        <td>คำร้องขอสหกิจศึกษา</td>
 
-        <p>
-          ตรวจสอบหนังสือขอความอนุเคราะห์ของนักศึกษาสหกิจศึกษา
-          ที่ใช้ติดต่อสถานประกอบการ
-        </p>
-      </div>
-    </div>
+                        <td class="status-cell">
+                          <span class="tag tag-muted"> ยื่นแล้ว </span>
+                        </td>
+                      </tr>
 
-<div
-  class="doc-status-grid"
-  style="grid-template-columns: 1fr;"
->
-  <div class="doc-status-box">
+                      <!-- ยังไม่ได้ยื่น -->
+                      <tr>
+                        <td>ภูริช วัฒนกุล</td>
 
-    <div class="doc-status-type-title">
-      <div>
-        <i class="fa-solid fa-briefcase"></i>
-        นักศึกษาสหกิจศึกษา
-      </div>
+                        <td>คำร้องขอสหกิจศึกษา</td>
 
-      <span class="type-tag coop">
-        สหกิจศึกษา
-      </span>
-    </div>
-
-
-    <div class="table-wrapper">
-
-      <table class="mock-table">
-
-        <thead>
-          <tr>
-            <th>ชื่อนักศึกษา</th>
-            <th>ประเภทเอกสาร</th>
-            <th class="status-cell">สถานะ</th>
-          </tr>
-        </thead>
-
-
-        <tbody>
-
-          <!-- รอตอบรับ -->
-          <tr>
-            <td>
-              ณัฐวุฒิ เพชรรัตน์
-            </td>
-
-            <td>
-              หนังสือขอความอนุเคราะห์
-            </td>
-
-            <td class="status-cell">
-              <span class="tag tag-muted">
-                รอตอบรับ
-              </span>
-            </td>
-          </tr>
-
-
-          <!-- ตอบรับแล้ว -->
-          <tr>
-            <td>
-              อรุณี พงษ์สุวรรณ
-            </td>
-
-            <td>
-              หนังสือขอความอนุเคราะห์
-            </td>
-
-            <td class="status-cell">
-              <span class="tag tag-green">
-                ตอบรับแล้ว
-              </span>
-            </td>
-          </tr>
-
-
-          <!-- ปฏิเสธ -->
-          <tr>
-            <td>
-              ชนากานต์ อินทร์แก้ว
-            </td>
-
-            <td>
-              หนังสือขอความอนุเคราะห์
-            </td>
-
-            <td class="status-cell">
-              <span class="tag tag-red">
-                ปฏิเสธ
-              </span>
-            </td>
-          </tr>
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  </div>
-</div>
-  </div>
-
-
-  <!-- ================= หนังสือส่งตัว ================= -->
-
-  <div class="doc-status-section">
-    <div class="doc-status-section-header">
-      <div class="doc-status-icon green">
-        <i class="fa-solid fa-paper-plane"></i>
-      </div>
-
-      <div>
-        <h3>หนังสือส่งตัว</h3>
-
-        <p>
-          ตรวจสอบสถานะหนังสือส่งตัวก่อนนักศึกษาสหกิจศึกษา
-          เข้าปฏิบัติงาน ณ สถานประกอบการ
-        </p>
-      </div>
-    </div>
-
-    <div
-      class="doc-status-grid"
-      style="grid-template-columns: 1fr;"
-    >
-      <div class="doc-status-box">
-        <div class="doc-status-type-title">
-          <div>
-            <i class="fa-solid fa-briefcase"></i>
-            นักศึกษาสหกิจศึกษา
+                        <td class="status-cell">
+                          <span class="tag tag-dark"> ยังไม่ได้ยื่น </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <span class="type-tag coop">
-            สหกิจศึกษา
-          </span>
-        </div>
+          <!-- =====================================================
+       2. เอกสารขอความอนุเคราะห์
 
-        <div class="table-wrapper">
-          <table class="mock-table">
-            <thead>
-              <tr>
-                <th>ชื่อนักศึกษา</th>
-                <th>ประเภทเอกสาร</th>
-                <th class="status-cell">สถานะ</th>
-              </tr>
-            </thead>
+       2.1 สถานะการตอบรับ:
+       - รอตอบรับ
+       - ตอบรับแล้ว
+       - ไม่ตอบรับ
 
-            <tbody>
-              <tr>
-                <td>ชนากานต์ อินทร์แก้ว</td>
+       2.2 สถานะการส่ง:
+       - ส่งแล้ว
+       - ยังไม่ส่ง
+       ===================================================== -->
 
-                <td>
-                  หนังสือส่งตัว
-                </td>
+          <div class="doc-status-section">
+            <div class="doc-status-section-header">
+              <div class="doc-status-icon orange">
+                <i class="fa-solid fa-envelope-open-text"></i>
+              </div>
 
-                <td class="status-cell">
-                  <span class="tag tag-green">
-                    ส่งแล้ว
-                  </span>
-                </td>
-              </tr>
+              <div>
+                <h3>เอกสารขอความอนุเคราะห์</h3>
 
-              <tr>
-                <td>ภูริช วัฒนกุล</td>
+                <p>ตรวจสอบสถานะการส่งเอกสารและการตอบรับจากสถานประกอบการ</p>
+              </div>
+            </div>
 
-                <td>
-                  หนังสือส่งตัว
-                </td>
+            <div class="doc-status-grid" style="grid-template-columns: 1fr">
+              <div class="doc-status-box">
+                <div class="doc-status-type-title">
+                  <div>
+                    <i class="fa-solid fa-briefcase"></i>
+                    นักศึกษาสหกิจศึกษา
+                  </div>
 
-                <td class="status-cell">
-                  <span class="tag tag-red">
-                    ยังไม่ส่ง
-                  </span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
+                  <span class="type-tag coop"> สหกิจศึกษา </span>
+                </div>
 
+                <div class="table-wrapper">
+                  <table class="mock-table">
+                    <thead>
+                      <tr>
+                        <th>ชื่อนักศึกษา</th>
 
-  <!-- =====================================================
+                        <th>ประเภทเอกสาร</th>
+
+                        <th class="status-cell">สถานะการส่ง</th>
+
+                        <th class="status-cell">สถานะการตอบรับ</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <!-- ส่งแล้ว / รอตอบรับ -->
+                      <tr>
+                        <td>ณัฐวุฒิ เพชรรัตน์</td>
+
+                        <td>หนังสือขอความอนุเคราะห์</td>
+
+                        <td class="status-cell">
+                          <span class="tag tag-green"> ส่งแล้ว </span>
+                        </td>
+
+                        <td class="status-cell">
+                          <span class="tag tag-muted"> รอตอบรับ </span>
+                        </td>
+                      </tr>
+
+                      <!-- ส่งแล้ว / ตอบรับแล้ว -->
+                      <tr>
+                        <td>อรุณี พงษ์สุวรรณ</td>
+
+                        <td>หนังสือขอความอนุเคราะห์</td>
+
+                        <td class="status-cell">
+                          <span class="tag tag-green"> ส่งแล้ว </span>
+                        </td>
+
+                        <td class="status-cell">
+                          <span class="tag tag-green"> ตอบรับแล้ว </span>
+                        </td>
+                      </tr>
+
+                      <!-- ส่งแล้ว / ไม่ตอบรับ -->
+                      <tr>
+                        <td>ชนากานต์ อินทร์แก้ว</td>
+
+                        <td>หนังสือขอความอนุเคราะห์</td>
+
+                        <td class="status-cell">
+                          <span class="tag tag-green"> ส่งแล้ว </span>
+                        </td>
+
+                        <td class="status-cell">
+                          <span class="tag tag-red"> ไม่ตอบรับ </span>
+                        </td>
+                      </tr>
+
+                      <!-- ยังไม่ส่ง -->
+                      <tr>
+                        <td>ภูริช วัฒนกุล</td>
+
+                        <td>หนังสือขอความอนุเคราะห์</td>
+
+                        <td class="status-cell">
+                          <span class="tag tag-red"> ยังไม่ส่ง </span>
+                        </td>
+
+                        <td class="status-cell">
+                          <span class="tag tag-dark"> - </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- =====================================================
+       3. หนังสือส่งตัว
+       สถานะ:
+       - พิมพ์แล้ว
+       - ยังไม่พิมพ์
+       ===================================================== -->
+
+          <div class="doc-status-section">
+            <div class="doc-status-section-header">
+              <div class="doc-status-icon green">
+                <i class="fa-solid fa-paper-plane"></i>
+              </div>
+
+              <div>
+                <h3>หนังสือส่งตัว</h3>
+
+                <p>ตรวจสอบสถานะการพิมพ์หนังสือส่งตัว ของนักศึกษาสหกิจศึกษา</p>
+              </div>
+            </div>
+
+            <div class="doc-status-grid" style="grid-template-columns: 1fr">
+              <div class="doc-status-box">
+                <div class="doc-status-type-title">
+                  <div>
+                    <i class="fa-solid fa-briefcase"></i>
+                    นักศึกษาสหกิจศึกษา
+                  </div>
+
+                  <span class="type-tag coop"> สหกิจศึกษา </span>
+                </div>
+
+                <div class="table-wrapper">
+                  <table class="mock-table">
+                    <thead>
+                      <tr>
+                        <th>ชื่อนักศึกษา</th>
+
+                        <th>ประเภทเอกสาร</th>
+
+                        <th class="status-cell">สถานะ</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <!-- พิมพ์แล้ว -->
+                      <tr>
+                        <td>ชนากานต์ อินทร์แก้ว</td>
+
+                        <td>หนังสือส่งตัว</td>
+
+                        <td class="status-cell">
+                          <span class="tag tag-green"> พิมพ์แล้ว </span>
+                        </td>
+                      </tr>
+
+                      <!-- ยังไม่พิมพ์ -->
+                      <tr>
+                        <td>ภูริช วัฒนกุล</td>
+
+                        <td>หนังสือส่งตัว</td>
+
+                        <td class="status-cell">
+                          <span class="tag tag-red"> ยังไม่พิมพ์ </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- =====================================================
        ตารางข้อมูลสำหรับ Chatbot
        ซ่อนไว้ ไม่แสดงบนหน้าเว็บ
        ===================================================== -->
 
-  <div class="document-master-data">
-    <table>
-      <tbody id="documentTableBody">
+          <div class="document-master-data">
+            <table>
+              <tbody id="documentTableBody">
+                <!-- =========================
+             คำร้องสหกิจศึกษา
+             ========================= -->
 
-        <tr
-          data-type="coop"
-          data-status="sent"
-        >
-          <td>อรุณี พงษ์สุวรรณ</td>
-          <td>สหกิจศึกษา</td>
-          <td>คำร้องขอสหกิจศึกษา</td>
-          <td>ส่งแล้ว</td>
-        </tr>
+                <tr
+                  data-type="coop"
+                  data-document="request"
+                  data-status="approved"
+                >
+                  <td>อรุณี พงษ์สุวรรณ</td>
+                  <td>สหกิจศึกษา</td>
+                  <td>คำร้องขอสหกิจศึกษา</td>
+                  <td>อนุมัติ</td>
+                </tr>
 
-        <tr
-          data-type="coop"
-          data-status="waiting"
-        >
-          <td>ภูริช วัฒนกุล</td>
-          <td>สหกิจศึกษา</td>
-          <td>คำร้องขอสหกิจศึกษา</td>
-          <td>ยังไม่ส่ง</td>
-        </tr>
+                <tr
+                  data-type="coop"
+                  data-document="request"
+                  data-status="rejected"
+                >
+                  <td>ชนากานต์ อินทร์แก้ว</td>
+                  <td>สหกิจศึกษา</td>
+                  <td>คำร้องขอสหกิจศึกษา</td>
+                  <td>ไม่อนุมัติ</td>
+                </tr>
 
-        <tr
-          data-type="coop"
-          data-status="sent"
-        >
-          <td>ชนากานต์ อินทร์แก้ว</td>
-          <td>สหกิจศึกษา</td>
-          <td>คำร้องขอสหกิจศึกษา</td>
-          <td>ส่งแล้ว</td>
-        </tr>
+                <tr
+                  data-type="coop"
+                  data-document="request"
+                  data-status="submitted"
+                >
+                  <td>ณัฐวุฒิ เพชรรัตน์</td>
+                  <td>สหกิจศึกษา</td>
+                  <td>คำร้องขอสหกิจศึกษา</td>
+                  <td>ยื่นแล้ว</td>
+                </tr>
 
-        <tr
-          data-type="coop"
-          data-status="waiting"
-        >
-          <td>ณัฐวุฒิ เพชรรัตน์</td>
-          <td>สหกิจศึกษา</td>
-          <td>หนังสือขอความอนุเคราะห์</td>
-          <td>ยังไม่ส่ง</td>
-        </tr>
+                <tr
+                  data-type="coop"
+                  data-document="request"
+                  data-status="not-submitted"
+                >
+                  <td>ภูริช วัฒนกุล</td>
+                  <td>สหกิจศึกษา</td>
+                  <td>คำร้องขอสหกิจศึกษา</td>
+                  <td>ยังไม่ได้ยื่น</td>
+                </tr>
 
-        <tr
-          data-type="coop"
-          data-status="sent"
-        >
-          <td>อรุณี พงษ์สุวรรณ</td>
-          <td>สหกิจศึกษา</td>
-          <td>หนังสือขอความอนุเคราะห์</td>
-          <td>ส่งแล้ว</td>
-        </tr>
+                <!-- =========================
+             หนังสือขอความอนุเคราะห์
+             ========================= -->
 
-        <tr
-          data-type="coop"
-          data-status="sent"
-        >
-          <td>ชนากานต์ อินทร์แก้ว</td>
-          <td>สหกิจศึกษา</td>
-          <td>หนังสือส่งตัว</td>
-          <td>ส่งแล้ว</td>
-        </tr>
+                <tr
+                  data-type="coop"
+                  data-document="assistance"
+                  data-send-status="sent"
+                  data-response-status="waiting"
+                >
+                  <td>ณัฐวุฒิ เพชรรัตน์</td>
+                  <td>สหกิจศึกษา</td>
+                  <td>หนังสือขอความอนุเคราะห์</td>
+                  <td>ส่งแล้ว / รอตอบรับ</td>
+                </tr>
 
-        <tr
-          data-type="coop"
-          data-status="waiting"
-        >
-          <td>ภูริช วัฒนกุล</td>
-          <td>สหกิจศึกษา</td>
-          <td>หนังสือส่งตัว</td>
-          <td>ยังไม่ส่ง</td>
-        </tr>
+                <tr
+                  data-type="coop"
+                  data-document="assistance"
+                  data-send-status="sent"
+                  data-response-status="accepted"
+                >
+                  <td>อรุณี พงษ์สุวรรณ</td>
+                  <td>สหกิจศึกษา</td>
+                  <td>หนังสือขอความอนุเคราะห์</td>
+                  <td>ส่งแล้ว / ตอบรับแล้ว</td>
+                </tr>
 
-      </tbody>
-    </table>
-  </div>
-</section>
+                <tr
+                  data-type="coop"
+                  data-document="assistance"
+                  data-send-status="sent"
+                  data-response-status="rejected"
+                >
+                  <td>ชนากานต์ อินทร์แก้ว</td>
+                  <td>สหกิจศึกษา</td>
+                  <td>หนังสือขอความอนุเคราะห์</td>
+                  <td>ส่งแล้ว / ไม่ตอบรับ</td>
+                </tr>
 
-<!-- =====================================================
+                <tr
+                  data-type="coop"
+                  data-document="assistance"
+                  data-send-status="not-sent"
+                  data-response-status=""
+                >
+                  <td>ภูริช วัฒนกุล</td>
+                  <td>สหกิจศึกษา</td>
+                  <td>หนังสือขอความอนุเคราะห์</td>
+                  <td>ยังไม่ส่ง</td>
+                </tr>
+
+                <!-- =========================
+             หนังสือส่งตัว
+             ========================= -->
+
+                <tr
+                  data-type="coop"
+                  data-document="send-letter"
+                  data-status="printed"
+                >
+                  <td>ชนากานต์ อินทร์แก้ว</td>
+                  <td>สหกิจศึกษา</td>
+                  <td>หนังสือส่งตัว</td>
+                  <td>พิมพ์แล้ว</td>
+                </tr>
+
+                <tr
+                  data-type="coop"
+                  data-document="send-letter"
+                  data-status="not-printed"
+                >
+                  <td>ภูริช วัฒนกุล</td>
+                  <td>สหกิจศึกษา</td>
+                  <td>หนังสือส่งตัว</td>
+                  <td>ยังไม่พิมพ์</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- =====================================================
      ตรวจสอบคำร้องสหกิจศึกษา
      ===================================================== -->
 
-<section class="content-panel" id="panel-approve">
-  <div class="panel-header">
-    <h2>ตรวจสอบคำร้องสหกิจศึกษา</h2>
+        <section class="content-panel" id="panel-approve">
+          <div class="panel-header">
+            <h2>ตรวจสอบคำร้องสหกิจศึกษา</h2>
 
-    <p>
-      ตรวจสอบรายละเอียดคำร้องขอสหกิจศึกษาที่นักศึกษายื่นเข้ามา
-      และสามารถพิมพ์เอกสารเป็น PDF ได้
-    </p>
-  </div>
+            <p>
+              ตรวจสอบรายละเอียดคำร้องขอสหกิจศึกษาที่นักศึกษายื่นเข้ามา
+              และสามารถพิมพ์เอกสารเป็น PDF ได้
+            </p>
+          </div>
 
-  <div class="table-wrapper">
-    <table class="mock-table" id="coopRequestTable">
-      <thead>
-        <tr>
-          <th>ชื่อนักศึกษา</th>
-          <th>รหัสนักศึกษา</th>
-          <th>ประเภท</th>
-          <th>สถานประกอบการ</th>
-          <th>ตำแหน่ง</th>
-          <th>วันที่ยื่น</th>
-          <th>สถานะ</th>
-          <th>การดำเนินการ</th>
-        </tr>
-      </thead>
+          <div class="table-wrapper">
+            <table class="mock-table" id="coopRequestTable">
+              <thead>
+                <tr>
+                  <th>ชื่อนักศึกษา</th>
 
-      <tbody>
+                  <th>รหัสนักศึกษา</th>
 
-        <!-- ================= นักศึกษา 1 ================= -->
+                  <th>ประเภท</th>
 
-        <tr
-          data-student-name="นางสาวพิมพ์ชนก สุขใจ"
-          data-student-id="6702458196"
-          data-major="INE"
-          data-company="BlueWave Digital Co., Ltd."
-          data-position="Frontend Developer"
-          data-province="ชลบุรี"
-          data-submit-date="3 ก.ย. 2569"
-          data-email="studentcoop@email.kmutnb.ac.th"
-          data-status="submitted"
-        >
-          <td>นางสาวพิมพ์ชนก สุขใจ</td>
+                  <th>สถานประกอบการ</th>
 
-          <td>6702458196</td>
+                  <th>ตำแหน่ง</th>
 
-          <td>
-            <span class="type-tag coop">
-              สหกิจศึกษา
-            </span>
-          </td>
+                  <th>วันที่ยื่น</th>
 
-          <td>BlueWave Digital Co., Ltd.</td>
+                  <th>สถานะ</th>
 
-          <td>Frontend Developer</td>
+                  <th>การดำเนินการ</th>
+                </tr>
+              </thead>
 
-          <td>3 ก.ย. 2569</td>
+              <tbody>
+                <!-- =====================================================
+             นักศึกษา 1
+             ===================================================== -->
 
-          <td>
-            <span class="tag tag-green request-status">
-              ยื่นคำร้องแล้ว
-            </span>
-          </td>
+                <tr
+                  data-student-name="นางสาวพิมพ์ชนก สุขใจ"
+                  data-student-id="6702458196"
+                  data-major="INE"
+                  data-company="BlueWave Digital Co., Ltd."
+                  data-position="Frontend Developer"
+                  data-province="ชลบุรี"
+                  data-submit-date="3 ก.ย. 2569"
+                  data-email="studentcoop@email.kmutnb.ac.th"
+                  data-status="submitted"
+                >
+                  <td>นางสาวพิมพ์ชนก สุขใจ</td>
 
-          <td>
-            <div class="action-group">
+                  <td>6702458196</td>
 
-              <button
-                type="button"
-                class="btn-mock-sm"
-                onclick="viewCoopRequestDetail(this)"
-              >
-                <i class="fa-solid fa-eye"></i>
-                ดูรายละเอียด
-              </button>
+                  <td>
+                    <span class="type-tag coop"> สหกิจศึกษา </span>
+                  </td>
 
+                  <td>BlueWave Digital Co., Ltd.</td>
 
-              <button
-                type="button"
-                class="btn-mock-sm"
-                onclick="printCoopRequestPDF(this)"
-              >
-                <i class="fa-solid fa-file-pdf"></i>
-                พิมพ์ PDF
-              </button>
+                  <td>Frontend Developer</td>
 
-            </div>
-          </td>
-        </tr>
+                  <td>3 ก.ย. 2569</td>
 
+                  <td>
+                    <span class="tag tag-green request-status">
+                      ยื่นคำร้องแล้ว
+                    </span>
+                  </td>
 
-        <!-- ================= นักศึกษา 2 ================= -->
+                  <td>
+                    <div class="action-group">
+                      <!-- ดูรายละเอียด -->
 
-        <tr
-          data-student-name="อรุณี พงษ์สุวรรณ"
-          data-student-id="6702458202"
-          data-major="IT"
-          data-company="DataSphere Thailand"
-          data-position="Data Analyst"
-          data-province="กรุงเทพมหานคร"
-          data-submit-date="2 ก.ย. 2569"
-          data-email="arunee@kmutnb.ac.th"
-          data-status="submitted"
-        >
-          <td>อรุณี พงษ์สุวรรณ</td>
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="viewCoopRequestDetail(this)"
+                      >
+                        <i class="fa-solid fa-eye"></i>
 
-          <td>6702458202</td>
+                        ดูรายละเอียด
+                      </button>
 
-          <td>
-            <span class="type-tag coop">
-              สหกิจศึกษา
-            </span>
-          </td>
+                      <!-- พิมพ์ PDF -->
 
-          <td>DataSphere Thailand</td>
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="printCoopRequestPDF(this)"
+                      >
+                        <i class="fa-solid fa-file-pdf"></i>
 
-          <td>Data Analyst</td>
+                        พิมพ์ PDF
+                      </button>
 
-          <td>2 ก.ย. 2569</td>
+                      <!-- ยกเลิกคำร้อง -->
 
-          <td>
-            <span class="tag tag-green request-status">
-              ยื่นคำร้องแล้ว
-            </span>
-          </td>
+                      <button
+                        type="button"
+                        class="btn-mock-sm danger"
+                        onclick="cancelCoopRequest(this)"
+                      >
+                        <i class="fa-solid fa-ban"></i>
 
-          <td>
-            <div class="action-group">
+                        ยกเลิกคำร้อง
+                      </button>
+                    </div>
+                  </td>
+                </tr>
 
-              <button
-                type="button"
-                class="btn-mock-sm"
-                onclick="viewCoopRequestDetail(this)"
-              >
-                <i class="fa-solid fa-eye"></i>
-                ดูรายละเอียด
-              </button>
+                <!-- =====================================================
+             นักศึกษา 2
+             ===================================================== -->
 
+                <tr
+                  data-student-name="อรุณี พงษ์สุวรรณ"
+                  data-student-id="6702458202"
+                  data-major="IT"
+                  data-company="DataSphere Thailand"
+                  data-position="Data Analyst"
+                  data-province="กรุงเทพมหานคร"
+                  data-submit-date="2 ก.ย. 2569"
+                  data-email="arunee@kmutnb.ac.th"
+                  data-status="submitted"
+                >
+                  <td>อรุณี พงษ์สุวรรณ</td>
 
-              <button
-                type="button"
-                class="btn-mock-sm"
-                onclick="printCoopRequestPDF(this)"
-              >
-                <i class="fa-solid fa-file-pdf"></i>
-                พิมพ์ PDF
-              </button>
+                  <td>6702458202</td>
 
-            </div>
-          </td>
-        </tr>
+                  <td>
+                    <span class="type-tag coop"> สหกิจศึกษา </span>
+                  </td>
 
+                  <td>DataSphere Thailand</td>
 
-        <!-- ================= นักศึกษา 3 ================= -->
+                  <td>Data Analyst</td>
 
-        <tr
-          data-student-name="ภูริช วัฒนกุล"
-          data-student-id="6702458208"
-          data-major="INE"
-          data-company="Business Intelligence Group"
-          data-position="Business Analyst"
-          data-province="กรุงเทพมหานคร"
-          data-submit-date="30 ส.ค. 2569"
-          data-email="purich@kmutnb.ac.th"
-          data-status="submitted"
-        >
-          <td>ภูริช วัฒนกุล</td>
+                  <td>2 ก.ย. 2569</td>
 
-          <td>6702458208</td>
+                  <td>
+                    <span class="tag tag-green request-status">
+                      ยื่นคำร้องแล้ว
+                    </span>
+                  </td>
 
-          <td>
-            <span class="type-tag coop">
-              สหกิจศึกษา
-            </span>
-          </td>
+                  <td>
+                    <div class="action-group">
+                      <!-- ดูรายละเอียด -->
 
-          <td>Business Intelligence Group</td>
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="viewCoopRequestDetail(this)"
+                      >
+                        <i class="fa-solid fa-eye"></i>
 
-          <td>Business Analyst</td>
+                        ดูรายละเอียด
+                      </button>
 
-          <td>30 ส.ค. 2569</td>
+                      <!-- พิมพ์ PDF -->
 
-          <td>
-            <span class="tag tag-green request-status">
-              ยื่นคำร้องแล้ว
-            </span>
-          </td>
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="printCoopRequestPDF(this)"
+                      >
+                        <i class="fa-solid fa-file-pdf"></i>
 
-          <td>
-            <div class="action-group">
+                        พิมพ์ PDF
+                      </button>
 
-              <button
-                type="button"
-                class="btn-mock-sm"
-                onclick="viewCoopRequestDetail(this)"
-              >
-                <i class="fa-solid fa-eye"></i>
-                ดูรายละเอียด
-              </button>
+                      <!-- ยกเลิกคำร้อง -->
 
+                      <button
+                        type="button"
+                        class="btn-mock-sm danger"
+                        onclick="cancelCoopRequest(this)"
+                      >
+                        <i class="fa-solid fa-ban"></i>
 
-              <button
-                type="button"
-                class="btn-mock-sm"
-                onclick="printCoopRequestPDF(this)"
-              >
-                <i class="fa-solid fa-file-pdf"></i>
-                พิมพ์ PDF
-              </button>
+                        ยกเลิกคำร้อง
+                      </button>
+                    </div>
+                  </td>
+                </tr>
 
-            </div>
-          </td>
-        </tr>
+                <!-- =====================================================
+             นักศึกษา 3
+             ===================================================== -->
 
-      </tbody>
-    </table>
-  </div>
-</section>
+                <tr
+                  data-student-name="ภูริช วัฒนกุล"
+                  data-student-id="6702458208"
+                  data-major="INE"
+                  data-company="Business Intelligence Group"
+                  data-position="Business Analyst"
+                  data-province="กรุงเทพมหานคร"
+                  data-submit-date="30 ส.ค. 2569"
+                  data-email="purich@kmutnb.ac.th"
+                  data-status="submitted"
+                >
+                  <td>ภูริช วัฒนกุล</td>
 
-<!-- =====================================================
+                  <td>6702458208</td>
+
+                  <td>
+                    <span class="type-tag coop"> สหกิจศึกษา </span>
+                  </td>
+
+                  <td>Business Intelligence Group</td>
+
+                  <td>Business Analyst</td>
+
+                  <td>30 ส.ค. 2569</td>
+
+                  <td>
+                    <span class="tag tag-green request-status">
+                      ยื่นคำร้องแล้ว
+                    </span>
+                  </td>
+
+                  <td>
+                    <div class="action-group">
+                      <!-- ดูรายละเอียด -->
+
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="viewCoopRequestDetail(this)"
+                      >
+                        <i class="fa-solid fa-eye"></i>
+
+                        ดูรายละเอียด
+                      </button>
+
+                      <!-- พิมพ์ PDF -->
+
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="printCoopRequestPDF(this)"
+                      >
+                        <i class="fa-solid fa-file-pdf"></i>
+
+                        พิมพ์ PDF
+                      </button>
+
+                      <!-- ยกเลิกคำร้อง -->
+
+                      <button
+                        type="button"
+                        class="btn-mock-sm danger"
+                        onclick="cancelCoopRequest(this)"
+                      >
+                        <i class="fa-solid fa-ban"></i>
+
+                        ยกเลิกคำร้อง
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- =====================================================
      จัดการเอกสารและฟอร์มตอบรับนักศึกษาสหกิจศึกษา
      ===================================================== -->
 
-<section class="content-panel" id="panel-print">
-  <div class="panel-header">
-    <h2>จัดการเอกสารสหกิจศึกษา</h2>
+        <section class="content-panel" id="panel-print">
+          <div class="panel-header">
+            <h2>จัดการเอกสารสหกิจศึกษา</h2>
 
-    <p>
-      จัดการหนังสือขอความอนุเคราะห์และเอกสารส่งตัวนักศึกษาสหกิจศึกษา
-      พร้อมส่งฟอร์มตอบรับให้สถานประกอบการ
-    </p>
-  </div>
+            <p>
+              จัดการหนังสือขอความอนุเคราะห์และเอกสารส่งตัวนักศึกษาสหกิจศึกษา
+              พร้อมส่งฟอร์มตอบรับให้สถานประกอบการ
+            </p>
+          </div>
 
-  <div
-    style="
-      font-size: 0.95rem;
-      font-weight: 600;
-      margin: 1.4rem 0 0.7rem;
-    "
-  >
-    รายการเอกสาร
-  </div>
+          <div
+            style="
+              font-size: 0.95rem;
+              font-weight: 600;
+              margin: 1.4rem 0 0.7rem;
+            "
+          >
+            รายการเอกสาร
+          </div>
 
-  <div class="table-wrapper">
-    <table class="mock-table" id="printDocumentTable">
-      <thead>
-        <tr>
-          <th style="width: 70px; text-align: center">
-            ลำดับ
-          </th>
+          <div class="table-wrapper">
+            <table class="mock-table" id="printDocumentTable">
+              <thead>
+                <tr>
+                  <th style="width: 70px; text-align: center">ลำดับ</th>
 
-          <th>
-            ชื่อนักศึกษา
-          </th>
+                  <th>ชื่อนักศึกษา</th>
 
-          <th>
-            ประเภทเอกสาร
-          </th>
+                  <th>ประเภทเอกสาร</th>
 
-          <th>
-            สถานประกอบการ
-          </th>
+                  <th>สถานประกอบการ</th>
 
-          <th>
-            สถานะการตอบรับ
-          </th>
+                  <th>สถานะการตอบรับ</th>
 
-          <th>
-            การดำเนินการ
-          </th>
-        </tr>
-      </thead>
+                  <th>การดำเนินการ</th>
+                </tr>
+              </thead>
 
-      <tbody>
+              <tbody>
+                <!-- ================= รายการ 1 ================= -->
 
-        <!-- ================= รายการ 1 ================= -->
+                <tr data-response-status="not-sent">
+                  <td style="text-align: center">1</td>
 
-        <tr data-response-status="not-sent">
-          <td style="text-align: center">
-            1
-          </td>
+                  <td class="print-student-name">นางสาวพิมพ์ชนก สุขใจ</td>
 
-          <td class="print-student-name">
-            นางสาวพิมพ์ชนก สุขใจ
-          </td>
+                  <td class="print-document-type">หนังสือขอความอนุเคราะห์</td>
 
-          <td class="print-document-type">
-            หนังสือขอความอนุเคราะห์
-          </td>
+                  <td class="print-company-name">BlueWave Digital Co., Ltd.</td>
 
-          <td class="print-company-name">
-            BlueWave Digital Co., Ltd.
-          </td>
+                  <td class="response-status-cell">
+                    <span class="tag tag-muted response-status">
+                      ยังไม่ส่งฟอร์ม
+                    </span>
+                  </td>
 
-          <td class="response-status-cell">
-            <span class="tag tag-muted response-status">
-              ยังไม่ส่งฟอร์ม
+                  <td>
+                    <div class="action-group">
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="editPrintDocument(this)"
+                      >
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        แก้ไข
+                      </button>
+
+                      <button
+                        type="button"
+                        class="btn-mock-sm danger"
+                        onclick="deletePrintDocument(this)"
+                      >
+                        <i class="fa-solid fa-trash"></i>
+                        ลบ
+                      </button>
+
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="sendResponseForm(this)"
+                      >
+                        <i class="fa-solid fa-paper-plane"></i>
+                        ส่งฟอร์มตอบรับ
+                      </button>
+
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="editResponseStatus(this)"
+                      >
+                        <i class="fa-solid fa-pen"></i>
+                        แก้ไขสถานะ
+                      </button>
+
+                      <button
+                        type="button"
+                        class="btn-mock-sm solid print-document-button"
+                        onclick="printDocumentRow(this)"
+                        disabled
+                      >
+                        <i class="fa-solid fa-print"></i>
+                        พิมพ์
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- ================= รายการ 2 ================= -->
+
+                <tr data-response-status="waiting">
+                  <td style="text-align: center">2</td>
+
+                  <td class="print-student-name">อรุณี พงษ์สุวรรณ</td>
+
+                  <td class="print-document-type">หนังสือขอความอนุเคราะห์</td>
+
+                  <td class="print-company-name">DataSphere Thailand</td>
+
+                  <td class="response-status-cell">
+                    <span class="tag tag-muted response-status">
+                      รอตอบรับ
+                    </span>
+                  </td>
+
+                  <td>
+                    <div class="action-group">
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="editPrintDocument(this)"
+                      >
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        แก้ไข
+                      </button>
+
+                      <button
+                        type="button"
+                        class="btn-mock-sm danger"
+                        onclick="deletePrintDocument(this)"
+                      >
+                        <i class="fa-solid fa-trash"></i>
+                        ลบ
+                      </button>
+
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="sendResponseForm(this)"
+                      >
+                        <i class="fa-solid fa-paper-plane"></i>
+                        ส่งฟอร์มอีกครั้ง
+                      </button>
+
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="editResponseStatus(this)"
+                      >
+                        <i class="fa-solid fa-pen"></i>
+                        แก้ไขสถานะ
+                      </button>
+
+                      <button
+                        type="button"
+                        class="btn-mock-sm solid print-document-button"
+                        onclick="printDocumentRow(this)"
+                        disabled
+                      >
+                        <i class="fa-solid fa-print"></i>
+                        พิมพ์
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- ================= รายการ 3 ================= -->
+
+                <tr data-response-status="accepted">
+                  <td style="text-align: center">3</td>
+
+                  <td class="print-student-name">ภูริช วัฒนกุล</td>
+
+                  <td class="print-document-type">เอกสารส่งตัวนักศึกษา</td>
+
+                  <td class="print-company-name">
+                    Business Intelligence Group
+                  </td>
+
+                  <td class="response-status-cell">
+                    <span class="tag tag-green response-status">
+                      ตอบรับแล้ว
+                    </span>
+                  </td>
+
+                  <td>
+                    <div class="action-group">
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="editPrintDocument(this)"
+                      >
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        แก้ไข
+                      </button>
+
+                      <button
+                        type="button"
+                        class="btn-mock-sm danger"
+                        onclick="deletePrintDocument(this)"
+                      >
+                        <i class="fa-solid fa-trash"></i>
+                        ลบ
+                      </button>
+
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="sendResponseForm(this)"
+                      >
+                        <i class="fa-solid fa-paper-plane"></i>
+                        ส่งฟอร์มอีกครั้ง
+                      </button>
+
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="editResponseStatus(this)"
+                      >
+                        <i class="fa-solid fa-pen"></i>
+                        แก้ไขสถานะ
+                      </button>
+
+                      <button
+                        type="button"
+                        class="btn-mock-sm solid print-document-button"
+                        onclick="printDocumentRow(this)"
+                      >
+                        <i class="fa-solid fa-print"></i>
+                        พิมพ์
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- ================= รายการ 4 ================= -->
+
+                <tr data-response-status="rejected">
+                  <td style="text-align: center">4</td>
+
+                  <td class="print-student-name">ชนากานต์ อินทร์แก้ว</td>
+
+                  <td class="print-document-type">หนังสือขอความอนุเคราะห์</td>
+
+                  <td class="print-company-name">Nova Cloud Labs</td>
+
+                  <td class="response-status-cell">
+                    <span class="tag tag-red response-status"> ไม่ตอบรับ </span>
+                  </td>
+
+                  <td>
+                    <div class="action-group">
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="editPrintDocument(this)"
+                      >
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        แก้ไข
+                      </button>
+
+                      <button
+                        type="button"
+                        class="btn-mock-sm danger"
+                        onclick="deletePrintDocument(this)"
+                      >
+                        <i class="fa-solid fa-trash"></i>
+                        ลบ
+                      </button>
+
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="sendResponseForm(this)"
+                      >
+                        <i class="fa-solid fa-paper-plane"></i>
+                        ส่งฟอร์มอีกครั้ง
+                      </button>
+
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="editResponseStatus(this)"
+                      >
+                        <i class="fa-solid fa-pen"></i>
+                        แก้ไขสถานะ
+                      </button>
+
+                      <button
+                        type="button"
+                        class="btn-mock-sm solid print-document-button"
+                        onclick="printDocumentRow(this)"
+                        disabled
+                      >
+                        <i class="fa-solid fa-print"></i>
+                        พิมพ์
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="doc-status-note">
+            <i class="fa-solid fa-circle-info"></i>
+
+            <span>
+              ปุ่มพิมพ์เอกสารจะสามารถใช้งานได้
+              เมื่อสถานประกอบการตอบรับนักศึกษาสหกิจศึกษาแล้วเท่านั้น
             </span>
-          </td>
+          </div>
+        </section>
+        <!-- =====================================================
+     จัดการหนังสือส่งตัว
+     ===================================================== -->
 
-          <td>
-            <div class="action-group">
+        <section class="content-panel" id="panel-send-document">
+          <div class="panel-header">
+            <h2>จัดการหนังสือส่งตัว</h2>
 
-              <button
-                type="button"
-                class="btn-mock-sm"
-                onclick="editPrintDocument(this)"
-              >
-                <i class="fa-solid fa-pen-to-square"></i>
-                แก้ไข
-              </button>
+            <p>ตรวจสอบและพิมพ์หนังสือส่งตัวนักศึกษาสหกิจศึกษา</p>
+          </div>
 
-              <button
-                type="button"
-                class="btn-mock-sm danger"
-                onclick="deletePrintDocument(this)"
-              >
-                <i class="fa-solid fa-trash"></i>
-                ลบ
-              </button>
+          <div class="table-wrapper">
+            <table class="mock-table" id="sendDocumentTable">
+              <thead>
+                <tr>
+                  <th style="width: 70px; text-align: center">ลำดับ</th>
 
-              <button
-                type="button"
-                class="btn-mock-sm"
-                onclick="sendResponseForm(this)"
-              >
-                <i class="fa-solid fa-paper-plane"></i>
-                ส่งฟอร์มตอบรับ
-              </button>
+                  <th>ชื่อนักศึกษา</th>
 
-              <button
-                type="button"
-                class="btn-mock-sm"
-                onclick="editResponseStatus(this)"
-              >
-                <i class="fa-solid fa-pen"></i>
-                แก้ไขสถานะ
-              </button>
+                  <th>รหัสนักศึกษา</th>
 
-              <button
-                type="button"
-                class="btn-mock-sm solid print-document-button"
-                onclick="printDocumentRow(this)"
-                disabled
-              >
-                <i class="fa-solid fa-print"></i>
-                พิมพ์
-              </button>
+                  <th>สถานประกอบการ</th>
 
-            </div>
-          </td>
-        </tr>
+                  <th>ตำแหน่ง</th>
 
+                  <th>สถานะ</th>
 
-        <!-- ================= รายการ 2 ================= -->
+                  <th>การดำเนินการ</th>
+                </tr>
+              </thead>
 
-        <tr data-response-status="waiting">
-          <td style="text-align: center">
-            2
-          </td>
+              <tbody>
+                <!-- ================= รายการ 1 ================= -->
 
-          <td class="print-student-name">
-            อรุณี พงษ์สุวรรณ
-          </td>
+                <tr>
+                  <td style="text-align: center">1</td>
 
-          <td class="print-document-type">
-            หนังสือขอความอนุเคราะห์
-          </td>
+                  <td class="send-student-name">นางสาวพิมพ์ชนก สุขใจ</td>
 
-          <td class="print-company-name">
-            DataSphere Thailand
-          </td>
+                  <td>6702458196</td>
 
-          <td class="response-status-cell">
-            <span class="tag tag-muted response-status">
-              รอตอบรับ
-            </span>
-          </td>
+                  <td class="send-company-name">BlueWave Digital Co., Ltd.</td>
 
-          <td>
-            <div class="action-group">
+                  <td>Frontend Developer</td>
 
-              <button
-                type="button"
-                class="btn-mock-sm"
-                onclick="editPrintDocument(this)"
-              >
-                <i class="fa-solid fa-pen-to-square"></i>
-                แก้ไข
-              </button>
+                  <td>
+                    <span class="tag tag-green"> พร้อมพิมพ์ </span>
+                  </td>
 
-              <button
-                type="button"
-                class="btn-mock-sm danger"
-                onclick="deletePrintDocument(this)"
-              >
-                <i class="fa-solid fa-trash"></i>
-                ลบ
-              </button>
+                  <td>
+                    <button
+                      type="button"
+                      class="btn-mock-sm solid"
+                      onclick="printSendDocument(this)"
+                    >
+                      <i class="fa-solid fa-print"></i>
+                      พิมพ์
+                    </button>
+                  </td>
+                </tr>
 
-              <button
-                type="button"
-                class="btn-mock-sm"
-                onclick="sendResponseForm(this)"
-              >
-                <i class="fa-solid fa-paper-plane"></i>
-                ส่งฟอร์มอีกครั้ง
-              </button>
+                <!-- ================= รายการ 2 ================= -->
 
-              <button
-                type="button"
-                class="btn-mock-sm"
-                onclick="editResponseStatus(this)"
-              >
-                <i class="fa-solid fa-pen"></i>
-                แก้ไขสถานะ
-              </button>
+                <tr>
+                  <td style="text-align: center">2</td>
 
-              <button
-                type="button"
-                class="btn-mock-sm solid print-document-button"
-                onclick="printDocumentRow(this)"
-                disabled
-              >
-                <i class="fa-solid fa-print"></i>
-                พิมพ์
-              </button>
+                  <td class="send-student-name">อรุณี พงษ์สุวรรณ</td>
 
-            </div>
-          </td>
-        </tr>
+                  <td>6702458202</td>
 
+                  <td class="send-company-name">DataSphere Thailand</td>
 
-        <!-- ================= รายการ 3 ================= -->
+                  <td>Data Analyst</td>
 
-        <tr data-response-status="accepted">
-          <td style="text-align: center">
-            3
-          </td>
+                  <td>
+                    <span class="tag tag-green"> พร้อมพิมพ์ </span>
+                  </td>
 
-          <td class="print-student-name">
-            ภูริช วัฒนกุล
-          </td>
+                  <td>
+                    <button
+                      type="button"
+                      class="btn-mock-sm solid"
+                      onclick="printSendDocument(this)"
+                    >
+                      <i class="fa-solid fa-print"></i>
+                      พิมพ์
+                    </button>
+                  </td>
+                </tr>
 
-          <td class="print-document-type">
-            เอกสารส่งตัวนักศึกษา
-          </td>
+                <!-- ================= รายการ 3 ================= -->
 
-          <td class="print-company-name">
-            Business Intelligence Group
-          </td>
+                <tr>
+                  <td style="text-align: center">3</td>
 
-          <td class="response-status-cell">
-            <span class="tag tag-green response-status">
-              ตอบรับแล้ว
-            </span>
-          </td>
+                  <td class="send-student-name">ภูริช วัฒนกุล</td>
 
-          <td>
-            <div class="action-group">
+                  <td>6702458208</td>
 
-              <button
-                type="button"
-                class="btn-mock-sm"
-                onclick="editPrintDocument(this)"
-              >
-                <i class="fa-solid fa-pen-to-square"></i>
-                แก้ไข
-              </button>
+                  <td class="send-company-name">Business Intelligence Group</td>
 
-              <button
-                type="button"
-                class="btn-mock-sm danger"
-                onclick="deletePrintDocument(this)"
-              >
-                <i class="fa-solid fa-trash"></i>
-                ลบ
-              </button>
+                  <td>Business Analyst</td>
 
-              <button
-                type="button"
-                class="btn-mock-sm"
-                onclick="sendResponseForm(this)"
-              >
-                <i class="fa-solid fa-paper-plane"></i>
-                ส่งฟอร์มอีกครั้ง
-              </button>
+                  <td>
+                    <span class="tag tag-green"> พร้อมพิมพ์ </span>
+                  </td>
 
-              <button
-                type="button"
-                class="btn-mock-sm"
-                onclick="editResponseStatus(this)"
-              >
-                <i class="fa-solid fa-pen"></i>
-                แก้ไขสถานะ
-              </button>
-
-              <button
-                type="button"
-                class="btn-mock-sm solid print-document-button"
-                onclick="printDocumentRow(this)"
-              >
-                <i class="fa-solid fa-print"></i>
-                พิมพ์
-              </button>
-
-            </div>
-          </td>
-        </tr>
-
-
-        <!-- ================= รายการ 4 ================= -->
-
-        <tr data-response-status="rejected">
-          <td style="text-align: center">
-            4
-          </td>
-
-          <td class="print-student-name">
-            ชนากานต์ อินทร์แก้ว
-          </td>
-
-          <td class="print-document-type">
-            หนังสือขอความอนุเคราะห์
-          </td>
-
-          <td class="print-company-name">
-            Nova Cloud Labs
-          </td>
-
-          <td class="response-status-cell">
-            <span class="tag tag-red response-status">
-              ไม่ตอบรับ
-            </span>
-          </td>
-
-          <td>
-            <div class="action-group">
-
-              <button
-                type="button"
-                class="btn-mock-sm"
-                onclick="editPrintDocument(this)"
-              >
-                <i class="fa-solid fa-pen-to-square"></i>
-                แก้ไข
-              </button>
-
-              <button
-                type="button"
-                class="btn-mock-sm danger"
-                onclick="deletePrintDocument(this)"
-              >
-                <i class="fa-solid fa-trash"></i>
-                ลบ
-              </button>
-
-              <button
-                type="button"
-                class="btn-mock-sm"
-                onclick="sendResponseForm(this)"
-              >
-                <i class="fa-solid fa-paper-plane"></i>
-                ส่งฟอร์มอีกครั้ง
-              </button>
-
-              <button
-                type="button"
-                class="btn-mock-sm"
-                onclick="editResponseStatus(this)"
-              >
-                <i class="fa-solid fa-pen"></i>
-                แก้ไขสถานะ
-              </button>
-
-              <button
-                type="button"
-                class="btn-mock-sm solid print-document-button"
-                onclick="printDocumentRow(this)"
-                disabled
-              >
-                <i class="fa-solid fa-print"></i>
-                พิมพ์
-              </button>
-
-            </div>
-          </td>
-        </tr>
-
-      </tbody>
-    </table>
-  </div>
-
-  <div class="doc-status-note">
-    <i class="fa-solid fa-circle-info"></i>
-
-    <span>
-      ปุ่มพิมพ์เอกสารจะสามารถใช้งานได้
-      เมื่อสถานประกอบการตอบรับนักศึกษาสหกิจศึกษาแล้วเท่านั้น
-    </span>
-  </div>
-</section>
-
-
+                  <td>
+                    <button
+                      type="button"
+                      class="btn-mock-sm solid"
+                      onclick="printSendDocument(this)"
+                    >
+                      <i class="fa-solid fa-print"></i>
+                      พิมพ์
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
         <!-- =====================================================
              CHATBOT
              ===================================================== -->
@@ -2755,578 +2909,508 @@
           </button>
         </section>
 
-<!-- =====================================================
+        <!-- =====================================================
      ปฏิทินกิจกรรม
      ===================================================== -->
 
-<section class="content-panel" id="panel-calendar">
-  <div class="panel-header">
-    <h2>ปฏิทินกิจกรรม</h2>
+        <section class="content-panel" id="panel-calendar">
+          <div class="panel-header">
+            <h2>ปฏิทินกิจกรรม</h2>
 
-    <p>
-      กำหนดช่วงเวลาสำคัญของการสหกิจศึกษาในแต่ละภาคการศึกษา
-    </p>
-  </div>
+            <p>กำหนดช่วงเวลาสำคัญของการสหกิจศึกษาในแต่ละภาคการศึกษา</p>
+          </div>
 
-  <div class="table-wrapper">
-    <table class="mock-table">
-      <thead>
-        <tr>
-          <th>กิจกรรม</th>
-          <th>วันที่/ช่วงเวลา</th>
-          <th>กลุ่มเป้าหมาย</th>
-          <th>การดำเนินการ</th>
-        </tr>
-      </thead>
+          <div class="table-wrapper">
+            <table class="mock-table">
+              <thead>
+                <tr>
+                  <th>กิจกรรม</th>
+                  <th>วันที่/ช่วงเวลา</th>
+                  <th>กลุ่มเป้าหมาย</th>
+                  <th>การดำเนินการ</th>
+                </tr>
+              </thead>
 
-      <tbody id="calendarTableBody">
+              <tbody id="calendarTableBody">
+                <!-- กิจกรรม 1 -->
+                <tr>
+                  <td>
+                    <div class="calendar-title">
+                      <span class="calendar-dot blue"></span>
+                      กำหนดส่งเอกสารคำร้องสหกิจศึกษา
+                    </div>
+                  </td>
 
-        <!-- กิจกรรม 1 -->
-        <tr>
-          <td>
-            <div class="calendar-title">
-              <span class="calendar-dot blue"></span>
-              กำหนดส่งเอกสารคำร้องสหกิจศึกษา
-            </div>
-          </td>
+                  <td>1–15 ส.ค. 2569</td>
 
-          <td>
-            1–15 ส.ค. 2569
-          </td>
+                  <td>นักศึกษาสหกิจศึกษา</td>
 
-          <td>
-            นักศึกษาสหกิจศึกษา
-          </td>
+                  <td>
+                    <div class="action-group">
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="editCalendar(this)"
+                      >
+                        <i class="fa-solid fa-pen"></i>
+                        แก้ไข
+                      </button>
 
-          <td>
-            <div class="action-group">
+                      <button
+                        type="button"
+                        class="btn-mock-sm danger"
+                        onclick="deleteRow(this)"
+                      >
+                        <i class="fa-solid fa-trash"></i>
+                        ลบ
+                      </button>
+                    </div>
+                  </td>
+                </tr>
 
-              <button
-                type="button"
-                class="btn-mock-sm"
-                onclick="editCalendar(this)"
-              >
-                <i class="fa-solid fa-pen"></i>
-                แก้ไข
-              </button>
+                <!-- กิจกรรม 2 -->
+                <tr>
+                  <td>
+                    <div class="calendar-title">
+                      <span class="calendar-dot orange"></span>
+                      วันเริ่มสหกิจศึกษา
+                    </div>
+                  </td>
 
-              <button
-                type="button"
-                class="btn-mock-sm danger"
-                onclick="deleteRow(this)"
-              >
-                <i class="fa-solid fa-trash"></i>
-                ลบ
-              </button>
+                  <td>1 ก.ย. 2569</td>
 
-            </div>
-          </td>
-        </tr>
+                  <td>นักศึกษาสหกิจศึกษา</td>
 
+                  <td>
+                    <div class="action-group">
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="editCalendar(this)"
+                      >
+                        <i class="fa-solid fa-pen"></i>
+                        แก้ไข
+                      </button>
 
-        <!-- กิจกรรม 2 -->
-        <tr>
-          <td>
-            <div class="calendar-title">
-              <span class="calendar-dot orange"></span>
-              วันเริ่มสหกิจศึกษา
-            </div>
-          </td>
+                      <button
+                        type="button"
+                        class="btn-mock-sm danger"
+                        onclick="deleteRow(this)"
+                      >
+                        <i class="fa-solid fa-trash"></i>
+                        ลบ
+                      </button>
+                    </div>
+                  </td>
+                </tr>
 
-          <td>
-            1 ก.ย. 2569
-          </td>
+                <!-- กิจกรรม 3 -->
+                <tr>
+                  <td>
+                    <div class="calendar-title">
+                      <span class="calendar-dot green"></span>
+                      กำหนดส่งเล่มโครงการและโปสเตอร์
+                    </div>
+                  </td>
 
-          <td>
-            นักศึกษาสหกิจศึกษา
-          </td>
+                  <td>1–10 ธ.ค. 2569</td>
 
-          <td>
-            <div class="action-group">
+                  <td>นักศึกษาสหกิจศึกษา</td>
 
-              <button
-                type="button"
-                class="btn-mock-sm"
-                onclick="editCalendar(this)"
-              >
-                <i class="fa-solid fa-pen"></i>
-                แก้ไข
-              </button>
+                  <td>
+                    <div class="action-group">
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="editCalendar(this)"
+                      >
+                        <i class="fa-solid fa-pen"></i>
+                        แก้ไข
+                      </button>
 
-              <button
-                type="button"
-                class="btn-mock-sm danger"
-                onclick="deleteRow(this)"
-              >
-                <i class="fa-solid fa-trash"></i>
-                ลบ
-              </button>
+                      <button
+                        type="button"
+                        class="btn-mock-sm danger"
+                        onclick="deleteRow(this)"
+                      >
+                        <i class="fa-solid fa-trash"></i>
+                        ลบ
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-            </div>
-          </td>
-        </tr>
+          <button
+            type="button"
+            class="btn-mock-sm solid"
+            style="margin-top: 14px"
+            onclick="addCalendar()"
+          >
+            <i class="fa-solid fa-plus"></i>
+            เพิ่มกำหนดการ
+          </button>
+        </section>
 
-
-        <!-- กิจกรรม 3 -->
-        <tr>
-          <td>
-            <div class="calendar-title">
-              <span class="calendar-dot green"></span>
-              กำหนดส่งเล่มโครงการและโปสเตอร์
-            </div>
-          </td>
-
-          <td>
-            1–10 ธ.ค. 2569
-          </td>
-
-          <td>
-            นักศึกษาสหกิจศึกษา
-          </td>
-
-          <td>
-            <div class="action-group">
-
-              <button
-                type="button"
-                class="btn-mock-sm"
-                onclick="editCalendar(this)"
-              >
-                <i class="fa-solid fa-pen"></i>
-                แก้ไข
-              </button>
-
-              <button
-                type="button"
-                class="btn-mock-sm danger"
-                onclick="deleteRow(this)"
-              >
-                <i class="fa-solid fa-trash"></i>
-                ลบ
-              </button>
-
-            </div>
-          </td>
-        </tr>
-
-      </tbody>
-    </table>
-  </div>
-
-  <button
-    type="button"
-    class="btn-mock-sm solid"
-    style="margin-top: 14px"
-    onclick="addCalendar()"
-  >
-    <i class="fa-solid fa-plus"></i>
-    เพิ่มกำหนดการ
-  </button>
-</section>
-
-<!-- =====================================================
+        <!-- =====================================================
      จัดการข้อมูลอาจารย์
      ===================================================== -->
 
-<section class="content-panel" id="panel-lecturers">
-  <div class="panel-header">
-    <h2>จัดการข้อมูลอาจารย์</h2>
+        <section class="content-panel" id="panel-lecturers">
+          <div class="panel-header">
+            <h2>จัดการข้อมูลอาจารย์</h2>
 
-    <p>
-      เพิ่ม แก้ไข และลบข้อมูลอาจารย์ในภาควิชา
-    </p>
-  </div>
+            <p>เพิ่ม แก้ไข และลบข้อมูลอาจารย์ในภาควิชา</p>
+          </div>
 
+          <!-- ================= ค้นหา / เพิ่มอาจารย์ ================= -->
 
-  <!-- ================= ค้นหา / เพิ่มอาจารย์ ================= -->
-
-  <div
-    style="
-      display: flex;
-      gap: 10px;
-      flex: 1;
-      flex-wrap: wrap;
-      align-items: center;
-    "
-  >
-
-    <input
-      type="text"
-      id="lecturerSearch"
-      placeholder="ค้นหาชื่ออาจารย์..."
-      style="
-        flex: 1;
-        min-width: 220px;
-        max-width: 400px;
-        border: 1px solid #d4deeb;
-        border-radius: 8px;
-        padding: 9px 12px;
-        font-family: inherit;
-      "
-    />
-
-    <button
-      type="button"
-      class="btn-mock-sm solid"
-      onclick="addLecturer()"
-    >
-      <i class="fa-solid fa-plus"></i>
-      เพิ่มอาจารย์
-    </button>
-
-  </div>
-
-
-  <!-- ================= ตารางอาจารย์ ================= -->
-
-  <div class="table-wrapper">
-    <table class="mock-table">
-
-      <thead>
-        <tr>
-
-          <th>
-            ชื่อ-นามสกุล
-          </th>
-
-          <th>
-            อีเมล
-          </th>
-
-          <th class="status-cell">
-            สถานะ
-          </th>
-
-          <th>
-            การดำเนินการ
-          </th>
-
-        </tr>
-      </thead>
-
-
-      <tbody id="lecturerTableBody">
-
-        <!-- 1 -->
-        <tr data-password="password123">
-
-          <td>
-            <b>
-              ผศ.ดร.ขนิษฐา นามี
-            </b>
-
-            <div
+          <div
+            style="
+              display: flex;
+              gap: 10px;
+              flex: 1;
+              flex-wrap: wrap;
+              align-items: center;
+            "
+          >
+            <input
+              type="text"
+              id="lecturerSearch"
+              placeholder="ค้นหาชื่ออาจารย์..."
               style="
-                margin-top: 4px;
-                color: #718096;
-                font-size: 0.72rem;
+                flex: 1;
+                min-width: 220px;
+                max-width: 400px;
+                border: 1px solid #d4deeb;
+                border-radius: 8px;
+                padding: 9px 12px;
+                font-family: inherit;
               "
+            />
+
+            <button
+              type="button"
+              class="btn-mock-sm solid"
+              onclick="addLecturer()"
             >
-              หัวหน้าภาควิชา
-            </div>
-          </td>
+              <i class="fa-solid fa-plus"></i>
+              เพิ่มอาจารย์
+            </button>
+          </div>
 
-          <td>
-            head@university.ac.th
-          </td>
+          <!-- ================= ตารางอาจารย์ ================= -->
 
-          <td class="status-cell">
-            <span class="tag tag-green">
-              ใช้งาน
-            </span>
-          </td>
+          <div class="table-wrapper">
+            <table class="mock-table">
+              <thead>
+                <tr>
+                  <th>ชื่อ-นามสกุล</th>
 
-          <td>
-            <div class="action-group">
+                  <th>อีเมล</th>
 
-              <button
-                type="button"
-                class="btn-mock-sm"
-                onclick="editLecturer(this)"
-              >
-                <i class="fa-solid fa-pen"></i>
-                แก้ไข
-              </button>
+                  <th class="status-cell">สถานะ</th>
 
-              <button
-                type="button"
-                class="btn-mock-sm danger"
-                onclick="deleteRow(this)"
-              >
-                <i class="fa-solid fa-trash"></i>
-                ลบ
-              </button>
+                  <th>การดำเนินการ</th>
+                </tr>
+              </thead>
 
-            </div>
-          </td>
+              <tbody id="lecturerTableBody">
+                <!-- 1 -->
+                <tr data-password="password123">
+                  <td>
+                    <b> ผศ.ดร.ขนิษฐา นามี </b>
 
-        </tr>
+                    <div
+                      style="
+                        margin-top: 4px;
+                        color: #718096;
+                        font-size: 0.72rem;
+                      "
+                    >
+                      หัวหน้าภาควิชา
+                    </div>
+                  </td>
 
+                  <td>head@university.ac.th</td>
 
-        <!-- 2 -->
-        <tr data-password="password123">
-          <td>ผศ.พีระศักดิ์ เสรีกุล</td>
-          <td>-</td>
+                  <td class="status-cell">
+                    <span class="tag tag-green"> ใช้งาน </span>
+                  </td>
 
-          <td class="status-cell">
-            <span class="tag tag-green">
-              ใช้งาน
-            </span>
-          </td>
+                  <td>
+                    <div class="action-group">
+                      <button
+                        type="button"
+                        class="btn-mock-sm"
+                        onclick="editLecturer(this)"
+                      >
+                        <i class="fa-solid fa-pen"></i>
+                        แก้ไข
+                      </button>
 
-          <td>
-            <div class="action-group">
+                      <button
+                        type="button"
+                        class="btn-mock-sm danger"
+                        onclick="deleteRow(this)"
+                      >
+                        <i class="fa-solid fa-trash"></i>
+                        ลบ
+                      </button>
+                    </div>
+                  </td>
+                </tr>
 
-              <button
-                class="btn-mock-sm"
-                onclick="editLecturer(this)"
-              >
-                <i class="fa-solid fa-pen"></i>
-                แก้ไข
-              </button>
+                <!-- 2 -->
+                <tr data-password="password123">
+                  <td>ผศ.พีระศักดิ์ เสรีกุล</td>
+                  <td>-</td>
 
-              <button
-                class="btn-mock-sm danger"
-                onclick="deleteRow(this)"
-              >
-                <i class="fa-solid fa-trash"></i>
-                ลบ
-              </button>
+                  <td class="status-cell">
+                    <span class="tag tag-green"> ใช้งาน </span>
+                  </td>
 
-            </div>
-          </td>
-        </tr>
+                  <td>
+                    <div class="action-group">
+                      <button class="btn-mock-sm" onclick="editLecturer(this)">
+                        <i class="fa-solid fa-pen"></i>
+                        แก้ไข
+                      </button>
 
+                      <button
+                        class="btn-mock-sm danger"
+                        onclick="deleteRow(this)"
+                      >
+                        <i class="fa-solid fa-trash"></i>
+                        ลบ
+                      </button>
+                    </div>
+                  </td>
+                </tr>
 
-        
+                <!-- 7 -->
+                <tr data-password="password123">
+                  <td>ผศ.ดร.วันทนี ประจวบศุภกิจ</td>
+                  <td>-</td>
 
-        <!-- 7 -->
-        <tr data-password="password123">
-          <td>ผศ.ดร.วันทนี ประจวบศุภกิจ</td>
-          <td>-</td>
+                  <td class="status-cell">
+                    <span class="tag tag-green">ใช้งาน</span>
+                  </td>
 
-          <td class="status-cell">
-            <span class="tag tag-green">ใช้งาน</span>
-          </td>
+                  <td>
+                    <div class="action-group">
+                      <button class="btn-mock-sm" onclick="editLecturer(this)">
+                        <i class="fa-solid fa-pen"></i>
+                        แก้ไข
+                      </button>
 
-          <td>
-            <div class="action-group">
-              <button class="btn-mock-sm" onclick="editLecturer(this)">
-                <i class="fa-solid fa-pen"></i>
-                แก้ไข
-              </button>
+                      <button
+                        class="btn-mock-sm danger"
+                        onclick="deleteRow(this)"
+                      >
+                        <i class="fa-solid fa-trash"></i>
+                        ลบ
+                      </button>
+                    </div>
+                  </td>
+                </tr>
 
-              <button class="btn-mock-sm danger" onclick="deleteRow(this)">
-                <i class="fa-solid fa-trash"></i>
-                ลบ
-              </button>
-            </div>
-          </td>
-        </tr>
+                <!-- 14 -->
+                <tr data-password="password123">
+                  <td>ผศ.ดร.สิวาลัย จินเจือ</td>
+                  <td>-</td>
 
+                  <td class="status-cell">
+                    <span class="tag tag-green">ใช้งาน</span>
+                  </td>
 
-        <!-- 14 -->
-        <tr data-password="password123">
-          <td>ผศ.ดร.สิวาลัย จินเจือ</td>
-          <td>-</td>
+                  <td>
+                    <div class="action-group">
+                      <button class="btn-mock-sm" onclick="editLecturer(this)">
+                        <i class="fa-solid fa-pen"></i>
+                        แก้ไข
+                      </button>
 
-          <td class="status-cell">
-            <span class="tag tag-green">ใช้งาน</span>
-          </td>
+                      <button
+                        class="btn-mock-sm danger"
+                        onclick="deleteRow(this)"
+                      >
+                        <i class="fa-solid fa-trash"></i>
+                        ลบ
+                      </button>
+                    </div>
+                  </td>
+                </tr>
 
-          <td>
-            <div class="action-group">
-              <button class="btn-mock-sm" onclick="editLecturer(this)">
-                <i class="fa-solid fa-pen"></i>
-                แก้ไข
-              </button>
+                <!-- 15 -->
+                <tr data-password="password123">
+                  <td>ผศ.ดร.บีสุดา ดาวเรือง</td>
+                  <td>-</td>
 
-              <button class="btn-mock-sm danger" onclick="deleteRow(this)">
-                <i class="fa-solid fa-trash"></i>
-                ลบ
-              </button>
-            </div>
-          </td>
-        </tr>
+                  <td class="status-cell">
+                    <span class="tag tag-green">ใช้งาน</span>
+                  </td>
 
+                  <td>
+                    <div class="action-group">
+                      <button class="btn-mock-sm" onclick="editLecturer(this)">
+                        <i class="fa-solid fa-pen"></i>
+                        แก้ไข
+                      </button>
 
-        <!-- 15 -->
-        <tr data-password="password123">
-          <td>ผศ.ดร.บีสุดา ดาวเรือง</td>
-          <td>-</td>
+                      <button
+                        class="btn-mock-sm danger"
+                        onclick="deleteRow(this)"
+                      >
+                        <i class="fa-solid fa-trash"></i>
+                        ลบ
+                      </button>
+                    </div>
+                  </td>
+                </tr>
 
-          <td class="status-cell">
-            <span class="tag tag-green">ใช้งาน</span>
-          </td>
+                <!-- 16 -->
+                <tr data-password="password123">
+                  <td>ผศ.ดร.นิติการ นาคเจือทอง</td>
+                  <td>-</td>
 
-          <td>
-            <div class="action-group">
-              <button class="btn-mock-sm" onclick="editLecturer(this)">
-                <i class="fa-solid fa-pen"></i>
-                แก้ไข
-              </button>
+                  <td class="status-cell">
+                    <span class="tag tag-green">ใช้งาน</span>
+                  </td>
 
-              <button class="btn-mock-sm danger" onclick="deleteRow(this)">
-                <i class="fa-solid fa-trash"></i>
-                ลบ
-              </button>
-            </div>
-          </td>
-        </tr>
+                  <td>
+                    <div class="action-group">
+                      <button class="btn-mock-sm" onclick="editLecturer(this)">
+                        <i class="fa-solid fa-pen"></i>
+                        แก้ไข
+                      </button>
 
+                      <button
+                        class="btn-mock-sm danger"
+                        onclick="deleteRow(this)"
+                      >
+                        <i class="fa-solid fa-trash"></i>
+                        ลบ
+                      </button>
+                    </div>
+                  </td>
+                </tr>
 
-        <!-- 16 -->
-        <tr data-password="password123">
-          <td>ผศ.ดร.นิติการ นาคเจือทอง</td>
-          <td>-</td>
+                <!-- 17 -->
+                <tr data-password="password123">
+                  <td>ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ</td>
 
-          <td class="status-cell">
-            <span class="tag tag-green">ใช้งาน</span>
-          </td>
+                  <td>teachercoop@university.ac.th</td>
 
-          <td>
-            <div class="action-group">
-              <button class="btn-mock-sm" onclick="editLecturer(this)">
-                <i class="fa-solid fa-pen"></i>
-                แก้ไข
-              </button>
+                  <td class="status-cell">
+                    <span class="tag tag-green"> ใช้งาน </span>
+                  </td>
 
-              <button class="btn-mock-sm danger" onclick="deleteRow(this)">
-                <i class="fa-solid fa-trash"></i>
-                ลบ
-              </button>
-            </div>
-          </td>
-        </tr>
+                  <td>
+                    <div class="action-group">
+                      <button class="btn-mock-sm" onclick="editLecturer(this)">
+                        <i class="fa-solid fa-pen"></i>
+                        แก้ไข
+                      </button>
 
+                      <button
+                        class="btn-mock-sm danger"
+                        onclick="deleteRow(this)"
+                      >
+                        <i class="fa-solid fa-trash"></i>
+                        ลบ
+                      </button>
+                    </div>
+                  </td>
+                </tr>
 
-        <!-- 17 -->
-        <tr data-password="password123">
-          <td>ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ</td>
+                <!-- 18 -->
+                <tr data-password="password123">
+                  <td>ผศ.นพเก้า ทองใบ</td>
+                  <td>-</td>
 
-          <td>
-            teachercoop@university.ac.th
-          </td>
+                  <td class="status-cell">
+                    <span class="tag tag-green">ใช้งาน</span>
+                  </td>
 
-          <td class="status-cell">
-            <span class="tag tag-green">
-              ใช้งาน
-            </span>
-          </td>
+                  <td>
+                    <div class="action-group">
+                      <button class="btn-mock-sm" onclick="editLecturer(this)">
+                        <i class="fa-solid fa-pen"></i>
+                        แก้ไข
+                      </button>
 
-          <td>
-            <div class="action-group">
-              <button
-                class="btn-mock-sm"
-                onclick="editLecturer(this)"
-              >
-                <i class="fa-solid fa-pen"></i>
-                แก้ไข
-              </button>
+                      <button
+                        class="btn-mock-sm danger"
+                        onclick="deleteRow(this)"
+                      >
+                        <i class="fa-solid fa-trash"></i>
+                        ลบ
+                      </button>
+                    </div>
+                  </td>
+                </tr>
 
-              <button
-                class="btn-mock-sm danger"
-                onclick="deleteRow(this)"
-              >
-                <i class="fa-solid fa-trash"></i>
-                ลบ
-              </button>
-            </div>
-          </td>
-        </tr>
+                <!-- 19 -->
+                <tr data-password="password123">
+                  <td>ผศ.ดร.นัฎฐพันธ์ นาคพงษ์</td>
+                  <td>-</td>
 
+                  <td class="status-cell">
+                    <span class="tag tag-green">ใช้งาน</span>
+                  </td>
 
-        <!-- 18 -->
-        <tr data-password="password123">
-          <td>ผศ.นพเก้า ทองใบ</td>
-          <td>-</td>
+                  <td>
+                    <div class="action-group">
+                      <button class="btn-mock-sm" onclick="editLecturer(this)">
+                        <i class="fa-solid fa-pen"></i>
+                        แก้ไข
+                      </button>
 
-          <td class="status-cell">
-            <span class="tag tag-green">ใช้งาน</span>
-          </td>
+                      <button
+                        class="btn-mock-sm danger"
+                        onclick="deleteRow(this)"
+                      >
+                        <i class="fa-solid fa-trash"></i>
+                        ลบ
+                      </button>
+                    </div>
+                  </td>
+                </tr>
 
-          <td>
-            <div class="action-group">
-              <button class="btn-mock-sm" onclick="editLecturer(this)">
-                <i class="fa-solid fa-pen"></i>
-                แก้ไข
-              </button>
+                <!-- 20 -->
+                <tr data-password="password123">
+                  <td>ผศ.ดร.ศรายุทธ ธเนศสกุลวัฒนา</td>
 
-              <button class="btn-mock-sm danger" onclick="deleteRow(this)">
-                <i class="fa-solid fa-trash"></i>
-                ลบ
-              </button>
-            </div>
-          </td>
-        </tr>
+                  <td>-</td>
 
+                  <td class="status-cell">
+                    <span class="tag tag-green"> ใช้งาน </span>
+                  </td>
 
-        <!-- 19 -->
-        <tr data-password="password123">
-          <td>ผศ.ดร.นัฎฐพันธ์ นาคพงษ์</td>
-          <td>-</td>
+                  <td>
+                    <div class="action-group">
+                      <button class="btn-mock-sm" onclick="editLecturer(this)">
+                        <i class="fa-solid fa-pen"></i>
+                        แก้ไข
+                      </button>
 
-          <td class="status-cell">
-            <span class="tag tag-green">ใช้งาน</span>
-          </td>
-
-          <td>
-            <div class="action-group">
-              <button class="btn-mock-sm" onclick="editLecturer(this)">
-                <i class="fa-solid fa-pen"></i>
-                แก้ไข
-              </button>
-
-              <button class="btn-mock-sm danger" onclick="deleteRow(this)">
-                <i class="fa-solid fa-trash"></i>
-                ลบ
-              </button>
-            </div>
-          </td>
-        </tr>
-
-
-        <!-- 20 -->
-        <tr data-password="password123">
-          <td>
-            ผศ.ดร.ศรายุทธ ธเนศสกุลวัฒนา
-          </td>
-
-          <td>-</td>
-
-          <td class="status-cell">
-            <span class="tag tag-green">
-              ใช้งาน
-            </span>
-          </td>
-
-          <td>
-            <div class="action-group">
-
-              <button
-                class="btn-mock-sm"
-                onclick="editLecturer(this)"
-              >
-                <i class="fa-solid fa-pen"></i>
-                แก้ไข
-              </button>
-
-              <button
-                class="btn-mock-sm danger"
-                onclick="deleteRow(this)"
-              >
-                <i class="fa-solid fa-trash"></i>
-                ลบ
-              </button>
-
-            </div>
-          </td>
-        </tr>
-
-      </tbody>
-    </table>
-  </div>
-</section>
+                      <button
+                        class="btn-mock-sm danger"
+                        onclick="deleteRow(this)"
+                      >
+                        <i class="fa-solid fa-trash"></i>
+                        ลบ
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
       </div>
     </div>
 
@@ -3379,8 +3463,8 @@
 
     <script>
       /* =========================================================
-         โหลดหน้า
-         ========================================================= */
+       โหลดหน้า
+       ========================================================= */
 
       document.addEventListener("DOMContentLoaded", function () {
         const user = JSON.parse(localStorage.getItem("currentUser") || "null");
@@ -3400,8 +3484,8 @@
         }
 
         /* =====================================================
-             ระบบเปลี่ยนเมนู
-             ===================================================== */
+           ระบบเปลี่ยนเมนู
+           ===================================================== */
 
         const sidebarItems = document.querySelectorAll(
           ".sidebar-item[data-target]",
@@ -3432,48 +3516,49 @@
         });
 
         /* =====================================================
-             ค้นหาอาจารย์
-             ===================================================== */
+           ค้นหาอาจารย์
+           ===================================================== */
 
-        const lecturerSearch =
-          document.getElementById("lecturerSearch");
+        const lecturerSearch = document.getElementById("lecturerSearch");
 
         if (lecturerSearch) {
           lecturerSearch.addEventListener("input", function () {
-            const keyword =
-              lecturerSearch.value.trim().toLowerCase();
+            const keyword = lecturerSearch.value.trim().toLowerCase();
 
             document
               .querySelectorAll("#lecturerTableBody tr")
               .forEach(function (row) {
                 const nameElement =
-                  row.cells[0].querySelector("b") ||
-                  row.cells[0];
+                  row.cells[0].querySelector("b") || row.cells[0];
 
-                const name =
-                  nameElement.textContent
-                    .trim()
-                    .toLowerCase();
+                const name = nameElement.textContent.trim().toLowerCase();
 
                 row.style.display =
-                  !keyword || name.includes(keyword)
-                    ? ""
-                    : "none";
+                  !keyword || name.includes(keyword) ? "" : "none";
               });
           });
         }
       });
 
       function addLecturer() {
-        openModal("เพิ่มข้อมูลอาจารย์", `<div class="form-group"><label>ชื่อ-นามสกุล</label><input id="lecturerName"></div><div class="form-group"><label>อีเมล</label><input id="lecturerEmail" type="email"></div><div class="form-group"><label>รหัสผ่าน</label><input id="lecturerPassword" type="password"></div>`, function () {
-          const name = document.getElementById("lecturerName").value.trim();
-          const email = document.getElementById("lecturerEmail").value.trim();
-          const password = document.getElementById("lecturerPassword").value;
-          if (!name || !email || !password) { alert("กรุณากรอกข้อมูลให้ครบถ้วน"); return; }
-          const row = document.createElement("tr"); row.dataset.password = password;
-          row.innerHTML = `<td>${escapeHtml(name)}</td><td>${escapeHtml(email)}</td><td><span class="tag tag-green">ใช้งาน</span></td><td><button class="btn-mock-sm" onclick="editLecturer(this)">แก้ไข</button><button class="btn-mock-sm danger" onclick="deleteRow(this)">ลบ</button></td>`;
-          document.getElementById("lecturerTableBody").appendChild(row); closeModal();
-        });
+        openModal(
+          "เพิ่มข้อมูลอาจารย์",
+          `<div class="form-group"><label>ชื่อ-นามสกุล</label><input id="lecturerName"></div><div class="form-group"><label>อีเมล</label><input id="lecturerEmail" type="email"></div><div class="form-group"><label>รหัสผ่าน</label><input id="lecturerPassword" type="password"></div>`,
+          function () {
+            const name = document.getElementById("lecturerName").value.trim();
+            const email = document.getElementById("lecturerEmail").value.trim();
+            const password = document.getElementById("lecturerPassword").value;
+            if (!name || !email || !password) {
+              alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+              return;
+            }
+            const row = document.createElement("tr");
+            row.dataset.password = password;
+            row.innerHTML = `<td>${escapeHtml(name)}</td><td>${escapeHtml(email)}</td><td><span class="tag tag-green">ใช้งาน</span></td><td><button class="btn-mock-sm" onclick="editLecturer(this)">แก้ไข</button><button class="btn-mock-sm danger" onclick="deleteRow(this)">ลบ</button></td>`;
+            document.getElementById("lecturerTableBody").appendChild(row);
+            closeModal();
+          },
+        );
       }
 
       function editLecturer(button) {
@@ -3482,18 +3567,28 @@
         const oldName = nameElement.textContent.trim();
         const oldEmail = row.cells[1].textContent.trim();
         const oldPassword = row.dataset.password || "";
-        openModal("แก้ไขข้อมูลอาจารย์", `<div class="form-group"><label>ชื่อ-นามสกุล</label><input id="lecturerName" value="${escapeAttribute(oldName)}"></div><div class="form-group"><label>อีเมล</label><input id="lecturerEmail" type="email" value="${oldEmail === "-" ? "" : escapeAttribute(oldEmail)}"></div><div class="form-group"><label>รหัสผ่าน</label><input id="lecturerPassword" type="password" value="${escapeAttribute(oldPassword)}"></div>`, function () {
-          const name = document.getElementById("lecturerName").value.trim();
-          const email = document.getElementById("lecturerEmail").value.trim();
-          const password = document.getElementById("lecturerPassword").value;
-          if (!name || !email || !password) { alert("กรุณากรอกข้อมูลให้ครบถ้วน"); return; }
-          nameElement.textContent = name; row.cells[1].textContent = email; row.dataset.password = password;
-          closeModal(); alert("แก้ไขข้อมูลอาจารย์เรียบร้อยแล้ว");
-        });
+        openModal(
+          "แก้ไขข้อมูลอาจารย์",
+          `<div class="form-group"><label>ชื่อ-นามสกุล</label><input id="lecturerName" value="${escapeAttribute(oldName)}"></div><div class="form-group"><label>อีเมล</label><input id="lecturerEmail" type="email" value="${oldEmail === "-" ? "" : escapeAttribute(oldEmail)}"></div><div class="form-group"><label>รหัสผ่าน</label><input id="lecturerPassword" type="password" value="${escapeAttribute(oldPassword)}"></div>`,
+          function () {
+            const name = document.getElementById("lecturerName").value.trim();
+            const email = document.getElementById("lecturerEmail").value.trim();
+            const password = document.getElementById("lecturerPassword").value;
+            if (!name || !email || !password) {
+              alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+              return;
+            }
+            nameElement.textContent = name;
+            row.cells[1].textContent = email;
+            row.dataset.password = password;
+            closeModal();
+            alert("แก้ไขข้อมูลอาจารย์เรียบร้อยแล้ว");
+          },
+        );
       }
       /* =========================================================
-         CHATBOT
-         ========================================================= */
+       CHATBOT
+       ========================================================= */
 
       const chatbotInput = document.getElementById("chatbotInput");
 
@@ -3618,8 +3713,8 @@
       }
 
       /* =========================================================
-         MODAL
-         ========================================================= */
+       MODAL
+       ========================================================= */
 
       function openModal(title, content, saveFunction) {
         const modal = document.getElementById("mainModal");
@@ -3662,8 +3757,8 @@
       });
 
       /* =========================================================
-         ป้องกัน HTML Injection
-         ========================================================= */
+       ป้องกัน HTML Injection
+       ========================================================= */
 
       function escapeHtml(text) {
         return String(text)
@@ -3682,64 +3777,60 @@
         return escapeHtml(text);
       }
       /* =========================================================
-   ส่งฟอร์มตอบรับนักศึกษาสหกิจศึกษา
-   ========================================================= */
+ ส่งฟอร์มตอบรับนักศึกษาสหกิจศึกษา
+ ========================================================= */
 
-function sendResponseForm(button) {
-  const row = button.closest("tr");
+      function sendResponseForm(button) {
+        const row = button.closest("tr");
 
-  const student = row
-    .querySelector(".print-student-name")
-    .textContent.trim();
+        const student = row
+          .querySelector(".print-student-name")
+          .textContent.trim();
 
-  const company = row
-    .querySelector(".print-company-name")
-    .textContent.trim();
+        const company = row
+          .querySelector(".print-company-name")
+          .textContent.trim();
 
-  const ok = confirm(
-    `ต้องการส่งฟอร์มตอบรับของ ${student}\nไปยัง ${company} หรือไม่?`
-  );
+        const ok = confirm(
+          `ต้องการส่งฟอร์มตอบรับของ ${student}\nไปยัง ${company} หรือไม่?`,
+        );
 
-  if (!ok) {
-    return;
-  }
+        if (!ok) {
+          return;
+        }
 
-  /*
-    Mockup Frontend:
-    ระบบจริงภายหลังสามารถเปลี่ยนส่วนนี้
-    เป็นการส่ง Email / Token Link
-    ให้สถานประกอบการได้
-  */
+        /*
+  Mockup Frontend:
+  ระบบจริงภายหลังสามารถเปลี่ยนส่วนนี้
+  เป็นการส่ง Email / Token Link
+  ให้สถานประกอบการได้
+*/
 
-  row.dataset.responseStatus = "waiting";
+        row.dataset.responseStatus = "waiting";
 
-  updateResponseStatus(row);
+        updateResponseStatus(row);
 
-  alert(
-    `ส่งฟอร์มตอบรับของ ${student}\nไปยัง ${company} เรียบร้อยแล้ว`
-  );
-}
+        alert(`ส่งฟอร์มตอบรับของ ${student}\nไปยัง ${company} เรียบร้อยแล้ว`);
+      }
 
+      /* =========================================================
+ แก้ไขสถานะการตอบรับ
+ ========================================================= */
 
-/* =========================================================
-   แก้ไขสถานะการตอบรับ
-   ========================================================= */
+      function editResponseStatus(button) {
+        const row = button.closest("tr");
 
-function editResponseStatus(button) {
-  const row = button.closest("tr");
+        const student = row
+          .querySelector(".print-student-name")
+          .textContent.trim();
 
-  const student = row
-    .querySelector(".print-student-name")
-    .textContent.trim();
+        const company = row
+          .querySelector(".print-company-name")
+          .textContent.trim();
 
-  const company = row
-    .querySelector(".print-company-name")
-    .textContent.trim();
+        const currentStatus = row.dataset.responseStatus || "not-sent";
 
-  const currentStatus =
-    row.dataset.responseStatus || "not-sent";
-
-  const content = `
+        const content = `
     <div
       style="
         padding: 12px 14px;
@@ -3782,11 +3873,7 @@ function editResponseStatus(button) {
 
         <option
           value="not-sent"
-          ${
-            currentStatus === "not-sent"
-              ? "selected"
-              : ""
-          }
+          ${currentStatus === "not-sent" ? "selected" : ""}
         >
           ยังไม่ส่งฟอร์ม
         </option>
@@ -3794,11 +3881,7 @@ function editResponseStatus(button) {
 
         <option
           value="waiting"
-          ${
-            currentStatus === "waiting"
-              ? "selected"
-              : ""
-          }
+          ${currentStatus === "waiting" ? "selected" : ""}
         >
           รอตอบรับ
         </option>
@@ -3806,11 +3889,7 @@ function editResponseStatus(button) {
 
         <option
           value="accepted"
-          ${
-            currentStatus === "accepted"
-              ? "selected"
-              : ""
-          }
+          ${currentStatus === "accepted" ? "selected" : ""}
         >
           ตอบรับแล้ว
         </option>
@@ -3818,11 +3897,7 @@ function editResponseStatus(button) {
 
         <option
           value="rejected"
-          ${
-            currentStatus === "rejected"
-              ? "selected"
-              : ""
-          }
+          ${currentStatus === "rejected" ? "selected" : ""}
         >
           ไม่ตอบรับ
         </option>
@@ -3832,238 +3907,233 @@ function editResponseStatus(button) {
     </div>
   `;
 
-  openModal(
-    "แก้ไขสถานะการตอบรับ",
-    content,
-    function () {
-      const status =
-        document.getElementById(
-          "responseStatusSelect"
-        ).value;
+        openModal("แก้ไขสถานะการตอบรับ", content, function () {
+          const status = document.getElementById("responseStatusSelect").value;
 
-      row.dataset.responseStatus = status;
+          row.dataset.responseStatus = status;
 
-      updateResponseStatus(row);
+          updateResponseStatus(row);
 
-      closeModal();
+          closeModal();
 
-      alert(
-        "แก้ไขสถานะการตอบรับเรียบร้อยแล้ว"
-      );
-    }
-  );
-}
+          alert("แก้ไขสถานะการตอบรับเรียบร้อยแล้ว");
+        });
+      }
 
+      /* =========================================================
+ อัปเดตสถานะ + ปุ่มพิมพ์
+ ========================================================= */
 
-/* =========================================================
-   อัปเดตสถานะ + ปุ่มพิมพ์
-   ========================================================= */
+      function updateResponseStatus(row) {
+        const status = row.dataset.responseStatus || "not-sent";
 
-function updateResponseStatus(row) {
-  const status =
-    row.dataset.responseStatus || "not-sent";
+        const statusElement = row.querySelector(".response-status");
 
-  const statusElement =
-    row.querySelector(".response-status");
+        const printButton = row.querySelector(".print-document-button");
 
-  const printButton =
-    row.querySelector(".print-document-button");
+        if (!statusElement || !printButton) {
+          return;
+        }
 
-  if (!statusElement || !printButton) {
-    return;
-  }
+        /* ================= ยังไม่ส่ง ================= */
 
+        if (status === "not-sent") {
+          statusElement.textContent = "ยังไม่ส่งฟอร์ม";
 
-  /* ================= ยังไม่ส่ง ================= */
+          statusElement.className = "tag tag-muted response-status";
 
-  if (status === "not-sent") {
-    statusElement.textContent =
-      "ยังไม่ส่งฟอร์ม";
+          printButton.disabled = true;
 
-    statusElement.className =
-      "tag tag-muted response-status";
+          return;
+        }
 
-    printButton.disabled = true;
+        /* ================= รอตอบรับ ================= */
 
-    return;
-  }
+        if (status === "waiting") {
+          statusElement.textContent = "รอตอบรับ";
 
+          statusElement.className = "tag tag-muted response-status";
 
-  /* ================= รอตอบรับ ================= */
+          printButton.disabled = true;
 
-  if (status === "waiting") {
-    statusElement.textContent =
-      "รอตอบรับ";
+          return;
+        }
 
-    statusElement.className =
-      "tag tag-muted response-status";
+        /* ================= ตอบรับ ================= */
 
-    printButton.disabled = true;
+        if (status === "accepted") {
+          statusElement.textContent = "ตอบรับแล้ว";
 
-    return;
-  }
+          statusElement.className = "tag tag-green response-status";
 
+          /*
+    สถานประกอบการตอบรับแล้ว
+    จึงอนุญาตให้พิมพ์เอกสาร
+  */
 
-  /* ================= ตอบรับ ================= */
+          printButton.disabled = false;
 
-  if (status === "accepted") {
-    statusElement.textContent =
-      "ตอบรับแล้ว";
+          return;
+        }
 
-    statusElement.className =
-      "tag tag-green response-status";
+        /* ================= ไม่ตอบรับ ================= */
 
-    /*
-      สถานประกอบการตอบรับแล้ว
-      จึงอนุญาตให้พิมพ์เอกสาร
-    */
+        if (status === "rejected") {
+          statusElement.textContent = "ไม่ตอบรับ";
 
-    printButton.disabled = false;
+          statusElement.className = "tag tag-red response-status";
 
-    return;
-  }
+          printButton.disabled = true;
+        }
+      }
 
+      function logout() {
+        if (!confirm("ต้องการออกจากระบบหรือไม่?")) {
+          return;
+        }
 
-  /* ================= ไม่ตอบรับ ================= */
+        localStorage.removeItem("currentUser");
+        window.location.href = "index.html";
+      }
 
-  if (status === "rejected") {
-    statusElement.textContent =
-      "ไม่ตอบรับ";
+      function getCoopRequestData(row) {
+        return {
+          student: row.dataset.studentName || row.cells[0].textContent.trim(),
+          studentId: row.dataset.studentId || row.cells[1].textContent.trim(),
+          company: row.dataset.company || row.cells[3].textContent.trim(),
+          position: row.dataset.position || row.cells[4].textContent.trim(),
+          province: row.dataset.province || "-",
+          submitDate: row.dataset.submitDate || row.cells[5].textContent.trim(),
+          email: row.dataset.email || "-",
+        };
+      }
 
-    statusElement.className =
-      "tag tag-red response-status";
+      function viewCoopRequestDetail(button) {
+        const data = getCoopRequestData(button.closest("tr"));
 
-    printButton.disabled = true;
-  }
-}
-
-function logout() {
-  if (!confirm("ต้องการออกจากระบบหรือไม่?")) {
-    return;
-  }
-
-  localStorage.removeItem("currentUser");
-  window.location.href = "index.html";
-}
-
-function getCoopRequestData(row) {
-  return {
-    student: row.dataset.studentName || row.cells[0].textContent.trim(),
-    studentId: row.dataset.studentId || row.cells[1].textContent.trim(),
-    company: row.dataset.company || row.cells[3].textContent.trim(),
-    position: row.dataset.position || row.cells[4].textContent.trim(),
-    province: row.dataset.province || "-",
-    submitDate: row.dataset.submitDate || row.cells[5].textContent.trim(),
-    email: row.dataset.email || "-",
-  };
-}
-
-function viewCoopRequestDetail(button) {
-  const data = getCoopRequestData(button.closest("tr"));
-
-  openModal(
-    "รายละเอียดคำร้องสหกิจศึกษา",
-    `<div class="form-group"><label>ชื่อนักศึกษา</label><input value="${escapeAttribute(data.student)}" readonly></div>
+        openModal(
+          "รายละเอียดคำร้องสหกิจศึกษา",
+          `<div class="form-group"><label>ชื่อนักศึกษา</label><input value="${escapeAttribute(data.student)}" readonly></div>
      <div class="form-group"><label>รหัสนักศึกษา</label><input value="${escapeAttribute(data.studentId)}" readonly></div>
      <div class="form-group"><label>สถานประกอบการ</label><input value="${escapeAttribute(data.company)}" readonly></div>
      <div class="form-group"><label>ตำแหน่ง</label><input value="${escapeAttribute(data.position)}" readonly></div>
      <div class="form-group"><label>จังหวัด</label><input value="${escapeAttribute(data.province)}" readonly></div>
      <div class="form-group"><label>วันที่ยื่น</label><input value="${escapeAttribute(data.submitDate)}" readonly></div>
      <div class="form-group"><label>อีเมล</label><input value="${escapeAttribute(data.email)}" readonly></div>`,
-    closeModal,
-  );
-}
-
-function printCoopRequestPDF(button) {
-  const data = getCoopRequestData(button.closest("tr"));
-  alert(`กำลังเตรียมคำร้องสหกิจศึกษาของ ${data.student} สำหรับพิมพ์ PDF`);
-  window.print();
-}
-
-function editPrintDocument(button) {
-  const row = button.closest("tr");
-  const studentCell = row.querySelector(".print-student-name");
-  const documentCell = row.querySelector(".print-document-type");
-  const companyCell = row.querySelector(".print-company-name");
-  const student = studentCell.textContent.trim();
-  const documentType = documentCell.textContent.trim();
-  const company = companyCell.textContent.trim();
-
-  openModal(
-    "แก้ไขข้อมูลเอกสาร",
-    `<div class="form-group"><label>ชื่อนักศึกษา</label><input id="editPrintStudent" value="${escapeAttribute(student)}"></div>
-     <div class="form-group"><label>ประเภทเอกสาร</label><select id="editPrintDocumentType"><option value="หนังสือขอความอนุเคราะห์" ${documentType === "หนังสือขอความอนุเคราะห์" ? "selected" : ""}>หนังสือขอความอนุเคราะห์</option><option value="เอกสารส่งตัวนักศึกษา" ${documentType === "เอกสารส่งตัวนักศึกษา" ? "selected" : ""}>เอกสารส่งตัวนักศึกษา</option></select></div>
-     <div class="form-group"><label>สถานประกอบการ</label><input id="editPrintCompany" value="${escapeAttribute(company)}"></div>`,
-    function () {
-      const newStudent = document.getElementById("editPrintStudent").value.trim();
-      const newDocumentType = document.getElementById("editPrintDocumentType").value;
-      const newCompany = document.getElementById("editPrintCompany").value.trim();
-
-      if (!newStudent || !newDocumentType || !newCompany) {
-        alert("กรุณากรอกข้อมูลให้ครบถ้วน");
-        return;
+          closeModal,
+        );
       }
 
-      studentCell.textContent = newStudent;
-      documentCell.textContent = newDocumentType;
-      companyCell.textContent = newCompany;
-      closeModal();
-      alert("แก้ไขข้อมูลเอกสารเรียบร้อยแล้ว");
-    },
-  );
-}
+      function printCoopRequestPDF(button) {
+        const data = getCoopRequestData(button.closest("tr"));
+        alert(`กำลังเตรียมคำร้องสหกิจศึกษาของ ${data.student} สำหรับพิมพ์ PDF`);
+        window.print();
+      }
 
-function deletePrintDocument(button) {
-  const row = button.closest("tr");
-  const student = row.querySelector(".print-student-name").textContent.trim();
-  const documentType = row.querySelector(".print-document-type").textContent.trim();
+      function editPrintDocument(button) {
+        const row = button.closest("tr");
+        const studentCell = row.querySelector(".print-student-name");
+        const documentCell = row.querySelector(".print-document-type");
+        const companyCell = row.querySelector(".print-company-name");
+        const student = studentCell.textContent.trim();
+        const documentType = documentCell.textContent.trim();
+        const company = companyCell.textContent.trim();
 
-  if (!confirm(`ต้องการลบ "${documentType}" ของ ${student} หรือไม่?`)) {
-    return;
-  }
+        openModal(
+          "แก้ไขข้อมูลเอกสาร",
+          `<div class="form-group"><label>ชื่อนักศึกษา</label><input id="editPrintStudent" value="${escapeAttribute(student)}"></div>
+     <div class="form-group"><label>ประเภทเอกสาร</label><select id="editPrintDocumentType"><option value="หนังสือขอความอนุเคราะห์" ${documentType === "หนังสือขอความอนุเคราะห์" ? "selected" : ""}>หนังสือขอความอนุเคราะห์</option><option value="เอกสารส่งตัวนักศึกษา" ${documentType === "เอกสารส่งตัวนักศึกษา" ? "selected" : ""}>เอกสารส่งตัวนักศึกษา</option></select></div>
+     <div class="form-group"><label>สถานประกอบการ</label><input id="editPrintCompany" value="${escapeAttribute(company)}"></div>`,
+          function () {
+            const newStudent = document
+              .getElementById("editPrintStudent")
+              .value.trim();
+            const newDocumentType = document.getElementById(
+              "editPrintDocumentType",
+            ).value;
+            const newCompany = document
+              .getElementById("editPrintCompany")
+              .value.trim();
 
-  row.remove();
-  updatePrintDocumentRowNumbers();
-}
+            if (!newStudent || !newDocumentType || !newCompany) {
+              alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+              return;
+            }
 
-function updatePrintDocumentRowNumbers() {
-  document.querySelectorAll("#printDocumentTable tbody tr").forEach(function (row, index) {
-    row.cells[0].textContent = index + 1;
-  });
-}
+            studentCell.textContent = newStudent;
+            documentCell.textContent = newDocumentType;
+            companyCell.textContent = newCompany;
+            closeModal();
+            alert("แก้ไขข้อมูลเอกสารเรียบร้อยแล้ว");
+          },
+        );
+      }
 
-function printDocumentRow(button) {
-  const row = button.closest("tr");
+      function deletePrintDocument(button) {
+        const row = button.closest("tr");
+        const student = row
+          .querySelector(".print-student-name")
+          .textContent.trim();
+        const documentType = row
+          .querySelector(".print-document-type")
+          .textContent.trim();
 
-  if (row.dataset.responseStatus !== "accepted") {
-    alert("สามารถพิมพ์เอกสารได้เมื่อสถานประกอบการตอบรับแล้วเท่านั้น");
-    return;
-  }
+        if (!confirm(`ต้องการลบ "${documentType}" ของ ${student} หรือไม่?`)) {
+          return;
+        }
 
-  const student = row.querySelector(".print-student-name").textContent.trim();
-  const documentType = row.querySelector(".print-document-type").textContent.trim();
-  alert(`กำลังเตรียม ${documentType} ของ ${student} สำหรับพิมพ์`);
-  window.print();
-}
+        row.remove();
+        updatePrintDocumentRowNumbers();
+      }
 
-function deleteRow(button) {
-  const row = button.closest("tr");
-  const name = row.cells[0] ? row.cells[0].textContent.trim() : "รายการนี้";
+      function updatePrintDocumentRowNumbers() {
+        document
+          .querySelectorAll("#printDocumentTable tbody tr")
+          .forEach(function (row, index) {
+            row.cells[0].textContent = index + 1;
+          });
+      }
 
-  if (confirm(`ต้องการลบ "${name}" หรือไม่?`)) {
-    row.remove();
-  }
-}
+      function printDocumentRow(button) {
+        const row = button.closest("tr");
 
-function getCompanyFormHtml(data = {}) {
-  const workFormats = Array.isArray(data.workFormats)
-    ? data.workFormats
-    : String(data.workFormats || "").split(",").filter(Boolean);
-  const checked = function (value) {
-    return workFormats.includes(value) ? "checked" : "";
-  };
+        if (row.dataset.responseStatus !== "accepted") {
+          alert("สามารถพิมพ์เอกสารได้เมื่อสถานประกอบการตอบรับแล้วเท่านั้น");
+          return;
+        }
 
-  return `<div class="company-form-grid">
+        const student = row
+          .querySelector(".print-student-name")
+          .textContent.trim();
+        const documentType = row
+          .querySelector(".print-document-type")
+          .textContent.trim();
+        alert(`กำลังเตรียม ${documentType} ของ ${student} สำหรับพิมพ์`);
+        window.print();
+      }
+
+      function deleteRow(button) {
+        const row = button.closest("tr");
+        const name = row.cells[0]
+          ? row.cells[0].textContent.trim()
+          : "รายการนี้";
+
+        if (confirm(`ต้องการลบ "${name}" หรือไม่?`)) {
+          row.remove();
+        }
+      }
+
+      function getCompanyFormHtml(data = {}) {
+        const workFormats = Array.isArray(data.workFormats)
+          ? data.workFormats
+          : String(data.workFormats || "")
+              .split(",")
+              .filter(Boolean);
+        const checked = function (value) {
+          return workFormats.includes(value) ? "checked" : "";
+        };
+
+        return `<div class="company-form-grid">
     <div class="company-form-section"><i class="fa-solid fa-building"></i> ข้อมูลสถานประกอบการ</div>
     <div class="form-group full"><label>ชื่อสถานประกอบการ</label><input id="companyName" value="${escapeAttribute(data.companyName || "")}"></div>
     <div class="form-group"><label>Email</label><input id="companyEmail" type="email" value="${escapeAttribute(data.companyEmail || "")}"></div>
@@ -4076,165 +4146,299 @@ function getCompanyFormHtml(data = {}) {
     <div class="form-group full"><label>จังหวัด</label><input id="companyProvince" value="${escapeAttribute(data.province || "")}"></div>
     <div class="company-form-section"><i class="fa-solid fa-briefcase"></i> รายละเอียดตำแหน่งงาน</div>
     <div class="form-group"><label>ชื่อตำแหน่งงาน</label><input id="companyPosition" value="${escapeAttribute(data.position || "")}"></div>
-    <div class="form-group"><label>หมวดหมู่งาน</label><select id="companyCategory"><option value="">-- เลือกหมวดหมู่งาน --</option>${["Software Development", "Web Development", "Mobile Application", "Data Science / AI", "Cloud / Infrastructure", "Cyber Security", "Network", "IT Support", "UX / UI Design", "Business Analyst", "อื่น ๆ"].map(function (category) { return `<option value="${escapeAttribute(category)}" ${data.category === category ? "selected" : ""}>${escapeHtml(category)}</option>`; }).join("")}</select></div>
+    <div class="form-group"><label>หมวดหมู่งาน</label><select id="companyCategory"><option value="">-- เลือกหมวดหมู่งาน --</option>${[
+      "Software Development",
+      "Web Development",
+      "Mobile Application",
+      "Data Science / AI",
+      "Cloud / Infrastructure",
+      "Cyber Security",
+      "Network",
+      "IT Support",
+      "UX / UI Design",
+      "Business Analyst",
+      "อื่น ๆ",
+    ]
+      .map(function (category) {
+        return `<option value="${escapeAttribute(category)}" ${data.category === category ? "selected" : ""}>${escapeHtml(category)}</option>`;
+      })
+      .join("")}</select></div>
     <div class="form-group"><label>จำนวนที่รับ</label><input id="companyQuota" type="number" min="1" value="${escapeAttribute(data.quota || "")}"></div>
     <div class="form-group"><label>ค่าตอบแทน</label><input id="companyCompensation" value="${escapeAttribute(data.compensation || "")}"></div>
     <div class="form-group full"><label>รูปแบบการทำงาน</label><div class="company-work-format"><label><input type="checkbox" name="companyWorkFormat" value="Onsite" ${checked("Onsite")}> Onsite</label><label><input type="checkbox" name="companyWorkFormat" value="Work from Home" ${checked("Work from Home")}> Work from Home</label><label><input type="checkbox" name="companyWorkFormat" value="Hybrid" ${checked("Hybrid")}> Hybrid</label></div></div>
-    <div class="form-group full"><label>จำนวนวันต่อสัปดาห์</label><select id="companyDaysPerWeek"><option value="">-- เลือกจำนวนวัน --</option>${[1, 2, 3, 4, 5, 6, 7].map(function (day) { return `<option value="${day}" ${String(data.daysPerWeek || "") === String(day) ? "selected" : ""}>${day} วัน/สัปดาห์</option>`; }).join("")}</select></div>
+    <div class="form-group full"><label>จำนวนวันต่อสัปดาห์</label><select id="companyDaysPerWeek"><option value="">-- เลือกจำนวนวัน --</option>${[
+      1, 2, 3, 4, 5, 6, 7,
+    ]
+      .map(function (day) {
+        return `<option value="${day}" ${String(data.daysPerWeek || "") === String(day) ? "selected" : ""}>${day} วัน/สัปดาห์</option>`;
+      })
+      .join("")}</select></div>
   </div>`;
-}
+      }
 
-function openCompanyModal(title, data, saveFunction) {
-  openModal(title, getCompanyFormHtml(data), function () {
-    const formData = readCompanyForm();
-    if (formData) {
-      saveFunction(formData);
-    }
-  });
+      function openCompanyModal(title, data, saveFunction) {
+        openModal(title, getCompanyFormHtml(data), function () {
+          const formData = readCompanyForm();
+          if (formData) {
+            saveFunction(formData);
+          }
+        });
 
-  const modalBox = document.querySelector("#mainModal .modal-box");
-  if (modalBox) {
-    modalBox.classList.add("company-modal-wide");
-  }
-}
+        const modalBox = document.querySelector("#mainModal .modal-box");
+        if (modalBox) {
+          modalBox.classList.add("company-modal-wide");
+        }
+      }
 
-function readCompanyForm() {
-  const value = function (id) {
-    return document.getElementById(id).value.trim();
-  };
-  const data = {
-    companyName: value("companyName"), companyEmail: value("companyEmail"),
-    companyPhone: value("companyPhone"), addressNo: value("companyAddressNo"),
-    addressMoo: value("companyAddressMoo"), subdistrict: value("companySubdistrict"),
-    district: value("companyDistrict"), province: value("companyProvince"),
-    position: value("companyPosition"), category: value("companyCategory"),
-    quota: value("companyQuota"), compensation: value("companyCompensation"),
-    daysPerWeek: value("companyDaysPerWeek"),
-    workFormats: Array.from(document.querySelectorAll('input[name="companyWorkFormat"]:checked')).map(function (input) { return input.value; }),
-  };
+      function readCompanyForm() {
+        const value = function (id) {
+          return document.getElementById(id).value.trim();
+        };
+        const data = {
+          companyName: value("companyName"),
+          companyEmail: value("companyEmail"),
+          companyPhone: value("companyPhone"),
+          addressNo: value("companyAddressNo"),
+          addressMoo: value("companyAddressMoo"),
+          subdistrict: value("companySubdistrict"),
+          district: value("companyDistrict"),
+          province: value("companyProvince"),
+          position: value("companyPosition"),
+          category: value("companyCategory"),
+          quota: value("companyQuota"),
+          compensation: value("companyCompensation"),
+          daysPerWeek: value("companyDaysPerWeek"),
+          workFormats: Array.from(
+            document.querySelectorAll(
+              'input[name="companyWorkFormat"]:checked',
+            ),
+          ).map(function (input) {
+            return input.value;
+          }),
+        };
 
-  if (!data.companyName || !data.companyEmail || !data.companyPhone || !data.addressNo || !data.subdistrict || !data.district || !data.province || !data.position || !data.category || !data.quota || !data.daysPerWeek || !data.workFormats.length) {
-    alert("กรุณากรอกข้อมูลให้ครบถ้วน");
-    return null;
-  }
-  if (!data.companyEmail.includes("@") || Number(data.quota) < 1) {
-    alert("กรุณาตรวจสอบอีเมลและจำนวนที่รับ");
-    return null;
-  }
-  return data;
-}
+        if (
+          !data.companyName ||
+          !data.companyEmail ||
+          !data.companyPhone ||
+          !data.addressNo ||
+          !data.subdistrict ||
+          !data.district ||
+          !data.province ||
+          !data.position ||
+          !data.category ||
+          !data.quota ||
+          !data.daysPerWeek ||
+          !data.workFormats.length
+        ) {
+          alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+          return null;
+        }
+        if (!data.companyEmail.includes("@") || Number(data.quota) < 1) {
+          alert("กรุณาตรวจสอบอีเมลและจำนวนที่รับ");
+          return null;
+        }
+        return data;
+      }
 
-function createWorkFormatHtml(workFormats) {
-  return workFormats.map(function (format) {
-    return `<span class="work-format-badge">${escapeHtml(format)}</span>`;
-  }).join("");
-}
+      function createWorkFormatHtml(workFormats) {
+        return workFormats
+          .map(function (format) {
+            return `<span class="work-format-badge">${escapeHtml(format)}</span>`;
+          })
+          .join("");
+      }
 
-function fillCompanyRow(row, data) {
-  row.dataset.companyName = data.companyName;
-  row.dataset.companyEmail = data.companyEmail;
-  row.dataset.companyPhone = data.companyPhone;
-  row.dataset.addressNo = data.addressNo;
-  row.dataset.addressMoo = data.addressMoo;
-  row.dataset.addressSubdistrict = data.subdistrict;
-  row.dataset.addressDistrict = data.district;
-  row.dataset.addressProvince = data.province;
-  row.dataset.position = data.position;
-  row.dataset.category = data.category;
-  row.dataset.quota = data.quota;
-  row.dataset.compensation = data.compensation;
-  row.dataset.workFormats = data.workFormats.join(",");
-  row.dataset.daysPerWeek = data.daysPerWeek;
-  row.innerHTML = `<td class="company-name-cell"><b>${escapeHtml(data.companyName)}</b><small>${escapeHtml(data.companyEmail)}</small><small>${escapeHtml(data.companyPhone)}</small></td><td>${escapeHtml(data.province)}</td><td class="company-position-cell"><b>${escapeHtml(data.position)}</b><small>${escapeHtml(data.category)}</small></td><td>${escapeHtml(data.category)}</td><td>${escapeHtml(data.quota)} คน</td><td>${data.compensation ? escapeHtml(data.compensation) : "-"}</td><td><div class="work-format-list">${createWorkFormatHtml(data.workFormats)}</div></td><td>${escapeHtml(data.daysPerWeek)} วัน</td><td><div class="action-group"><button class="btn-mock-sm" onclick="editCompany(this)"><i class="fa-solid fa-pen"></i> แก้ไข</button><button class="btn-mock-sm danger" onclick="deleteCompany(this)"><i class="fa-solid fa-trash"></i> ลบ</button></div></td>`;
-}
+      function fillCompanyRow(row, data) {
+        row.dataset.companyName = data.companyName;
+        row.dataset.companyEmail = data.companyEmail;
+        row.dataset.companyPhone = data.companyPhone;
+        row.dataset.addressNo = data.addressNo;
+        row.dataset.addressMoo = data.addressMoo;
+        row.dataset.addressSubdistrict = data.subdistrict;
+        row.dataset.addressDistrict = data.district;
+        row.dataset.addressProvince = data.province;
+        row.dataset.position = data.position;
+        row.dataset.category = data.category;
+        row.dataset.quota = data.quota;
+        row.dataset.compensation = data.compensation;
+        row.dataset.workFormats = data.workFormats.join(",");
+        row.dataset.daysPerWeek = data.daysPerWeek;
+        row.innerHTML = `<td class="company-name-cell"><b>${escapeHtml(data.companyName)}</b><small>${escapeHtml(data.companyEmail)}</small><small>${escapeHtml(data.companyPhone)}</small></td><td>${escapeHtml(data.province)}</td><td class="company-position-cell"><b>${escapeHtml(data.position)}</b><small>${escapeHtml(data.category)}</small></td><td>${escapeHtml(data.category)}</td><td>${escapeHtml(data.quota)} คน</td><td>${data.compensation ? escapeHtml(data.compensation) : "-"}</td><td><div class="work-format-list">${createWorkFormatHtml(data.workFormats)}</div></td><td>${escapeHtml(data.daysPerWeek)} วัน</td><td><div class="action-group"><button class="btn-mock-sm" onclick="editCompany(this)"><i class="fa-solid fa-pen"></i> แก้ไข</button><button class="btn-mock-sm danger" onclick="deleteCompany(this)"><i class="fa-solid fa-trash"></i> ลบ</button></div></td>`;
+      }
 
-function addCompany() {
-  openCompanyModal("เพิ่มสถานประกอบการ / ตำแหน่งงาน", {}, function (data) {
-    const row = document.createElement("tr");
-    fillCompanyRow(row, data);
-    document.getElementById("companyTableBody").appendChild(row);
-    updateCompanySummary();
-    closeModal();
-  });
-}
+      function addCompany() {
+        openCompanyModal(
+          "เพิ่มสถานประกอบการ / ตำแหน่งงาน",
+          {},
+          function (data) {
+            const row = document.createElement("tr");
+            fillCompanyRow(row, data);
+            document.getElementById("companyTableBody").appendChild(row);
+            updateCompanySummary();
+            closeModal();
+          },
+        );
+      }
 
-function editCompany(button) {
-  const row = button.closest("tr");
-  openCompanyModal("แก้ไขสถานประกอบการ / ตำแหน่งงาน", {
-    companyName: row.dataset.companyName, companyEmail: row.dataset.companyEmail,
-    companyPhone: row.dataset.companyPhone, addressNo: row.dataset.addressNo,
-    addressMoo: row.dataset.addressMoo, subdistrict: row.dataset.addressSubdistrict,
-    district: row.dataset.addressDistrict, province: row.dataset.addressProvince,
-    position: row.dataset.position, category: row.dataset.category, quota: row.dataset.quota,
-    compensation: row.dataset.compensation, workFormats: row.dataset.workFormats,
-    daysPerWeek: row.dataset.daysPerWeek,
-  }, function (data) {
-    fillCompanyRow(row, data);
-    updateCompanySummary();
-    closeModal();
-  });
-}
+      function editCompany(button) {
+        const row = button.closest("tr");
+        openCompanyModal(
+          "แก้ไขสถานประกอบการ / ตำแหน่งงาน",
+          {
+            companyName: row.dataset.companyName,
+            companyEmail: row.dataset.companyEmail,
+            companyPhone: row.dataset.companyPhone,
+            addressNo: row.dataset.addressNo,
+            addressMoo: row.dataset.addressMoo,
+            subdistrict: row.dataset.addressSubdistrict,
+            district: row.dataset.addressDistrict,
+            province: row.dataset.addressProvince,
+            position: row.dataset.position,
+            category: row.dataset.category,
+            quota: row.dataset.quota,
+            compensation: row.dataset.compensation,
+            workFormats: row.dataset.workFormats,
+            daysPerWeek: row.dataset.daysPerWeek,
+          },
+          function (data) {
+            fillCompanyRow(row, data);
+            updateCompanySummary();
+            closeModal();
+          },
+        );
+      }
 
-function deleteCompany(button) {
-  const row = button.closest("tr");
-  if (confirm(`ต้องการลบ "${row.dataset.companyName || "รายการนี้"}" หรือไม่?`)) {
-    row.remove();
-    updateCompanySummary();
-  }
-}
+      function deleteCompany(button) {
+        const row = button.closest("tr");
+        if (
+          confirm(
+            `ต้องการลบ "${row.dataset.companyName || "รายการนี้"}" หรือไม่?`,
+          )
+        ) {
+          row.remove();
+          updateCompanySummary();
+        }
+      }
 
-function updateCompanySummary() {
-  const rows = Array.from(document.querySelectorAll("#companyTableBody tr"));
-  const names = new Set();
-  let quota = 0;
-  rows.forEach(function (row) {
-    if (row.dataset.companyName) {
-      names.add(row.dataset.companyName);
-    }
-    quota += Number(row.dataset.quota || 0);
-  });
-  document.getElementById("companyCount").textContent = `${names.size} แห่ง`;
-  document.getElementById("positionCount").textContent = `${rows.length} ตำแหน่ง`;
-  document.getElementById("quotaCount").textContent = `${quota} คน`;
-}
+      function updateCompanySummary() {
+        const rows = Array.from(
+          document.querySelectorAll("#companyTableBody tr"),
+        );
+        const names = new Set();
+        let quota = 0;
+        rows.forEach(function (row) {
+          if (row.dataset.companyName) {
+            names.add(row.dataset.companyName);
+          }
+          quota += Number(row.dataset.quota || 0);
+        });
+        document.getElementById("companyCount").textContent =
+          `${names.size} แห่ง`;
+        document.getElementById("positionCount").textContent =
+          `${rows.length} ตำแหน่ง`;
+        document.getElementById("quotaCount").textContent = `${quota} คน`;
+      }
 
-function getCalendarFormHtml(name, date) {
-  return `<div class="form-group"><label>ชื่อกิจกรรม</label><input id="calendarName" value="${escapeAttribute(name || "")}"></div><div class="form-group"><label>วันที่/ช่วงเวลา</label><input id="calendarDate" value="${escapeAttribute(date || "")}"></div><div class="form-group"><label>กลุ่มเป้าหมาย</label><input value="นักศึกษาสหกิจศึกษา" readonly></div>`;
-}
+      function getCalendarFormHtml(name, date) {
+        return `<div class="form-group"><label>ชื่อกิจกรรม</label><input id="calendarName" value="${escapeAttribute(name || "")}"></div><div class="form-group"><label>วันที่/ช่วงเวลา</label><input id="calendarDate" value="${escapeAttribute(date || "")}"></div><div class="form-group"><label>กลุ่มเป้าหมาย</label><input value="นักศึกษาสหกิจศึกษา" readonly></div>`;
+      }
 
-function addCalendar() {
-  openModal("เพิ่มกำหนดการ", getCalendarFormHtml(), function () {
-    const name = document.getElementById("calendarName").value.trim();
-    const date = document.getElementById("calendarDate").value.trim();
-    if (!name || !date) {
-      alert("กรุณากรอกข้อมูลให้ครบถ้วน");
-      return;
-    }
-    const row = document.createElement("tr");
-    row.innerHTML = `<td><div class="calendar-title"><span class="calendar-dot blue"></span>${escapeHtml(name)}</div></td><td>${escapeHtml(date)}</td><td>นักศึกษาสหกิจศึกษา</td><td><div class="action-group"><button type="button" class="btn-mock-sm" onclick="editCalendar(this)"><i class="fa-solid fa-pen"></i> แก้ไข</button><button type="button" class="btn-mock-sm danger" onclick="deleteRow(this)"><i class="fa-solid fa-trash"></i> ลบ</button></div></td>`;
-    document.getElementById("calendarTableBody").appendChild(row);
-    closeModal();
-  });
-}
+      function addCalendar() {
+        openModal("เพิ่มกำหนดการ", getCalendarFormHtml(), function () {
+          const name = document.getElementById("calendarName").value.trim();
+          const date = document.getElementById("calendarDate").value.trim();
+          if (!name || !date) {
+            alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+            return;
+          }
+          const row = document.createElement("tr");
+          row.innerHTML = `<td><div class="calendar-title"><span class="calendar-dot blue"></span>${escapeHtml(name)}</div></td><td>${escapeHtml(date)}</td><td>นักศึกษาสหกิจศึกษา</td><td><div class="action-group"><button type="button" class="btn-mock-sm" onclick="editCalendar(this)"><i class="fa-solid fa-pen"></i> แก้ไข</button><button type="button" class="btn-mock-sm danger" onclick="deleteRow(this)"><i class="fa-solid fa-trash"></i> ลบ</button></div></td>`;
+          document.getElementById("calendarTableBody").appendChild(row);
+          closeModal();
+        });
+      }
 
-function editCalendar(button) {
-  const row = button.closest("tr");
-  const oldName = row.cells[0].textContent.trim();
-  const oldDate = row.cells[1].textContent.trim();
-  openModal("แก้ไขกำหนดการ", getCalendarFormHtml(oldName, oldDate), function () {
-    const name = document.getElementById("calendarName").value.trim();
-    const date = document.getElementById("calendarDate").value.trim();
-    if (!name || !date) {
-      alert("กรุณากรอกข้อมูลให้ครบถ้วน");
-      return;
-    }
-    row.cells[0].innerHTML = `<div class="calendar-title"><span class="calendar-dot blue"></span>${escapeHtml(name)}</div>`;
-    row.cells[1].textContent = date;
-    row.cells[2].textContent = "นักศึกษาสหกิจศึกษา";
-    closeModal();
-  });
-}
+      function editCalendar(button) {
+        const row = button.closest("tr");
+        const oldName = row.cells[0].textContent.trim();
+        const oldDate = row.cells[1].textContent.trim();
+        openModal(
+          "แก้ไขกำหนดการ",
+          getCalendarFormHtml(oldName, oldDate),
+          function () {
+            const name = document.getElementById("calendarName").value.trim();
+            const date = document.getElementById("calendarDate").value.trim();
+            if (!name || !date) {
+              alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+              return;
+            }
+            row.cells[0].innerHTML = `<div class="calendar-title"><span class="calendar-dot blue"></span>${escapeHtml(name)}</div>`;
+            row.cells[1].textContent = date;
+            row.cells[2].textContent = "นักศึกษาสหกิจศึกษา";
+            closeModal();
+          },
+        );
+      }
+      /* =========================================================
+   พิมพ์หนังสือส่งตัว
+   ========================================================= */
 
+      function printSendDocument(button) {
+        const row = button.closest("tr");
+
+        const student = row
+          .querySelector(".send-student-name")
+          .textContent.trim();
+
+        const company = row
+          .querySelector(".send-company-name")
+          .textContent.trim();
+
+        alert(
+          `กำลังเตรียมหนังสือส่งตัวของ ${student}\nสถานประกอบการ ${company}`,
+        );
+
+        window.print();
+      }
+      /* =========================================================
+   ยกเลิกคำร้องสหกิจศึกษา
+   ========================================================= */
+
+      function cancelCoopRequest(button) {
+        const row = button.closest("tr");
+
+        const student =
+          row.dataset.studentName || row.cells[0].textContent.trim();
+
+        const ok = confirm(
+          `ต้องการยกเลิกคำร้องสหกิจศึกษาของ ${student} หรือไม่?`,
+        );
+
+        if (!ok) {
+          return;
+        }
+
+        /* เปลี่ยนสถานะ */
+
+        row.dataset.status = "cancelled";
+
+        const statusElement = row.querySelector(".request-status");
+
+        if (statusElement) {
+          statusElement.textContent = "ยกเลิกคำร้อง";
+
+          statusElement.className = "tag tag-red request-status";
+        }
+
+        /* ปิดปุ่มยกเลิก เพื่อไม่ให้กดซ้ำ */
+
+        button.disabled = true;
+
+        button.innerHTML = `<i class="fa-solid fa-ban"></i> ยกเลิกแล้ว`;
+
+        alert(`ยกเลิกคำร้องสหกิจศึกษาของ ${student} เรียบร้อยแล้ว`);
+      }
     </script>
   </body>
 </html>
