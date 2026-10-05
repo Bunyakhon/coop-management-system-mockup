@@ -1,1477 +1,320 @@
 <!doctype html>
 <html lang="th">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>แดชบอร์ดหัวหน้าภาควิชา | KIWI — ระบบจัดการสหกิจศึกษา</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="css/head_department.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Sarabun:wght@500;600;700&family=Noto+Sans+Thai:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-  </head>
-  <body>
-    <header class="navbar">
-      <div class="nav-container">
-        <a href="index.html" class="brand">
-          <img src="images/logo_kiwi.png" alt="KIWI" class="brand-mark" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>แดชบอร์ดหัวหน้าภาควิชา | KIWI</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/head_department.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+  <header class="hd-navbar">
+    <div class="hd-navbar-inner">
+      <a href="index.html" class="hd-brand">
+        <img src="images/logo_kiwi.png" alt="KIWI" class="hd-brand-logo" />
+        <div><strong>KIWI</strong><span>ระบบจัดการสหกิจศึกษา</span></div>
+      </a>
+      <div class="hd-nav-user">
+        <div class="hd-user-meta">
+          <span>หัวหน้าภาควิชา</span>
+          <strong id="headerUserName">ผศ.ดร.ขนิษฐา นามี</strong>
+        </div>
+        <button type="button" class="hd-btn hd-btn-outline" onclick="logoutHeadDepartment()">
+          <i class="fa-solid fa-right-from-bracket"></i> ออกจากระบบ
+        </button>
+      </div>
+    </div>
+  </header>
 
-          <span> KIWI<br />ระบบจัดการสหกิจศึกษา </span>
-        </a>
+  <div class="hd-app-shell">
+    <aside class="hd-sidebar">
+      <div class="hd-sidebar-heading">เมนูหัวหน้าภาควิชา</div>
 
-        <div class="nav-right">
-          <span
-            id="userNameDisplay"
-            class="head-inline-01"
-            >ผศ.ดร.ขนิษฐา นามี — หัวหน้าภาควิชา</span
-          >
+      <button class="hd-sidebar-item active" data-panel="panel-overview" type="button">
+        <i class="fa-solid fa-chart-pie"></i><span>ภาพรวม</span>
+      </button>
 
-          <button class="btn-login" onclick="logout()">ออกจากระบบ</button>
+      <button class="hd-sidebar-item" data-panel="panel-coop" type="button">
+        <i class="fa-solid fa-user-graduate"></i><span>นักศึกษาสหกิจ</span>
+        <span class="hd-sidebar-badge" id="sidebarPendingBadge">0</span>
+      </button>
+
+      <button class="hd-sidebar-item" data-panel="panel-teachers" type="button">
+        <i class="fa-solid fa-chalkboard-user"></i><span>อาจารย์ในภาควิชา</span>
+      </button>
+
+      <button class="hd-sidebar-item" data-panel="panel-profile" type="button">
+        <i class="fa-solid fa-user-gear"></i><span>ข้อมูลส่วนตัว</span>
+      </button>
+
+      <div class="hd-sidebar-help">
+        <i class="fa-solid fa-circle-info"></i>
+        <div>
+          <strong>ขอบเขตหัวหน้าภาควิชา</strong>
+          <span>ค้นหา • อนุมัติคำร้อง • กำหนดที่ปรึกษา • จัดการอาจารย์</span>
         </div>
       </div>
-    </header>
-
-    <div class="dashboard-layout">
-      <!-- ======================================== -->
-      <!-- เมนูด้านซ้าย -->
-      <!-- ======================================== -->
-
-      <aside class="dashboard-sidebar">
-        <!-- ภาพรวม -->
-
-        <a class="sidebar-item active" data-target="panel-overview">
-          <i class="fa-solid fa-gauge"></i>
-
-          ภาพรวม
-        </a>
-
-        <!-- จัดการข้อมูลส่วนตัว -->
-
-        <a class="sidebar-item" data-target="panel-profile">
-          <i class="fa-solid fa-user-pen"></i>
-
-          จัดการข้อมูลส่วนตัว
-        </a>
-
-        <!-- จัดการข้อมูลอาจารย์ -->
-
-        <a class="sidebar-item" data-target="panel-teachers">
-          <i class="fa-solid fa-chalkboard-user"></i>
-
-          จัดการข้อมูลอาจารย์
-        </a>
-
-        <!-- ค้นหาข้อมูลนักศึกษา -->
-
-        <a class="sidebar-item" data-target="panel-students">
-          <i class="fa-solid fa-user-graduate"></i>
-
-          ค้นหาข้อมูลนักศึกษา
-        </a>
-
-        <a class="sidebar-item" data-target="panel-coop-request-approval">
-          <i class="fa-solid fa-file-circle-check"></i>
-
-          อนุมัติคำร้องสหกิจศึกษา
-        </a>
-
-        <!-- กำหนดอาจารย์ที่ปรึกษานักศึกษาสหกิจ -->
-
-        <a class="sidebar-item" data-target="panel-coop-advisor">
-          <i class="fa-solid fa-user-tie"></i>
-
-          กำหนดอาจารย์ที่ปรึกษาสหกิจ
-        </a>
-      </aside>
-      <!-- เนื้อหาแต่ละเมนู -->
-      <div class="dashboard-content">
-        <!-- ================= ภาพรวม ================= -->
-        <!-- ========================= -->
-        <!-- ภาพรวม -->
-        <!-- ========================= -->
-
-        <section class="content-panel active" id="panel-overview">
-          <div class="dashboard-banner">
-            <b id="overviewGreeting"> ยินดีต้อนรับ, ผศ.ดร.ขนิษฐา นามี </b>
-
-            <span> ภาพรวมระบบจัดการสหกิจศึกษา </span>
-          </div>
-
-          <div
-            class="stat-row head-inline-02"
-          >
-            <div class="stat-box">
-              <b>4 คน</b
-              ><span
-                ><i class="fa-solid fa-user-graduate"></i>
-                นักศึกษาสหกิจศึกษาทั้งหมด</span
-              >
-            </div>
-            <div class="stat-box">
-              <b>3 รายการ</b
-              ><span
-                ><i class="fa-solid fa-file-circle-question"></i>
-                คำร้องรอพิจารณา</span
-              >
-            </div>
-            <div class="stat-box">
-              <b>2 คน</b
-              ><span
-                ><i class="fa-solid fa-user-tie"></i>
-                กำหนดอาจารย์ที่ปรึกษาแล้ว</span
-              >
-            </div>
-            <div class="stat-box">
-              <b>2 คน</b
-              ><span
-                ><i class="fa-solid fa-user-clock"></i>
-                ยังไม่ได้กำหนดอาจารย์ที่ปรึกษา</span
-              >
-            </div>
-            <div class="stat-box">
-              <b>20 คน</b
-              ><span
-                ><i class="fa-solid fa-chalkboard-user"></i> อาจารย์ในระบบ</span
-              >
-            </div>
-            <div class="stat-box">
-              <b>4 แห่ง</b
-              ><span><i class="fa-solid fa-building"></i> สถานประกอบการ</span>
-            </div>
-          </div>
-        </section>
-
-        <!-- ========================= -->
-        <!-- จัดการข้อมูลส่วนตัว -->
-        <!-- ========================= -->
-
-        <section class="content-panel" id="panel-profile">
-          <div class="panel-header">
-            <h2>จัดการข้อมูลส่วนตัว</h2>
-
-            <p>แก้ไขข้อมูลส่วนตัวของหัวหน้าภาควิชา</p>
-          </div>
-
-          <div class="advisor-info-box">
-            <i class="fa-solid fa-circle-info"></i>
-
-            <span> สามารถแก้ไขชื่อ-นามสกุล Email และรหัสผ่านได้ </span>
-          </div>
-
-          <div
-            class="head-inline-03"
-          >
-            <form id="profileForm" onsubmit="saveProfile(event)">
-              <div class="mockup-grid">
-                <div class="mockup-field full">
-                  <label for="profileFullName">
-                    ชื่อ-นามสกุล
-
-                    <span class="head-inline-04"> * </span>
-                  </label>
-
-                  <input
-                    type="text"
-                    id="profileFullName"
-                    placeholder="กรอกชื่อ-นามสกุล"
-                    required
-                  />
-                </div>
-
-                <div class="mockup-field full">
-                  <label for="profileEmail">
-                    Email
-
-                    <span class="head-inline-05"> * </span>
-                  </label>
-
-                  <input
-                    type="email"
-                    id="profileEmail"
-                    placeholder="example@kmutnb.ac.th"
-                    required
-                  />
-                </div>
-
-                <div class="mockup-field">
-                  <label for="profilePassword"> รหัสผ่านใหม่ </label>
-
-                  <input
-                    type="password"
-                    id="profilePassword"
-                    placeholder="เว้นว่างหากไม่เปลี่ยนรหัสผ่าน"
-                    minlength="6"
-                  />
-                </div>
-
-                <div class="mockup-field">
-                  <label for="profileConfirmPassword">
-                    ยืนยันรหัสผ่านใหม่
-                  </label>
-
-                  <input
-                    type="password"
-                    id="profileConfirmPassword"
-                    placeholder="กรอกรหัสผ่านใหม่อีกครั้ง"
-                    minlength="6"
-                  />
-                </div>
-              </div>
-
-              <div
-                class="head-inline-06"
-              >
-                <button
-                  type="button"
-                  class="btn-mock-sm"
-                  onclick="loadProfileData()"
-                >
-                  <i class="fa-solid fa-rotate-left"></i>
-
-                  คืนค่าข้อมูล
-                </button>
-
-                <button type="submit" class="btn-mock-sm solid">
-                  <i class="fa-solid fa-floppy-disk"></i>
-
-                  บันทึกการแก้ไข
-                </button>
-              </div>
-            </form>
-          </div>
-        </section>
-
-        <!-- ======================================== -->
-        <!-- ค้นหาข้อมูลนักศึกษา -->
-        <!-- ======================================== -->
-
-        <section class="content-panel" id="panel-students">
-          <div class="panel-header">
-            <h2>ค้นหาข้อมูลนักศึกษา</h2>
-
-            <p>ค้นหาและตรวจสอบข้อมูลนักศึกษาสหกิจศึกษา</p>
-          </div>
-
-          <!-- ======================================== -->
-          <!-- ช่องค้นหา -->
-          <!-- ======================================== -->
-
-          <div class="student-search-box">
-            <div class="search-field">
-              <label>
-                <i class="fa-solid fa-magnifying-glass"></i>
-
-                ค้นหานักศึกษา
-              </label>
-
-              <input
-                type="text"
-                id="studentSearchInput"
-                placeholder="ค้นหาชื่อ รหัสนักศึกษา หรือสถานประกอบการ..."
-                oninput="filterHeadStudents()"
-              />
-            </div>
-
-            <div class="search-field">
-              <label>
-                <i class="fa-solid fa-filter"></i>
-
-                สาขา
-              </label>
-
-              <select id="studentMajorFilter" onchange="filterHeadStudents()">
-                <option value="">ทุกสาขา</option>
-
-                <option value="IT">IT</option>
-
-                <option value="INE">INE</option>
-              </select>
-            </div>
-
-            <button
-              type="button"
-              class="btn-mock-sm solid student-search-btn"
-              onclick="filterHeadStudents()"
-            >
-              <i class="fa-solid fa-search"></i>
-
-              ค้นหา
-            </button>
-          </div>
-
-          <!-- ======================================== -->
-          <!-- นักศึกษาสหกิจ -->
-          <!-- ======================================== -->
-
-          <div>
-            <div class="sub-block-title">
-              <i class="fa-solid fa-user-graduate"></i>
-
-              นักศึกษาสหกิจศึกษา
-            </div>
-
-            <div class="table-wrapper">
-              <table class="mock-table" id="headCoopStudentTable">
-                <thead>
-                  <tr>
-                    <th>นักศึกษา</th>
-
-                    <th>รหัสนักศึกษา</th>
-
-                    <th>สาขา</th>
-
-                    <th>สถานประกอบการ</th>
-
-                    <th>ตำแหน่ง</th>
-
-                    <th>ระยะเวลาสหกิจ</th>
-
-                    <th>อาจารย์ที่ปรึกษาโครงการ</th>
-
-                    <th>การดำเนินการ</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  <!-- นางสาวพิมพ์ชนก สุขใจ -->
-                  <tr
-                    data-name="นางสาวพิมพ์ชนก สุขใจ"
-                    data-student-id="6702458196"
-                    data-major="INE"
-                    data-company="BlueWave Digital Co., Ltd."
-                  >
-                    <td>
-                      <div class="student-cell">
-                        <span class="avatar-sm">พ</span>
-                        นางสาวพิมพ์ชนก สุขใจ
-                      </div>
-                    </td>
-
-                    <td>6702458196</td>
-                    <td>INE</td>
-                    <td>BlueWave Digital Co., Ltd.</td>
-                    <td>Frontend Developer</td>
-                    <td>1 ก.ย. 2569 – 18 ธ.ค. 2569</td>
-                    <td>ผศ.ดร.นิติการ นาคเจือทอง</td>
-
-                    <td>
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="viewHeadStudent(this)"
-                      >
-                        <i class="fa-solid fa-eye"></i>
-                        ดูข้อมูล
-                      </button>
-                    </td>
-                  </tr>
-
-                  <!-- นายธนกฤต วัฒนศิริ -->
-                  <tr
-                    data-name="นายธนกฤต วัฒนศิริ"
-                    data-student-id="6702458198"
-                    data-major="INE"
-                    data-company="CloudNova Systems Co., Ltd."
-                  >
-                    <td>
-                      <div class="student-cell">
-                        <span class="avatar-sm">ธ</span>
-                        นายธนกฤต วัฒนศิริ
-                      </div>
-                    </td>
-
-                    <td>6702458198</td>
-                    <td>INE</td>
-                    <td>CloudNova Systems Co., Ltd.</td>
-                    <td>Cloud Engineer</td>
-                    <td>1 ก.ย. 2569 – 18 ธ.ค. 2569</td>
-                    <td>ผศ.ดร.สุปีติ กุลจันทร์</td>
-
-                    <td>
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="viewHeadStudent(this)"
-                      >
-                        <i class="fa-solid fa-eye"></i>
-                        ดูข้อมูล
-                      </button>
-                    </td>
-                  </tr>
-
-                  <!-- นางสาวอรุณี พงษ์สุวรรณ -->
-                  <tr
-                    data-name="นางสาวอรุณี พงษ์สุวรรณ"
-                    data-student-id="6702458202"
-                    data-major="IT"
-                    data-company="DataSphere Thailand"
-                  >
-                    <td>
-                      <div class="student-cell">
-                        <span class="avatar-sm">อ</span>
-                        นางสาวอรุณี พงษ์สุวรรณ
-                      </div>
-                    </td>
-
-                    <td>6702458202</td>
-                    <td>IT</td>
-                    <td>DataSphere Thailand</td>
-                    <td>Data Analyst</td>
-                    <td>1 ก.ย. 2569 – 18 ธ.ค. 2569</td>
-                    <td>รศ.ดร.อนิราช มิ่งขวัญ</td>
-
-                    <td>
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="viewHeadStudent(this)"
-                      >
-                        <i class="fa-solid fa-eye"></i>
-                        ดูข้อมูล
-                      </button>
-                    </td>
-                  </tr>
-
-                  <!-- นายกิตติพงศ์ สุวรรณชัย -->
-                  <tr
-                    data-name="นายกิตติพงศ์ สุวรรณชัย"
-                    data-student-id="6702458204"
-                    data-major="INE"
-                    data-company="NextWave Technology Co., Ltd."
-                  >
-                    <td>
-                      <div class="student-cell">
-                        <span class="avatar-sm">ก</span>
-                        นายกิตติพงศ์ สุวรรณชัย
-                      </div>
-                    </td>
-
-                    <td>6702458204</td>
-                    <td>INE</td>
-                    <td>NextWave Technology Co., Ltd.</td>
-                    <td>Network Engineer</td>
-                    <td>1 ก.ย. 2569 – 18 ธ.ค. 2569</td>
-                    <td>ผศ.ดร.วันทนี ประจวบศุภกิจ</td>
-
-                    <td>
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="viewHeadStudent(this)"
-                      >
-                        <i class="fa-solid fa-eye"></i>
-                        ดูข้อมูล
-                      </button>
-                    </td>
-                  </tr>
-
-                  <!-- นางสาวณิชารีย์ บุญส่ง -->
-                  <tr
-                    data-name="นางสาวณิชารีย์ บุญส่ง"
-                    data-student-id="6702458206"
-                    data-major="IT"
-                    data-company="BrightCode Solutions Co., Ltd."
-                  >
-                    <td>
-                      <div class="student-cell">
-                        <span class="avatar-sm">ณ</span>
-                        นางสาวณิชารีย์ บุญส่ง
-                      </div>
-                    </td>
-
-                    <td>6702458206</td>
-                    <td>IT</td>
-                    <td>BrightCode Solutions Co., Ltd.</td>
-                    <td>Mobile Application Developer</td>
-                    <td>1 ก.ย. 2569 – 18 ธ.ค. 2569</td>
-                    <td>ผศ.ดร.พาฝัน ดวงไพศาล</td>
-
-                    <td>
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="viewHeadStudent(this)"
-                      >
-                        <i class="fa-solid fa-eye"></i>
-                        ดูข้อมูล
-                      </button>
-                    </td>
-                  </tr>
-
-                  <!-- นายภูริช วัฒนกุล -->
-                  <tr
-                    data-name="นายภูริช วัฒนกุล"
-                    data-student-id="6702458208"
-                    data-major="INE"
-                    data-company="Business Intelligence Group"
-                  >
-                    <td>
-                      <div class="student-cell">
-                        <span class="avatar-sm">ภ</span>
-                        นายภูริช วัฒนกุล
-                      </div>
-                    </td>
-
-                    <td>6702458208</td>
-                    <td>INE</td>
-                    <td>Business Intelligence Group</td>
-                    <td>Business Analyst</td>
-                    <td>1 ก.ย. 2569 – 18 ธ.ค. 2569</td>
-                    <td>ผศ.ดร.อรบุษป์ วุฒิกมลชัย</td>
-
-                    <td>
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="viewHeadStudent(this)"
-                      >
-                        <i class="fa-solid fa-eye"></i>
-                        ดูข้อมูล
-                      </button>
-                    </td>
-                  </tr>
-
-                  <!-- นางสาวชลธิชา มณีวงศ์ -->
-                  <tr
-                    data-name="นางสาวชลธิชา มณีวงศ์"
-                    data-student-id="6702458210"
-                    data-major="IT"
-                    data-company="SecureLink Cyber Co., Ltd."
-                  >
-                    <td>
-                      <div class="student-cell">
-                        <span class="avatar-sm">ช</span>
-                        นางสาวชลธิชา มณีวงศ์
-                      </div>
-                    </td>
-
-                    <td>6702458210</td>
-                    <td>IT</td>
-                    <td>SecureLink Cyber Co., Ltd.</td>
-                    <td>Cybersecurity Analyst</td>
-                    <td>1 ก.ย. 2569 – 18 ธ.ค. 2569</td>
-                    <td>ผศ.ดร.สิวาลัย จินเจือ</td>
-
-                    <td>
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="viewHeadStudent(this)"
-                      >
-                        <i class="fa-solid fa-eye"></i>
-                        ดูข้อมูล
-                      </button>
-                    </td>
-                  </tr>
-
-                  <!-- นายพีรพัฒน์ จันทร์ดี -->
-                  <tr
-                    data-name="นายพีรพัฒน์ จันทร์ดี"
-                    data-student-id="6702458212"
-                    data-major="INE"
-                    data-company="Smart Factory Solutions Co., Ltd."
-                  >
-                    <td>
-                      <div class="student-cell">
-                        <span class="avatar-sm">พ</span>
-                        นายพีรพัฒน์ จันทร์ดี
-                      </div>
-                    </td>
-
-                    <td>6702458212</td>
-                    <td>INE</td>
-                    <td>Smart Factory Solutions Co., Ltd.</td>
-                    <td>IoT Developer</td>
-                    <td>1 ก.ย. 2569 – 18 ธ.ค. 2569</td>
-                    <td>ผศ.นพดล บูรณ์กุศล</td>
-
-                    <td>
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="viewHeadStudent(this)"
-                      >
-                        <i class="fa-solid fa-eye"></i>
-                        ดูข้อมูล
-                      </button>
-                    </td>
-                  </tr>
-
-                  <!-- นางสาวรินรดา ศรีสุข -->
-                  <tr
-                    data-name="นางสาวรินรดา ศรีสุข"
-                    data-student-id="6702458214"
-                    data-major="IT"
-                    data-company="Digital Vision Lab Co., Ltd."
-                  >
-                    <td>
-                      <div class="student-cell">
-                        <span class="avatar-sm">ร</span>
-                        นางสาวรินรดา ศรีสุข
-                      </div>
-                    </td>
-
-                    <td>6702458214</td>
-                    <td>IT</td>
-                    <td>Digital Vision Lab Co., Ltd.</td>
-                    <td>Software Developer</td>
-                    <td>1 ก.ย. 2569 – 18 ธ.ค. 2569</td>
-                    <td>
-                      <span class="tag tag-muted">ยังไม่ได้กำหนด</span>
-                    </td>
-
-                    <td>
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="viewHeadStudent(this)"
-                      >
-                        <i class="fa-solid fa-eye"></i>
-                        ดูข้อมูล
-                      </button>
-                    </td>
-                  </tr>
-
-                  <!-- นายณัฐพงษ์ แสงทอง -->
-                  <tr
-                    data-name="นายณัฐพงษ์ แสงทอง"
-                    data-student-id="6702458216"
-                    data-major="INE"
-                    data-company="Eastern Digital Solutions Co., Ltd."
-                  >
-                    <td>
-                      <div class="student-cell">
-                        <span class="avatar-sm">ณ</span>
-                        นายณัฐพงษ์ แสงทอง
-                      </div>
-                    </td>
-
-                    <td>6702458216</td>
-                    <td>INE</td>
-                    <td>Eastern Digital Solutions Co., Ltd.</td>
-                    <td>System Engineer</td>
-                    <td>1 ก.ย. 2569 – 18 ธ.ค. 2569</td>
-                    <td>
-                      <span class="tag tag-muted">ยังไม่ได้กำหนด</span>
-                    </td>
-
-                    <td>
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="viewHeadStudent(this)"
-                      >
-                        <i class="fa-solid fa-eye"></i>
-                        ดูข้อมูล
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </section>
-
-        <!-- CSS/JS ส่วนเพิ่มสำหรับค้นหาและรับเป็นที่ปรึกษา -->
-
-        <!-- ======================================== -->
-        <!-- จัดการข้อมูลอาจารย์ -->
-        <!-- ======================================== -->
-
-        <!-- ======================================== -->
-        <!-- จัดการข้อมูลอาจารย์ -->
-        <!-- ======================================== -->
-
-        <section class="content-panel" id="panel-teachers">
-          <div class="panel-header">
-            <h2>จัดการข้อมูลอาจารย์</h2>
-            <p>ค้นหา ตรวจสอบ และแก้ไขข้อมูลอาจารย์ภายในภาควิชา</p>
-          </div>
-
-          <!-- ค้นหาอาจารย์ -->
-          <!-- ค้นหาข้อมูลอาจารย์ -->
-          <div class="teacher-search-card">
-            <div class="teacher-search-info">
-              <div class="teacher-search-icon">
-                <i class="fa-solid fa-magnifying-glass"></i>
-              </div>
-
-              <div>
-                <h3>ค้นหาข้อมูลอาจารย์</h3>
-                <p>ค้นหาจากชื่อ-นามสกุล หรืออีเมลอาจารย์</p>
-              </div>
-            </div>
-
-            <div class="teacher-search-form">
-              <div class="teacher-search-input-wrap">
-                <i class="fa-solid fa-user-tie"></i>
-
-                <input
-                  type="text"
-                  id="teacherSearchInput"
-                  placeholder="พิมพ์ชื่อหรืออีเมลอาจารย์..."
-                  oninput="searchTeachers()"
-                />
-              </div>
-
-              <button
-                type="button"
-                class="teacher-search-button"
-                onclick="searchTeachers()"
-              >
-                <i class="fa-solid fa-magnifying-glass"></i>
-                ค้นหา
+    </aside>
+
+    <main class="hd-main">
+      <section class="hd-panel active" id="panel-overview">
+        <div class="hd-page-heading">
+          <p class="hd-eyebrow">HEAD OF DEPARTMENT</p>
+          <h1 id="overviewGreeting">ยินดีต้อนรับ, ผศ.ดร.ขนิษฐา นามี</h1>
+          <p>ภาพรวมงานที่เกี่ยวข้องกับนักศึกษาสหกิจศึกษาและอาจารย์ภายในภาควิชา</p>
+        </div>
+
+        <div class="hd-stat-grid">
+          <article class="hd-stat-card">
+            <div class="hd-stat-icon"><i class="fa-solid fa-user-graduate"></i></div>
+            <div><span>นักศึกษาสหกิจทั้งหมด</span><strong id="statStudentTotal">0</strong><small>คน</small></div>
+          </article>
+          <article class="hd-stat-card warning">
+            <div class="hd-stat-icon"><i class="fa-solid fa-file-circle-question"></i></div>
+            <div><span>คำร้องรอพิจารณา</span><strong id="statPendingRequests">0</strong><small>รายการ</small></div>
+          </article>
+          <article class="hd-stat-card success">
+            <div class="hd-stat-icon"><i class="fa-solid fa-circle-check"></i></div>
+            <div><span>คำร้องอนุมัติแล้ว</span><strong id="statApprovedRequests">0</strong><small>รายการ</small></div>
+          </article>
+          <article class="hd-stat-card danger">
+            <div class="hd-stat-icon"><i class="fa-solid fa-user-clock"></i></div>
+            <div><span>ยังไม่มีอาจารย์ที่ปรึกษา</span><strong id="statNoAdvisor">0</strong><small>คน</small></div>
+          </article>
+          <article class="hd-stat-card">
+            <div class="hd-stat-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+            <div><span>อาจารย์ในภาควิชา</span><strong id="statTeacherTotal">0</strong><small>คน</small></div>
+          </article>
+        </div>
+
+        <div class="hd-grid-2">
+          <article class="hd-card">
+            <div class="hd-card-header"><div><h2>งานที่ต้องดำเนินการ</h2><p>รายการที่ควรตรวจสอบก่อน</p></div></div>
+            <div class="hd-task-list">
+              <button type="button" class="hd-task-item" onclick="goToCoopTab('requests')">
+                <div class="hd-task-icon warning"><i class="fa-solid fa-file-signature"></i></div>
+                <div><strong>คำร้องสหกิจรอพิจารณา</strong><span id="taskPendingText">0 รายการ</span></div>
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+              <button type="button" class="hd-task-item" onclick="goToCoopTab('advisors')">
+                <div class="hd-task-icon danger"><i class="fa-solid fa-user-tie"></i></div>
+                <div><strong>นักศึกษายังไม่มีอาจารย์ที่ปรึกษา</strong><span id="taskAdvisorText">0 คน</span></div>
+                <i class="fa-solid fa-chevron-right"></i>
               </button>
             </div>
-          </div>
+          </article>
 
-          <div class="mock-table-wrapper">
-            <table class="mock-table" id="teacherTable">
-              <thead>
-                <tr>
-                  <th>ชื่อ-นามสกุล</th>
-
-                  <!-- ซ่อนไว้เพื่อรักษาโครงสร้าง JavaScript เดิม -->
-                  <th class="head-inline-07"></th>
-                  <th class="head-inline-08"></th>
-
-                  <th>อีเมล</th>
-                  <th>สถานะ</th>
-                  <th>การดำเนินการ</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <!-- ผศ.ดร.นิติการ นาคเจือทอง -->
-                <tr
-                  data-id="T001"
-                  data-name="ผศ.ดร.นิติการ นาคเจือทอง"
-                  data-major="IT"
-                  data-email="nitikan@kmutnb.ac.th"
-                >
-                  <td>ผศ.ดร.นิติการ นาคเจือทอง</td>
-
-                  <!-- ข้อมูลเดิมซ่อนไว้ ไม่แสดงในตาราง -->
-                  <td class="head-inline-09">T001</td>
-                  <td class="head-inline-10">IT</td>
-
-                  <td>nitikan@kmutnb.ac.th</td>
-
-                  <td>
-                    <span class="tag tag-green">ปฏิบัติงาน</span>
-                  </td>
-
-                  <td>
-                    <button
-                      type="button"
-                      class="btn-mock-sm"
-                      onclick="openEditTeacher(this)"
-                    >
-                      <i class="fa-solid fa-pen"></i>
-                      แก้ไข
-                    </button>
-                  </td>
-                </tr>
-
-                <!-- ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ -->
-                <tr
-                  data-id="T002"
-                  data-name="ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ"
-                  data-major="INE"
-                  data-email="supaporn@kmutnb.ac.th"
-                >
-                  <td>ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ</td>
-
-                  <!-- ข้อมูลเดิมซ่อนไว้ ไม่แสดงในตาราง -->
-                  <td class="head-inline-11">T002</td>
-                  <td class="head-inline-12">INE</td>
-
-                  <td>supaporn@kmutnb.ac.th</td>
-
-                  <td>
-                    <span class="tag tag-green">ปฏิบัติงาน</span>
-                  </td>
-
-                  <td>
-                    <button
-                      type="button"
-                      class="btn-mock-sm"
-                      onclick="openEditTeacher(this)"
-                    >
-                      <i class="fa-solid fa-pen"></i>
-                      แก้ไข
-                    </button>
-                  </td>
-                </tr>
-
-                <!-- หัวหน้าภาควิชา -->
-                <tr
-                  data-id="T003"
-                  data-name="ผศ.ดร.ขนิษฐา นามี"
-                  data-major="IT"
-                  data-email="khanittha@kmutnb.ac.th"
-                >
-                  <td>ผศ.ดร.ขนิษฐา นามี</td>
-
-                  <!-- ข้อมูลเดิมซ่อนไว้ ไม่แสดงในตาราง -->
-                  <td class="head-inline-13">T003</td>
-                  <td class="head-inline-14">IT</td>
-
-                  <td>khanittha@kmutnb.ac.th</td>
-
-                  <td>
-                    <span class="tag tag-green">หัวหน้าภาควิชา</span>
-                  </td>
-
-                  <td>
-                    <button
-                      type="button"
-                      class="btn-mock-sm"
-                      onclick="openEditTeacher(this)"
-                    >
-                      <i class="fa-solid fa-pen"></i>
-                      แก้ไข
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <!-- ======================================== -->
-        <!-- อนุมัติคำร้องสหกิจศึกษา -->
-        <!-- ======================================== -->
-
-        <section class="content-panel" id="panel-coop-request-approval">
-          <div class="panel-header">
-            <h2>อนุมัติคำร้องสหกิจศึกษา</h2>
-            <p>ตรวจสอบและพิจารณาคำร้องสหกิจศึกษาของนักศึกษา</p>
-          </div>
-
-          <div class="mock-table-wrapper">
-            <table class="mock-table" id="coopRequestApprovalTable">
-              <thead>
-                <tr>
-                  <th>ชื่อนักศึกษา</th>
-                  <th>รหัสนักศึกษา</th>
-                  <th>ประเภท</th>
-                  <th>สถานประกอบการ</th>
-                  <th>ตำแหน่ง</th>
-                  <th>วันที่ยื่น</th>
-                  <th>สถานะ</th>
-                  <th>การดำเนินการ</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr
-                  data-name="นางสาวพิมพ์ชนก สุขใจ"
-                  data-student-id="6702458196"
-                  data-company="BlueWave Digital Co., Ltd."
-                  data-province="ชลบุรี"
-                  data-position="Frontend Developer"
-                  data-submitted-date="3 ก.ย. 2569"
-                  data-duration="1 ก.ย. 2569 – 18 ธ.ค. 2569"
-                >
-                  <td>นางสาวพิมพ์ชนก สุขใจ</td>
-                  <td>6702458196</td>
-                  <td><span class="tag tag-coop">สหกิจศึกษา</span></td>
-                  <td>BlueWave Digital Co., Ltd.</td>
-                  <td>Frontend Developer</td>
-                  <td>3 ก.ย. 2569</td>
-                  <td><span class="tag tag-blue">ยื่นคำร้องแล้ว</span></td>
-                  <td>
-                    <div class="request-actions">
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="viewCoopRequest(this)"
-                      >
-                        <i class="fa-solid fa-eye"></i> ดูรายละเอียด
-                      </button>
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="printCoopRequest(this)"
-                      >
-                        <i class="fa-solid fa-file-pdf"></i> พิมพ์ PDF
-                      </button>
-                      <button
-                        type="button"
-                        class="btn-mock-sm solid"
-                        onclick="approveCoopRequest(this)"
-                      >
-                        <i class="fa-solid fa-circle-check"></i> อนุมัติ
-                      </button>
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="rejectCoopRequest(this)"
-                      >
-                        <i class="fa-solid fa-circle-xmark"></i> ไม่อนุมัติ
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-                <tr
-                  data-name="อรุณี พงษ์สุวรรณ"
-                  data-student-id="6702458202"
-                  data-company="DataSphere Thailand"
-                  data-province="-"
-                  data-position="Data Analyst"
-                  data-submitted-date="2 ก.ย. 2569"
-                >
-                  <td>อรุณี พงษ์สุวรรณ</td>
-                  <td>6702458202</td>
-                  <td><span class="tag tag-coop">สหกิจศึกษา</span></td>
-                  <td>DataSphere Thailand</td>
-                  <td>Data Analyst</td>
-                  <td>2 ก.ย. 2569</td>
-                  <td><span class="tag tag-blue">ยื่นคำร้องแล้ว</span></td>
-                  <td>
-                    <div class="request-actions">
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="viewCoopRequest(this)"
-                      >
-                        <i class="fa-solid fa-eye"></i> ดูรายละเอียด
-                      </button>
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="printCoopRequest(this)"
-                      >
-                        <i class="fa-solid fa-file-pdf"></i> พิมพ์ PDF
-                      </button>
-                      <button
-                        type="button"
-                        class="btn-mock-sm solid"
-                        onclick="approveCoopRequest(this)"
-                      >
-                        <i class="fa-solid fa-circle-check"></i> อนุมัติ
-                      </button>
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="rejectCoopRequest(this)"
-                      >
-                        <i class="fa-solid fa-circle-xmark"></i> ไม่อนุมัติ
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-                <tr
-                  data-name="ภูริช วัฒนกุล"
-                  data-student-id="6702458208"
-                  data-company="Business Intelligence Group"
-                  data-province="-"
-                  data-position="Business Analyst"
-                  data-submitted-date="30 ส.ค. 2569"
-                >
-                  <td>ภูริช วัฒนกุล</td>
-                  <td>6702458208</td>
-                  <td><span class="tag tag-coop">สหกิจศึกษา</span></td>
-                  <td>Business Intelligence Group</td>
-                  <td>Business Analyst</td>
-                  <td>30 ส.ค. 2569</td>
-                  <td><span class="tag tag-blue">ยื่นคำร้องแล้ว</span></td>
-                  <td>
-                    <div class="request-actions">
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="viewCoopRequest(this)"
-                      >
-                        <i class="fa-solid fa-eye"></i> ดูรายละเอียด
-                      </button>
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="printCoopRequest(this)"
-                      >
-                        <i class="fa-solid fa-file-pdf"></i> พิมพ์ PDF
-                      </button>
-                      <button
-                        type="button"
-                        class="btn-mock-sm solid"
-                        onclick="approveCoopRequest(this)"
-                      >
-                        <i class="fa-solid fa-circle-check"></i> อนุมัติ
-                      </button>
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="rejectCoopRequest(this)"
-                      >
-                        <i class="fa-solid fa-circle-xmark"></i> ไม่อนุมัติ
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <!-- ======================================== -->
-        <!-- กำหนดอาจารย์ที่ปรึกษาโครงการสหกิจ -->
-        <!-- ======================================== -->
-
-        <section class="content-panel" id="panel-coop-advisor">
-          <div class="panel-header">
-            <h2>กำหนดอาจารย์ที่ปรึกษาสหกิจ</h2>
-
-            <p>ค้นหาและกำหนดอาจารย์ที่ปรึกษาโครงการให้นักศึกษาสหกิจศึกษา</p>
-          </div>
-
-          <div class="student-search-box">
-            <div class="search-field">
-              <label>
-                <i class="fa-solid fa-magnifying-glass"></i>
-
-                ค้นหานักศึกษาสหกิจ
-              </label>
-
-              <input
-                type="text"
-                id="coopAdvisorSearch"
-                placeholder="ค้นหาชื่อหรือรหัสนักศึกษา..."
-                oninput="filterCoopAdvisorStudents()"
-              />
+          <article class="hd-card">
+            <div class="hd-card-header"><div><h2>ลำดับการทำงาน</h2><p>Workflow ของหัวหน้าภาควิชา</p></div></div>
+            <div class="hd-workflow">
+              <div class="hd-workflow-step"><span>1</span><div><strong>ตรวจสอบนักศึกษาสหกิจ</strong><small>ค้นหาและตรวจสอบข้อมูลนักศึกษา</small></div></div>
+              <div class="hd-workflow-line"></div>
+              <div class="hd-workflow-step"><span>2</span><div><strong>พิจารณาคำร้อง</strong><small>อนุมัติหรือไม่อนุมัติคำร้อง</small></div></div>
+              <div class="hd-workflow-line"></div>
+              <div class="hd-workflow-step"><span>3</span><div><strong>กำหนดอาจารย์ที่ปรึกษา</strong><small>เฉพาะคำร้องที่อนุมัติแล้ว</small></div></div>
             </div>
-
-            <div class="search-field">
-              <label>
-                <i class="fa-solid fa-filter"></i>
-
-                สาขา
-              </label>
-
-              <select
-                id="coopAdvisorMajor"
-                onchange="filterCoopAdvisorStudents()"
-              >
-                <option value="">ทุกสาขา</option>
-
-                <option value="IT">IT</option>
-
-                <option value="INE">INE</option>
-              </select>
-            </div>
-
-            <button
-              type="button"
-              class="btn-mock-sm solid student-search-btn"
-              onclick="filterCoopAdvisorStudents()"
-            >
-              <i class="fa-solid fa-search"></i>
-
-              ค้นหา
-            </button>
-          </div>
-
-          <div class="advisor-info-box">
-            <i class="fa-solid fa-circle-info"></i>
-
-            <span>
-              เลือกอาจารย์ที่ปรึกษาโครงการ แล้วกด “กำหนดอาจารย์ที่ปรึกษา”
-            </span>
-          </div>
-
-          <div class="mock-table-wrapper">
-            <table class="mock-table advisor-table" id="coopAdvisorTable">
-              <thead>
-                <tr>
-                  <th>นักศึกษาสหกิจ</th>
-
-                  <th>รหัสนักศึกษา</th>
-
-                  <th>สาขา</th>
-
-                  <th>สถานประกอบการ</th>
-
-                  <th>อาจารย์ที่ปรึกษา</th>
-
-                  <th>การดำเนินการ</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <!-- พิมพ์ชนก -->
-                <tr
-                  data-name="นางสาวพิมพ์ชนก สุขใจ"
-                  data-student-id="6702458196"
-                  data-major="INE"
-                >
-                  <td>
-                    <div class="student-cell">
-                      <span class="avatar-sm">พ</span>
-                      นางสาวพิมพ์ชนก สุขใจ
-                    </div>
-                  </td>
-
-                  <td>6702458196</td>
-                  <td>INE</td>
-                  <td>BlueWave Digital Co., Ltd.</td>
-
-                  <td>
-                    <select class="advisor-select">
-                      <option value="">-- ยังไม่ได้กำหนด --</option>
-                      <option selected>ผศ.ดร.นิติการ นาคเจือทอง</option>
-                      <option>ผศ.พีระศักดิ์ เสรีกุล</option>
-                      <option>รศ.ดร.อนิราช มิ่งขวัญ</option>
-                      <option>ผศ.ดร.สุปีติ กุลจันทร์</option>
-                      <option>ผศ.ดร.วันทนี ประจวบศุภกิจ</option>
-                      <option>ผศ.ดร.พาฝัน ดวงไพศาล</option>
-                      <option>ผศ.ดร.อรบุษป์ วุฒิกมลชัย</option>
-                      <option>ผศ.ดร.สิวาลัย จินเจือ</option>
-                      <option>ผศ.นพเก้า ทองใบ</option>
-                    </select>
-                  </td>
-
-                  <td>
-                    <button
-                      type="button"
-                      class="btn-mock-sm"
-                      onclick="assignCoopAdvisor(this)"
-                    >
-                      <i class="fa-solid fa-pen"></i>
-                      แก้ไขอาจารย์ที่ปรึกษา
-                    </button>
-                  </td>
-                </tr>
-
-                <!-- ธนกฤต -->
-                <tr
-                  data-name="นายธนกฤต วัฒนศิริ"
-                  data-student-id="6702458198"
-                  data-major="INE"
-                >
-                  <td>
-                    <div class="student-cell">
-                      <span class="avatar-sm">ธ</span>
-                      นายธนกฤต วัฒนศิริ
-                    </div>
-                  </td>
-
-                  <td>6702458198</td>
-                  <td>INE</td>
-                  <td>CloudNova Systems Co., Ltd.</td>
-
-                  <td>
-                    <select class="advisor-select">
-                      <option value="">-- ยังไม่ได้กำหนด --</option>
-                      <option>ผศ.ดร.นิติการ นาคเจือทอง</option>
-                      <option selected>ผศ.ดร.สุปีติ กุลจันทร์</option>
-                      <option>รศ.ดร.อนิราช มิ่งขวัญ</option>
-                      <option>ผศ.ดร.วันทนี ประจวบศุภกิจ</option>
-                      <option>ผศ.ดร.พาฝัน ดวงไพศาล</option>
-                    </select>
-                  </td>
-
-                  <td>
-                    <button
-                      type="button"
-                      class="btn-mock-sm"
-                      onclick="assignCoopAdvisor(this)"
-                    >
-                      <i class="fa-solid fa-pen"></i>
-                      แก้ไขอาจารย์ที่ปรึกษา
-                    </button>
-                  </td>
-                </tr>
-
-                <!-- อรุณี -->
-                <tr
-                  data-name="อรุณี พงษ์สุวรรณ"
-                  data-student-id="6702458202"
-                  data-major="IT"
-                >
-                  <td>
-                    <div class="student-cell">
-                      <span class="avatar-sm">อ</span>
-                      อรุณี พงษ์สุวรรณ
-                    </div>
-                  </td>
-
-                  <td>6702458202</td>
-                  <td>IT</td>
-                  <td>DataSphere Thailand</td>
-
-                  <td>
-                    <select class="advisor-select">
-                      <option value="">-- ยังไม่ได้กำหนด --</option>
-                      <option>ผศ.ดร.นิติการ นาคเจือทอง</option>
-                      <option selected>รศ.ดร.อนิราช มิ่งขวัญ</option>
-                      <option>ผศ.ดร.พาฝัน ดวงไพศาล</option>
-                      <option>ผศ.ดร.อรบุษป์ วุฒิกมลชัย</option>
-                    </select>
-                  </td>
-
-                  <td>
-                    <button
-                      type="button"
-                      class="btn-mock-sm"
-                      onclick="assignCoopAdvisor(this)"
-                    >
-                      <i class="fa-solid fa-pen"></i>
-                      แก้ไขอาจารย์ที่ปรึกษา
-                    </button>
-                  </td>
-                </tr>
-
-                <!-- กิตติพงศ์ -->
-                <tr
-                  data-name="นายกิตติพงศ์ สุวรรณชัย"
-                  data-student-id="6702458204"
-                  data-major="INE"
-                >
-                  <td>
-                    <div class="student-cell">
-                      <span class="avatar-sm">ก</span>
-                      นายกิตติพงศ์ สุวรรณชัย
-                    </div>
-                  </td>
-
-                  <td>6702458204</td>
-                  <td>INE</td>
-                  <td>NextWave Technology Co., Ltd.</td>
-
-                  <td>
-                    <select class="advisor-select">
-                      <option value="">-- ยังไม่ได้กำหนด --</option>
-                      <option>ผศ.ดร.นิติการ นาคเจือทอง</option>
-                      <option>ผศ.ดร.สุปีติ กุลจันทร์</option>
-                      <option selected>ผศ.ดร.วันทนี ประจวบศุภกิจ</option>
-                      <option>ผศ.ดร.พาฝัน ดวงไพศาล</option>
-                    </select>
-                  </td>
-
-                  <td>
-                    <button
-                      type="button"
-                      class="btn-mock-sm"
-                      onclick="assignCoopAdvisor(this)"
-                    >
-                      <i class="fa-solid fa-pen"></i>
-                      แก้ไขอาจารย์ที่ปรึกษา
-                    </button>
-                  </td>
-                </tr>
-
-                <!-- ณิชารีย์ : ยังไม่ได้กำหนด -->
-                <tr
-                  data-name="นางสาวณิชารีย์ บุญส่ง"
-                  data-student-id="6702458206"
-                  data-major="IT"
-                >
-                  <td>
-                    <div class="student-cell">
-                      <span class="avatar-sm">ณ</span>
-                      นางสาวณิชารีย์ บุญส่ง
-                    </div>
-                  </td>
-
-                  <td>6702458206</td>
-                  <td>IT</td>
-                  <td>BrightCode Solutions Co., Ltd.</td>
-
-                  <td>
-                    <select class="advisor-select">
-                      <option value="" selected>-- ยังไม่ได้กำหนด --</option>
-                      <option>ผศ.ดร.นิติการ นาคเจือทอง</option>
-                      <option>รศ.ดร.อนิราช มิ่งขวัญ</option>
-                      <option>ผศ.ดร.พาฝัน ดวงไพศาล</option>
-                      <option>ผศ.ดร.อรบุษป์ วุฒิกมลชัย</option>
-                      <option>ผศ.นพเก้า ทองใบ</option>
-                    </select>
-                  </td>
-
-                  <td>
-                    <button
-                      type="button"
-                      class="btn-mock-sm solid"
-                      onclick="assignCoopAdvisor(this)"
-                    >
-                      <i class="fa-solid fa-user-plus"></i>
-                      กำหนดอาจารย์ที่ปรึกษา
-                    </button>
-                  </td>
-                </tr>
-
-                <!-- ภูริช -->
-                <tr
-                  data-name="นายภูริช วัฒนกุล"
-                  data-student-id="6702458208"
-                  data-major="INE"
-                >
-                  <td>
-                    <div class="student-cell">
-                      <span class="avatar-sm">ภ</span>
-                      นายภูริช วัฒนกุล
-                    </div>
-                  </td>
-
-                  <td>6702458208</td>
-                  <td>INE</td>
-                  <td>Business Intelligence Group</td>
-
-                  <td>
-                    <select class="advisor-select">
-                      <option value="">-- ยังไม่ได้กำหนด --</option>
-                      <option>ผศ.ดร.นิติการ นาคเจือทอง</option>
-                      <option>ผศ.ดร.วันทนี ประจวบศุภกิจ</option>
-                      <option selected>ผศ.ดร.อรบุษป์ วุฒิกมลชัย</option>
-                      <option>ผศ.ดร.พาฝัน ดวงไพศาล</option>
-                    </select>
-                  </td>
-
-                  <td>
-                    <button
-                      type="button"
-                      class="btn-mock-sm"
-                      onclick="assignCoopAdvisor(this)"
-                    >
-                      <i class="fa-solid fa-pen"></i>
-                      แก้ไขอาจารย์ที่ปรึกษา
-                    </button>
-                  </td>
-                </tr>
-
-                <!-- รินรดา : ยังไม่ได้กำหนด -->
-                <tr
-                  data-name="นางสาวรินรดา ศรีสุข"
-                  data-student-id="6702458214"
-                  data-major="IT"
-                >
-                  <td>
-                    <div class="student-cell">
-                      <span class="avatar-sm">ร</span>
-                      นางสาวรินรดา ศรีสุข
-                    </div>
-                  </td>
-
-                  <td>6702458214</td>
-                  <td>IT</td>
-                  <td>Digital Vision Lab Co., Ltd.</td>
-
-                  <td>
-                    <select class="advisor-select">
-                      <option value="" selected>-- ยังไม่ได้กำหนด --</option>
-                      <option>ผศ.ดร.นิติการ นาคเจือทอง</option>
-                      <option>ผศ.ดร.พาฝัน ดวงไพศาล</option>
-                      <option>ผศ.ดร.สิวาลัย จินเจือ</option>
-                      <option>ผศ.นพเก้า ทองใบ</option>
-                    </select>
-                  </td>
-
-                  <td>
-                    <button
-                      type="button"
-                      class="btn-mock-sm solid"
-                      onclick="assignCoopAdvisor(this)"
-                    >
-                      <i class="fa-solid fa-user-plus"></i>
-                      กำหนดอาจารย์ที่ปรึกษา
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-      </div>
-    </div>
-
-    <!-- Modal แก้ไขข้อมูลอาจารย์ -->
-    <div id="editTeacherModal" class="mockup-modal head-inline-15">
-      <div class="mockup-card">
-        <div class="mockup-card-header">
-          <h3><i class="fa-solid fa-user-pen"></i> แก้ไขข้อมูลอาจารย์</h3>
-          <button
-            type="button"
-            class="mockup-close"
-            onclick="closeEditTeacher()"
-          >
-            ×
-          </button>
+          </article>
         </div>
-        <div class="mockup-body">
-          <div class="mockup-grid">
-            <div class="mockup-field full">
-              <label>ชื่อ-นามสกุล</label>
-              <input
-                type="text"
-                id="editTeacherName"
-                placeholder="ชื่อ-นามสกุล"
-              />
+      </section>
+
+      <section class="hd-panel" id="panel-coop">
+        <div class="hd-page-heading">
+          <p class="hd-eyebrow">CO-OPERATIVE STUDENTS</p>
+          <h1>นักศึกษาสหกิจ</h1>
+          <p>ค้นหาข้อมูล พิจารณาคำร้อง และกำหนดอาจารย์ที่ปรึกษาในหน้าเดียว</p>
+        </div>
+
+        <div class="hd-tabs">
+          <button type="button" class="hd-tab active" data-coop-tab="students"><i class="fa-solid fa-address-card"></i>ข้อมูลนักศึกษา</button>
+          <button type="button" class="hd-tab" data-coop-tab="requests"><i class="fa-solid fa-file-circle-check"></i>คำร้องสหกิจศึกษา <span class="hd-tab-count" id="requestTabCount">0</span></button>
+          <button type="button" class="hd-tab" data-coop-tab="advisors"><i class="fa-solid fa-user-tie"></i>อาจารย์ที่ปรึกษา</button>
+        </div>
+
+        <div class="hd-tab-panel active" data-coop-tab-panel="students">
+          <article class="hd-card">
+            <div class="hd-card-header"><div><h2>ข้อมูลนักศึกษาสหกิจ</h2><p>ค้นหาจากชื่อ รหัสนักศึกษา หรือสถานประกอบการ</p></div></div>
+            <div class="hd-filter-grid three">
+              <div class="hd-field"><label for="studentSearch">ค้นหานักศึกษา</label><div class="hd-input-icon"><i class="fa-solid fa-magnifying-glass"></i><input id="studentSearch" type="text" placeholder="ชื่อ / รหัส / สถานประกอบการ" /></div></div>
+              <div class="hd-field"><label for="studentMajor">สาขา</label><select id="studentMajor"><option value="">ทุกสาขา</option><option value="IT">IT</option><option value="INE">INE</option></select></div>
+              <div class="hd-field"><label for="studentRequestStatus">สถานะคำร้อง</label><select id="studentRequestStatus"><option value="">ทุกสถานะ</option><option value="pending">รอพิจารณา</option><option value="approved">อนุมัติแล้ว</option><option value="rejected">ไม่อนุมัติ</option></select></div>
             </div>
-            <div class="mockup-field full">
-              <label>อีเมล</label>
-              <input
-                type="email"
-                id="editTeacherEmail"
-                placeholder="example@kmutnb.ac.th"
-              />
+            <div class="hd-table-wrap no-horizontal-scroll">
+              <table class="hd-table hd-student-table">
+                <thead><tr><th>นักศึกษา</th><th>สาขา</th><th>สถานประกอบการ / ตำแหน่ง</th><th>สถานะคำร้อง</th><th>อาจารย์ที่ปรึกษา</th><th>ดำเนินการ</th></tr></thead>
+                <tbody id="studentTableBody"></tbody>
+              </table>
             </div>
-            <div class="mockup-field">
-              <label>สาขาวิชา</label>
-              <select id="editTeacherMajor">
-                <option value="">-- เลือกสาขาวิชา --</option>
-                <option value="IT">IT</option>
-                <option value="ITI">ITI</option>
-                <option value="INET">INET</option>
-                <option value="INE">INE</option>
-              </select>
+            <div class="hd-empty" id="studentEmptyState"><i class="fa-solid fa-magnifying-glass"></i><strong>ไม่พบข้อมูลนักศึกษา</strong><span>ลองเปลี่ยนคำค้นหาหรือตัวกรอง</span></div>
+          </article>
+        </div>
+
+        <div class="hd-tab-panel" data-coop-tab-panel="requests">
+          <article class="hd-card">
+            <div class="hd-card-header request-header">
+              <div><h2>คำร้องสหกิจศึกษา</h2><p>อนุมัติหรือไม่อนุมัติคำร้องของนักศึกษา</p></div>
+              <button type="button" class="hd-btn hd-btn-primary" id="bulkApproveButton" onclick="approveSelectedRequests()" disabled><i class="fa-solid fa-check-double"></i>อนุมัติรายการที่เลือก <span id="bulkApproveCount">0</span></button>
             </div>
-            <div class="mockup-field">
-              <label>รหัสผ่านใหม่</label>
-              <input
-                type="password"
-                id="editTeacherPassword"
-                placeholder="เว้นว่างหากไม่เปลี่ยนรหัสผ่าน"
-              />
+
+            <div class="hd-request-summary">
+              <button type="button" class="hd-request-chip active" data-request-filter=""><span>ทั้งหมด</span><strong id="requestCountAll">0</strong></button>
+              <button type="button" class="hd-request-chip warning" data-request-filter="pending"><span>รอพิจารณา</span><strong id="requestCountPending">0</strong></button>
+              <button type="button" class="hd-request-chip success" data-request-filter="approved"><span>อนุมัติแล้ว</span><strong id="requestCountApproved">0</strong></button>
+              <button type="button" class="hd-request-chip danger" data-request-filter="rejected"><span>ไม่อนุมัติ</span><strong id="requestCountRejected">0</strong></button>
             </div>
+
+            <div class="hd-filter-grid two">
+              <div class="hd-field"><label for="requestSearch">ค้นหาคำร้อง</label><div class="hd-input-icon"><i class="fa-solid fa-magnifying-glass"></i><input id="requestSearch" type="text" placeholder="ชื่อ / รหัส / สถานประกอบการ" /></div></div>
+              <div class="hd-field"><label for="requestMajor">สาขา</label><select id="requestMajor"><option value="">ทุกสาขา</option><option value="IT">IT</option><option value="INE">INE</option></select></div>
+            </div>
+
+            <div class="hd-table-wrap no-horizontal-scroll">
+              <table class="hd-table hd-request-table">
+                <thead><tr><th class="hd-check-col"><input type="checkbox" id="selectAllRequests" aria-label="เลือกคำร้องทั้งหมด" /></th><th>นักศึกษา</th><th>สถานประกอบการ / ตำแหน่ง</th><th>วันที่ยื่น</th><th>สถานะ</th><th>ดำเนินการ</th></tr></thead>
+                <tbody id="requestTableBody"></tbody>
+              </table>
+            </div>
+            <div class="hd-empty" id="requestEmptyState"><i class="fa-solid fa-file-circle-question"></i><strong>ไม่พบคำร้อง</strong><span>ไม่มีรายการที่ตรงกับตัวกรองปัจจุบัน</span></div>
+          </article>
+        </div>
+
+        <div class="hd-tab-panel" data-coop-tab-panel="advisors">
+          <article class="hd-card">
+            <div class="hd-card-header"><div><h2>กำหนดอาจารย์ที่ปรึกษา</h2><p>แสดงเฉพาะนักศึกษาที่คำร้องได้รับการอนุมัติแล้ว</p></div></div>
+            <div class="hd-info-banner"><i class="fa-solid fa-circle-info"></i><span>เลือกอาจารย์ที่ปรึกษาแล้วกดบันทึก สามารถแก้ไขได้ภายหลัง</span></div>
+            <div class="hd-filter-grid three">
+              <div class="hd-field"><label for="advisorSearch">ค้นหานักศึกษา</label><div class="hd-input-icon"><i class="fa-solid fa-magnifying-glass"></i><input id="advisorSearch" type="text" placeholder="ชื่อ / รหัสนักศึกษา" /></div></div>
+              <div class="hd-field"><label for="advisorMajor">สาขา</label><select id="advisorMajor"><option value="">ทุกสาขา</option><option value="IT">IT</option><option value="INE">INE</option></select></div>
+              <div class="hd-field"><label for="advisorStatus">สถานะที่ปรึกษา</label><select id="advisorStatus"><option value="">ทั้งหมด</option><option value="assigned">กำหนดแล้ว</option><option value="unassigned">ยังไม่ได้กำหนด</option></select></div>
+            </div>
+            <div class="hd-table-wrap no-horizontal-scroll">
+              <table class="hd-table hd-advisor-table">
+                <thead><tr><th>นักศึกษา</th><th>สาขา</th><th>สถานประกอบการ</th><th>อาจารย์ที่ปรึกษา</th><th>ดำเนินการ</th></tr></thead>
+                <tbody id="advisorTableBody"></tbody>
+              </table>
+            </div>
+            <div class="hd-empty" id="advisorEmptyState"><i class="fa-solid fa-user-tie"></i><strong>ไม่พบนักศึกษา</strong><span>ไม่มีนักศึกษาที่ตรงกับตัวกรองปัจจุบัน</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="hd-panel" id="panel-teachers">
+        <div class="hd-page-heading with-action">
+          <div><p class="hd-eyebrow">DEPARTMENT TEACHERS</p><h1>อาจารย์ในภาควิชา</h1><p>ค้นหา ตรวจสอบ และจัดการข้อมูลอาจารย์ภายในภาควิชา</p></div>
+          <button type="button" class="hd-btn hd-btn-primary" onclick="openTeacherModal()"><i class="fa-solid fa-user-plus"></i>เพิ่มอาจารย์</button>
+        </div>
+
+        <article class="hd-card">
+          <div class="hd-filter-grid three">
+            <div class="hd-field"><label for="teacherSearch">ค้นหาอาจารย์</label><div class="hd-input-icon"><i class="fa-solid fa-magnifying-glass"></i><input id="teacherSearch" type="text" placeholder="ชื่อ / อีเมล / รหัสอาจารย์" /></div></div>
+            <div class="hd-field"><label for="teacherMajor">สาขา</label><select id="teacherMajor"><option value="">ทุกสาขา</option><option value="IT">IT</option><option value="INE">INE</option></select></div>
+            <div class="hd-field"><label for="teacherStatus">สถานะ</label><select id="teacherStatus"><option value="">ทุกสถานะ</option><option value="active">ปฏิบัติงาน</option><option value="inactive">ไม่ปฏิบัติงาน</option></select></div>
           </div>
-          <div
-            class="head-inline-16"
-          >
-            <button
-              type="button"
-              class="btn-mock-sm"
-              onclick="closeEditTeacher()"
-            >
-              ยกเลิก
-            </button>
-            <button
-              type="button"
-              class="btn-mock-sm solid"
-              onclick="saveTeacherEdit()"
-            >
-              <i class="fa-solid fa-floppy-disk"></i> บันทึกการแก้ไข
-            </button>
+          <div class="hd-table-wrap no-horizontal-scroll">
+            <table class="hd-table hd-teacher-table">
+              <thead><tr><th>อาจารย์</th><th>สาขา</th><th>อีเมล</th><th>สถานะ</th><th>ดำเนินการ</th></tr></thead>
+              <tbody id="teacherTableBody"></tbody>
+            </table>
+          </div>
+          <div class="hd-empty" id="teacherEmptyState"><i class="fa-solid fa-user-slash"></i><strong>ไม่พบข้อมูลอาจารย์</strong><span>ลองเปลี่ยนคำค้นหาหรือตัวกรอง</span></div>
+        </article>
+      </section>
+
+      <section class="hd-panel" id="panel-profile">
+        <div class="hd-page-heading"><p class="hd-eyebrow">MY PROFILE</p><h1>ข้อมูลส่วนตัว</h1><p>จัดการข้อมูลบัญชีของหัวหน้าภาควิชา</p></div>
+        <div class="hd-profile-layout">
+          <article class="hd-card hd-profile-summary">
+            <div class="hd-profile-avatar" id="profileAvatar">ข</div>
+            <h2 id="profileSummaryName">ผศ.ดร.ขนิษฐา นามี</h2>
+            <span class="hd-status hd-status-primary">หัวหน้าภาควิชา</span>
+            <div class="hd-profile-meta">
+              <div><span>อีเมล</span><strong id="profileSummaryEmail">khanittha@kmutnb.ac.th</strong></div>
+              <div><span>สาขา</span><strong id="profileSummaryMajor">IT</strong></div>
+            </div>
+          </article>
+
+          <article class="hd-card">
+            <div class="hd-card-header"><div><h2>แก้ไขข้อมูลส่วนตัว</h2><p>ชื่อ อีเมล และรหัสผ่าน</p></div></div>
+            <form id="profileForm">
+              <div class="hd-form-grid">
+                <div class="hd-field full"><label for="profileName">ชื่อ-นามสกุล</label><input id="profileName" type="text" required /></div>
+                <div class="hd-field full"><label for="profileEmail">อีเมล</label><input id="profileEmail" type="email" required /></div>
+                <div class="hd-field full"><label for="profileMajor">สาขา</label><input id="profileMajor" type="text" readonly /><small class="hd-field-help">สาขาแสดงเพื่ออ้างอิงและไม่อนุญาตให้แก้ไขจากหน้านี้</small></div>
+                <div class="hd-form-divider full"><span>เปลี่ยนรหัสผ่าน</span></div>
+                <div class="hd-field"><label for="profilePassword">รหัสผ่านใหม่</label><input id="profilePassword" type="password" minlength="6" placeholder="เว้นว่างหากไม่เปลี่ยน" /></div>
+                <div class="hd-field"><label for="profileConfirmPassword">ยืนยันรหัสผ่านใหม่</label><input id="profileConfirmPassword" type="password" minlength="6" placeholder="กรอกรหัสผ่านอีกครั้ง" /></div>
+              </div>
+              <div class="hd-form-actions">
+                <button type="button" class="hd-btn hd-btn-outline" onclick="loadProfileForm()"><i class="fa-solid fa-rotate-left"></i>คืนค่า</button>
+                <button type="submit" class="hd-btn hd-btn-primary"><i class="fa-solid fa-floppy-disk"></i>บันทึกการแก้ไข</button>
+              </div>
+            </form>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="hd-modal" id="studentDetailModal" aria-hidden="true">
+    <div class="hd-modal-dialog hd-modal-lg">
+      <div class="hd-modal-header"><div><p class="hd-eyebrow">STUDENT DETAIL</p><h2>รายละเอียดนักศึกษาสหกิจ</h2></div><button type="button" class="hd-modal-close" data-close-modal><i class="fa-solid fa-xmark"></i></button></div>
+      <div class="hd-modal-body" id="studentDetailContent"></div>
+    </div>
+  </div>
+
+  <div class="hd-modal" id="requestDetailModal" aria-hidden="true">
+    <div class="hd-modal-dialog hd-modal-lg">
+      <div class="hd-modal-header"><div><p class="hd-eyebrow">CO-OP REQUEST</p><h2>รายละเอียดคำร้องสหกิจศึกษา</h2></div><button type="button" class="hd-modal-close" data-close-modal><i class="fa-solid fa-xmark"></i></button></div>
+      <div class="hd-modal-body" id="requestDetailContent"></div>
+      <div class="hd-modal-footer" id="requestDetailFooter"></div>
+    </div>
+  </div>
+
+  <div class="hd-modal" id="rejectModal" aria-hidden="true">
+    <div class="hd-modal-dialog">
+      <div class="hd-modal-header"><div><p class="hd-eyebrow danger">REJECT REQUEST</p><h2>ไม่อนุมัติคำร้อง</h2></div><button type="button" class="hd-modal-close" data-close-modal><i class="fa-solid fa-xmark"></i></button></div>
+      <div class="hd-modal-body">
+        <div class="hd-request-student-preview" id="rejectStudentPreview"></div>
+        <div class="hd-field"><label for="rejectReason">เหตุผลที่ไม่อนุมัติ <span class="required">*</span></label><textarea id="rejectReason" rows="5" placeholder="ระบุเหตุผลเพื่อให้นักศึกษาทราบว่าต้องแก้ไขอะไร"></textarea></div>
+      </div>
+      <div class="hd-modal-footer"><button type="button" class="hd-btn hd-btn-outline" data-close-modal>ยกเลิก</button><button type="button" class="hd-btn hd-btn-danger" onclick="submitRejectRequest()"><i class="fa-solid fa-circle-xmark"></i>ยืนยันไม่อนุมัติ</button></div>
+    </div>
+  </div>
+
+  <div class="hd-modal" id="teacherModal" aria-hidden="true">
+    <div class="hd-modal-dialog">
+      <div class="hd-modal-header"><div><p class="hd-eyebrow">TEACHER MANAGEMENT</p><h2 id="teacherModalTitle">เพิ่มอาจารย์</h2></div><button type="button" class="hd-modal-close" data-close-modal><i class="fa-solid fa-xmark"></i></button></div>
+      <form id="teacherForm">
+        <div class="hd-modal-body">
+          <input type="hidden" id="teacherEditId" />
+          <div class="hd-form-grid">
+            <div class="hd-field full"><label for="teacherFormName">ชื่อ-นามสกุล</label><input id="teacherFormName" type="text" required /></div>
+            <div class="hd-field full"><label for="teacherFormEmail">อีเมล</label><input id="teacherFormEmail" type="email" required /></div>
+            <div class="hd-field"><label for="teacherFormMajor">สาขา</label><select id="teacherFormMajor" required><option value="">-- เลือกสาขา --</option><option value="IT">IT</option><option value="INE">INE</option></select></div>
+            <div class="hd-field"><label for="teacherFormStatus">สถานะ</label><select id="teacherFormStatus" required><option value="active">ปฏิบัติงาน</option><option value="inactive">ไม่ปฏิบัติงาน</option></select></div>
+            <div class="hd-field full"><label for="teacherFormPassword">รหัสผ่านใหม่</label><input id="teacherFormPassword" type="password" minlength="6" placeholder="เว้นว่างหากไม่ต้องการเปลี่ยนรหัสผ่าน" /><small class="hd-field-help">Mockup: รหัสผ่านจะเชื่อมกับ Backend ภายหลัง</small></div>
           </div>
         </div>
-      </div>
+        <div class="hd-modal-footer"><button type="button" class="hd-btn hd-btn-outline" data-close-modal>ยกเลิก</button><button type="submit" class="hd-btn hd-btn-primary"><i class="fa-solid fa-floppy-disk"></i>บันทึก</button></div>
+      </form>
     </div>
+  </div>
 
-    <footer class="footer">
-      <div class="footer-copyright">
-        <p>© KIWI — Co-operative Education Management System</p>
-      </div>
-    </footer>
+  <div class="hd-modal" id="confirmModal" aria-hidden="true">
+    <div class="hd-modal-dialog hd-confirm-dialog">
+      <div class="hd-confirm-icon" id="confirmIcon"><i class="fa-solid fa-circle-question"></i></div>
+      <h2 id="confirmTitle">ยืนยันการดำเนินการ</h2>
+      <p id="confirmMessage"></p>
+      <div class="hd-confirm-actions"><button type="button" class="hd-btn hd-btn-outline" id="confirmCancelButton">ยกเลิก</button><button type="button" class="hd-btn hd-btn-primary" id="confirmOkButton">ยืนยัน</button></div>
+    </div>
+  </div>
 
-    <script type="module" src="main.js"></script>
-    <script src="js/head_department.js"></script>
+  <div class="hd-toast-container" id="toastContainer" aria-live="polite"></div>
 
+  <footer class="hd-footer"><p>© KIWI — Co-operative Education Management System</p></footer>
 
-
-
-  </body>
+  <script type="module" src="main.js"></script>
+  <script src="js/head_department.js"></script>
+</body>
 </html>
