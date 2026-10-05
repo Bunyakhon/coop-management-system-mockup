@@ -54,6 +54,14 @@ document.addEventListener(
     const fileName =
       path.split("/").pop();
 
+    if (
+      fileName === "index.html" ||
+      fileName === "search_company.html" ||
+      fileName === "recruit_student.html"
+    ) {
+      loadChatData();
+    }
+
     // ==========================================
     // ระบบค้นหาสถานประกอบการ
     // ==========================================
@@ -120,8 +128,6 @@ document.addEventListener(
       fileName === ""
     ) {
       initCompany();
-
-      loadChatData();
 
       return;
     }

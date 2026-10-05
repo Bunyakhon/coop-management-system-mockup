@@ -578,6 +578,51 @@
       </div>
     </main>
 
+  <!-- Chatbot -->
+  <div class="chatbot-container">
+    <button class="chat-toggle-btn" id="btnToggleChat">
+      <i class="fa-solid fa-comment-dots"></i>
+      <span class="notification-badge"></span>
+    </button>
+
+    <div class="chat-window hidden" id="chatWindow">
+      <div class="chat-header" style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          ">
+        <div class="bot-info" style="display: flex">
+          <div class="bot-avatar" style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              ">
+            <i class="fa-solid fa-robot"></i>
+          </div>
+
+          <div>
+            <h3>KIWI Chatbot</h3>
+            <span class="online-status">● ออนไลน์</span>
+          </div>
+        </div>
+
+        <button class="btn-close-chat" id="btnCloseChat">✕</button>
+      </div>
+
+      <div class="chat-body" id="chatBody"></div>
+
+      <div class="chat-quick-replies" id="quickReplies"></div>
+
+      <div class="chat-footer" style="display: flex">
+        <input type="text" id="chatInput" placeholder="สอบถามเกี่ยวกับสหกิจศึกษา..." />
+
+        <button id="btnSend">
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <footer class="footer">
     <div class="footer-copyright">
       <p>© KIWI — Co-operative Education Management System</p>

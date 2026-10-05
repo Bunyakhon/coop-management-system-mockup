@@ -13,13 +13,13 @@ export async function loadChatData() {
     }
 
     chatData = await response.json();
-
-    initChatbot();
   } catch (error) {
     console.error(
       "Error loading chat data:",
       error
     );
+  } finally {
+    initChatbot();
   }
 }
 
@@ -48,9 +48,15 @@ function initChatbot() {
 
   // ป้องกัน Error
   // หากหน้านั้นไม่มี Chatbot
-  if (!chatWindow || !btnToggleChat) {
+  if (
+    !chatWindow ||
+    !btnToggleChat ||
+    btnToggleChat.dataset.chatInitialized === "true"
+  ) {
     return;
   }
+
+  btnToggleChat.dataset.chatInitialized = "true";
 
   // ==========================================
   // เปิด / ปิด Chatbot

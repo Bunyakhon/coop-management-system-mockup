@@ -79,15 +79,13 @@ export function handleLogin(email, password) {
     localStorage.getItem("users") || "[]"
   );
 
-  // ค้นหาผู้ใช้จาก Email และ Password
+  // ค้นหาผู้ใช้จาก Email
   const user = users.find(
-    (user) =>
-      user.email === email &&
-      user.password === password
+    (user) => user.email === email
   );
 
   // ถ้าไม่พบผู้ใช้
-  if (!user) {
+  if (!user || !password) {
     alert("อีเมลหรือรหัสผ่านไม่ถูกต้อง!");
     return false;
   }
