@@ -1,0 +1,1257 @@
+      /* ==========================================
+       ส่วนเสริมเฉพาะหน้าอาจารย์นิเทศ — สอดคล้องกับ
+       ธีมสีและ component เดิมใน style.css
+       ========================================== */
+
+      .avatar-sm {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: var(--primary-light);
+        color: var(--primary-color);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.76rem;
+        font-weight: 700;
+        margin-right: 8px;
+        vertical-align: middle;
+      }
+      .student-cell {
+        display: flex;
+        align-items: center;
+      }
+      .sub-block-title {
+        font-family: "Sarabun", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin: 1.6rem 0 0.7rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .sub-block-title i {
+        color: var(--primary-color);
+      }
+      .tag-blue {
+        background: #dbeafe;
+        color: #1d4ed8;
+      }
+      .tag-coop {
+        background: var(--primary-light);
+        color: var(--primary-color);
+      }
+      .request-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      #panel-profile .mockup-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      #panel-profile .mockup-field {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+      }
+
+      #panel-profile .mockup-field.full {
+        grid-column: 1 / -1;
+      }
+
+      #panel-profile .mockup-field label {
+        font-size: 14px;
+        font-weight: 600;
+        color: #374151;
+      }
+
+      #panel-profile .mockup-field input,
+      #panel-profile .mockup-field select {
+        width: 100%;
+        min-height: 42px;
+        padding: 10px 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        background: #fff;
+        font-family: "Noto Sans Thai", sans-serif;
+        font-size: 14px;
+        box-sizing: border-box;
+        outline: none;
+      }
+
+      #panel-profile .mockup-field input:focus,
+      #panel-profile .mockup-field select:focus {
+        border-color: var(--primary-color);
+      }
+
+      @media (max-width: 700px) {
+        #panel-profile .mockup-grid {
+          grid-template-columns: 1fr;
+        }
+
+        #panel-profile .mockup-field.full {
+          grid-column: auto;
+        }
+      }
+      /* ==========================================
+   ค้นหาข้อมูลอาจารย์
+   ========================================== */
+
+      .teacher-search-card {
+        margin: 18px 0 22px;
+        padding: 20px;
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 14px;
+      }
+
+      .teacher-search-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+
+      .teacher-search-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+        background: var(--primary-light);
+        color: var(--primary-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 17px;
+      }
+
+      .teacher-search-info h3 {
+        margin: 0 0 3px;
+        font-family: "Sarabun", sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        color: #111827;
+      }
+
+      .teacher-search-info p {
+        margin: 0;
+        font-size: 13px;
+        color: #6b7280;
+      }
+
+      .teacher-search-form {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .teacher-search-input-wrap {
+        flex: 1;
+        position: relative;
+      }
+
+      .teacher-search-input-wrap > i {
+        position: absolute;
+        top: 50%;
+        left: 14px;
+        transform: translateY(-50%);
+        color: #9ca3af;
+        font-size: 14px;
+        pointer-events: none;
+      }
+
+      .teacher-search-input-wrap input {
+        width: 100%;
+        height: 44px;
+        padding: 0 14px 0 42px;
+        border: 1px solid #d1d5db;
+        border-radius: 9px;
+        background: #ffffff;
+        font-family: "Noto Sans Thai", sans-serif;
+        font-size: 14px;
+        color: #111827;
+        outline: none;
+        box-sizing: border-box;
+        transition: 0.2s;
+      }
+
+      .teacher-search-input-wrap input::placeholder {
+        color: #9ca3af;
+      }
+
+      .teacher-search-input-wrap input:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+      }
+
+      .teacher-search-button {
+        height: 44px;
+        padding: 0 20px;
+        border: none;
+        border-radius: 9px;
+        background: var(--primary-color);
+        color: #ffffff;
+        font-family: "Noto Sans Thai", sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+
+        transition: 0.2s;
+      }
+
+      .teacher-search-button:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+      }
+
+      @media (max-width: 700px) {
+        .teacher-search-form {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .teacher-search-button {
+          width: 100%;
+        }
+      }
+      /* ==========================================
+   Modal แก้ไขข้อมูลอาจารย์
+   ========================================== */
+
+      .mockup-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+
+        display: none;
+        align-items: center;
+        justify-content: center;
+
+        padding: 20px;
+
+        background: rgba(15, 23, 42, 0.45);
+        backdrop-filter: blur(2px);
+      }
+
+      .mockup-modal.show {
+        display: flex;
+      }
+
+      .mockup-card {
+        width: 100%;
+        max-width: 620px;
+
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 16px;
+
+        box-shadow:
+          0 20px 25px -5px rgba(0, 0, 0, 0.12),
+          0 8px 10px -6px rgba(0, 0, 0, 0.08);
+
+        overflow: hidden;
+      }
+
+      .mockup-card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        padding: 18px 22px;
+
+        background: #ffffff;
+        border-bottom: 1px solid #e5e7eb;
+      }
+
+      .mockup-card-header h3 {
+        margin: 0;
+
+        display: flex;
+        align-items: center;
+        gap: 9px;
+
+        font-family: "Sarabun", sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+        color: #111827;
+      }
+
+      .mockup-card-header h3 i {
+        color: var(--primary-color);
+      }
+
+      .mockup-close {
+        width: 34px;
+        height: 34px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border: none;
+        border-radius: 8px;
+
+        background: #f3f4f6;
+        color: #6b7280;
+
+        font-size: 22px;
+        line-height: 1;
+
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .mockup-close:hover {
+        background: #fee2e2;
+        color: #dc2626;
+      }
+
+      .mockup-body {
+        padding: 22px;
+      }
+
+      /* Grid ภายใน Modal */
+
+      .mockup-modal .mockup-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .mockup-modal .mockup-field {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+      }
+
+      .mockup-modal .mockup-field.full {
+        grid-column: 1 / -1;
+      }
+
+      /* Label */
+
+      .mockup-modal .mockup-field label {
+        font-size: 14px;
+        font-weight: 600;
+        color: #374151;
+      }
+
+      /* Input / Select */
+
+      .mockup-modal .mockup-field input,
+      .mockup-modal .mockup-field select {
+        width: 100%;
+        min-height: 42px;
+
+        padding: 10px 12px;
+
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+
+        background: #ffffff;
+        color: #111827;
+
+        font-family: "Noto Sans Thai", sans-serif;
+        font-size: 14px;
+
+        outline: none;
+        box-sizing: border-box;
+
+        transition: 0.2s;
+      }
+
+      .mockup-modal .mockup-field input:focus,
+      .mockup-modal .mockup-field select:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+      }
+
+      /* ปุ่มด้านล่าง */
+
+      .mockup-modal .btn-mock-sm {
+        min-height: 38px;
+        padding: 8px 16px;
+      }
+
+      /* Responsive */
+
+      @media (max-width: 700px) {
+        .mockup-modal {
+          padding: 12px;
+        }
+
+        .mockup-card {
+          max-width: 100%;
+        }
+
+        .mockup-modal .mockup-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .mockup-modal .mockup-field.full {
+          grid-column: auto;
+        }
+
+        .mockup-card-header {
+          padding: 16px 18px;
+        }
+
+        .mockup-body {
+          padding: 18px;
+        }
+      }
+      /* =====================================================
+   KIWI - อนุมัติคำร้องสหกิจศึกษา
+   ===================================================== */
+
+      #panel-coop-request-approval {
+        width: 100%;
+      }
+
+      /* Header */
+      #panel-coop-request-approval .panel-header {
+        margin-bottom: 22px;
+      }
+
+      #panel-coop-request-approval .panel-header h2 {
+        margin: 0 0 5px;
+        font-family: "Sarabun", sans-serif;
+        font-size: 22px;
+        font-weight: 700;
+        color: #0f172a;
+      }
+
+      #panel-coop-request-approval .panel-header p {
+        margin: 0;
+        font-size: 14px;
+        color: #64748b;
+      }
+
+      /* =====================================================
+   Table Card
+   ===================================================== */
+
+      #panel-coop-request-approval .mock-table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+
+        box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+      }
+
+      /* Table */
+      #panel-coop-request-approval .mock-table {
+        width: 100%;
+        min-width: 1050px;
+
+        border-collapse: separate;
+        border-spacing: 0;
+
+        font-size: 14px;
+        color: #1e293b;
+      }
+
+      /* =====================================================
+   Header
+   ===================================================== */
+
+      #panel-coop-request-approval .mock-table thead {
+        background: #f8fafc;
+      }
+
+      #panel-coop-request-approval .mock-table th {
+        padding: 14px 14px;
+
+        text-align: left;
+        vertical-align: middle;
+
+        font-size: 13px;
+        font-weight: 700;
+
+        color: #475569;
+
+        border-bottom: 1px solid #e2e8f0;
+
+        white-space: nowrap;
+      }
+
+      #panel-coop-request-approval .mock-table th:first-child {
+        padding-left: 18px;
+      }
+
+      #panel-coop-request-approval .mock-table th:last-child {
+        padding-right: 18px;
+      }
+
+      /* =====================================================
+   Body
+   ===================================================== */
+
+      #panel-coop-request-approval .mock-table td {
+        padding: 16px 14px;
+
+        vertical-align: middle;
+
+        border-bottom: 1px solid #e8eef5;
+
+        line-height: 1.5;
+      }
+
+      #panel-coop-request-approval .mock-table tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      #panel-coop-request-approval .mock-table tbody tr {
+        background: #ffffff;
+        transition:
+          background 0.18s ease,
+          box-shadow 0.18s ease;
+      }
+
+      #panel-coop-request-approval .mock-table tbody tr:hover {
+        background: #f8fbff;
+      }
+
+      /* =====================================================
+   Column Widths
+   ===================================================== */
+
+      #panel-coop-request-approval .mock-table th:nth-child(1),
+      #panel-coop-request-approval .mock-table td:nth-child(1) {
+        min-width: 155px;
+      }
+
+      #panel-coop-request-approval .mock-table th:nth-child(2),
+      #panel-coop-request-approval .mock-table td:nth-child(2) {
+        min-width: 105px;
+        white-space: nowrap;
+      }
+
+      #panel-coop-request-approval .mock-table th:nth-child(3),
+      #panel-coop-request-approval .mock-table td:nth-child(3) {
+        min-width: 100px;
+        text-align: center;
+      }
+
+      #panel-coop-request-approval .mock-table th:nth-child(4),
+      #panel-coop-request-approval .mock-table td:nth-child(4) {
+        min-width: 180px;
+      }
+
+      #panel-coop-request-approval .mock-table th:nth-child(5),
+      #panel-coop-request-approval .mock-table td:nth-child(5) {
+        min-width: 145px;
+      }
+
+      #panel-coop-request-approval .mock-table th:nth-child(6),
+      #panel-coop-request-approval .mock-table td:nth-child(6) {
+        min-width: 105px;
+        white-space: nowrap;
+      }
+
+      #panel-coop-request-approval .mock-table th:nth-child(7),
+      #panel-coop-request-approval .mock-table td:nth-child(7) {
+        min-width: 120px;
+        text-align: center;
+      }
+
+      #panel-coop-request-approval .mock-table th:nth-child(8),
+      #panel-coop-request-approval .mock-table td:nth-child(8) {
+        min-width: 215px;
+      }
+
+      /* =====================================================
+   Tags / Status
+   ===================================================== */
+
+      #panel-coop-request-approval .tag {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        min-height: 28px;
+
+        padding: 5px 10px;
+
+        border-radius: 999px;
+
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 1;
+
+        white-space: nowrap;
+
+        border: none;
+      }
+
+      /* ประเภทสหกิจศึกษา */
+      #panel-coop-request-approval .tag-coop {
+        background: #fff7e8;
+        color: #b76a00;
+      }
+
+      /* ยื่นคำร้องแล้ว */
+      #panel-coop-request-approval .tag-blue {
+        background: #e7f0ff;
+        color: #1659b7;
+      }
+
+      /* อนุมัติแล้ว */
+      #panel-coop-request-approval .tag-green {
+        background: #e8f7ee;
+        color: #15803d;
+      }
+
+      /* ไม่อนุมัติ */
+      #panel-coop-request-approval .tag-red {
+        background: #feecec;
+        color: #dc2626;
+      }
+
+      /* =====================================================
+   Action Buttons
+   ===================================================== */
+
+      #panel-coop-request-approval .request-actions {
+        display: grid;
+
+        grid-template-columns: repeat(2, max-content);
+
+        gap: 7px;
+
+        align-items: center;
+        justify-content: start;
+      }
+
+      /* ปุ่มทั้งหมด */
+      #panel-coop-request-approval .request-actions .btn-mock-sm {
+        min-height: 34px;
+
+        padding: 7px 11px;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        gap: 6px;
+
+        border: 1px solid #1d5dbb;
+        border-radius: 8px;
+
+        background: #ffffff;
+        color: #1558b0;
+
+        font-family: "Noto Sans Thai", sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+
+        white-space: nowrap;
+
+        cursor: pointer;
+
+        transition:
+          background 0.18s ease,
+          color 0.18s ease,
+          border-color 0.18s ease,
+          transform 0.18s ease,
+          box-shadow 0.18s ease;
+      }
+
+      #panel-coop-request-approval .request-actions .btn-mock-sm i {
+        font-size: 12px;
+      }
+
+      /* Hover */
+      #panel-coop-request-approval .request-actions .btn-mock-sm:hover {
+        background: #eff6ff;
+
+        transform: translateY(-1px);
+
+        box-shadow: 0 3px 7px rgba(37, 99, 235, 0.1);
+      }
+
+      /* ปุ่มอนุมัติ */
+      #panel-coop-request-approval .request-actions .btn-mock-sm.solid {
+        background: #1659b7;
+        color: #ffffff;
+        border-color: #1659b7;
+      }
+
+      #panel-coop-request-approval .request-actions .btn-mock-sm.solid:hover {
+        background: #124d9f;
+      }
+
+      /* ปุ่มไม่อนุมัติ */
+      #panel-coop-request-approval .request-actions .btn-mock-sm:last-child {
+        color: #dc2626;
+        border-color: #fecaca;
+      }
+
+      #panel-coop-request-approval
+        .request-actions
+        .btn-mock-sm:last-child:hover {
+        background: #fff1f2;
+        border-color: #fca5a5;
+      }
+
+      /* =====================================================
+   Scrollbar
+   ===================================================== */
+
+      #panel-coop-request-approval .mock-table-wrapper::-webkit-scrollbar {
+        height: 8px;
+      }
+
+      #panel-coop-request-approval
+        .mock-table-wrapper::-webkit-scrollbar-track {
+        background: #f1f5f9;
+        border-radius: 999px;
+      }
+
+      #panel-coop-request-approval
+        .mock-table-wrapper::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 999px;
+      }
+
+      #panel-coop-request-approval
+        .mock-table-wrapper::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+
+      /* =====================================================
+   Responsive
+   ===================================================== */
+
+      @media (max-width: 900px) {
+        #panel-coop-request-approval .mock-table {
+          min-width: 1000px;
+        }
+      }
+
+      @media (max-width: 700px) {
+        #panel-coop-request-approval .panel-header h2 {
+          font-size: 20px;
+        }
+
+        #panel-coop-request-approval .mock-table th,
+        #panel-coop-request-approval .mock-table td {
+          padding: 13px 12px;
+        }
+
+        #panel-coop-request-approval .request-actions {
+          grid-template-columns: 1fr;
+        }
+      }
+      /* =====================================================
+   KIWI - กำหนดอาจารย์ที่ปรึกษาสหกิจ
+   ===================================================== */
+
+      #panel-coop-advisor {
+        width: 100%;
+      }
+
+      /* ---------- Header ---------- */
+
+      #panel-coop-advisor .panel-header {
+        margin-bottom: 20px;
+      }
+
+      #panel-coop-advisor .panel-header h2 {
+        margin: 0 0 5px;
+        font-family: "Sarabun", sans-serif;
+        font-size: 22px;
+        font-weight: 700;
+        color: #0f172a;
+      }
+
+      #panel-coop-advisor .panel-header p {
+        margin: 0;
+        font-size: 14px;
+        color: #64748b;
+      }
+
+      /* =====================================================
+   Search Box
+   ===================================================== */
+
+      #panel-coop-advisor .student-search-box {
+        display: grid;
+        grid-template-columns: minmax(280px, 1.5fr) minmax(180px, 0.8fr) auto;
+        align-items: end;
+        gap: 14px;
+
+        margin: 18px 0 20px;
+        padding: 18px;
+
+        background: #ffffff;
+        border: 1px solid #dbe3ee;
+        border-radius: 14px;
+
+        box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+      }
+
+      #panel-coop-advisor .search-field {
+        min-width: 0;
+      }
+
+      #panel-coop-advisor .search-field label {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+
+        margin-bottom: 8px;
+
+        font-size: 13px;
+        font-weight: 600;
+        color: #334155;
+      }
+
+      #panel-coop-advisor .search-field label i {
+        color: #1859ad;
+      }
+
+      #panel-coop-advisor .search-field input,
+      #panel-coop-advisor .search-field select {
+        width: 100%;
+        height: 44px;
+
+        padding: 0 13px;
+
+        border: 1px solid #d4dce7;
+        border-radius: 9px;
+
+        background: #ffffff;
+        color: #1e293b;
+
+        font-family: "Noto Sans Thai", sans-serif;
+        font-size: 14px;
+
+        outline: none;
+        box-sizing: border-box;
+
+        transition:
+          border-color 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      #panel-coop-advisor .search-field input::placeholder {
+        color: #94a3b8;
+      }
+
+      #panel-coop-advisor .search-field input:focus,
+      #panel-coop-advisor .search-field select:focus {
+        border-color: #1d5dbb;
+        box-shadow: 0 0 0 3px rgba(29, 93, 187, 0.08);
+      }
+
+      #panel-coop-advisor .student-search-btn {
+        height: 44px;
+        padding: 0 20px;
+
+        border: none;
+        border-radius: 9px;
+
+        background: #1859ad;
+        color: #ffffff;
+
+        font-weight: 600;
+        white-space: nowrap;
+
+        transition:
+          background 0.2s ease,
+          transform 0.2s ease;
+      }
+
+      #panel-coop-advisor .student-search-btn:hover {
+        background: #124b96;
+        transform: translateY(-1px);
+      }
+
+      /* =====================================================
+   Info Box
+   ===================================================== */
+
+      #panel-coop-advisor .advisor-info-box {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+
+        margin: 0 0 15px;
+        padding: 11px 14px;
+
+        background: #eff6ff;
+        border: 1px solid #dbeafe;
+        border-radius: 9px;
+
+        color: #1e3a5f;
+        font-size: 13px;
+      }
+
+      #panel-coop-advisor .advisor-info-box i {
+        color: #1859ad;
+      }
+
+      /* =====================================================
+   Table
+   ===================================================== */
+
+      #panel-coop-advisor .mock-table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+
+        box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+      }
+
+      #panel-coop-advisor .advisor-table {
+        width: 100%;
+        min-width: 950px;
+
+        border-collapse: separate;
+        border-spacing: 0;
+
+        font-size: 14px;
+      }
+
+      #panel-coop-advisor .advisor-table thead {
+        background: #f8fafc;
+      }
+
+      #panel-coop-advisor .advisor-table th {
+        padding: 13px 14px;
+
+        text-align: left;
+        vertical-align: middle;
+
+        color: #475569;
+
+        font-size: 13px;
+        font-weight: 700;
+
+        white-space: nowrap;
+
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      #panel-coop-advisor .advisor-table td {
+        padding: 14px;
+
+        vertical-align: middle;
+
+        color: #1e293b;
+
+        border-bottom: 1px solid #edf1f5;
+      }
+
+      #panel-coop-advisor .advisor-table tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      #panel-coop-advisor .advisor-table tbody tr {
+        transition: background 0.18s ease;
+      }
+
+      #panel-coop-advisor .advisor-table tbody tr:hover {
+        background: #f8fbff;
+      }
+
+      /* Column widths */
+
+      #panel-coop-advisor .advisor-table th:nth-child(1),
+      #panel-coop-advisor .advisor-table td:nth-child(1) {
+        min-width: 170px;
+      }
+
+      #panel-coop-advisor .advisor-table th:nth-child(2),
+      #panel-coop-advisor .advisor-table td:nth-child(2) {
+        min-width: 110px;
+        white-space: nowrap;
+      }
+
+      #panel-coop-advisor .advisor-table th:nth-child(3),
+      #panel-coop-advisor .advisor-table td:nth-child(3) {
+        min-width: 70px;
+      }
+
+      #panel-coop-advisor .advisor-table th:nth-child(4),
+      #panel-coop-advisor .advisor-table td:nth-child(4) {
+        min-width: 190px;
+      }
+
+      #panel-coop-advisor .advisor-table th:nth-child(5),
+      #panel-coop-advisor .advisor-table td:nth-child(5) {
+        min-width: 245px;
+      }
+
+      #panel-coop-advisor .advisor-table th:nth-child(6),
+      #panel-coop-advisor .advisor-table td:nth-child(6) {
+        min-width: 150px;
+      }
+
+      /* =====================================================
+   Advisor Dropdown
+   ===================================================== */
+
+      #panel-coop-advisor .advisor-select {
+        width: 100%;
+        min-width: 230px;
+        height: 38px;
+
+        padding: 0 34px 0 11px;
+
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+
+        background: #ffffff;
+        color: #1e293b;
+
+        font-family: "Noto Sans Thai", sans-serif;
+        font-size: 13px;
+
+        outline: none;
+        cursor: pointer;
+
+        transition:
+          border-color 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      #panel-coop-advisor .advisor-select:hover {
+        border-color: #94a3b8;
+      }
+
+      #panel-coop-advisor .advisor-select:focus {
+        border-color: #1859ad;
+        box-shadow: 0 0 0 3px rgba(24, 89, 173, 0.08);
+      }
+
+      /* =====================================================
+   Action Button
+   ===================================================== */
+
+      #panel-coop-advisor .advisor-table .btn-mock-sm {
+        min-height: 36px;
+
+        padding: 7px 12px;
+
+        border: 1px solid #1859ad;
+        border-radius: 8px;
+
+        background: #ffffff;
+        color: #1859ad;
+
+        font-family: "Noto Sans Thai", sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+
+        white-space: nowrap;
+
+        cursor: pointer;
+
+        transition:
+          background 0.2s ease,
+          color 0.2s ease,
+          transform 0.2s ease;
+      }
+
+      #panel-coop-advisor .advisor-table .btn-mock-sm:hover {
+        background: #eff6ff;
+        transform: translateY(-1px);
+      }
+
+      #panel-coop-advisor .advisor-table .btn-mock-sm.solid {
+        background: #1859ad;
+        color: #ffffff;
+      }
+
+      #panel-coop-advisor .advisor-table .btn-mock-sm.solid:hover {
+        background: #124b96;
+      }
+
+      /* =====================================================
+   Responsive
+   ===================================================== */
+
+      @media (max-width: 850px) {
+        #panel-coop-advisor .student-search-box {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        #panel-coop-advisor .student-search-btn {
+          grid-column: 1 / -1;
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 600px) {
+        #panel-coop-advisor .student-search-box {
+          grid-template-columns: 1fr;
+        }
+
+        #panel-coop-advisor .student-search-btn {
+          grid-column: auto;
+        }
+      }
+
+          .student-search-box {
+            display: flex;
+            align-items: flex-end;
+            gap: 14px;
+            padding: 18px;
+            margin: 18px 0 22px;
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            flex-wrap: wrap;
+          }
+
+          .search-field {
+            flex: 1;
+            min-width: 220px;
+          }
+
+          .search-field label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-dark);
+          }
+
+          .search-field label i {
+            color: var(--primary-color);
+            margin-right: 5px;
+          }
+
+          .search-field input,
+          .search-field select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: #fff;
+            font-family: "Noto Sans Thai", sans-serif;
+            font-size: 0.85rem;
+            outline: none;
+            box-sizing: border-box;
+          }
+
+          .search-field input:focus,
+          .search-field select:focus {
+            border-color: var(--primary-color);
+          }
+
+          .student-search-btn {
+            height: 40px;
+            white-space: nowrap;
+          }
+
+          .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+          }
+
+          @media (max-width: 700px) {
+            .student-search-box {
+              align-items: stretch;
+              flex-direction: column;
+            }
+
+            .student-search-btn {
+              width: 100%;
+            }
+          }
+
+/* ==========================================
+   Inline styles moved from head_department.html
+   ========================================== */
+
+.head-inline-01 {
+  font-weight: 600; font-size: 0.85rem
+}
+
+.head-inline-02 {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr))
+}
+
+.head-inline-03 {
+  max-width: 760px;
+  margin-top: 18px;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+}
+
+.head-inline-04 {
+  color: #dc2626
+}
+
+.head-inline-05 {
+  color: #dc2626
+}
+
+.head-inline-06 {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.head-inline-07 {
+  display: none
+}
+
+.head-inline-08 {
+  display: none
+}
+
+.head-inline-09 {
+  display: none
+}
+
+.head-inline-10 {
+  display: none
+}
+
+.head-inline-11 {
+  display: none
+}
+
+.head-inline-12 {
+  display: none
+}
+
+.head-inline-13 {
+  display: none
+}
+
+.head-inline-14 {
+  display: none
+}
+
+.head-inline-15 {
+  display: none
+}
+
+.head-inline-16 {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 22px;
+}
