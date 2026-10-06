@@ -1,2314 +1,1204 @@
 <!doctype html>
 <html lang="th">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>แดชบอร์ดเจ้าหน้าที่ภาควิชา | KIWI</title>
 
-    <title>แดชบอร์ดเจ้าหน้าที่ภาควิชา | KIWI — ระบบจัดการสหกิจศึกษา</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/officer.css" />
 
-    <!-- CSS หลัก -->
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="css/officer.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Sarabun:wght@500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+</head>
 
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+<body>
+  <header class="of-navbar">
+    <div class="of-navbar-inner">
+      <a href="index.html" class="of-brand">
+        <img src="images/logo_kiwi.png" alt="KIWI" class="of-brand-logo" />
+        <div>
+          <strong>KIWI</strong>
+          <span>ระบบจัดการสหกิจศึกษา</span>
+        </div>
+      </a>
 
-    <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+      <div class="of-nav-user">
+        <div class="of-user-meta">
+          <span>เจ้าหน้าที่ภาควิชา</span>
+          <strong id="headerOfficerName">เจ้าหน้าที่ภาควิชาเทคโนโลยีสารสนเทศ</strong>
+        </div>
 
-  </head>
+        <button class="of-btn of-btn-outline" type="button" onclick="officerLogout()">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          ออกจากระบบ
+        </button>
+      </div>
+    </div>
+  </header>
 
-  <body>
-    <!-- =========================================================
-         NAVBAR
-         ========================================================= -->
+  <div class="of-app-shell">
+    <aside class="of-sidebar">
+      <div class="of-sidebar-heading">เมนูเจ้าหน้าที่ภาควิชา</div>
 
-    <header class="navbar">
-      <div class="nav-container">
-        <a href="index.html" class="brand">
-          <img src="images/logo_kiwi.png" alt="KIWI" class="brand-mark" />
+      <button class="of-sidebar-item active" type="button" data-panel="panel-overview">
+        <i class="fa-solid fa-chart-pie"></i>
+        <span>ภาพรวม</span>
+      </button>
 
-          <span> KIWI<br />ระบบจัดการสหกิจศึกษา </span>
-        </a>
-        <div class="nav-right">
-          <span
-            id="userNameDisplay"
-            class="officer-inline-01"
-          ></span>
+      <button class="of-sidebar-item" type="button" data-panel="panel-documents">
+        <i class="fa-solid fa-file-lines"></i>
+        <span>คำร้องและเอกสาร</span>
+        <span class="of-sidebar-badge warning" id="documentTaskBadge">0</span>
+      </button>
 
-          <button class="btn-login" onclick="logout()">ออกจากระบบ</button>
+      <button class="of-sidebar-item" type="button" data-panel="panel-companies">
+        <i class="fa-solid fa-building"></i>
+        <span>สถานประกอบการ</span>
+      </button>
+
+      <button class="of-sidebar-item" type="button" data-panel="panel-calendar">
+        <i class="fa-solid fa-calendar-days"></i>
+        <span>ปฏิทินสหกิจศึกษา</span>
+      </button>
+
+      <button class="of-sidebar-item" type="button" data-panel="panel-teachers">
+        <i class="fa-solid fa-chalkboard-user"></i>
+        <span>อาจารย์</span>
+      </button>
+
+      <button class="of-sidebar-item" type="button" data-panel="panel-scoring">
+        <i class="fa-solid fa-chart-column"></i>
+        <span>เกณฑ์และคะแนน</span>
+      </button>
+
+      <button class="of-sidebar-item" type="button" data-panel="panel-chatbot">
+        <i class="fa-solid fa-comments"></i>
+        <span>ผู้ช่วยสถานะเอกสาร</span>
+      </button>
+
+      <div class="of-sidebar-help">
+        <i class="fa-solid fa-route"></i>
+        <div>
+          <strong>Workflow เอกสาร</strong>
+          <span>คำร้อง → อาจารย์ → หัวหน้าภาค → หนังสือขอความอนุเคราะห์ → หนังสือส่งตัว → เริ่มสหกิจ</span>
         </div>
       </div>
-    </header>
+    </aside>
 
-    <!-- =========================================================
-         DASHBOARD
-         ========================================================= -->
-
-    <div class="dashboard-layout">
+    <main class="of-main">
       <!-- =======================================================
-           SIDEBAR
-           ห้ามแก้ไขเมนู
+           OVERVIEW
            ======================================================= -->
+      <section class="of-panel active" id="panel-overview">
+        <div class="of-page-heading">
+          <div>
+            <p class="of-eyebrow">DEPARTMENT OFFICER</p>
+            <h1 id="overviewGreeting">ภาพรวมงานสหกิจศึกษา</h1>
+            <p>ติดตามงานค้าง เอกสาร ปฏิทิน และข้อมูลที่เจ้าหน้าที่ต้องดำเนินการ</p>
+          </div>
+        </div>
 
-      <aside class="dashboard-sidebar">
-        <a class="sidebar-item active" data-target="panel-overview">
-          <i class="fa-solid fa-gauge"></i>
-          ภาพรวม
-        </a>
+        <div class="of-stat-grid">
+          <article class="of-stat-card">
+            <div class="of-stat-icon"><i class="fa-solid fa-file-signature"></i></div>
+            <div>
+              <span>คำร้องรอตรวจสอบ</span>
+              <strong id="statPendingRequests">0</strong>
+              <small>รายการ</small>
+            </div>
+          </article>
 
-        <a class="sidebar-item" data-target="panel-docstatus">
-          <i class="fa-solid fa-file-circle-check"></i>
-          ตรวจสอบสถานะเอกสาร
-        </a>
+          <article class="of-stat-card warning">
+            <div class="of-stat-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+            <div>
+              <span>รอจัดทำหนังสือขอฯ</span>
+              <strong id="statCourtesyPending">0</strong>
+              <small>ฉบับ</small>
+            </div>
+          </article>
 
-        <a class="sidebar-item" data-target="panel-approve">
-          <i class="fa-solid fa-clipboard-check"></i>
-          จัดการคำร้องฝึกงานสหกิจศึกษา
-        </a>
+          <article class="of-stat-card purple">
+            <div class="of-stat-icon"><i class="fa-solid fa-file-arrow-right"></i></div>
+            <div>
+              <span>รอออกหนังสือส่งตัว</span>
+              <strong id="statReferralPending">0</strong>
+              <small>ฉบับ</small>
+            </div>
+          </article>
 
-        <a class="sidebar-item" data-target="panel-print">
-          <i class="fa-solid fa-print"></i>
-          จัดการเอกสารขอความอนุเคราะห์
-        </a>
+          <article class="of-stat-card danger">
+            <div class="of-stat-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <div>
+              <span>เอกสารมีปัญหา</span>
+              <strong id="statDocumentIssues">0</strong>
+              <small>รายการ</small>
+            </div>
+          </article>
 
-        <!-- เพิ่มเมนูใหม่ -->
-        <a class="sidebar-item" data-target="panel-send-document">
-          <i class="fa-solid fa-file-arrow-up"></i>
-          จัดการหนังสือส่งตัว
-        </a>
+          <article class="of-stat-card success">
+            <div class="of-stat-icon"><i class="fa-solid fa-building-circle-check"></i></div>
+            <div>
+              <span>สถานประกอบการ</span>
+              <strong id="statCompanies">0</strong>
+              <small>แห่ง</small>
+            </div>
+          </article>
+        </div>
 
-        <a class="sidebar-item" data-target="panel-chatbot">
-          <i class="fa-solid fa-robot"></i>
-          Chatbot ตรวจสอบสถานะ
-        </a>
+        <div class="of-grid-2">
+          <article class="of-card">
+            <div class="of-card-header">
+              <div>
+                <h2>งานที่ต้องดำเนินการ</h2>
+                <p>รายการที่ควรจัดการก่อนเพื่อไม่ให้ขั้นตอนสหกิจล่าช้า</p>
+              </div>
+            </div>
 
-        <a class="sidebar-item" data-target="panel-companies">
-          <i class="fa-solid fa-building"></i>
-          จัดการสถานประกอบการ
-        </a>
+            <div class="of-task-list" id="overviewTaskList"></div>
+          </article>
 
-        <a class="sidebar-item" data-target="panel-calendar">
-          <i class="fa-solid fa-calendar-days"></i>
-          ปฏิทินกิจกรรม
-        </a>
+          <article class="of-card">
+            <div class="of-card-header">
+              <div>
+                <h2>กิจกรรมที่กำลังจะถึง</h2>
+                <p>ดึงจากปฏิทินของปีการศึกษาที่กำลังใช้งาน</p>
+              </div>
+            </div>
 
-        <a class="sidebar-item" data-target="panel-lecturers">
-          <i class="fa-solid fa-chalkboard-user"></i>
-          จัดการข้อมูลอาจารย์
-        </a>
-      </aside>
+            <div class="of-upcoming-list" id="overviewUpcomingList"></div>
+          </article>
+        </div>
+      </section>
 
       <!-- =======================================================
-           CONTENT
+           DOCUMENTS
            ======================================================= -->
-
-      <div class="dashboard-content">
-        <!-- =====================================================
-             ภาพรวม
-             ===================================================== -->
-        <section class="content-panel active" id="panel-overview">
-          <div class="dashboard-banner">
-            <b id="overviewGreeting"> ยินดีต้อนรับ </b>
-
-            <span> ภาพรวมสถานะการดำเนินงานด้านสหกิจศึกษาของภาควิชา </span>
+      <section class="of-panel" id="panel-documents">
+        <div class="of-page-heading">
+          <div>
+            <p class="of-eyebrow">REQUEST & DOCUMENTS</p>
+            <h1>คำร้องและเอกสาร</h1>
+            <p>ตรวจสถานะ ยกเลิกคำร้อง และจัดการหนังสือขอความอนุเคราะห์/หนังสือส่งตัวใน Workflow เดียว</p>
           </div>
+        </div>
 
-          <div class="officer-overview-head">
-            <div class="officer-overview-title">
-              <h2>
-                <i class="fa-solid fa-chart-simple"></i>
-                สรุปข้อมูลการดำเนินงานสหกิจศึกษา
-              </h2>
+        <div class="of-tabs">
+          <button class="of-tab active" type="button" data-doc-tab="status">
+            <i class="fa-solid fa-list-check"></i>
+            ภาพรวมสถานะ
+          </button>
 
-              <p>
-                แสดงจำนวนรายการสำคัญที่เจ้าหน้าที่ใช้ติดตามคำร้อง เอกสาร
-                การตอบรับจากสถานประกอบการ
-                และนักศึกษาสหกิจศึกษาที่ยังไม่ได้ยื่นคำร้อง
-              </p>
+          <button class="of-tab" type="button" data-doc-tab="requests">
+            <i class="fa-solid fa-file-signature"></i>
+            คำร้องสหกิจ
+          </button>
+
+          <button class="of-tab" type="button" data-doc-tab="courtesy">
+            <i class="fa-solid fa-envelope-open-text"></i>
+            หนังสือขอความอนุเคราะห์
+          </button>
+
+          <button class="of-tab" type="button" data-doc-tab="referral">
+            <i class="fa-solid fa-file-arrow-right"></i>
+            หนังสือส่งตัว
+          </button>
+        </div>
+
+        <!-- status -->
+        <div class="of-tab-panel active" data-doc-tab-panel="status">
+          <article class="of-card">
+            <div class="of-filter-grid four">
+              <div class="of-field">
+                <label for="documentSearchInput">ค้นหา</label>
+                <div class="of-input-icon">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <input id="documentSearchInput" type="text" placeholder="ชื่อ / รหัส / สถานประกอบการ" />
+                </div>
+              </div>
+
+              <div class="of-field">
+                <label for="documentYearFilter">ปีการศึกษา</label>
+                <select id="documentYearFilter"></select>
+              </div>
+
+              <div class="of-field">
+                <label for="documentMajorFilter">สาขา</label>
+                <select id="documentMajorFilter">
+                  <option value="">ทั้งหมด</option>
+                  <option value="IT">IT</option>
+                  <option value="INE">INE</option>
+                </select>
+              </div>
+
+              <div class="of-field">
+                <label for="documentStatusFilter">สถานะ</label>
+                <select id="documentStatusFilter">
+                  <option value="">ทั้งหมด</option>
+                  <option value="pending">มีงานรอดำเนินการ</option>
+                  <option value="complete">เอกสารครบ</option>
+                  <option value="issue">มีปัญหา</option>
+                </select>
+              </div>
             </div>
 
-            <span class="overview-badge">
-              <i class="fa-solid fa-circle-info"></i>
-              ข้อมูลภาพรวมสหกิจศึกษา
-            </span>
-          </div>
+            <div class="of-table-wrap">
+              <table class="of-table of-doc-status-table">
+                <thead>
+                  <tr>
+                    <th>นักศึกษา</th>
+                    <th>สถานประกอบการ</th>
+                    <th>คำร้อง</th>
+                    <th>ขอความอนุเคราะห์</th>
+                    <th>ส่งตัว</th>
+                  </tr>
+                </thead>
+                <tbody id="documentStatusTableBody"></tbody>
+              </table>
+            </div>
 
-          <div class="overview-stat-grid">
-            <!-- คำร้องขอสหกิจศึกษา -->
-            <article class="overview-stat-card tone-blue">
-              <div class="overview-stat-top">
-                <div class="overview-stat-icon">
-                  <i class="fa-solid fa-file-signature"></i>
-                </div>
-              </div>
+            <div class="of-empty" id="documentStatusEmpty">
+              <i class="fa-solid fa-folder-open"></i>
+              <strong>ไม่พบข้อมูลเอกสาร</strong>
+              <span>ลองเปลี่ยนคำค้นหาหรือตัวกรอง</span>
+            </div>
+          </article>
+        </div>
 
-              <div class="overview-stat-number">7</div>
-
-              <span class="overview-stat-label"> คำร้องขอสหกิจศึกษา </span>
-
-              <span class="overview-stat-note">
-                คำร้องสหกิจศึกษาที่อยู่ในกระบวนการตรวจสอบและดำเนินการ
-              </span>
-            </article>
-
-            <!-- เอกสารขอความอนุเคราะห์ -->
-            <article class="overview-stat-card tone-orange">
-              <div class="overview-stat-top">
-                <div class="overview-stat-icon">
-                  <i class="fa-solid fa-file-circle-check"></i>
-                </div>
-              </div>
-
-              <div class="overview-stat-number">4</div>
-
-              <span class="overview-stat-label"> เอกสารขอความอนุเคราะห์ </span>
-
-              <span class="overview-stat-note">
-                เอกสารของนักศึกษาสหกิจศึกษาที่อยู่ในขั้นตอนจัดทำหรือรอส่ง
-              </span>
-            </article>
-
-            <!-- สถานประกอบการตอบรับ -->
-            <article class="overview-stat-card tone-green">
-              <div class="overview-stat-top">
-                <div class="overview-stat-icon">
-                  <i class="fa-solid fa-building-circle-check"></i>
-                </div>
-              </div>
-
-              <div class="overview-stat-number">5</div>
-
-              <span class="overview-stat-label">
-                สถานประกอบการตอบรับนักศึกษาสหกิจศึกษา
-              </span>
-
-              <span class="overview-stat-note">
-                จำนวนนักศึกษาสหกิจศึกษาที่ได้รับการตอบรับจากสถานประกอบการ
-              </span>
-            </article>
-
-            <!-- สถานประกอบการปฏิเสธ -->
-            <article class="overview-stat-card tone-red">
-              <div class="overview-stat-top">
-                <div class="overview-stat-icon">
-                  <i class="fa-solid fa-building-circle-xmark"></i>
-                </div>
-              </div>
-
-              <div class="overview-stat-number">2</div>
-
-              <span class="overview-stat-label">
-                สถานประกอบการปฏิเสธรับนักศึกษาสหกิจศึกษา
-              </span>
-
-              <span class="overview-stat-note">
-                รายการที่นักศึกษาต้องดำเนินการเลือกสถานประกอบการใหม่
-              </span>
-            </article>
-
-            <!-- สถานประกอบการในระบบ -->
-            <article class="overview-stat-card tone-purple">
-              <div class="overview-stat-top">
-                <div class="overview-stat-icon">
-                  <i class="fa-solid fa-building"></i>
-                </div>
-              </div>
-
-              <div class="overview-stat-number">32</div>
-
-              <span class="overview-stat-label"> สถานประกอบการในระบบ </span>
-
-              <span class="overview-stat-note">
-                จำนวนสถานประกอบการที่รองรับนักศึกษาสหกิจศึกษา
-              </span>
-            </article>
-
-            <!-- เอกสารส่งตัว -->
-            <article class="overview-stat-card tone-cyan">
-              <div class="overview-stat-top">
-                <div class="overview-stat-icon">
-                  <i class="fa-solid fa-paper-plane"></i>
-                </div>
-              </div>
-
-              <div class="overview-stat-number">6</div>
-
-              <span class="overview-stat-label">
-                เอกสารส่งตัวนักศึกษาสหกิจศึกษา
-              </span>
-
-              <span class="overview-stat-note">
-                รายการเอกสารส่งตัวที่อยู่ในกระบวนการดำเนินงาน
-              </span>
-            </article>
-
-            <!-- ยังไม่ทำคำร้อง -->
-            <article class="overview-stat-card tone-gray">
-              <div class="overview-stat-top">
-                <div class="overview-stat-icon">
-                  <i class="fa-solid fa-user-clock"></i>
-                </div>
-              </div>
-
-              <div class="overview-stat-number">11</div>
-
-              <span class="overview-stat-label">
-                นักศึกษาที่ยังไม่ทำคำร้องสหกิจศึกษา
-              </span>
-
-              <span class="overview-stat-note">
-                นักศึกษาสหกิจศึกษาที่ควรติดตามให้ดำเนินการยื่นคำร้อง
-              </span>
-            </article>
-          </div>
-
-          <div class="overview-footnote">
-            <i class="fa-solid fa-circle-info"></i>
-
-            <span>
-              ตัวเลขในหน้า Mockup นี้เป็นข้อมูลตัวอย่างสำหรับแสดงรูปแบบ
-              Dashboard ของระบบสหกิจศึกษา
-              และสามารถเปลี่ยนให้ดึงค่าจากฐานข้อมูลจริงภายหลังได้
-            </span>
-          </div>
-        </section>
-
-        <!-- =====================================================
-     ตรวจสอบสถานะเอกสาร
-     ===================================================== -->
-
-        <section class="content-panel" id="panel-docstatus">
-          <div class="panel-header">
-            <h2>ตรวจสอบสถานะเอกสาร</h2>
-
-            <p>ตรวจสอบสถานะเอกสารของนักศึกษาสหกิจศึกษา โดยแยกตามประเภทเอกสาร</p>
-          </div>
-
-          <!-- =====================================================
-       1. เอกสารคำร้องสหกิจศึกษา
-       สถานะ:
-       - อนุมัติ
-       - ไม่อนุมัติ
-       - ยื่นแล้ว
-       - ยังไม่ได้ยื่น
-       ===================================================== -->
-
-          <div class="doc-status-section">
-            <div class="doc-status-section-header">
-              <div class="doc-status-icon">
-                <i class="fa-solid fa-file-signature"></i>
-              </div>
-
+        <!-- requests -->
+        <div class="of-tab-panel" data-doc-tab-panel="requests">
+          <article class="of-card">
+            <div class="of-card-header">
               <div>
-                <h3>เอกสารคำร้องสหกิจศึกษา</h3>
-
-                <p>ตรวจสอบสถานะคำร้องของนักศึกษาสหกิจศึกษา</p>
+                <h2>คำร้องสหกิจศึกษา</h2>
+                <p>ตรวจสอบรายละเอียดและยกเลิกคำร้องพร้อมบันทึกเหตุผลย้อนหลัง</p>
               </div>
             </div>
 
-            <div class="doc-status-grid officer-inline-02">
-              <div class="doc-status-box">
-                <div class="doc-status-type-title">
-                  <div>
-                    <i class="fa-solid fa-briefcase"></i>
-                    นักศึกษาสหกิจศึกษา
-                  </div>
-
-                  <span class="type-tag coop"> สหกิจศึกษา </span>
+            <div class="of-filter-grid three">
+              <div class="of-field">
+                <label for="requestSearchInput">ค้นหา</label>
+                <div class="of-input-icon">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <input id="requestSearchInput" type="text" placeholder="ชื่อ / รหัส / บริษัท" />
                 </div>
+              </div>
 
-                <div class="table-wrapper">
-                  <table class="mock-table">
-                    <thead>
-                      <tr>
-                        <th>ชื่อนักศึกษา</th>
-                        <th>ประเภทเอกสาร</th>
-                        <th class="status-cell">สถานะ</th>
-                      </tr>
-                    </thead>
+              <div class="of-field">
+                <label for="requestYearFilter">ปีการศึกษา</label>
+                <select id="requestYearFilter"></select>
+              </div>
 
-                    <tbody>
-                      <!-- อนุมัติ -->
-                      <tr>
-                        <td>อรุณี พงษ์สุวรรณ</td>
-
-                        <td>คำร้องขอสหกิจศึกษา</td>
-
-                        <td class="status-cell">
-                          <span class="tag tag-green"> อนุมัติ </span>
-                        </td>
-                      </tr>
-
-                      <!-- ไม่อนุมัติ -->
-                      <tr>
-                        <td>ชนากานต์ อินทร์แก้ว</td>
-
-                        <td>คำร้องขอสหกิจศึกษา</td>
-
-                        <td class="status-cell">
-                          <span class="tag tag-red"> ไม่อนุมัติ </span>
-                        </td>
-                      </tr>
-
-                      <!-- ยื่นแล้ว -->
-                      <tr>
-                        <td>ณัฐวุฒิ เพชรรัตน์</td>
-
-                        <td>คำร้องขอสหกิจศึกษา</td>
-
-                        <td class="status-cell">
-                          <span class="tag tag-muted"> ยื่นแล้ว </span>
-                        </td>
-                      </tr>
-
-                      <!-- ยังไม่ได้ยื่น -->
-                      <tr>
-                        <td>ภูริช วัฒนกุล</td>
-
-                        <td>คำร้องขอสหกิจศึกษา</td>
-
-                        <td class="status-cell">
-                          <span class="tag tag-dark"> ยังไม่ได้ยื่น </span>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+              <div class="of-field">
+                <label for="requestStatusFilter">สถานะ</label>
+                <select id="requestStatusFilter">
+                  <option value="">ทั้งหมด</option>
+                  <option value="pending">รอดำเนินการ</option>
+                  <option value="approved">อนุมัติแล้ว</option>
+                  <option value="rejected">ไม่อนุมัติ</option>
+                  <option value="cancelled">ยกเลิกแล้ว</option>
+                </select>
               </div>
             </div>
-          </div>
 
-          <!-- =====================================================
-       2. เอกสารขอความอนุเคราะห์
+            <div class="of-table-wrap">
+              <table class="of-table of-request-table">
+                <thead>
+                  <tr>
+                    <th>นักศึกษา</th>
+                    <th>สถานประกอบการ</th>
+                    <th>วันที่ยื่น</th>
+                    <th>สถานะ</th>
+                    <th>ดำเนินการ</th>
+                  </tr>
+                </thead>
+                <tbody id="requestTableBody"></tbody>
+              </table>
+            </div>
 
-       2.1 สถานะการตอบรับ:
-       - รอตอบรับ
-       - ตอบรับแล้ว
-       - ไม่ตอบรับ
+            <div class="of-empty" id="requestTableEmpty">
+              <i class="fa-solid fa-file-circle-xmark"></i>
+              <strong>ไม่พบคำร้อง</strong>
+              <span>ไม่พบรายการที่ตรงกับตัวกรอง</span>
+            </div>
+          </article>
+        </div>
 
-       2.2 สถานะการส่ง:
-       - ส่งแล้ว
-       - ยังไม่ส่ง
-       ===================================================== -->
-
-          <div class="doc-status-section">
-            <div class="doc-status-section-header">
-              <div class="doc-status-icon orange">
-                <i class="fa-solid fa-envelope-open-text"></i>
-              </div>
-
+        <!-- courtesy -->
+        <div class="of-tab-panel" data-doc-tab-panel="courtesy">
+          <article class="of-card">
+            <div class="of-card-header">
               <div>
-                <h3>เอกสารขอความอนุเคราะห์</h3>
-
-                <p>ตรวจสอบสถานะการส่งเอกสารและการตอบรับจากสถานประกอบการ</p>
+                <h2>หนังสือขอความอนุเคราะห์</h2>
+                <p>จัดทำ แก้ไข พิมพ์ และติดตามสถานะการส่งเอกสาร</p>
               </div>
             </div>
 
-            <div class="doc-status-grid officer-inline-03">
-              <div class="doc-status-box">
-                <div class="doc-status-type-title">
-                  <div>
-                    <i class="fa-solid fa-briefcase"></i>
-                    นักศึกษาสหกิจศึกษา
-                  </div>
-
-                  <span class="type-tag coop"> สหกิจศึกษา </span>
+            <div class="of-filter-grid three">
+              <div class="of-field">
+                <label for="courtesySearchInput">ค้นหา</label>
+                <div class="of-input-icon">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <input id="courtesySearchInput" type="text" placeholder="ชื่อ / รหัสนักศึกษา / บริษัท" />
                 </div>
+              </div>
 
-                <div class="table-wrapper">
-                  <table class="mock-table">
-                    <thead>
-                      <tr>
-                        <th>ชื่อนักศึกษา</th>
+              <div class="of-field">
+                <label for="courtesyYearFilter">ปีการศึกษา</label>
+                <select id="courtesyYearFilter"></select>
+              </div>
 
-                        <th>ประเภทเอกสาร</th>
-
-                        <th class="status-cell">สถานะการส่ง</th>
-
-                        <th class="status-cell">สถานะการตอบรับ</th>
-                      </tr>
-                    </thead>
-
-                    <tbody>
-                      <!-- ส่งแล้ว / รอตอบรับ -->
-                      <tr>
-                        <td>ณัฐวุฒิ เพชรรัตน์</td>
-
-                        <td>หนังสือขอความอนุเคราะห์</td>
-
-                        <td class="status-cell">
-                          <span class="tag tag-green"> ส่งแล้ว </span>
-                        </td>
-
-                        <td class="status-cell">
-                          <span class="tag tag-muted"> รอตอบรับ </span>
-                        </td>
-                      </tr>
-
-                      <!-- ส่งแล้ว / ตอบรับแล้ว -->
-                      <tr>
-                        <td>อรุณี พงษ์สุวรรณ</td>
-
-                        <td>หนังสือขอความอนุเคราะห์</td>
-
-                        <td class="status-cell">
-                          <span class="tag tag-green"> ส่งแล้ว </span>
-                        </td>
-
-                        <td class="status-cell">
-                          <span class="tag tag-green"> ตอบรับแล้ว </span>
-                        </td>
-                      </tr>
-
-                      <!-- ส่งแล้ว / ไม่ตอบรับ -->
-                      <tr>
-                        <td>ชนากานต์ อินทร์แก้ว</td>
-
-                        <td>หนังสือขอความอนุเคราะห์</td>
-
-                        <td class="status-cell">
-                          <span class="tag tag-green"> ส่งแล้ว </span>
-                        </td>
-
-                        <td class="status-cell">
-                          <span class="tag tag-red"> ไม่ตอบรับ </span>
-                        </td>
-                      </tr>
-
-                      <!-- ยังไม่ส่ง -->
-                      <tr>
-                        <td>ภูริช วัฒนกุล</td>
-
-                        <td>หนังสือขอความอนุเคราะห์</td>
-
-                        <td class="status-cell">
-                          <span class="tag tag-red"> ยังไม่ส่ง </span>
-                        </td>
-
-                        <td class="status-cell">
-                          <span class="tag tag-dark"> - </span>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+              <div class="of-field">
+                <label for="courtesyStatusFilter">สถานะ</label>
+                <select id="courtesyStatusFilter">
+                  <option value="">ทั้งหมด</option>
+                  <option value="draft">ฉบับร่าง</option>
+                  <option value="ready">จัดทำแล้ว</option>
+                  <option value="cancelled">ยกเลิก</option>
+                </select>
               </div>
             </div>
-          </div>
 
-          <!-- =====================================================
-       3. หนังสือส่งตัว
-       สถานะ:
-       - พิมพ์แล้ว
-       - ยังไม่พิมพ์
-       ===================================================== -->
+            <div class="of-table-wrap">
+              <table class="of-table of-document-table">
+                <thead>
+                  <tr>
+                    <th>นักศึกษา</th>
+                    <th>สถานประกอบการ</th>
+                    <th>สถานะหนังสือ</th>
+                    <th>สถานะตอบรับ</th>
+                    <th>ดำเนินการ</th>
+                  </tr>
+                </thead>
+                <tbody id="courtesyTableBody"></tbody>
+              </table>
+            </div>
 
-          <div class="doc-status-section">
-            <div class="doc-status-section-header">
-              <div class="doc-status-icon green">
-                <i class="fa-solid fa-paper-plane"></i>
-              </div>
+            <div class="of-empty" id="courtesyTableEmpty">
+              <i class="fa-solid fa-envelope-open-text"></i>
+              <strong>ไม่พบหนังสือขอความอนุเคราะห์</strong>
+              <span>สามารถกด “จัดทำหนังสือ” เพื่อเริ่มรายการใหม่</span>
+            </div>
+          </article>
+        </div>
 
+        <!-- referral -->
+        <div class="of-tab-panel" data-doc-tab-panel="referral">
+          <article class="of-card">
+            <div class="of-card-header">
               <div>
-                <h3>หนังสือส่งตัว</h3>
-
-                <p>ตรวจสอบสถานะการพิมพ์หนังสือส่งตัว ของนักศึกษาสหกิจศึกษา</p>
+                <h2>หนังสือส่งตัวนักศึกษาสหกิจศึกษา</h2>
+                <p>จัดทำ แก้ไข พิมพ์ และบันทึกการส่งหนังสือส่งตัว</p>
               </div>
             </div>
 
-            <div class="doc-status-grid officer-inline-04">
-              <div class="doc-status-box">
-                <div class="doc-status-type-title">
-                  <div>
-                    <i class="fa-solid fa-briefcase"></i>
-                    นักศึกษาสหกิจศึกษา
-                  </div>
-
-                  <span class="type-tag coop"> สหกิจศึกษา </span>
-                </div>
-
-                <div class="table-wrapper">
-                  <table class="mock-table">
-                    <thead>
-                      <tr>
-                        <th>ชื่อนักศึกษา</th>
-
-                        <th>ประเภทเอกสาร</th>
-
-                        <th class="status-cell">สถานะ</th>
-                      </tr>
-                    </thead>
-
-                    <tbody>
-                      <!-- พิมพ์แล้ว -->
-                      <tr>
-                        <td>ชนากานต์ อินทร์แก้ว</td>
-
-                        <td>หนังสือส่งตัว</td>
-
-                        <td class="status-cell">
-                          <span class="tag tag-green"> พิมพ์แล้ว </span>
-                        </td>
-                      </tr>
-
-                      <!-- ยังไม่พิมพ์ -->
-                      <tr>
-                        <td>ภูริช วัฒนกุล</td>
-
-                        <td>หนังสือส่งตัว</td>
-
-                        <td class="status-cell">
-                          <span class="tag tag-red"> ยังไม่พิมพ์ </span>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+            <div class="of-filter-grid three">
+              <div class="of-field">
+                <label for="referralSearchInput">ค้นหา</label>
+                <div class="of-input-icon">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <input id="referralSearchInput" type="text" placeholder="ชื่อ / รหัสนักศึกษา / บริษัท" />
                 </div>
               </div>
+
+              <div class="of-field">
+                <label for="referralYearFilter">ปีการศึกษา</label>
+                <select id="referralYearFilter"></select>
+              </div>
+
+              <div class="of-field">
+                <label for="referralStatusFilter">สถานะ</label>
+                <select id="referralStatusFilter">
+                  <option value="">ทั้งหมด</option>
+                  <option value="draft">ยังไม่ได้จัดทำเสร็จ</option>
+                  <option value="ready">จัดทำแล้ว</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="of-table-wrap">
+              <table class="of-table of-document-table">
+                <thead>
+                  <tr>
+                    <th>นักศึกษา</th>
+                    <th>สถานประกอบการ</th>
+                    <th>วันเริ่มสหกิจ</th>
+                    <th>สถานะ</th>
+                    <th>ดำเนินการ</th>
+                  </tr>
+                </thead>
+                <tbody id="referralTableBody"></tbody>
+              </table>
+            </div>
+
+            <div class="of-empty" id="referralTableEmpty">
+              <i class="fa-solid fa-file-arrow-right"></i>
+              <strong>ไม่พบหนังสือส่งตัว</strong>
+              <span>สามารถกด “จัดทำหนังสือส่งตัว” เพื่อเริ่มรายการใหม่</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- =======================================================
+           COMPANIES
+           ======================================================= -->
+      <section class="of-panel" id="panel-companies">
+        <div class="of-page-heading with-action">
+          <div>
+            <p class="of-eyebrow">COMPANY MANAGEMENT</p>
+            <h1>สถานประกอบการ</h1>
+            <p>จัดการข้อมูลบริษัท ผู้ประสานงาน ตำแหน่งที่เปิดรับ และสถานะใช้งาน</p>
+          </div>
+
+          <button class="of-btn of-btn-primary" type="button" onclick="openCompanyEditor()">
+            <i class="fa-solid fa-plus"></i>
+            เพิ่มสถานประกอบการ
+          </button>
+        </div>
+
+        <article class="of-card">
+          <div class="of-filter-grid three">
+            <div class="of-field">
+              <label for="companySearchInput">ค้นหา</label>
+              <div class="of-input-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input id="companySearchInput" type="text" placeholder="ชื่อบริษัท / จังหวัด / ตำแหน่ง" />
+              </div>
+            </div>
+
+            <div class="of-field">
+              <label for="companyTypeFilter">ประเภท</label>
+              <select id="companyTypeFilter">
+                <option value="">ทั้งหมด</option>
+                <option value="Software">Software</option>
+                <option value="Data">Data</option>
+                <option value="Network">Network</option>
+                <option value="Cybersecurity">Cybersecurity</option>
+                <option value="Cloud">Cloud</option>
+              </select>
+            </div>
+
+            <div class="of-field">
+              <label for="companyActiveFilter">สถานะ</label>
+              <select id="companyActiveFilter">
+                <option value="">ทั้งหมด</option>
+                <option value="active">ใช้งาน</option>
+                <option value="inactive">ไม่ใช้งาน</option>
+              </select>
             </div>
           </div>
 
-          <!-- =====================================================
-       ตารางข้อมูลสำหรับ Chatbot
-       ซ่อนไว้ ไม่แสดงบนหน้าเว็บ
-       ===================================================== -->
-
-          <div class="document-master-data">
-            <table>
-              <tbody id="documentTableBody">
-                <!-- =========================
-             คำร้องสหกิจศึกษา
-             ========================= -->
-
-                <tr
-                  data-type="coop"
-                  data-document="request"
-                  data-status="approved"
-                >
-                  <td>อรุณี พงษ์สุวรรณ</td>
-                  <td>สหกิจศึกษา</td>
-                  <td>คำร้องขอสหกิจศึกษา</td>
-                  <td>อนุมัติ</td>
-                </tr>
-
-                <tr
-                  data-type="coop"
-                  data-document="request"
-                  data-status="rejected"
-                >
-                  <td>ชนากานต์ อินทร์แก้ว</td>
-                  <td>สหกิจศึกษา</td>
-                  <td>คำร้องขอสหกิจศึกษา</td>
-                  <td>ไม่อนุมัติ</td>
-                </tr>
-
-                <tr
-                  data-type="coop"
-                  data-document="request"
-                  data-status="submitted"
-                >
-                  <td>ณัฐวุฒิ เพชรรัตน์</td>
-                  <td>สหกิจศึกษา</td>
-                  <td>คำร้องขอสหกิจศึกษา</td>
-                  <td>ยื่นแล้ว</td>
-                </tr>
-
-                <tr
-                  data-type="coop"
-                  data-document="request"
-                  data-status="not-submitted"
-                >
-                  <td>ภูริช วัฒนกุล</td>
-                  <td>สหกิจศึกษา</td>
-                  <td>คำร้องขอสหกิจศึกษา</td>
-                  <td>ยังไม่ได้ยื่น</td>
-                </tr>
-
-                <!-- =========================
-             หนังสือขอความอนุเคราะห์
-             ========================= -->
-
-                <tr
-                  data-type="coop"
-                  data-document="assistance"
-                  data-send-status="sent"
-                  data-response-status="waiting"
-                >
-                  <td>ณัฐวุฒิ เพชรรัตน์</td>
-                  <td>สหกิจศึกษา</td>
-                  <td>หนังสือขอความอนุเคราะห์</td>
-                  <td>ส่งแล้ว / รอตอบรับ</td>
-                </tr>
-
-                <tr
-                  data-type="coop"
-                  data-document="assistance"
-                  data-send-status="sent"
-                  data-response-status="accepted"
-                >
-                  <td>อรุณี พงษ์สุวรรณ</td>
-                  <td>สหกิจศึกษา</td>
-                  <td>หนังสือขอความอนุเคราะห์</td>
-                  <td>ส่งแล้ว / ตอบรับแล้ว</td>
-                </tr>
-
-                <tr
-                  data-type="coop"
-                  data-document="assistance"
-                  data-send-status="sent"
-                  data-response-status="rejected"
-                >
-                  <td>ชนากานต์ อินทร์แก้ว</td>
-                  <td>สหกิจศึกษา</td>
-                  <td>หนังสือขอความอนุเคราะห์</td>
-                  <td>ส่งแล้ว / ไม่ตอบรับ</td>
-                </tr>
-
-                <tr
-                  data-type="coop"
-                  data-document="assistance"
-                  data-send-status="not-sent"
-                  data-response-status=""
-                >
-                  <td>ภูริช วัฒนกุล</td>
-                  <td>สหกิจศึกษา</td>
-                  <td>หนังสือขอความอนุเคราะห์</td>
-                  <td>ยังไม่ส่ง</td>
-                </tr>
-
-                <!-- =========================
-             หนังสือส่งตัว
-             ========================= -->
-
-                <tr
-                  data-type="coop"
-                  data-document="send-letter"
-                  data-status="printed"
-                >
-                  <td>ชนากานต์ อินทร์แก้ว</td>
-                  <td>สหกิจศึกษา</td>
-                  <td>หนังสือส่งตัว</td>
-                  <td>พิมพ์แล้ว</td>
-                </tr>
-
-                <tr
-                  data-type="coop"
-                  data-document="send-letter"
-                  data-status="not-printed"
-                >
-                  <td>ภูริช วัฒนกุล</td>
-                  <td>สหกิจศึกษา</td>
-                  <td>หนังสือส่งตัว</td>
-                  <td>ยังไม่พิมพ์</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <!-- =====================================================
-     ตรวจสอบคำร้องสหกิจศึกษา
-     ===================================================== -->
-
-        <section class="content-panel" id="panel-approve">
-          <div class="panel-header">
-            <h2>ตรวจสอบคำร้องสหกิจศึกษา</h2>
-
-            <p>
-              ตรวจสอบรายละเอียดคำร้องขอสหกิจศึกษาที่นักศึกษายื่นเข้ามา
-              และสามารถพิมพ์เอกสารเป็น PDF ได้
-            </p>
-          </div>
-
-          <div class="table-wrapper">
-            <table class="mock-table" id="coopRequestTable">
+          <div class="of-table-wrap">
+            <table class="of-table of-company-table">
               <thead>
                 <tr>
-                  <th>ชื่อนักศึกษา</th>
-
-                  <th>รหัสนักศึกษา</th>
-
-                  <th>ประเภท</th>
-
                   <th>สถานประกอบการ</th>
+                  <th>จังหวัด</th>
+                  <th>ผู้ประสานงาน</th>
+                  <th>จำนวนรับ</th>
+                  <th>ดำเนินการ</th>
+                </tr>
+              </thead>
+              <tbody id="companyTableBody"></tbody>
+            </table>
+          </div>
 
-                  <th>ตำแหน่ง</th>
+          <div class="of-empty" id="companyTableEmpty">
+            <i class="fa-solid fa-building-circle-xmark"></i>
+            <strong>ไม่พบสถานประกอบการ</strong>
+            <span>ลองเปลี่ยนตัวกรองหรือเพิ่มข้อมูลใหม่</span>
+          </div>
+        </article>
+      </section>
 
-                  <th>วันที่ยื่น</th>
+      <!-- =======================================================
+           CALENDAR
+           ======================================================= -->
+      <section class="of-panel" id="panel-calendar">
+        <div class="of-page-heading">
+          <div>
+            <p class="of-eyebrow">ANNUAL CO-OP CALENDAR</p>
+            <h1>ปฏิทินสหกิจศึกษา</h1>
+            <p>กำหนดช่วงกิจกรรมทั้งภาคเรียนพร้อมกันในครั้งเดียว ไม่ต้องเพิ่มกิจกรรมทีละรายการ</p>
+          </div>
+        </div>
 
+        <div class="of-calendar-toolbar">
+          <div class="of-field">
+            <label for="calendarYearSelect">ปีการศึกษา</label>
+            <select id="calendarYearSelect"></select>
+          </div>
+
+          <div class="of-field">
+            <label for="calendarTermSelect">ภาคการศึกษา</label>
+            <select id="calendarTermSelect">
+              <option value="1">ภาค 1</option>
+              <option value="2">ภาค 2</option>
+              <option value="summer">ภาคฤดูร้อน</option>
+            </select>
+          </div>
+
+          <button class="of-btn of-btn-primary" type="button" onclick="saveCalendarSchedule()">
+            <i class="fa-solid fa-floppy-disk"></i>
+            บันทึกปฏิทินทั้งภาคเรียน
+          </button>
+        </div>
+
+        <article class="of-card">
+          <div class="of-card-header">
+            <div>
+              <h2>กำหนดช่วงกิจกรรมพร้อมกัน</h2>
+              <p>กำหนดวันเริ่ม–สิ้นสุดของกิจกรรมหลักทั้งหมด แล้วกดบันทึกครั้งเดียว</p>
+            </div>
+          </div>
+
+          <div class="of-calendar-bulk-editor" id="calendarBulkEditor"></div>
+        </article>
+
+        <article class="of-card of-calendar-preview-card">
+          <div class="of-card-header">
+            <div>
+              <h2>ตัวอย่าง Timeline ของภาคเรียน</h2>
+              <p>แสดงผลจากวันที่ที่กำหนดด้านบน</p>
+            </div>
+          </div>
+
+          <div class="of-calendar-timeline" id="calendarTimeline"></div>
+        </article>
+      </section>
+
+      <!-- =======================================================
+           TEACHERS
+           ======================================================= -->
+      <section class="of-panel" id="panel-teachers">
+        <div class="of-page-heading with-action">
+          <div>
+            <p class="of-eyebrow">TEACHER MANAGEMENT</p>
+            <h1>อาจารย์ในภาควิชา</h1>
+            <p>ค้นหา เพิ่ม แก้ไข และกำหนดสถานะการใช้งานบัญชีอาจารย์</p>
+          </div>
+
+          <button class="of-btn of-btn-primary" type="button" onclick="openTeacherEditor()">
+            <i class="fa-solid fa-user-plus"></i>
+            เพิ่มอาจารย์
+          </button>
+        </div>
+
+        <article class="of-card">
+          <div class="of-filter-grid three">
+            <div class="of-field">
+              <label for="teacherSearchInput">ค้นหา</label>
+              <div class="of-input-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input id="teacherSearchInput" type="text" placeholder="ชื่อ / Email" />
+              </div>
+            </div>
+
+            <div class="of-field">
+              <label for="teacherMajorFilter">สาขา</label>
+              <select id="teacherMajorFilter">
+                <option value="">ทั้งหมด</option>
+                <option value="IT">IT</option>
+                <option value="INE">INE</option>
+              </select>
+            </div>
+
+            <div class="of-field">
+              <label for="teacherStatusFilter">สถานะ</label>
+              <select id="teacherStatusFilter">
+                <option value="">ทั้งหมด</option>
+                <option value="active">ใช้งาน</option>
+                <option value="inactive">ไม่ใช้งาน</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="of-table-wrap">
+            <table class="of-table of-teacher-table">
+              <thead>
+                <tr>
+                  <th>อาจารย์</th>
+                  <th>Email</th>
+                  <th>สาขา</th>
                   <th>สถานะ</th>
-
-                  <th>การดำเนินการ</th>
+                  <th>ดำเนินการ</th>
                 </tr>
               </thead>
-
-              <tbody>
-                <!-- =====================================================
-             นักศึกษา 1
-             ===================================================== -->
-
-                <tr
-                  data-student-name="นางสาวพิมพ์ชนก สุขใจ"
-                  data-student-id="6702458196"
-                  data-major="INE"
-                  data-company="BlueWave Digital Co., Ltd."
-                  data-position="Frontend Developer"
-                  data-province="ชลบุรี"
-                  data-submit-date="3 ก.ย. 2569"
-                  data-email="studentcoop@email.kmutnb.ac.th"
-                  data-status="submitted"
-                >
-                  <td>นางสาวพิมพ์ชนก สุขใจ</td>
-
-                  <td>6702458196</td>
-
-                  <td>
-                    <span class="type-tag coop"> สหกิจศึกษา </span>
-                  </td>
-
-                  <td>BlueWave Digital Co., Ltd.</td>
-
-                  <td>Frontend Developer</td>
-
-                  <td>3 ก.ย. 2569</td>
-
-                  <td>
-                    <span class="tag tag-green request-status">
-                      ยื่นคำร้องแล้ว
-                    </span>
-                  </td>
-
-                  <td>
-                    <div class="action-group">
-                      <!-- ดูรายละเอียด -->
-
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="viewCoopRequestDetail(this)"
-                      >
-                        <i class="fa-solid fa-eye"></i>
-
-                        ดูรายละเอียด
-                      </button>
-
-                      <!-- พิมพ์ PDF -->
-
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="printCoopRequestPDF(this)"
-                      >
-                        <i class="fa-solid fa-file-pdf"></i>
-
-                        พิมพ์ PDF
-                      </button>
-
-                      <!-- ยกเลิกคำร้อง -->
-
-                      <button
-                        type="button"
-                        class="btn-mock-sm danger"
-                        onclick="cancelCoopRequest(this)"
-                      >
-                        <i class="fa-solid fa-ban"></i>
-
-                        ยกเลิกคำร้อง
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <!-- =====================================================
-             นักศึกษา 2
-             ===================================================== -->
-
-                <tr
-                  data-student-name="อรุณี พงษ์สุวรรณ"
-                  data-student-id="6702458202"
-                  data-major="IT"
-                  data-company="DataSphere Thailand"
-                  data-position="Data Analyst"
-                  data-province="กรุงเทพมหานคร"
-                  data-submit-date="2 ก.ย. 2569"
-                  data-email="arunee@kmutnb.ac.th"
-                  data-status="submitted"
-                >
-                  <td>อรุณี พงษ์สุวรรณ</td>
-
-                  <td>6702458202</td>
-
-                  <td>
-                    <span class="type-tag coop"> สหกิจศึกษา </span>
-                  </td>
-
-                  <td>DataSphere Thailand</td>
-
-                  <td>Data Analyst</td>
-
-                  <td>2 ก.ย. 2569</td>
-
-                  <td>
-                    <span class="tag tag-green request-status">
-                      ยื่นคำร้องแล้ว
-                    </span>
-                  </td>
-
-                  <td>
-                    <div class="action-group">
-                      <!-- ดูรายละเอียด -->
-
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="viewCoopRequestDetail(this)"
-                      >
-                        <i class="fa-solid fa-eye"></i>
-
-                        ดูรายละเอียด
-                      </button>
-
-                      <!-- พิมพ์ PDF -->
-
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="printCoopRequestPDF(this)"
-                      >
-                        <i class="fa-solid fa-file-pdf"></i>
-
-                        พิมพ์ PDF
-                      </button>
-
-                      <!-- ยกเลิกคำร้อง -->
-
-                      <button
-                        type="button"
-                        class="btn-mock-sm danger"
-                        onclick="cancelCoopRequest(this)"
-                      >
-                        <i class="fa-solid fa-ban"></i>
-
-                        ยกเลิกคำร้อง
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <!-- =====================================================
-             นักศึกษา 3
-             ===================================================== -->
-
-                <tr
-                  data-student-name="ภูริช วัฒนกุล"
-                  data-student-id="6702458208"
-                  data-major="INE"
-                  data-company="Business Intelligence Group"
-                  data-position="Business Analyst"
-                  data-province="กรุงเทพมหานคร"
-                  data-submit-date="30 ส.ค. 2569"
-                  data-email="purich@kmutnb.ac.th"
-                  data-status="submitted"
-                >
-                  <td>ภูริช วัฒนกุล</td>
-
-                  <td>6702458208</td>
-
-                  <td>
-                    <span class="type-tag coop"> สหกิจศึกษา </span>
-                  </td>
-
-                  <td>Business Intelligence Group</td>
-
-                  <td>Business Analyst</td>
-
-                  <td>30 ส.ค. 2569</td>
-
-                  <td>
-                    <span class="tag tag-green request-status">
-                      ยื่นคำร้องแล้ว
-                    </span>
-                  </td>
-
-                  <td>
-                    <div class="action-group">
-                      <!-- ดูรายละเอียด -->
-
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="viewCoopRequestDetail(this)"
-                      >
-                        <i class="fa-solid fa-eye"></i>
-
-                        ดูรายละเอียด
-                      </button>
-
-                      <!-- พิมพ์ PDF -->
-
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="printCoopRequestPDF(this)"
-                      >
-                        <i class="fa-solid fa-file-pdf"></i>
-
-                        พิมพ์ PDF
-                      </button>
-
-                      <!-- ยกเลิกคำร้อง -->
-
-                      <button
-                        type="button"
-                        class="btn-mock-sm danger"
-                        onclick="cancelCoopRequest(this)"
-                      >
-                        <i class="fa-solid fa-ban"></i>
-
-                        ยกเลิกคำร้อง
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <!-- =====================================================
-     จัดการเอกสารและฟอร์มตอบรับนักศึกษาสหกิจศึกษา
-     ===================================================== -->
-
-        <section class="content-panel" id="panel-print">
-          <div class="panel-header">
-            <h2>จัดการเอกสารสหกิจศึกษา</h2>
-
-            <p>
-              จัดการหนังสือขอความอนุเคราะห์และเอกสารส่งตัวนักศึกษาสหกิจศึกษา
-              พร้อมส่งฟอร์มตอบรับให้สถานประกอบการ
-            </p>
-          </div>
-
-          <div
-            class="officer-inline-05"
-          >
-            รายการเอกสาร
-          </div>
-
-          <div class="table-wrapper">
-            <table class="mock-table" id="printDocumentTable">
-              <thead>
-                <tr>
-                  <th class="officer-inline-06">ลำดับ</th>
-
-                  <th>ชื่อนักศึกษา</th>
-
-                  <th>ประเภทเอกสาร</th>
-
-                  <th>สถานประกอบการ</th>
-
-                  <th>สถานะการตอบรับ</th>
-
-                  <th>การดำเนินการ</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <!-- ================= รายการ 1 ================= -->
-
-                <tr data-response-status="not-sent">
-                  <td class="officer-inline-07">1</td>
-
-                  <td class="print-student-name">นางสาวพิมพ์ชนก สุขใจ</td>
-
-                  <td class="print-document-type">หนังสือขอความอนุเคราะห์</td>
-
-                  <td class="print-company-name">BlueWave Digital Co., Ltd.</td>
-
-                  <td class="response-status-cell">
-                    <span class="tag tag-muted response-status">
-                      ยังไม่ส่งฟอร์ม
-                    </span>
-                  </td>
-
-                  <td>
-                    <div class="action-group">
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="editPrintDocument(this)"
-                      >
-                        <i class="fa-solid fa-pen-to-square"></i>
-                        แก้ไข
-                      </button>
-
-                      <button
-                        type="button"
-                        class="btn-mock-sm danger"
-                        onclick="deletePrintDocument(this)"
-                      >
-                        <i class="fa-solid fa-trash"></i>
-                        ลบ
-                      </button>
-
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="sendResponseForm(this)"
-                      >
-                        <i class="fa-solid fa-paper-plane"></i>
-                        ส่งฟอร์มตอบรับ
-                      </button>
-
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="editResponseStatus(this)"
-                      >
-                        <i class="fa-solid fa-pen"></i>
-                        แก้ไขสถานะ
-                      </button>
-
-                      <button
-                        type="button"
-                        class="btn-mock-sm solid print-document-button"
-                        onclick="printDocumentRow(this)"
-                        disabled
-                      >
-                        <i class="fa-solid fa-print"></i>
-                        พิมพ์
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <!-- ================= รายการ 2 ================= -->
-
-                <tr data-response-status="waiting">
-                  <td class="officer-inline-08">2</td>
-
-                  <td class="print-student-name">อรุณี พงษ์สุวรรณ</td>
-
-                  <td class="print-document-type">หนังสือขอความอนุเคราะห์</td>
-
-                  <td class="print-company-name">DataSphere Thailand</td>
-
-                  <td class="response-status-cell">
-                    <span class="tag tag-muted response-status">
-                      รอตอบรับ
-                    </span>
-                  </td>
-
-                  <td>
-                    <div class="action-group">
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="editPrintDocument(this)"
-                      >
-                        <i class="fa-solid fa-pen-to-square"></i>
-                        แก้ไข
-                      </button>
-
-                      <button
-                        type="button"
-                        class="btn-mock-sm danger"
-                        onclick="deletePrintDocument(this)"
-                      >
-                        <i class="fa-solid fa-trash"></i>
-                        ลบ
-                      </button>
-
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="sendResponseForm(this)"
-                      >
-                        <i class="fa-solid fa-paper-plane"></i>
-                        ส่งฟอร์มอีกครั้ง
-                      </button>
-
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="editResponseStatus(this)"
-                      >
-                        <i class="fa-solid fa-pen"></i>
-                        แก้ไขสถานะ
-                      </button>
-
-                      <button
-                        type="button"
-                        class="btn-mock-sm solid print-document-button"
-                        onclick="printDocumentRow(this)"
-                        disabled
-                      >
-                        <i class="fa-solid fa-print"></i>
-                        พิมพ์
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <!-- ================= รายการ 3 ================= -->
-
-                <tr data-response-status="accepted">
-                  <td class="officer-inline-09">3</td>
-
-                  <td class="print-student-name">ภูริช วัฒนกุล</td>
-
-                  <td class="print-document-type">เอกสารส่งตัวนักศึกษา</td>
-
-                  <td class="print-company-name">
-                    Business Intelligence Group
-                  </td>
-
-                  <td class="response-status-cell">
-                    <span class="tag tag-green response-status">
-                      ตอบรับแล้ว
-                    </span>
-                  </td>
-
-                  <td>
-                    <div class="action-group">
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="editPrintDocument(this)"
-                      >
-                        <i class="fa-solid fa-pen-to-square"></i>
-                        แก้ไข
-                      </button>
-
-                      <button
-                        type="button"
-                        class="btn-mock-sm danger"
-                        onclick="deletePrintDocument(this)"
-                      >
-                        <i class="fa-solid fa-trash"></i>
-                        ลบ
-                      </button>
-
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="sendResponseForm(this)"
-                      >
-                        <i class="fa-solid fa-paper-plane"></i>
-                        ส่งฟอร์มอีกครั้ง
-                      </button>
-
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="editResponseStatus(this)"
-                      >
-                        <i class="fa-solid fa-pen"></i>
-                        แก้ไขสถานะ
-                      </button>
-
-                      <button
-                        type="button"
-                        class="btn-mock-sm solid print-document-button"
-                        onclick="printDocumentRow(this)"
-                      >
-                        <i class="fa-solid fa-print"></i>
-                        พิมพ์
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <!-- ================= รายการ 4 ================= -->
-
-                <tr data-response-status="rejected">
-                  <td class="officer-inline-10">4</td>
-
-                  <td class="print-student-name">ชนากานต์ อินทร์แก้ว</td>
-
-                  <td class="print-document-type">หนังสือขอความอนุเคราะห์</td>
-
-                  <td class="print-company-name">Nova Cloud Labs</td>
-
-                  <td class="response-status-cell">
-                    <span class="tag tag-red response-status"> ไม่ตอบรับ </span>
-                  </td>
-
-                  <td>
-                    <div class="action-group">
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="editPrintDocument(this)"
-                      >
-                        <i class="fa-solid fa-pen-to-square"></i>
-                        แก้ไข
-                      </button>
-
-                      <button
-                        type="button"
-                        class="btn-mock-sm danger"
-                        onclick="deletePrintDocument(this)"
-                      >
-                        <i class="fa-solid fa-trash"></i>
-                        ลบ
-                      </button>
-
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="sendResponseForm(this)"
-                      >
-                        <i class="fa-solid fa-paper-plane"></i>
-                        ส่งฟอร์มอีกครั้ง
-                      </button>
-
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="editResponseStatus(this)"
-                      >
-                        <i class="fa-solid fa-pen"></i>
-                        แก้ไขสถานะ
-                      </button>
-
-                      <button
-                        type="button"
-                        class="btn-mock-sm solid print-document-button"
-                        onclick="printDocumentRow(this)"
-                        disabled
-                      >
-                        <i class="fa-solid fa-print"></i>
-                        พิมพ์
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
+              <tbody id="teacherTableBody"></tbody>
             </table>
           </div>
 
-          <div class="doc-status-note">
-            <i class="fa-solid fa-circle-info"></i>
-
-            <span>
-              ปุ่มพิมพ์เอกสารจะสามารถใช้งานได้
-              เมื่อสถานประกอบการตอบรับนักศึกษาสหกิจศึกษาแล้วเท่านั้น
-            </span>
+          <div class="of-empty" id="teacherTableEmpty">
+            <i class="fa-solid fa-user-slash"></i>
+            <strong>ไม่พบข้อมูลอาจารย์</strong>
+            <span>ลองเปลี่ยนคำค้นหาหรือตัวกรอง</span>
           </div>
-        </section>
-        <!-- =====================================================
-     จัดการหนังสือส่งตัว
-     ===================================================== -->
+        </article>
+      </section>
 
-        <section class="content-panel" id="panel-send-document">
-          <div class="panel-header">
-            <h2>จัดการหนังสือส่งตัว</h2>
-
-            <p>ตรวจสอบและพิมพ์หนังสือส่งตัวนักศึกษาสหกิจศึกษา</p>
+      <!-- =======================================================
+           SCORING
+           ======================================================= -->
+      <section class="of-panel" id="panel-scoring">
+        <div class="of-page-heading">
+          <div>
+            <p class="of-eyebrow">SCORING SETTINGS</p>
+            <h1>เกณฑ์และคะแนนสหกิจศึกษา</h1>
+            <p>กำหนดสัดส่วนคะแนนหลักของสถานประกอบการและภาควิชาได้เอง โดยผลรวมต้องเท่ากับ 100% และคะแนนย่อยด้านล่างจะปรับตามสัดส่วนที่กำหนด</p>
           </div>
+        </div>
 
-          <div class="table-wrapper">
-            <table class="mock-table" id="sendDocumentTable">
-              <thead>
-                <tr>
-                  <th class="officer-inline-11">ลำดับ</th>
-
-                  <th>ชื่อนักศึกษา</th>
-
-                  <th>รหัสนักศึกษา</th>
-
-                  <th>สถานประกอบการ</th>
-
-                  <th>ตำแหน่ง</th>
-
-                  <th>สถานะ</th>
-
-                  <th>การดำเนินการ</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <!-- ================= รายการ 1 ================= -->
-
-                <tr>
-                  <td class="officer-inline-12">1</td>
-
-                  <td class="send-student-name">นางสาวพิมพ์ชนก สุขใจ</td>
-
-                  <td>6702458196</td>
-
-                  <td class="send-company-name">BlueWave Digital Co., Ltd.</td>
-
-                  <td>Frontend Developer</td>
-
-                  <td>
-                    <span class="tag tag-green"> พร้อมพิมพ์ </span>
-                  </td>
-
-                  <td>
-                    <button
-                      type="button"
-                      class="btn-mock-sm solid"
-                      onclick="printSendDocument(this)"
-                    >
-                      <i class="fa-solid fa-print"></i>
-                      พิมพ์
-                    </button>
-                  </td>
-                </tr>
-
-                <!-- ================= รายการ 2 ================= -->
-
-                <tr>
-                  <td class="officer-inline-13">2</td>
-
-                  <td class="send-student-name">อรุณี พงษ์สุวรรณ</td>
-
-                  <td>6702458202</td>
-
-                  <td class="send-company-name">DataSphere Thailand</td>
-
-                  <td>Data Analyst</td>
-
-                  <td>
-                    <span class="tag tag-green"> พร้อมพิมพ์ </span>
-                  </td>
-
-                  <td>
-                    <button
-                      type="button"
-                      class="btn-mock-sm solid"
-                      onclick="printSendDocument(this)"
-                    >
-                      <i class="fa-solid fa-print"></i>
-                      พิมพ์
-                    </button>
-                  </td>
-                </tr>
-
-                <!-- ================= รายการ 3 ================= -->
-
-                <tr>
-                  <td class="officer-inline-14">3</td>
-
-                  <td class="send-student-name">ภูริช วัฒนกุล</td>
-
-                  <td>6702458208</td>
-
-                  <td class="send-company-name">Business Intelligence Group</td>
-
-                  <td>Business Analyst</td>
-
-                  <td>
-                    <span class="tag tag-green"> พร้อมพิมพ์ </span>
-                  </td>
-
-                  <td>
-                    <button
-                      type="button"
-                      class="btn-mock-sm solid"
-                      onclick="printSendDocument(this)"
-                    >
-                      <i class="fa-solid fa-print"></i>
-                      พิมพ์
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-        <!-- =====================================================
-             CHATBOT
-             ===================================================== -->
-
-        <section class="content-panel" id="panel-chatbot">
-          <div class="panel-header">
-            <h2>Chatbot ตรวจสอบสถานะ</h2>
-
-            <p>สอบถามข้อมูลสถานะเอกสารของนักศึกษา</p>
+        <div class="of-scoring-toolbar">
+          <div class="of-field">
+            <label for="scoringYearSelect">ปีการศึกษา</label>
+            <select id="scoringYearSelect"></select>
           </div>
 
-          <div class="chatbot-panel">
-            <div
-              class="chat-transcript"
-              id="chatbotTranscript"
-              aria-live="polite"
-            >
-              <div class="ct-msg bot">
-                สวัสดีค่ะ สามารถสอบถามสถานะเอกสารของนักศึกษาได้ เช่น “สมชาย ใจดี
-                สถานะอะไร” หรือ “มีเอกสารที่ยังไม่ส่งกี่รายการ”
+          <div class="of-field">
+            <label for="scoringMajorSelect">สาขา</label>
+            <select id="scoringMajorSelect">
+              <option value="IT">IT</option>
+              <option value="INE">INE</option>
+            </select>
+          </div>
+
+          <button class="of-btn of-btn-outline" type="button" onclick="createScoringDraftFromCurrent()">
+            <i class="fa-solid fa-copy"></i>
+            สร้างฉบับร่างจากเกณฑ์ปัจจุบัน
+          </button>
+        </div>
+
+        <article class="of-card of-score-weight-card">
+          <div class="of-card-header">
+            <div>
+              <h2>กำหนดสัดส่วนคะแนนหลัก</h2>
+              <p>กำหนดได้ว่าสถานประกอบการและภาควิชามีน้ำหนักกี่เปอร์เซ็นต์ โดยรวมกันต้องเท่ากับ 100%</p>
+            </div>
+          </div>
+
+          <div class="of-score-weight-grid">
+            <div class="of-field">
+              <label for="companyWeightInput">สถานประกอบการ (%)</label>
+              <input id="companyWeightInput" type="number" min="0" max="100" step="1" />
+            </div>
+
+            <div class="of-field">
+              <label for="departmentWeightInput">ภาควิชา (%)</label>
+              <input id="departmentWeightInput" type="number" min="0" max="100" step="1" />
+            </div>
+
+            <div class="of-score-weight-total" id="scoreWeightTotalBox">
+              <span>รวมสัดส่วน</span>
+              <strong id="scoreWeightTotalValue">100%</strong>
+              <small id="scoreWeightTotalMessage">สัดส่วนถูกต้อง</small>
+            </div>
+          </div>
+        </article>
+
+        <div class="of-grid-scoring">
+          <article class="of-card">
+            <div class="of-card-header">
+              <div>
+                <h2>กำหนดคะแนนแต่ละส่วน</h2>
+                <p>คะแนนย่อยของแต่ละกลุ่มต้องรวมให้เท่ากับสัดส่วนหลักที่กำหนด และคะแนนรวมทั้งหมดต้องเท่ากับ 100%</p>
+              </div>
+
+              <span class="of-status of-status-muted" id="scoringVersionStatus">ฉบับร่าง</span>
+            </div>
+
+            <div class="of-score-editor" id="scoreEditor"></div>
+
+            <div class="of-score-total-box" id="scoreTotalBox">
+              <div>
+                <span>คะแนนรวม</span>
+                <strong id="scoreTotalValue">0 / 100</strong>
+              </div>
+              <span id="scoreTotalMessage">กำลังตรวจสอบ</span>
+            </div>
+
+            <div class="of-form-actions">
+              <button class="of-btn of-btn-primary" type="button" id="saveScoringButton" onclick="saveScoringScheme()">
+                <i class="fa-solid fa-floppy-disk"></i>
+                บันทึกเกณฑ์คะแนน
+              </button>
+            </div>
+          </article>
+
+          <article class="of-card">
+            <div class="of-card-header">
+              <div>
+                <h2>ประวัติเวอร์ชัน</h2>
+                <p>เก็บเกณฑ์แยกตามปีและสาขา</p>
               </div>
             </div>
 
-            <div class="chatbot-input-row">
-              <input
-                type="text"
-                id="chatbotInput"
-                class="chatbot-input"
-                placeholder="พิมพ์คำถาม เช่น สมชาย ใจดี สถานะอะไร"
-                autocomplete="off"
-              />
+            <div class="of-version-list" id="scoringVersionList"></div>
+          </article>
+        </div>
+      </section>
 
-              <button type="button" class="chatbot-send" id="chatbotSendButton">
+      <!-- =======================================================
+           CHATBOT
+           ======================================================= -->
+      <section class="of-panel" id="panel-chatbot">
+        <div class="of-page-heading">
+          <div>
+            <p class="of-eyebrow">DOCUMENT STATUS ASSISTANT</p>
+            <h1>ผู้ช่วยสถานะเอกสาร</h1>
+            <p>สอบถามสถานะคำร้อง หนังสือขอความอนุเคราะห์ หนังสือส่งตัว และงานค้างของเจ้าหน้าที่</p>
+          </div>
+        </div>
+
+        <div class="of-chat-page">
+          <aside class="of-chat-help-card">
+            <div class="of-chatbot-icon"><i class="fa-solid fa-robot"></i></div>
+            <h2>KIWI Officer Assistant</h2>
+            <p>ตัวอย่างคำถาม</p>
+
+            <div class="of-quick-questions">
+              <button type="button" onclick="askOfficerQuickQuestion('มีคำร้องไหนรอดำเนินการบ้าง')">มีคำร้องไหนรอดำเนินการบ้าง?</button>
+              <button type="button" onclick="askOfficerQuickQuestion('นักศึกษาคนไหนรอหนังสือส่งตัว')">นักศึกษาคนไหนรอหนังสือส่งตัว?</button>
+              <button type="button" onclick="askOfficerQuickQuestion('มีหนังสือขอความอนุเคราะห์ที่ยังไม่ส่งไหม')">มีหนังสือขอความอนุเคราะห์ที่ยังไม่ส่งไหม?</button>
+              <button type="button" onclick="askOfficerQuickQuestion('สถานะเอกสารของพิมพ์ชนก')">สถานะเอกสารของพิมพ์ชนก</button>
+            </div>
+          </aside>
+
+          <article class="of-card of-chat-card">
+            <div class="of-chat-messages" id="officerChatMessages"></div>
+
+            <form id="officerChatForm" class="of-chat-input-row">
+              <input id="officerChatInput" type="text" placeholder="พิมพ์คำถามเกี่ยวกับสถานะเอกสาร..." autocomplete="off" />
+              <button class="of-btn of-btn-primary" type="submit">
                 <i class="fa-solid fa-paper-plane"></i>
                 ส่ง
               </button>
-            </div>
-
-            <div class="chatbot-quick">
-              <button
-                type="button"
-                data-chat-question="มีเอกสารที่ยังไม่ส่งกี่รายการ"
-              >
-                เอกสารที่ยังไม่ส่ง
-              </button>
-
-              <button
-                type="button"
-                data-chat-question="มีคำร้องรอตรวจสอบกี่รายการ"
-              >
-                คำร้องรอตรวจสอบ
-              </button>
-
-              <button
-                type="button"
-                data-chat-question="มีเอกสารส่งแล้วกี่รายการ"
-              >
-                เอกสารที่ส่งแล้ว
-              </button>
-            </div>
-
-            <div class="chatbot-note">
-              ระบบจะอ่านข้อมูลจากตารางเอกสารในหน้านี้โดยตรง
-            </div>
-          </div>
-        </section>
-
-        <!-- =====================================================
-             จัดการสถานประกอบการ
-             แก้ไขเฉพาะส่วนนี้
-             ===================================================== -->
-
-        <section class="content-panel" id="panel-companies">
-          <div class="panel-header">
-            <h2>จัดการสถานประกอบการ</h2>
-
-            <p>
-              เพิ่ม แก้ไข และลบข้อมูลสถานประกอบการ
-              พร้อมรายละเอียดตำแหน่งงานที่เปิดรับนักศึกษา
-            </p>
-          </div>
-
-          <!-- ================= สรุปข้อมูล ================= -->
-
-          <div class="company-summary">
-            <div class="company-summary-card">
-              <span> สถานประกอบการทั้งหมด </span>
-
-              <b id="companyCount"> 3 แห่ง </b>
-            </div>
-
-            <div class="company-summary-card">
-              <span> ตำแหน่งงานที่เปิดรับ </span>
-
-              <b id="positionCount"> 3 ตำแหน่ง </b>
-            </div>
-
-            <div class="company-summary-card">
-              <span> จำนวนที่รับรวม </span>
-
-              <b id="quotaCount"> 10 คน </b>
-            </div>
-          </div>
-
-          <!-- ================= ตาราง ================= -->
-
-          <div class="table-wrapper">
-            <table class="mock-table company-table">
-              <thead>
-                <tr>
-                  <th>สถานประกอบการ / ติดต่อ</th>
-
-                  <th>จังหวัด</th>
-
-                  <th>ตำแหน่งงาน</th>
-
-                  <th>หมวดหมู่งาน</th>
-
-                  <th>จำนวนที่รับ</th>
-
-                  <th>ค่าตอบแทน</th>
-
-                  <th>รูปแบบการทำงาน</th>
-
-                  <th>วันฝึก/สัปดาห์</th>
-
-                  <th>การดำเนินการ</th>
-                </tr>
-              </thead>
-
-              <tbody id="companyTableBody">
-                <!-- ================= บริษัท 1 ================= -->
-
-                <tr
-                  data-company-name="บริษัท เทค โซลูชันส์ จำกัด"
-                  data-company-email="hr@techsolutions.co.th"
-                  data-company-phone="02-123-4567"
-                  data-address-no="99/9"
-                  data-address-moo="5"
-                  data-address-subdistrict="คลองหนึ่ง"
-                  data-address-district="คลองหลวง"
-                  data-address-province="ปทุมธานี"
-                  data-position="Frontend Developer Intern"
-                  data-category="Software Development"
-                  data-quota="4"
-                  data-compensation="300 บาท/วัน"
-                  data-work-formats="Onsite,Hybrid"
-                  data-days-per-week="5"
-                >
-                  <td class="company-name-cell">
-                    <b> บริษัท เทค โซลูชันส์ จำกัด </b>
-
-                    <small> hr@techsolutions.co.th </small>
-
-                    <small> 02-123-4567 </small>
-                  </td>
-
-                  <td>ปทุมธานี</td>
-
-                  <td class="company-position-cell">
-                    <b> Frontend Developer Intern </b>
-
-                    <small> Software Development </small>
-                  </td>
-
-                  <td>Software Development</td>
-
-                  <td>4 คน</td>
-
-                  <td>300 บาท/วัน</td>
-
-                  <td>
-                    <div class="work-format-list">
-                      <span class="work-format-badge"> Onsite </span>
-
-                      <span class="work-format-badge"> Hybrid </span>
-                    </div>
-                  </td>
-
-                  <td>5 วัน</td>
-
-                  <td>
-                    <div class="action-group">
-                      <button class="btn-mock-sm" onclick="editCompany(this)">
-                        <i class="fa-solid fa-pen"></i>
-                        แก้ไข
-                      </button>
-
-                      <button
-                        class="btn-mock-sm danger"
-                        onclick="deleteCompany(this)"
-                      >
-                        <i class="fa-solid fa-trash"></i>
-                        ลบ
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <!-- ================= บริษัท 2 ================= -->
-
-                <tr
-                  data-company-name="Cloud Matrix Thailand"
-                  data-company-email="career@cloudmatrix.co.th"
-                  data-company-phone="02-888-7788"
-                  data-address-no="88"
-                  data-address-moo=""
-                  data-address-subdistrict="บางนาเหนือ"
-                  data-address-district="บางนา"
-                  data-address-province="กรุงเทพมหานคร"
-                  data-position="Cloud Support Intern"
-                  data-category="Cloud / Infrastructure"
-                  data-quota="3"
-                  data-compensation="8,000 บาท/เดือน"
-                  data-work-formats="Onsite,Work from Home,Hybrid"
-                  data-days-per-week="5"
-                >
-                  <td class="company-name-cell">
-                    <b> Cloud Matrix Thailand </b>
-
-                    <small> career@cloudmatrix.co.th </small>
-
-                    <small> 02-888-7788 </small>
-                  </td>
-
-                  <td>กรุงเทพมหานคร</td>
-
-                  <td class="company-position-cell">
-                    <b> Cloud Support Intern </b>
-
-                    <small> Cloud / Infrastructure </small>
-                  </td>
-
-                  <td>Cloud / Infrastructure</td>
-
-                  <td>3 คน</td>
-
-                  <td>8,000 บาท/เดือน</td>
-
-                  <td>
-                    <div class="work-format-list">
-                      <span class="work-format-badge"> Onsite </span>
-
-                      <span class="work-format-badge"> Work from Home </span>
-
-                      <span class="work-format-badge"> Hybrid </span>
-                    </div>
-                  </td>
-
-                  <td>5 วัน</td>
-
-                  <td>
-                    <div class="action-group">
-                      <button class="btn-mock-sm" onclick="editCompany(this)">
-                        <i class="fa-solid fa-pen"></i>
-                        แก้ไข
-                      </button>
-
-                      <button
-                        class="btn-mock-sm danger"
-                        onclick="deleteCompany(this)"
-                      >
-                        <i class="fa-solid fa-trash"></i>
-                        ลบ
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <!-- ================= บริษัท 3 ================= -->
-
-                <tr
-                  data-company-name="AppWorks Innovation"
-                  data-company-email="intern@appworks.co.th"
-                  data-company-phone="053-555-777"
-                  data-address-no="15/2"
-                  data-address-moo="2"
-                  data-address-subdistrict="สุเทพ"
-                  data-address-district="เมืองเชียงใหม่"
-                  data-address-province="เชียงใหม่"
-                  data-position="Mobile Application Developer"
-                  data-category="Mobile Application"
-                  data-quota="3"
-                  data-compensation="250 บาท/วัน"
-                  data-work-formats="Onsite,Work from Home"
-                  data-days-per-week="5"
-                >
-                  <td class="company-name-cell">
-                    <b> AppWorks Innovation </b>
-
-                    <small> intern@appworks.co.th </small>
-
-                    <small> 053-555-777 </small>
-                  </td>
-
-                  <td>เชียงใหม่</td>
-
-                  <td class="company-position-cell">
-                    <b> Mobile Application Developer </b>
-
-                    <small> Mobile Application </small>
-                  </td>
-
-                  <td>Mobile Application</td>
-
-                  <td>3 คน</td>
-
-                  <td>250 บาท/วัน</td>
-
-                  <td>
-                    <div class="work-format-list">
-                      <span class="work-format-badge"> Onsite </span>
-
-                      <span class="work-format-badge"> Work from Home </span>
-                    </div>
-                  </td>
-
-                  <td>5 วัน</td>
-
-                  <td>
-                    <div class="action-group">
-                      <button class="btn-mock-sm" onclick="editCompany(this)">
-                        <i class="fa-solid fa-pen"></i>
-                        แก้ไข
-                      </button>
-
-                      <button
-                        class="btn-mock-sm danger"
-                        onclick="deleteCompany(this)"
-                      >
-                        <i class="fa-solid fa-trash"></i>
-                        ลบ
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            </form>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- FLOATING CHAT -->
+  <button class="of-floating-chat" type="button" onclick="openOfficerChatDrawer()" aria-label="เปิดผู้ช่วยสถานะเอกสาร">
+    <i class="fa-solid fa-comments"></i>
+  </button>
+
+  <div class="of-chat-drawer" id="officerChatDrawer" aria-hidden="true">
+    <div class="of-chat-drawer-header">
+      <div>
+        <strong>KIWI Officer Assistant</strong>
+        <span>ผู้ช่วยตรวจสอบสถานะเอกสาร</span>
+      </div>
+
+      <button type="button" onclick="closeOfficerChatDrawer()">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="of-chat-drawer-messages" id="officerChatDrawerMessages"></div>
+
+    <form id="officerChatDrawerForm" class="of-chat-drawer-form">
+      <input id="officerChatDrawerInput" type="text" placeholder="พิมพ์คำถาม..." autocomplete="off" />
+      <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
+    </form>
+  </div>
+
+  <!-- =========================================================
+       STUDENT DOCUMENT DETAIL MODAL
+       ========================================================= -->
+  <div class="of-modal" id="studentDocumentModal" aria-hidden="true">
+    <div class="of-modal-dialog of-modal-lg">
+      <div class="of-modal-header">
+        <div>
+          <p class="of-eyebrow">DOCUMENT TIMELINE</p>
+          <h2 id="studentDocumentModalTitle">สถานะเอกสารนักศึกษา</h2>
+        </div>
+        <button class="of-modal-close" type="button" data-close-modal>
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="of-modal-body" id="studentDocumentModalBody"></div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       REQUEST DETAIL MODAL
+       ========================================================= -->
+  <div class="of-modal" id="requestDetailModal" aria-hidden="true">
+    <div class="of-modal-dialog of-modal-lg">
+      <div class="of-modal-header">
+        <div>
+          <p class="of-eyebrow">CO-OP REQUEST</p>
+          <h2 id="requestDetailModalTitle">รายละเอียดคำร้อง</h2>
+        </div>
+        <button class="of-modal-close" type="button" data-close-modal>
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="of-modal-body" id="requestDetailModalBody"></div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       CANCEL REQUEST MODAL
+       ========================================================= -->
+  <div class="of-modal" id="cancelRequestModal" aria-hidden="true">
+    <div class="of-modal-dialog">
+      <div class="of-modal-header">
+        <div>
+          <p class="of-eyebrow">CANCEL REQUEST</p>
+          <h2>ยกเลิกคำร้องสหกิจศึกษา</h2>
+        </div>
+        <button class="of-modal-close" type="button" data-close-modal>
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="cancelRequestForm">
+        <div class="of-modal-body">
+          <input id="cancelRequestId" type="hidden" />
+
+          <div class="of-request-cancel-preview" id="cancelRequestPreview"></div>
+
+          <div class="of-field">
+            <label for="cancelRequestReason">เหตุผลในการยกเลิก</label>
+            <textarea id="cancelRequestReason" rows="4" required placeholder="ระบุเหตุผลเพื่อใช้ตรวจสอบย้อนหลัง"></textarea>
           </div>
 
-          <button
-            class="btn-mock-sm solid officer-inline-15"
-            onclick="addCompany()"
-          >
-            <i class="fa-solid fa-plus"></i>
-            เพิ่มสถานประกอบการ / ตำแหน่งงาน
+          <div class="of-info-banner danger">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span>ระบบจะบันทึกผู้ดำเนินการ วันเวลา และเหตุผลการยกเลิกไว้ในประวัติ</span>
+          </div>
+        </div>
+
+        <div class="of-modal-footer">
+          <button class="of-btn of-btn-outline" type="button" onclick="closeOfficerModal('cancelRequestModal')">กลับ</button>
+          <button class="of-btn of-btn-danger" type="submit">
+            <i class="fa-solid fa-ban"></i>
+            ยืนยันยกเลิกคำร้อง
           </button>
-        </section>
+        </div>
+      </form>
+    </div>
+  </div>
 
-        <!-- =====================================================
-     ปฏิทินกิจกรรม
-     ===================================================== -->
+  <!-- =========================================================
+       DOCUMENT EDITOR MODAL
+       ========================================================= -->
+  <div class="of-modal" id="documentEditorModal" aria-hidden="true">
+    <div class="of-modal-dialog of-modal-xl">
+      <div class="of-modal-header">
+        <div>
+          <p class="of-eyebrow">DOCUMENT MANAGEMENT</p>
+          <h2 id="documentEditorTitle">จัดทำเอกสาร</h2>
+        </div>
+        <button class="of-modal-close" type="button" data-close-modal>
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
 
-        <section class="content-panel" id="panel-calendar">
-          <div class="panel-header">
-            <h2>ปฏิทินกิจกรรม</h2>
+      <form id="documentEditorForm">
+        <div class="of-modal-body">
+          <input id="documentEditorId" type="hidden" />
+          <input id="documentEditorType" type="hidden" />
 
-            <p>กำหนดช่วงเวลาสำคัญของการสหกิจศึกษาในแต่ละภาคการศึกษา</p>
+          <div class="of-form-grid three">
+            <div class="of-field">
+              <label for="documentStudentSelect">นักศึกษา</label>
+              <select id="documentStudentSelect" required></select>
+            </div>
+
+            <div class="of-field">
+              <label for="documentDate">วันที่จัดทำ</label>
+              <input id="documentDate" type="date" required />
+            </div>
+
+            <div class="of-field full">
+              <label for="documentSubject">เรื่อง</label>
+              <input id="documentSubject" type="text" required />
+            </div>
+
+            <div class="of-field">
+              <label for="documentAttention">เรียน</label>
+              <input id="documentAttention" type="text" required />
+            </div>
+
+            <div class="of-field full">
+              <label for="documentNote">หมายเหตุ</label>
+              <textarea id="documentNote" rows="3"></textarea>
+            </div>
           </div>
+        </div>
 
-          <div class="table-wrapper">
-            <table class="mock-table">
-              <thead>
-                <tr>
-                  <th>กิจกรรม</th>
-                  <th>วันที่/ช่วงเวลา</th>
-                  <th>กลุ่มเป้าหมาย</th>
-                  <th>การดำเนินการ</th>
-                </tr>
-              </thead>
-
-              <tbody id="calendarTableBody">
-                <!-- กิจกรรม 1 -->
-                <tr>
-                  <td>
-                    <div class="calendar-title">
-                      <span class="calendar-dot blue"></span>
-                      กำหนดส่งเอกสารคำร้องสหกิจศึกษา
-                    </div>
-                  </td>
-
-                  <td>1–15 ส.ค. 2569</td>
-
-                  <td>นักศึกษาสหกิจศึกษา</td>
-
-                  <td>
-                    <div class="action-group">
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="editCalendar(this)"
-                      >
-                        <i class="fa-solid fa-pen"></i>
-                        แก้ไข
-                      </button>
-
-                      <button
-                        type="button"
-                        class="btn-mock-sm danger"
-                        onclick="deleteRow(this)"
-                      >
-                        <i class="fa-solid fa-trash"></i>
-                        ลบ
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <!-- กิจกรรม 2 -->
-                <tr>
-                  <td>
-                    <div class="calendar-title">
-                      <span class="calendar-dot orange"></span>
-                      วันเริ่มสหกิจศึกษา
-                    </div>
-                  </td>
-
-                  <td>1 ก.ย. 2569</td>
-
-                  <td>นักศึกษาสหกิจศึกษา</td>
-
-                  <td>
-                    <div class="action-group">
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="editCalendar(this)"
-                      >
-                        <i class="fa-solid fa-pen"></i>
-                        แก้ไข
-                      </button>
-
-                      <button
-                        type="button"
-                        class="btn-mock-sm danger"
-                        onclick="deleteRow(this)"
-                      >
-                        <i class="fa-solid fa-trash"></i>
-                        ลบ
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <!-- กิจกรรม 3 -->
-                <tr>
-                  <td>
-                    <div class="calendar-title">
-                      <span class="calendar-dot green"></span>
-                      กำหนดส่งเล่มโครงการและโปสเตอร์
-                    </div>
-                  </td>
-
-                  <td>1–10 ธ.ค. 2569</td>
-
-                  <td>นักศึกษาสหกิจศึกษา</td>
-
-                  <td>
-                    <div class="action-group">
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="editCalendar(this)"
-                      >
-                        <i class="fa-solid fa-pen"></i>
-                        แก้ไข
-                      </button>
-
-                      <button
-                        type="button"
-                        class="btn-mock-sm danger"
-                        onclick="deleteRow(this)"
-                      >
-                        <i class="fa-solid fa-trash"></i>
-                        ลบ
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <button
-            type="button"
-            class="btn-mock-sm solid officer-inline-16"
-            onclick="addCalendar()"
-          >
-            <i class="fa-solid fa-plus"></i>
-            เพิ่มกำหนดการ
-          </button>
-        </section>
-
-        <!-- =====================================================
-     จัดการข้อมูลอาจารย์
-     ===================================================== -->
-
-        <section class="content-panel" id="panel-lecturers">
-          <div class="panel-header">
-            <h2>จัดการข้อมูลอาจารย์</h2>
-
-            <p>เพิ่ม แก้ไข และลบข้อมูลอาจารย์ในภาควิชา</p>
-          </div>
-
-          <!-- ================= ค้นหา / เพิ่มอาจารย์ ================= -->
-
-          <div
-            class="officer-inline-17"
-          >
-            <input
-              type="text"
-              id="lecturerSearch"
-              placeholder="ค้นหาชื่ออาจารย์..."
-              class="officer-inline-18"
-            />
-
-            <button
-              type="button"
-              class="btn-mock-sm solid"
-              onclick="addLecturer()"
-            >
-              <i class="fa-solid fa-plus"></i>
-              เพิ่มอาจารย์
+        <div class="of-modal-footer split">
+          <button class="of-btn of-btn-outline" type="button" onclick="closeOfficerModal('documentEditorModal')">ปิด</button>
+          <div>
+            <button class="of-btn of-btn-outline" type="button" onclick="saveManagedDocument('draft')">
+              <i class="fa-solid fa-file-pen"></i>
+              บันทึกฉบับร่าง
+            </button>
+            <button class="of-btn of-btn-primary" type="submit">
+              <i class="fa-solid fa-floppy-disk"></i>
+              <span id="documentSubmitButtonText">บันทึกเอกสาร</span>
             </button>
           </div>
-
-          <!-- ================= ตารางอาจารย์ ================= -->
-
-          <div class="table-wrapper">
-            <table class="mock-table">
-              <thead>
-                <tr>
-                  <th>ชื่อ-นามสกุล</th>
-
-                  <th>อีเมล</th>
-
-                  <th class="status-cell">สถานะ</th>
-
-                  <th>การดำเนินการ</th>
-                </tr>
-              </thead>
-
-              <tbody id="lecturerTableBody">
-                <!-- 1 -->
-                <tr data-password="password123">
-                  <td>
-                    <b> ผศ.ดร.ขนิษฐา นามี </b>
-
-                    <div
-                      class="officer-inline-19"
-                    >
-                      หัวหน้าภาควิชา
-                    </div>
-                  </td>
-
-                  <td>head@university.ac.th</td>
-
-                  <td class="status-cell">
-                    <span class="tag tag-green"> ใช้งาน </span>
-                  </td>
-
-                  <td>
-                    <div class="action-group">
-                      <button
-                        type="button"
-                        class="btn-mock-sm"
-                        onclick="editLecturer(this)"
-                      >
-                        <i class="fa-solid fa-pen"></i>
-                        แก้ไข
-                      </button>
-
-                      <button
-                        type="button"
-                        class="btn-mock-sm danger"
-                        onclick="deleteRow(this)"
-                      >
-                        <i class="fa-solid fa-trash"></i>
-                        ลบ
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <!-- 2 -->
-                <tr data-password="password123">
-                  <td>ผศ.พีระศักดิ์ เสรีกุล</td>
-                  <td>-</td>
-
-                  <td class="status-cell">
-                    <span class="tag tag-green"> ใช้งาน </span>
-                  </td>
-
-                  <td>
-                    <div class="action-group">
-                      <button class="btn-mock-sm" onclick="editLecturer(this)">
-                        <i class="fa-solid fa-pen"></i>
-                        แก้ไข
-                      </button>
-
-                      <button
-                        class="btn-mock-sm danger"
-                        onclick="deleteRow(this)"
-                      >
-                        <i class="fa-solid fa-trash"></i>
-                        ลบ
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <!-- 7 -->
-                <tr data-password="password123">
-                  <td>ผศ.ดร.วันทนี ประจวบศุภกิจ</td>
-                  <td>-</td>
-
-                  <td class="status-cell">
-                    <span class="tag tag-green">ใช้งาน</span>
-                  </td>
-
-                  <td>
-                    <div class="action-group">
-                      <button class="btn-mock-sm" onclick="editLecturer(this)">
-                        <i class="fa-solid fa-pen"></i>
-                        แก้ไข
-                      </button>
-
-                      <button
-                        class="btn-mock-sm danger"
-                        onclick="deleteRow(this)"
-                      >
-                        <i class="fa-solid fa-trash"></i>
-                        ลบ
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <!-- 14 -->
-                <tr data-password="password123">
-                  <td>ผศ.ดร.สิวาลัย จินเจือ</td>
-                  <td>-</td>
-
-                  <td class="status-cell">
-                    <span class="tag tag-green">ใช้งาน</span>
-                  </td>
-
-                  <td>
-                    <div class="action-group">
-                      <button class="btn-mock-sm" onclick="editLecturer(this)">
-                        <i class="fa-solid fa-pen"></i>
-                        แก้ไข
-                      </button>
-
-                      <button
-                        class="btn-mock-sm danger"
-                        onclick="deleteRow(this)"
-                      >
-                        <i class="fa-solid fa-trash"></i>
-                        ลบ
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <!-- 15 -->
-                <tr data-password="password123">
-                  <td>ผศ.ดร.บีสุดา ดาวเรือง</td>
-                  <td>-</td>
-
-                  <td class="status-cell">
-                    <span class="tag tag-green">ใช้งาน</span>
-                  </td>
-
-                  <td>
-                    <div class="action-group">
-                      <button class="btn-mock-sm" onclick="editLecturer(this)">
-                        <i class="fa-solid fa-pen"></i>
-                        แก้ไข
-                      </button>
-
-                      <button
-                        class="btn-mock-sm danger"
-                        onclick="deleteRow(this)"
-                      >
-                        <i class="fa-solid fa-trash"></i>
-                        ลบ
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <!-- 16 -->
-                <tr data-password="password123">
-                  <td>ผศ.ดร.นิติการ นาคเจือทอง</td>
-                  <td>-</td>
-
-                  <td class="status-cell">
-                    <span class="tag tag-green">ใช้งาน</span>
-                  </td>
-
-                  <td>
-                    <div class="action-group">
-                      <button class="btn-mock-sm" onclick="editLecturer(this)">
-                        <i class="fa-solid fa-pen"></i>
-                        แก้ไข
-                      </button>
-
-                      <button
-                        class="btn-mock-sm danger"
-                        onclick="deleteRow(this)"
-                      >
-                        <i class="fa-solid fa-trash"></i>
-                        ลบ
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <!-- 17 -->
-                <tr data-password="password123">
-                  <td>ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ</td>
-
-                  <td>teachercoop@university.ac.th</td>
-
-                  <td class="status-cell">
-                    <span class="tag tag-green"> ใช้งาน </span>
-                  </td>
-
-                  <td>
-                    <div class="action-group">
-                      <button class="btn-mock-sm" onclick="editLecturer(this)">
-                        <i class="fa-solid fa-pen"></i>
-                        แก้ไข
-                      </button>
-
-                      <button
-                        class="btn-mock-sm danger"
-                        onclick="deleteRow(this)"
-                      >
-                        <i class="fa-solid fa-trash"></i>
-                        ลบ
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <!-- 18 -->
-                <tr data-password="password123">
-                  <td>ผศ.นพเก้า ทองใบ</td>
-                  <td>-</td>
-
-                  <td class="status-cell">
-                    <span class="tag tag-green">ใช้งาน</span>
-                  </td>
-
-                  <td>
-                    <div class="action-group">
-                      <button class="btn-mock-sm" onclick="editLecturer(this)">
-                        <i class="fa-solid fa-pen"></i>
-                        แก้ไข
-                      </button>
-
-                      <button
-                        class="btn-mock-sm danger"
-                        onclick="deleteRow(this)"
-                      >
-                        <i class="fa-solid fa-trash"></i>
-                        ลบ
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <!-- 19 -->
-                <tr data-password="password123">
-                  <td>ผศ.ดร.นัฎฐพันธ์ นาคพงษ์</td>
-                  <td>-</td>
-
-                  <td class="status-cell">
-                    <span class="tag tag-green">ใช้งาน</span>
-                  </td>
-
-                  <td>
-                    <div class="action-group">
-                      <button class="btn-mock-sm" onclick="editLecturer(this)">
-                        <i class="fa-solid fa-pen"></i>
-                        แก้ไข
-                      </button>
-
-                      <button
-                        class="btn-mock-sm danger"
-                        onclick="deleteRow(this)"
-                      >
-                        <i class="fa-solid fa-trash"></i>
-                        ลบ
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <!-- 20 -->
-                <tr data-password="password123">
-                  <td>ผศ.ดร.ศรายุทธ ธเนศสกุลวัฒนา</td>
-
-                  <td>-</td>
-
-                  <td class="status-cell">
-                    <span class="tag tag-green"> ใช้งาน </span>
-                  </td>
-
-                  <td>
-                    <div class="action-group">
-                      <button class="btn-mock-sm" onclick="editLecturer(this)">
-                        <i class="fa-solid fa-pen"></i>
-                        แก้ไข
-                      </button>
-
-                      <button
-                        class="btn-mock-sm danger"
-                        onclick="deleteRow(this)"
-                      >
-                        <i class="fa-solid fa-trash"></i>
-                        ลบ
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-      </div>
+        </div>
+      </form>
     </div>
+  </div>
 
-    <!-- =========================================================
-         FOOTER
-         ========================================================= -->
-
-    <footer class="footer">
-      <div class="footer-copyright">
-        <p>
-          © Development of a Web Platform for Internship and Co-operative
-          Education Management
-        </p>
+  <!-- =========================================================
+       COMPANY RESPONSE STATUS MODAL
+       ========================================================= -->
+  <div class="of-modal" id="companyResponseModal" aria-hidden="true">
+    <div class="of-modal-dialog">
+      <div class="of-modal-header">
+        <div>
+          <p class="of-eyebrow">COMPANY RESPONSE</p>
+          <h2>อัปเดตสถานะตอบรับจากสถานประกอบการ</h2>
+        </div>
+        <button class="of-modal-close" type="button" data-close-modal>
+          <i class="fa-solid fa-xmark"></i>
+        </button>
       </div>
-    </footer>
 
-    <!-- =========================================================
-         MODAL
-         ========================================================= -->
+      <form id="companyResponseForm">
+        <div class="of-modal-body">
+          <input id="companyResponseDocumentId" type="hidden" />
 
-    <div class="modal" id="mainModal">
-      <div class="modal-box">
-        <div class="modal-header">
-          <h3 id="modalTitle">เพิ่มข้อมูล</h3>
+          <div class="of-response-summary" id="companyResponseSummary"></div>
 
-          <button class="modal-close" onclick="closeModal()">
-            <i class="fa-solid fa-xmark"></i>
+          <div class="of-field">
+            <label for="companyResponseStatus">สถานะตอบรับ</label>
+            <select id="companyResponseStatus" required>
+              <option value="waiting">รอตอบรับ</option>
+              <option value="accepted">ตอบรับแล้ว</option>
+              <option value="rejected">ไม่ตอบรับ</option>
+            </select>
+          </div>
+
+          <div class="of-field">
+            <label for="companyResponseNote">หมายเหตุ</label>
+            <textarea id="companyResponseNote" rows="4" placeholder="เช่น บริษัทตอบรับทาง E-mail / แจ้งเหตุผลกรณีไม่ตอบรับ"></textarea>
+          </div>
+        </div>
+
+        <div class="of-modal-footer">
+          <button class="of-btn of-btn-outline" type="button" onclick="closeOfficerModal('companyResponseModal')">
+            ยกเลิก
+          </button>
+
+          <button class="of-btn of-btn-primary" type="submit">
+            <i class="fa-solid fa-floppy-disk"></i>
+            บันทึกสถานะตอบรับ
           </button>
         </div>
+      </form>
+    </div>
+  </div>
 
-        <div id="modalBody"></div>
-
-        <div class="modal-actions">
-          <button class="btn-mock-sm" onclick="closeModal()">ยกเลิก</button>
-
-          <button class="btn-mock-sm solid" id="modalSaveButton">บันทึก</button>
+  <!-- =========================================================
+       COMPANY EDITOR
+       ========================================================= -->
+  <div class="of-modal" id="companyEditorModal" aria-hidden="true">
+    <div class="of-modal-dialog of-modal-lg">
+      <div class="of-modal-header">
+        <div>
+          <p class="of-eyebrow">COMPANY MANAGEMENT</p>
+          <h2 id="companyEditorTitle">เพิ่มสถานประกอบการ</h2>
         </div>
+        <button class="of-modal-close" type="button" data-close-modal>
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="companyEditorForm">
+        <div class="of-modal-body">
+          <input id="companyEditorId" type="hidden" />
+
+          <div class="of-form-grid">
+            <div class="of-field">
+              <label for="companyNameTh">ชื่อภาษาไทย</label>
+              <input id="companyNameTh" type="text" required />
+            </div>
+
+            <div class="of-field">
+              <label for="companyNameEn">ชื่อภาษาอังกฤษ</label>
+              <input id="companyNameEn" type="text" />
+            </div>
+
+            <div class="of-field">
+              <label for="companyType">ประเภทกิจการ</label>
+              <select id="companyType" required>
+                <option value="Software">Software</option>
+                <option value="Data">Data</option>
+                <option value="Network">Network</option>
+                <option value="Cybersecurity">Cybersecurity</option>
+                <option value="Cloud">Cloud</option>
+              </select>
+            </div>
+
+            <div class="of-field">
+              <label for="companyProvince">จังหวัด</label>
+              <input id="companyProvince" type="text" required />
+            </div>
+
+            <div class="of-field full">
+              <label for="companyAddress">ที่อยู่</label>
+              <textarea id="companyAddress" rows="3" required></textarea>
+            </div>
+
+            <div class="of-field">
+              <label for="companyContactName">ผู้ประสานงาน</label>
+              <input id="companyContactName" type="text" required />
+            </div>
+
+            <div class="of-field">
+              <label for="companyContactPosition">ตำแหน่งผู้ประสานงาน</label>
+              <input id="companyContactPosition" type="text" />
+            </div>
+
+            <div class="of-field">
+              <label for="companyContactEmail">Email</label>
+              <input id="companyContactEmail" type="email" required />
+            </div>
+
+            <div class="of-field">
+              <label for="companyContactPhone">โทรศัพท์</label>
+              <input id="companyContactPhone" type="tel" />
+            </div>
+
+            <div class="of-field">
+              <label for="companyOpenPosition">ตำแหน่งที่เปิดรับ</label>
+              <input id="companyOpenPosition" type="text" required />
+            </div>
+
+            <div class="of-field">
+              <label for="companyCapacity">จำนวนรับ</label>
+              <input id="companyCapacity" type="number" min="0" required />
+            </div>
+
+            <div class="of-field full">
+              <label for="companySkills">ทักษะที่ต้องการ</label>
+              <input id="companySkills" type="text" placeholder="เช่น JavaScript, React, SQL" />
+            </div>
+          </div>
+        </div>
+
+        <div class="of-modal-footer">
+          <button class="of-btn of-btn-outline" type="button" onclick="closeOfficerModal('companyEditorModal')">ยกเลิก</button>
+          <button class="of-btn of-btn-primary" type="submit">
+            <i class="fa-solid fa-floppy-disk"></i>
+            บันทึกสถานประกอบการ
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       TEACHER EDITOR
+       ========================================================= -->
+  <div class="of-modal" id="teacherEditorModal" aria-hidden="true">
+    <div class="of-modal-dialog">
+      <div class="of-modal-header">
+        <div>
+          <p class="of-eyebrow">TEACHER MANAGEMENT</p>
+          <h2 id="teacherEditorTitle">เพิ่มอาจารย์</h2>
+        </div>
+        <button class="of-modal-close" type="button" data-close-modal>
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="teacherEditorForm">
+        <div class="of-modal-body">
+          <input id="teacherEditorId" type="hidden" />
+
+          <div class="of-form-grid">
+            <div class="of-field">
+              <label for="teacherFirstName">ชื่อ</label>
+              <input id="teacherFirstName" type="text" required />
+            </div>
+
+            <div class="of-field">
+              <label for="teacherLastName">นามสกุล</label>
+              <input id="teacherLastName" type="text" required />
+            </div>
+
+            <div class="of-field full">
+              <label for="teacherEmail">Email</label>
+              <input id="teacherEmail" type="email" required />
+            </div>
+
+            <div class="of-field">
+              <label for="teacherMajor">สาขา</label>
+              <select id="teacherMajor" required>
+                <option value="IT">IT</option>
+                <option value="INE">INE</option>
+              </select>
+            </div>
+
+            <div class="of-field">
+              <label for="teacherAcademicTitle">ตำแหน่งทางวิชาการ</label>
+              <input id="teacherAcademicTitle" type="text" placeholder="เช่น ผศ.ดร." />
+            </div>
+          </div>
+
+          <div class="of-info-banner">
+            <i class="fa-solid fa-key"></i>
+            <span>ระบบไม่แสดงรหัสผ่านเดิม หากต้องการเปลี่ยนรหัสผ่านให้ใช้คำสั่ง Reset Password แทน</span>
+          </div>
+        </div>
+
+        <div class="of-modal-footer">
+          <button class="of-btn of-btn-outline" type="button" onclick="closeOfficerModal('teacherEditorModal')">ยกเลิก</button>
+          <button class="of-btn of-btn-primary" type="submit">
+            <i class="fa-solid fa-floppy-disk"></i>
+            บันทึกข้อมูลอาจารย์
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       CONFIRM MODAL
+       ========================================================= -->
+  <div class="of-modal" id="officerConfirmModal" aria-hidden="true">
+    <div class="of-modal-dialog of-confirm-dialog">
+      <div class="of-confirm-icon" id="officerConfirmIcon">
+        <i class="fa-solid fa-circle-question"></i>
+      </div>
+
+      <h2 id="officerConfirmTitle">ยืนยันการดำเนินการ</h2>
+      <p id="officerConfirmMessage"></p>
+
+      <div class="of-confirm-actions">
+        <button class="of-btn of-btn-outline" type="button" id="officerConfirmCancelButton">ยกเลิก</button>
+        <button class="of-btn of-btn-primary" type="button" id="officerConfirmOkButton">ยืนยัน</button>
       </div>
     </div>
+  </div>
 
-    <!-- =========================================================
-         MAIN JS
-         ========================================================= -->
+  <div class="of-toast-container" id="officerToastContainer" aria-live="polite"></div>
 
-    <script type="module" src="main.js"></script>
-    <script src="js/officer.js"></script>
+  <footer class="of-footer">
+    <p>© KIWI — Co-operative Education Management System</p>
+  </footer>
 
-    <!-- =========================================================
-         JAVASCRIPT
-         ========================================================= -->
-
-  </body>
+  <script type="module" src="main.js"></script>
+  <script src="js/officer.js"></script>
+</body>
 </html>

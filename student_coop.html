@@ -1,2897 +1,722 @@
 <!doctype html>
 <html lang="th">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>แดชบอร์ดนักศึกษาสหกิจศึกษา | KIWI</title>
-
-    <link rel="stylesheet" href="style.css" />
-
-    <link rel="stylesheet" href="css/student_coop.css" />
-
-    <link
-      href="https://fonts.googleapis.com/css2?family=Sarabun:wght@500;600;700&family=Noto+Sans+Thai:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-
-  </head>
-
-  <body>
-    <header class="navbar">
-      <div class="nav-container">
-        <a href="index.html" class="brand">
-          <img src="images/logo_kiwi.png" alt="KIWI Logo" class="brand-logo" />
-
-          <div class="brand-text">
-            <strong>KIWI</strong>
-            <span>ระบบจัดการสหกิจศึกษา</span>
-          </div>
-        </a>
-
-        <div class="nav-right">
-          <div class="nav-user">
-            <div class="nav-user-icon">
-              <i class="fa-solid fa-user"></i>
-            </div>
-
-            <div class="nav-user-info">
-              <small>นักศึกษาสหกิจศึกษา</small>
-              <span id="userNameDisplay">พิมพ์ชนก สุขใจ</span>
-            </div>
-          </div>
-
-          <button class="btn-logout" onclick="logout()">
-            <i class="fa-solid fa-right-from-bracket"></i>
-            ออกจากระบบ
-          </button>
-        </div>
-      </div>
-    </header>
-
-    <div class="dashboard-layout">
-      <!-- ===============================
-       Sidebar
-       =============================== -->
-
-      <aside class="dashboard-sidebar">
-        <div class="sidebar-header">
-          <span class="sidebar-title">
-            <i class="fa-solid fa-bars"></i>
-            เมนูนักศึกษา
-          </span>
-
-          <small> ระบบสหกิจศึกษา </small>
-        </div>
-
-        <div class="sidebar-menu">
-          <a class="sidebar-item active" data-target="panel-overview">
-            <span class="sidebar-icon">
-              <i class="fa-solid fa-gauge-high"></i>
-            </span>
-
-            <span class="sidebar-text"> ภาพรวม </span>
-          </a>
-
-          <a class="sidebar-item" data-target="panel-profile">
-            <span class="sidebar-icon">
-              <i class="fa-solid fa-id-card"></i>
-            </span>
-
-            <span class="sidebar-text"> ประวัตินักศึกษา </span>
-          </a>
-
-          <a class="sidebar-item" data-target="panel-resume">
-            <span class="sidebar-icon">
-              <i class="fa-solid fa-file-arrow-up"></i>
-            </span>
-
-            <span class="sidebar-text"> อัปโหลดเรซูเม่ </span>
-          </a>
-
-          <a class="sidebar-item" href="search_company.html">
-            <span class="sidebar-icon">
-              <i class="fa-solid fa-building-magnifying-glass"></i>
-            </span>
-
-            <span class="sidebar-text"> ค้นหาสถานประกอบการ </span>
-          </a>
-
-          <div class="sidebar-divider">
-            <span>การดำเนินงาน</span>
-          </div>
-
-          <a class="sidebar-item" data-target="panel-request">
-            <span class="sidebar-icon">
-              <i class="fa-solid fa-file-signature"></i>
-            </span>
-
-            <span class="sidebar-text"> คำร้องสหกิจศึกษา </span>
-          </a>
-
-          <a class="sidebar-item" data-target="panel-daily">
-            <span class="sidebar-icon">
-              <i class="fa-solid fa-calendar-check"></i>
-            </span>
-
-            <span class="sidebar-text"> บันทึกการปฏิบัติงาน </span>
-          </a>
-
-          <a class="sidebar-item" data-target="panel-coop">
-            <span class="sidebar-icon">
-              <i class="fa-solid fa-graduation-cap"></i>
-            </span>
-
-            <span class="sidebar-text"> โครงการสหกิจศึกษา </span>
-          </a>
-
-          <a class="sidebar-item" data-target="panel-report-upload">
-            <span class="sidebar-icon">
-              <i class="fa-solid fa-cloud-arrow-up"></i>
-            </span>
-
-            <span class="sidebar-text"> อัปโหลดโครงการ </span>
-          </a>
-
-          <a class="sidebar-item" data-target="panel-mentor">
-            <span class="sidebar-icon">
-              <i class="fa-solid fa-user-tie"></i>
-            </span>
-
-            <span class="sidebar-text"> ข้อมูลพี่เลี้ยง </span>
-          </a>
-
-          <a class="sidebar-item" data-target="panel-evaluate">
-            <span class="sidebar-icon">
-              <i class="fa-solid fa-star"></i>
-            </span>
-
-            <span class="sidebar-text"> ประเมินสถานประกอบการ </span>
-          </a>
-
-          <div class="sidebar-divider">
-            <span>อื่น ๆ</span>
-          </div>
-
-          <a class="sidebar-item sidebar-danger" data-target="panel-transfer">
-            <span class="sidebar-icon">
-              <i class="fa-solid fa-arrow-right-arrow-left"></i>
-            </span>
-
-            <span class="sidebar-text"> ขอย้ายสถานประกอบการ </span>
-          </a>
-        </div>
-      </aside>
-
-      <!-- เนื้อหาแต่ละเมนู -->
-      <div class="dashboard-content">
-        <!-- ==================================================
-           ภาพรวม
-           ================================================== -->
-
-        <section class="content-panel active" id="panel-overview">
-          <div class="dashboard-banner">
-            <b id="overviewGreeting">ยินดีต้อนรับ นางสาวพิมพ์ชนก สุขใจ</b>
-            <span>ภาพรวมสถานะการปฏิบัติงานสหกิจศึกษาของคุณ</span>
-          </div>
-
-          <div class="stat-row">
-            <div class="stat-box">
-              <b>2</b>
-              <span>คำร้องที่ยื่นแล้ว</span>
-            </div>
-
-            <div class="stat-box">
-              <b>6</b>
-              <span>บันทึกการปฏิบัติงานประจำวัน</span>
-            </div>
-
-            <div class="stat-box">
-              <b>อยู่ระหว่างปฏิบัติงานสหกิจศึกษา</b>
-              <span>สถานะปัจจุบัน</span>
-            </div>
-          </div>
-
-          <!-- ==================================================
-             ข้อมูลสหกิจศึกษา
-             แทนส่วนกิจกรรมล่าสุดเดิม
-             ================================================== -->
-
-          <div class="coop-overview">
-            <div class="coop-overview-head">
-              <div class="coop-overview-title">
-                <h3>
-                  <i
-                    class="fa-solid fa-briefcase student-inline-01"
-                  ></i>
-                  ข้อมูลสหกิจศึกษา
-                </h3>
-
-                <p>รายละเอียดการปฏิบัติงานสหกิจศึกษาปัจจุบันของนักศึกษา</p>
-              </div>
-
-              <span class="coop-status"> กำลังปฏิบัติงานสหกิจศึกษา </span>
-            </div>
-
-            <div class="coop-main-card">
-              <!-- สถานประกอบการ -->
-              <div class="coop-company-header">
-                <div class="coop-company-icon">
-                  <i class="fa-solid fa-building"></i>
-                </div>
-
-                <div>
-                  <span>สถานประกอบการ</span>
-
-                  <h4>BlueWave Digital Co., Ltd.</h4>
-
-                  <p>
-                    <i class="fa-solid fa-location-dot"></i>
-                    จังหวัดชลบุรี
-                  </p>
-                </div>
-              </div>
-
-              <!-- รายละเอียด -->
-              <div class="coop-detail-grid">
-                <!-- พี่เลี้ยง -->
-                <div class="coop-detail-item">
-                  <div class="coop-detail-icon">
-                    <i class="fa-solid fa-user-tie"></i>
-                  </div>
-
-                  <div class="coop-detail-content">
-                    <span class="coop-detail-label"> พี่เลี้ยง </span>
-
-                    <strong class="coop-detail-value">
-                      คุณกมลชนก วัฒนชัย
-                    </strong>
-
-                    <span class="coop-detail-sub">
-                      Frontend Team Lead / พี่เลี้ยง
-                    </span>
-                  </div>
-                </div>
-
-                <!-- อาจารย์นิเทศ -->
-                <div class="coop-detail-item">
-                  <div class="coop-detail-icon">
-                    <i class="fa-solid fa-chalkboard-user"></i>
-                  </div>
-
-                  <div class="coop-detail-content">
-                    <span class="coop-detail-label"> อาจารย์นิเทศ </span>
-
-                    <strong class="coop-detail-value">
-                      ผศ.ดร.นิติการ นาคเจือทอง
-                    </strong>
-
-                    <span class="coop-detail-sub">
-                      ภาควิชาเทคโนโลยีสารสนเทศ
-                    </span>
-                  </div>
-                </div>
-
-                <!-- ฝึกที่ไหน -->
-                <div class="coop-detail-item">
-                  <div class="coop-detail-icon">
-                    <i class="fa-solid fa-location-dot"></i>
-                  </div>
-
-                  <div class="coop-detail-content">
-                    <span class="coop-detail-label"> สถานที่ปฏิบัติงาน </span>
-
-                    <strong class="coop-detail-value">
-                      BlueWave Digital Co., Ltd.
-                    </strong>
-
-                    <span class="coop-detail-sub"> จังหวัดชลบุรี </span>
-                  </div>
-                </div>
-
-                <!-- บันทึกการปฏิบัติงาน -->
-                <div class="coop-detail-item">
-                  <div class="coop-detail-icon">
-                    <i class="fa-solid fa-book-open"></i>
-                  </div>
-
-                  <div class="coop-detail-content">
-                    <span class="coop-detail-label"> บันทึกการปฏิบัติงาน </span>
-
-                    <strong class="coop-detail-value">
-                      ส่งแล้ว 6 รายการ
-                    </strong>
-
-                    <!--
-                  <span class="coop-detail-sub">
-                    จากทั้งหมด 20 รายการ
-                  </span>
-                  -->
-
-                    <div class="coop-progress">
-                      <div class="coop-progress-bar"></div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- วันเริ่ม -->
-                <div class="coop-detail-item">
-                  <div class="coop-detail-icon">
-                    <i class="fa-solid fa-calendar-check"></i>
-                  </div>
-
-                  <div class="coop-detail-content">
-                    <span class="coop-detail-label">
-                      วันที่เริ่มสหกิจศึกษา
-                    </span>
-
-                    <strong class="coop-detail-value"> 1 กันยายน 2569 </strong>
-                  </div>
-                </div>
-
-                <!-- วันจบ -->
-                <div class="coop-detail-item">
-                  <div class="coop-detail-icon">
-                    <i class="fa-solid fa-calendar-xmark"></i>
-                  </div>
-
-                  <div class="coop-detail-content">
-                    <span class="coop-detail-label">
-                      วันที่สิ้นสุดสหกิจศึกษา
-                    </span>
-
-                    <strong class="coop-detail-value"> 18 ธันวาคม 2569 </strong>
-                  </div>
-                </div>
-              </div>
-
-              <!-- ระยะเวลารวม -->
-              <div class="coop-period">
-                <div class="coop-period-icon">
-                  <i class="fa-solid fa-calendar-days"></i>
-                </div>
-
-                <div>
-                  <small>ระยะเวลาสหกิจศึกษา</small>
-
-                  <strong> 1 กันยายน 2569 – 18 ธันวาคม 2569 </strong>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ==================================================
-     ประวัตินักศึกษา
-     ================================================== -->
-
-        <section class="content-panel" id="panel-profile">
-          <div class="panel-header">
-            <h2>ประวัตินักศึกษา</h2>
-            <p>
-              ข้อมูลประวัตินักศึกษาตามแบบฟอร์มของมหาวิทยาลัย —
-              ข้อมูลตัวอย่างสำหรับ Mockup
-            </p>
-          </div>
-
-          <div class="profile-actions">
-            <button class="btn-mock-sm solid" id="btnEditProfile">
-              <i class="fa-solid fa-pen"></i> แก้ไขประวัติ
-            </button>
-
-            <button class="btn-mock-sm" id="btnEditAccount">
-              <i class="fa-solid fa-key"></i> แก้ไขอีเมล / รหัสผ่าน
-            </button>
-          </div>
-
-          <div class="profile-hero mock-card">
-            <div class="profile-photo-wrap">
-              <div class="profile-photo" id="profilePhoto">
-                <i class="fa-solid fa-user"></i>
-              </div>
-
-              <button class="btn-mock-sm" id="btnChangePhoto">
-                <i class="fa-solid fa-camera"></i> เปลี่ยนรูปโปรไฟล์
-              </button>
-            </div>
-
-            <div class="profile-identity">
-              <span class="profile-label"> ข้อมูลนักศึกษา </span>
-
-              <h3>นางสาวพิมพ์ชนก สุขใจ</h3>
-
-              <p>
-                <b>รหัสประจำตัว:</b>
-                6702458196
-              </p>
-
-              <p>
-                <b>สาขาวิชา:</b>
-                วิศวกรรมสารสนเทศและเครือข่าย &nbsp; | &nbsp;
-
-                <b>ชั้นปีที่:</b>
-                4
-              </p>
-
-              <!-- อาจารย์ที่ปรึกษา -->
-              <div class="profile-advisor">
-                <div class="profile-advisor-info">
-                  <span class="advisor-label">
-                    <i class="fa-solid fa-chalkboard-user"></i>
-                    อาจารย์ที่ปรึกษา
-                  </span>
-
-                  <!-- แสดงชื่อปัจจุบัน -->
-                  <strong id="profileAdvisorName">
-                    ผศ.ดร.นิติการ นาคเจือทอง
-                  </strong>
-
-                  <!-- Dropdown สำหรับแก้ไข -->
-                  <select
-                    id="profileAdvisorSelect"
-                    class="advisor-select student-inline-02"
-                  >
-                    <option value="ผศ.ดร.นิติการ นาคเจือทอง" selected>
-                      ผศ.ดร.นิติการ นาคเจือทอง
-                    </option>
-
-                    <option value="ผศ.ดร.ขนิษฐา นามี">ผศ.ดร.ขนิษฐา นามี</option>
-
-                    <option value="อ.ดร.ศิรินทรา แว่วศรี">
-                      อ.ดร.ศิรินทรา แว่วศรี
-                    </option>
-                    <option value="ผศ.ดร.สิวาลัย จินเจือ">
-                      ผศ.ดร.สิวาลัย จินเจือ
-                    </option>
-                    <option value="ผศ.ดร.สิวาลัย จินเจือ">
-                      ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ
-                    </option>
-                  </select>
-                </div>
-
-                <div class="advisor-actions">
-                  <button
-                    type="button"
-                    class="btn-advisor-edit"
-                    id="btnEditAdvisor"
-                  >
-                    <i class="fa-solid fa-pen"></i>
-                    แก้ไข
-                  </button>
-
-                  <button
-                    type="button"
-                    class="btn-advisor-save student-inline-02"
-                    id="btnSaveAdvisor"
-                  >
-                    <i class="fa-solid fa-check"></i>
-                    บันทึก
-                  </button>
-
-                  <button
-                    type="button"
-                    class="btn-advisor-cancel student-inline-02"
-                    id="btnCancelAdvisor"
-                  >
-                    ยกเลิก
-                  </button>
-                </div>
-              </div>
-
-              <span class="tag tag-green"> กำลังศึกษา </span>
-            </div>
-          </div>
-
-          <div class="mock-card profile-section-card">
-            <h4>
-              <i class="fa-solid fa-user"></i>
-              ข้อมูลส่วนตัว
-            </h4>
-
-            <div class="info-grid">
-              <div class="info-item">
-                <span>ชื่อ-สกุล</span>
-                <strong>นางสาวพิมพ์ชนก สุขใจ</strong>
-              </div>
-
-              <div class="info-item">
-                <span>รหัสประจำตัว</span>
-                <strong>6702458196</strong>
-              </div>
-
-              <div class="info-item">
-                <span>สาขาวิชา</span>
-                <strong>วิศวกรรมสารสนเทศและเครือข่าย</strong>
-              </div>
-
-              <div class="info-item">
-                <span>ชั้นปีที่</span>
-                <strong>4</strong>
-              </div>
-
-              <div class="info-item">
-                <span>เกรดเฉลี่ย</span>
-                <strong>3.71</strong>
-              </div>
-
-              <div class="info-item">
-                <span>วันเกิด</span>
-                <strong>12 ก.พ. 2547</strong>
-              </div>
-
-              <div class="info-item">
-                <span>อายุ</span>
-                <strong>22 ปี</strong>
-              </div>
-
-              <div class="info-item">
-                <span>ส่วนสูง</span>
-                <strong>160 ซม.</strong>
-              </div>
-
-              <div class="info-item">
-                <span>น้ำหนัก</span>
-                <strong>50 กก.</strong>
-              </div>
-
-              <div class="info-item">
-                <span>สัญชาติ</span>
-                <strong>ไทย</strong>
-              </div>
-
-              <div class="info-item">
-                <span>เชื้อชาติ</span>
-                <strong>ไทย</strong>
-              </div>
-
-              <div class="info-item">
-                <span>ศาสนา</span>
-                <strong>พุทธ</strong>
-              </div>
-
-              <div class="info-item">
-                <span>กลุ่มเลือด</span>
-                <strong>B</strong>
-              </div>
-
-              <div class="info-item">
-                <span>โรคประจำตัว</span>
-                <strong>ไม่มี</strong>
-              </div>
-
-              <div class="info-item">
-                <span>อาการแพ้</span>
-                <strong>ไม่มี</strong>
-              </div>
-
-              <div class="info-item">
-                <span>ความสามารถพิเศษ</span>
-                <strong>
-                  ออกแบบ UI/UX, พัฒนาเว็บไซต์ด้วย React, ออกแบบ Prototype ด้วย
-                  Figma และวิเคราะห์ข้อมูล
-                </strong>
-              </div>
-
-              <div class="info-item">
-                <span>ภูมิลำเนา</span>
-                <strong>จังหวัดฉะเชิงเทรา</strong>
-              </div>
-
-              <div class="info-item">
-                <span>โทรศัพท์</span>
-                <strong>092-684-7315</strong>
-              </div>
-
-              <div class="info-item student-inline-03">
-                <span>ที่อยู่ปัจจุบันที่สามารถติดต่อได้</span>
-                <strong>
-                  88/19 หมู่ 6 ต.ท่าข้าม อ.บางปะกง จ.ฉะเชิงเทรา 24130
-                </strong>
-              </div>
-            </div>
-          </div>
-
-          <div class="mock-card profile-section-card">
-            <h4>
-              <i class="fa-solid fa-people-roof"></i>
-              ข้อมูลบิดา–มารดา
-            </h4>
-
-            <div class="info-grid">
-              <div class="info-item">
-                <span>ชื่อบิดา</span>
-                <strong>นายธนากร สุขใจ</strong>
-              </div>
-
-              <div class="info-item">
-                <span>อายุบิดา</span>
-                <strong>50 ปี</strong>
-              </div>
-
-              <div class="info-item">
-                <span>อาชีพบิดา</span>
-                <strong>ช่างเทคนิคระบบไฟฟ้า</strong>
-              </div>
-
-              <div class="info-item">
-                <span>ชื่อมารดา</span>
-                <strong>นางสาวิตรี สุขใจ</strong>
-              </div>
-
-              <div class="info-item">
-                <span>อายุมารดา</span>
-                <strong>48 ปี</strong>
-              </div>
-
-              <div class="info-item">
-                <span>อาชีพมารดา</span>
-                <strong>พนักงานบัญชี</strong>
-              </div>
-
-              <div class="info-item student-inline-03">
-                <span>ที่อยู่ที่สามารถติดต่อ</span>
-                <strong>
-                  88/19 หมู่ 6 ต.ท่าข้าม อ.บางปะกง จ.ฉะเชิงเทรา 24130
-                </strong>
-              </div>
-
-              <div class="info-item">
-                <span>เบอร์โทรศัพท์</span>
-                <strong>081-642-9057</strong>
-              </div>
-            </div>
-          </div>
-
-          <div class="mock-card profile-section-card">
-            <h4>
-              <i class="fa-solid fa-phone-volume"></i>
-              บุคคลที่สามารถติดต่อได้กรณีฉุกเฉิน
-            </h4>
-
-            <div class="info-grid">
-              <div class="info-item">
-                <span>ชื่อ-สกุล</span>
-                <strong>นางสาวพิมพ์มาดา สุขใจ</strong>
-              </div>
-
-              <div class="info-item">
-                <span>ความเกี่ยวข้อง</span>
-                <strong>พี่สาว</strong>
-              </div>
-
-              <div class="info-item student-inline-03">
-                <span>ที่อยู่</span>
-                <strong>
-                  88/19 หมู่ 6 ต.ท่าข้าม อ.บางปะกง จ.ฉะเชิงเทรา 24130
-                </strong>
-              </div>
-
-              <div class="info-item">
-                <span>โทรศัพท์</span>
-                <strong>095-317-8642</strong>
-              </div>
-            </div>
-          </div>
-
-          <div class="mock-card profile-section-card">
-            <h4>
-              <i class="fa-solid fa-chalkboard-user"></i>
-              ข้อมูลด้านสหกิจศึกษา
-            </h4>
-
-            <div class="info-grid">
-              <div class="info-item">
-                <span>ชื่ออาจารย์ที่ปรึกษา</span>
-                <strong>ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ</strong>
-              </div>
-
-              <div class="info-item student-inline-03">
-                <span>ความสามารถที่เกี่ยวข้องกับสหกิจศึกษา</span>
-                <strong>
-                  HTML, CSS, JavaScript, TypeScript, React, Figma, SQL, Git,
-                  REST API และการออกแบบ UI/UX
-                </strong>
-              </div>
-            </div>
-          </div>
-
-          <p class="helper-note">
-            *ข้อมูลทั้งหมดเป็นข้อมูลตัวอย่างสำหรับหน้า Mockup เท่านั้น
-            การแก้ไขข้อมูลและการอัปโหลดรูปจริงยังไม่เชื่อมต่อฐานข้อมูล
-          </p>
-        </section>
-
-        <!-- ==================================================
-     Modal: แก้ไขประวัติ
-     ================================================== -->
-
-        <div class="modal-overlay" id="profileModal" aria-hidden="true">
-          <div
-            class="modal-box"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="profileModalTitle"
-          >
-            <div class="modal-head">
-              <div>
-                <h3 id="profileModalTitle">แก้ไขประวัตินักศึกษา</h3>
-
-                <p>แสดงข้อมูลตัวอย่างในรูปแบบ Mockup</p>
-              </div>
-
-              <button
-                class="modal-close"
-                data-close-modal="profileModal"
-                aria-label="ปิด"
-              >
-                <i class="fa-solid fa-xmark"></i>
-              </button>
-            </div>
-
-            <div class="modal-body">
-              <div class="form-grid">
-                <label>
-                  ชื่อ-สกุล
-                  <input value="นางสาวพิมพ์ชนก สุขใจ" readonly />
-                </label>
-
-                <label>
-                  รหัสประจำตัว
-                  <input value="6702458196" readonly />
-                </label>
-
-                <label>
-                  สาขาวิชา
-                  <input value="วิศวกรรมสารสนเทศและเครือข่าย" readonly />
-                </label>
-
-                <label>
-                  ชั้นปีที่
-                  <input value="4" readonly />
-                </label>
-
-                <label>
-                  เกรดเฉลี่ย
-                  <input value="3.71" readonly />
-                </label>
-
-                <label>
-                  วันเกิด
-                  <input value="12 ก.พ. 2547" readonly />
-                </label>
-
-                <label>
-                  อายุ
-                  <input value="22 ปี" readonly />
-                </label>
-
-                <label>
-                  ส่วนสูง
-                  <input value="160 ซม." readonly />
-                </label>
-
-                <label>
-                  น้ำหนัก
-                  <input value="50 กก." readonly />
-                </label>
-
-                <label>
-                  สัญชาติ
-                  <input value="ไทย" readonly />
-                </label>
-
-                <label>
-                  เชื้อชาติ
-                  <input value="ไทย" readonly />
-                </label>
-
-                <label>
-                  ศาสนา
-                  <input value="พุทธ" readonly />
-                </label>
-
-                <label>
-                  กลุ่มเลือด
-                  <input value="B" readonly />
-                </label>
-
-                <label>
-                  โรคประจำตัว
-                  <input value="ไม่มี" readonly />
-                </label>
-
-                <label>
-                  อาการแพ้
-                  <input value="ไม่มี" readonly />
-                </label>
-
-                <label>
-                  ความสามารถพิเศษ
-
-                  <input
-                    value="ออกแบบ UI/UX, React, Figma, วิเคราะห์ข้อมูล"
-                    readonly
-                  />
-                </label>
-
-                <label>
-                  ภูมิลำเนา
-
-                  <input value="จังหวัดฉะเชิงเทรา" readonly />
-                </label>
-
-                <label>
-                  โทรศัพท์
-
-                  <input value="092-684-7315" readonly />
-                </label>
-
-                <label class="full">
-                  ที่อยู่ปัจจุบันที่สามารถติดต่อได้
-
-                  <textarea readonly>
-88/19 หมู่ 6 ต.ท่าข้าม อ.บางปะกง จ.ฉะเชิงเทรา 24130</textarea
-                  >
-                </label>
-
-                <label>
-                  ชื่อบิดา
-
-                  <input value="นายธนากร สุขใจ" readonly />
-                </label>
-
-                <label>
-                  อายุบิดา
-
-                  <input value="50 ปี" readonly />
-                </label>
-
-                <label>
-                  อาชีพบิดา
-
-                  <input value="ช่างเทคนิคระบบไฟฟ้า" readonly />
-                </label>
-
-                <label>
-                  ชื่อมารดา
-
-                  <input value="นางสาวิตรี สุขใจ" readonly />
-                </label>
-
-                <label>
-                  อายุมารดา
-
-                  <input value="48 ปี" readonly />
-                </label>
-
-                <label>
-                  อาชีพมารดา
-
-                  <input value="พนักงานบัญชี" readonly />
-                </label>
-
-                <label class="full">
-                  ที่อยู่ที่สามารถติดต่อ
-
-                  <textarea readonly>
-88/19 หมู่ 6 ต.ท่าข้าม อ.บางปะกง จ.ฉะเชิงเทรา 24130</textarea
-                  >
-                </label>
-
-                <label>
-                  เบอร์โทรศัพท์
-
-                  <input value="081-642-9057" readonly />
-                </label>
-
-                <label>
-                  ผู้ติดต่อฉุกเฉิน
-
-                  <input value="นางสาวพิมพ์มาดา สุขใจ" readonly />
-                </label>
-
-                <label>
-                  ความเกี่ยวข้อง
-
-                  <input value="พี่สาว" readonly />
-                </label>
-
-                <label>
-                  โทรศัพท์ฉุกเฉิน
-
-                  <input value="095-317-8642" readonly />
-                </label>
-
-                <label class="full">
-                  ที่อยู่ผู้ติดต่อฉุกเฉิน
-
-                  <textarea readonly>
-88/19 หมู่ 6 ต.ท่าข้าม อ.บางปะกง จ.ฉะเชิงเทรา 24130</textarea
-                  >
-                </label>
-
-                <label>
-                  ชื่ออาจารย์ที่ปรึกษา
-
-                  <input value="ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ" readonly />
-                </label>
-
-                <label class="full">
-                  ความสามารถที่เกี่ยวข้องกับสหกิจศึกษา
-
-                  <textarea readonly>
-HTML, CSS, JavaScript, TypeScript, React, Figma, SQL, Git, REST API และการออกแบบ UI/UX</textarea
-                  >
-                </label>
-              </div>
-            </div>
-
-            <div class="modal-foot">
-              <button class="btn-mock-sm" data-close-modal="profileModal">
-                ยกเลิก
-              </button>
-
-              <button class="btn-mock-sm solid" id="btnSaveProfile">
-                บันทึกการเปลี่ยนแปลง
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Modal: แก้ไขอีเมล/รหัสผ่าน -->
-        <div class="modal-overlay" id="accountModal" aria-hidden="true">
-          <div
-            class="modal-box small"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="accountModalTitle"
-          >
-            <div class="modal-head">
-              <div>
-                <h3 id="accountModalTitle">แก้ไขอีเมล / รหัสผ่าน</h3>
-                <p>แสดงหน้าจอสำหรับระบบจริง แต่ยังไม่เปิดให้แก้ไขใน Mockup</p>
-              </div>
-
-              <button
-                class="modal-close"
-                data-close-modal="accountModal"
-                aria-label="ปิด"
-              >
-                <i class="fa-solid fa-xmark"></i>
-              </button>
-            </div>
-
-            <div class="modal-body">
-              <div class="form-grid single">
-                <label>
-                  อีเมลปัจจุบัน
-                  <input value="studentcoop@email.kmutnb.ac.th" readonly />
-                </label>
-
-                <label>
-                  อีเมลใหม่
-                  <input value="studentcoop@email.kmutnb.ac.th" readonly />
-                </label>
-
-                <label>
-                  รหัสผ่านปัจจุบัน
-                  <input type="password" value="password123" readonly />
-                </label>
-
-                <label>
-                  รหัสผ่านใหม่
-                  <input type="password" value="password123" readonly />
-                </label>
-
-                <label>
-                  ยืนยันรหัสผ่านใหม่
-                  <input type="password" value="password123" readonly />
-                </label>
-              </div>
-
-              <div class="mock-alert">
-                <i class="fa-solid fa-circle-info"></i>
-                ฟังก์ชันแก้ไขอีเมลและรหัสผ่านอยู่ระหว่างการพัฒนา
-                ข้อมูลจะไม่ถูกเปลี่ยนแปลง
-              </div>
-            </div>
-
-            <div class="modal-foot">
-              <button class="btn-mock-sm" data-close-modal="accountModal">
-                ยกเลิก
-              </button>
-
-              <button class="btn-mock-sm solid" id="btnSaveAccount">
-                บันทึกการเปลี่ยนแปลง
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- ==================================================
-     อัปโหลดเรซูเม่
-     ================================================== -->
-
-        <section class="content-panel" id="panel-resume">
-          <div class="panel-header">
-            <h2>อัปโหลดเรซูเม่</h2>
-
-            <p>
-              ระบบแนะนำสถานประกอบการที่เหมาะสมให้อัตโนมัติจากเรซูเม่ของคุณ
-              พร้อมเครื่องมือช่วยสร้างเรซูเม่ในตัว
-            </p>
-          </div>
-
-          <span class="status-chip planned"> ยังไม่เริ่มพัฒนา </span>
-
-          <!-- ไฟล์ Resume ปัจจุบัน -->
-          <div class="resume-file-row">
-            <div class="resume-file-info">
-              <div class="resume-file-icon">
-                <i class="fa-solid fa-file-pdf"></i>
-              </div>
-
-              <div>
-                <b>resume_พิมพ์ชนก_สุขใจ_2569.pdf</b>
-
-                <span>
-                  อัปโหลดเมื่อ 2 วันที่แล้ว · 486 KB ·
-
-                  <span class="tag tag-green resume-status">
-                    วิเคราะห์แล้ว
-                  </span>
-                </span>
-              </div>
-            </div>
-
-            <div class="resume-file-actions">
-              <button class="btn-mock-sm">ดูไฟล์</button>
-
-              <button class="btn-mock-sm solid">อัปโหลดใหม่</button>
-            </div>
-          </div>
-
-          <!-- พื้นที่ Upload -->
-          <div class="mock-empty">
-            <i
-              class="fa-solid fa-cloud-arrow-up student-inline-04"
-            ></i>
-
-            ลากไฟล์เรซูเม่มาวาง หรือกดเพื่อเลือกไฟล์ (PDF)
-          </div>
-
-          <!--
-  <div class="section-title-sm">
-    <i
-      class="fa-solid fa-wand-magic-sparkles student-inline-05"
-    ></i>
-
-    ระบบสร้างเรซูเม่ (Resume Builder)
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>แดชบอร์ดนักศึกษาสหกิจศึกษา | KIWI</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/student_coop.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+<header class="sc-navbar">
+  <div class="sc-navbar-inner">
+    <a href="index.html" class="sc-brand">
+      <img src="images/logo_kiwi.png" alt="KIWI" class="sc-brand-logo" />
+      <div><strong>KIWI</strong><span>ระบบจัดการสหกิจศึกษา</span></div>
+    </a>
+    <div class="sc-nav-user">
+      <div class="sc-user-meta"><span>นักศึกษาสหกิจศึกษา</span><strong id="headerStudentName">นางสาวพิมพ์ชนก สุขใจ</strong></div>
+      <button class="sc-btn sc-btn-outline" type="button" onclick="studentLogout()"><i class="fa-solid fa-right-from-bracket"></i> ออกจากระบบ</button>
+    </div>
+  </div>
+</header>
+
+<div class="sc-app-shell">
+<aside class="sc-sidebar">
+  <div class="sc-sidebar-heading">เมนูนักศึกษาสหกิจศึกษา</div>
+  <button class="sc-sidebar-item active" data-panel="panel-overview"><i class="fa-solid fa-chart-pie"></i><span>ภาพรวม</span></button>
+  <button class="sc-sidebar-item" data-panel="panel-profile"><i class="fa-solid fa-id-card"></i><span>ข้อมูลของฉัน</span><span class="sc-sidebar-badge" id="profilePercentBadge">0%</span></button>
+  <button class="sc-sidebar-item" data-panel="panel-prepare"><i class="fa-solid fa-briefcase"></i><span>เตรียมสมัครสหกิจ</span></button>
+  <button class="sc-sidebar-item" data-panel="panel-request"><i class="fa-solid fa-file-signature"></i><span>คำร้องสหกิจศึกษา</span><span class="sc-sidebar-badge warning" id="requestStatusBadge">0</span></button>
+  <button class="sc-sidebar-item" data-panel="panel-project"><i class="fa-solid fa-graduation-cap"></i><span>โครงการสหกิจ</span><span class="sc-sidebar-badge danger" id="projectTaskBadge">0</span></button>
+  <button class="sc-sidebar-item" data-panel="panel-daily"><i class="fa-solid fa-book-open"></i><span>บันทึกการปฏิบัติงาน</span><span class="sc-sidebar-badge" id="dailyLogBadge">0</span></button>
+  <button class="sc-sidebar-item" data-panel="panel-evaluation"><i class="fa-solid fa-star-half-stroke"></i><span>ประเมินสถานประกอบการ</span></button>
+  <button class="sc-sidebar-item" data-panel="panel-chatbot"><i class="fa-solid fa-comments"></i><span>ผู้ช่วยเอกสาร</span></button>
+  <div class="sc-sidebar-help"><i class="fa-solid fa-route"></i><div><strong>เส้นทางสหกิจ</strong><span>ประวัติ → Resume → บริษัท → คำร้อง → โครงการ → บันทึกงาน → ประเมิน</span></div></div>
+</aside>
+
+<main class="sc-main">
+
+<section class="sc-panel active" id="panel-overview">
+  <div class="sc-page-heading"><div><p class="sc-eyebrow">CO-OPERATIVE EDUCATION</p><h1 id="overviewGreeting">ยินดีต้อนรับ</h1><p>ติดตามความพร้อม คำร้อง เอกสาร โครงการ และบันทึกการปฏิบัติงาน</p></div></div>
+  <div class="sc-stat-grid">
+    <article class="sc-stat-card"><div class="sc-stat-icon"><i class="fa-solid fa-id-card"></i></div><div><span>ความครบถ้วนประวัติ</span><strong id="statProfilePercent">0%</strong><small>ข้อมูล</small></div></article>
+    <article class="sc-stat-card success"><div class="sc-stat-icon"><i class="fa-solid fa-file-pdf"></i></div><div><span>Resume</span><strong id="statResumeStatus">ยังไม่มี</strong><small>ไฟล์</small></div></article>
+    <article class="sc-stat-card warning"><div class="sc-stat-icon"><i class="fa-solid fa-file-circle-check"></i></div><div><span>สถานะคำร้อง</span><strong id="statRequestStatus">ยังไม่ยื่น</strong><small>ล่าสุด</small></div></article>
+    <article class="sc-stat-card purple"><div class="sc-stat-icon"><i class="fa-solid fa-folder-open"></i></div><div><span>เอกสารพร้อม</span><strong id="statDocumentProgress">0/3</strong><small>รายการ</small></div></article>
+    <article class="sc-stat-card"><div class="sc-stat-icon"><i class="fa-solid fa-book"></i></div><div><span>บันทึกประจำวัน</span><strong id="statDailyLogs">0</strong><small>วัน</small></div></article>
+  </div>
+  <div class="sc-grid-2">
+    <article class="sc-card"><div class="sc-card-header"><div><h2>งานที่ต้องดำเนินการ</h2><p>รายการสำคัญที่ควรทำต่อ</p></div></div><div class="sc-task-list" id="overviewTaskList"></div></article>
+    <article class="sc-card"><div class="sc-card-header"><div><h2>ความคืบหน้าสหกิจศึกษา</h2><p>ลำดับตั้งแต่เตรียมตัวจนจบโครงการ</p></div></div><div class="sc-timeline" id="overviewWorkflow"></div></article>
+  </div>
+</section>
+
+<section class="sc-panel" id="panel-profile">
+  <div class="sc-page-heading"><div><p class="sc-eyebrow">MY INFORMATION</p><h1>ข้อมูลของฉัน</h1><p>ประวัตินักศึกษา ครอบครัว/ฉุกเฉิน อาจารย์ที่ปรึกษา และบัญชีผู้ใช้</p></div></div>
+  <div class="sc-tabs">
+    <button class="sc-tab active" data-profile-tab="personal"><i class="fa-solid fa-user"></i> ประวัตินักศึกษา</button>
+    <button class="sc-tab" data-profile-tab="family"><i class="fa-solid fa-people-roof"></i> ติดต่อ / ครอบครัว / ฉุกเฉิน</button>
+    <button class="sc-tab" data-profile-tab="account"><i class="fa-solid fa-user-gear"></i> บัญชีผู้ใช้</button>
   </div>
 
-  <div class="mock-card">
-
-    <div class="info-grid">
-
-      <div
-        class="info-item student-inline-03"
-      >
-        <span>ทักษะเด่น</span>
-
-        <div class="student-inline-06">
-          <span class="skill-chip">HTML</span>
-          <span class="skill-chip">CSS</span>
-          <span class="skill-chip">JavaScript</span>
-          <span class="skill-chip">TypeScript</span>
-          <span class="skill-chip">React</span>
-          <span class="skill-chip">Figma</span>
-          <span class="skill-chip">SQL</span>
-          <span class="skill-chip">Git</span>
+  <div class="sc-tab-panel active" data-profile-tab-panel="personal">
+    <form id="personalProfileForm">
+      <article class="sc-card">
+        <div class="sc-profile-photo-row">
+          <div class="sc-avatar-large" id="studentPhotoPreview"><i class="fa-solid fa-user-graduate"></i></div>
+          <div><h2>รูปถ่ายนักศึกษา</h2><p>ใช้รูปสุภาพ หน้าตรง</p><label class="sc-btn sc-btn-outline sc-file-button"><i class="fa-solid fa-camera"></i> เปลี่ยนรูป<input type="file" id="studentPhotoInput" accept="image/*" hidden /></label></div>
+          <div class="sc-profile-completion"><span>ความครบถ้วน</span><strong id="profileCompletionValue">0%</strong><div class="sc-progress-bar"><span id="profileCompletionBar"></span></div></div>
         </div>
+
+        <div class="sc-section-divider"><span>ข้อมูลการศึกษา</span></div>
+        <div class="sc-form-grid three">
+          <div class="sc-field"><label for="profileFirstName">ชื่อ</label><input id="profileFirstName" required /></div>
+          <div class="sc-field"><label for="profileLastName">นามสกุล</label><input id="profileLastName" required /></div>
+          <div class="sc-field"><label for="profileStudentId">รหัสประจำตัว</label><input id="profileStudentId" readonly /></div>
+          <div class="sc-field"><label for="profileMajor">สาขาวิชา</label><select id="profileMajor"><option>IT</option><option>INE</option></select></div>
+          <div class="sc-field"><label for="profileYear">ชั้นปี</label><select id="profileYear"><option value="1">ปี 1</option><option value="2">ปี 2</option><option value="3">ปี 3</option><option value="4">ปี 4</option></select></div>
+          <div class="sc-field"><label for="profileGpa">เกรดเฉลี่ย</label><input id="profileGpa" type="number" min="0" max="4" step="0.01" /></div>
+          <div class="sc-field full"><label for="profileAcademicAdvisor">อาจารย์ที่ปรึกษาประจำ</label><select id="profileAcademicAdvisor"></select><small class="sc-field-help">อาจารย์ที่ปรึกษาประจำ ไม่ใช่อาจารย์ที่ปรึกษาโครงการ</small></div>
+        </div>
+
+        <div class="sc-section-divider"><span>ข้อมูลส่วนบุคคล</span></div>
+        <div class="sc-form-grid four">
+          <div class="sc-field"><label for="profileBirthDate">วันเกิด</label><input id="profileBirthDate" type="date" /></div>
+          <div class="sc-field"><label for="profileAge">อายุ</label><input id="profileAge" type="number" readonly /></div>
+          <div class="sc-field"><label for="profileHeight">ส่วนสูง (ซม.)</label><input id="profileHeight" type="number" /></div>
+          <div class="sc-field"><label for="profileWeight">น้ำหนัก (กก.)</label><input id="profileWeight" type="number" /></div>
+          <div class="sc-field"><label for="profileNationality">สัญชาติ</label><input id="profileNationality" /></div>
+          <div class="sc-field"><label for="profileEthnicity">เชื้อชาติ</label><input id="profileEthnicity" /></div>
+          <div class="sc-field"><label for="profileReligion">ศาสนา</label><input id="profileReligion" /></div>
+          <div class="sc-field"><label for="profileBloodGroup">กลุ่มเลือด</label><select id="profileBloodGroup"><option value="">-- เลือก --</option><option>A</option><option>B</option><option>AB</option><option>O</option></select></div>
+        </div>
+
+        <div class="sc-section-divider"><span>สุขภาพและความสามารถ</span></div>
+        <div class="sc-form-grid">
+          <div class="sc-field"><label for="profileDisease">โรคประจำตัว</label><textarea id="profileDisease"></textarea></div>
+          <div class="sc-field"><label for="profileAllergy">อาการแพ้</label><textarea id="profileAllergy"></textarea></div>
+          <div class="sc-field full"><label for="profileTalent">ความสามารถพิเศษ</label><textarea id="profileTalent"></textarea></div>
+          <div class="sc-field full">
+            <label>ความสามารถที่เกี่ยวข้องกับสหกิจศึกษา</label>
+            <div class="sc-skill-editor">
+              <div class="sc-skill-tags" id="profileSkillTags"></div>
+              <div class="sc-skill-input-row"><input id="profileSkillInput" placeholder="เช่น JavaScript, React, Python" /><button class="sc-btn sc-btn-outline" type="button" onclick="addProfileSkill()"><i class="fa-solid fa-plus"></i> เพิ่มทักษะ</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="sc-form-actions"><button class="sc-btn sc-btn-primary" type="submit"><i class="fa-solid fa-floppy-disk"></i> บันทึกประวัตินักศึกษา</button></div>
+      </article>
+    </form>
+  </div>
+
+  <div class="sc-tab-panel" data-profile-tab-panel="family">
+    <form id="familyProfileForm">
+      <article class="sc-card">
+        <div class="sc-section-divider first"><span>ข้อมูลติดต่อของนักศึกษา</span></div>
+        <div class="sc-form-grid">
+          <div class="sc-field"><label for="profileHometown">ภูมิลำเนา</label><input id="profileHometown" /></div>
+          <div class="sc-field"><label for="profilePhone">โทรศัพท์</label><input id="profilePhone" type="tel" /></div>
+          <div class="sc-field full"><label for="profileCurrentAddress">ที่อยู่ปัจจุบันที่สามารถติดต่อได้</label><textarea id="profileCurrentAddress"></textarea></div>
+        </div>
+
+        <div class="sc-section-divider"><span>ข้อมูลบิดา</span></div>
+        <div class="sc-form-grid three">
+          <div class="sc-field"><label for="fatherName">ชื่อบิดา</label><input id="fatherName" /></div>
+          <div class="sc-field"><label for="fatherAge">อายุบิดา</label><input id="fatherAge" type="number" /></div>
+          <div class="sc-field"><label for="fatherOccupation">อาชีพบิดา</label><input id="fatherOccupation" /></div>
+          <div class="sc-field full"><label for="fatherAddress">ที่อยู่ที่สามารถติดต่อ</label><textarea id="fatherAddress"></textarea></div>
+          <div class="sc-field"><label for="fatherPhone">โทรศัพท์</label><input id="fatherPhone" type="tel" /></div>
+        </div>
+
+        <div class="sc-section-divider"><span>ข้อมูลมารดา</span></div>
+        <div class="sc-form-grid three">
+          <div class="sc-field"><label for="motherName">ชื่อมารดา</label><input id="motherName" /></div>
+          <div class="sc-field"><label for="motherAge">อายุมารดา</label><input id="motherAge" type="number" /></div>
+          <div class="sc-field"><label for="motherOccupation">อาชีพมารดา</label><input id="motherOccupation" /></div>
+          <div class="sc-field full"><label for="motherAddress">ที่อยู่ที่สามารถติดต่อ</label><textarea id="motherAddress"></textarea></div>
+          <div class="sc-field"><label for="motherPhone">โทรศัพท์</label><input id="motherPhone" type="tel" /></div>
+        </div>
+
+        <div class="sc-section-divider"><span>บุคคลติดต่อกรณีฉุกเฉิน</span></div>
+        <div class="sc-form-grid">
+          <div class="sc-field"><label for="emergencyName">ชื่อ-นามสกุล</label><input id="emergencyName" /></div>
+          <div class="sc-field"><label for="emergencyRelation">ความเกี่ยวข้อง</label><input id="emergencyRelation" /></div>
+          <div class="sc-field full"><label for="emergencyAddress">ที่อยู่</label><textarea id="emergencyAddress"></textarea></div>
+          <div class="sc-field"><label for="emergencyPhone">โทรศัพท์</label><input id="emergencyPhone" type="tel" /></div>
+        </div>
+        <div class="sc-form-actions"><button class="sc-btn sc-btn-primary" type="submit"><i class="fa-solid fa-floppy-disk"></i> บันทึกข้อมูลติดต่อ</button></div>
+      </article>
+    </form>
+  </div>
+
+  <div class="sc-tab-panel" data-profile-tab-panel="account">
+    <div class="sc-profile-layout">
+      <article class="sc-card sc-account-summary">
+        <div class="sc-account-icon"><i class="fa-brands fa-google"></i></div>
+        <h2>Google Account</h2><span class="sc-status sc-status-success">เชื่อมต่อแล้ว</span><p id="googleAccountEmail"></p>
+        <a href="register.html" class="sc-btn sc-btn-outline"><i class="fa-solid fa-user-plus"></i> หน้าลงทะเบียน / OAuth</a>
+        <small>Google OAuth จริงต้องใช้ Google Client ID และ Backend</small>
+      </article>
+      <article class="sc-card">
+        <div class="sc-card-header"><div><h2>จัดการบัญชีของฉัน</h2><p>แก้ไข Email และ Password</p></div></div>
+        <form id="accountForm">
+          <div class="sc-form-grid">
+            <div class="sc-field full"><label for="accountEmail">Email</label><input id="accountEmail" type="email" required /></div>
+            <div class="sc-field"><label for="accountPassword">รหัสผ่านใหม่</label><input id="accountPassword" type="password" minlength="6" /></div>
+            <div class="sc-field"><label for="accountConfirmPassword">ยืนยันรหัสผ่านใหม่</label><input id="accountConfirmPassword" type="password" minlength="6" /></div>
+          </div>
+          <div class="sc-form-actions"><button class="sc-btn sc-btn-primary" type="submit"><i class="fa-solid fa-floppy-disk"></i> บันทึกบัญชี</button></div>
+        </form>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="sc-panel" id="panel-prepare">
+  <div class="sc-page-heading"><div><p class="sc-eyebrow">PREPARE FOR CO-OP</p><h1>เตรียมสมัครสหกิจ</h1><p>Resume คำแนะนำ และค้นหาสถานประกอบการ</p></div></div>
+  <div class="sc-tabs">
+    <button class="sc-tab active" data-prepare-tab="resume"><i class="fa-solid fa-file-pdf"></i> Resume</button>
+    <button class="sc-tab" data-prepare-tab="recommend"><i class="fa-solid fa-wand-magic-sparkles"></i> แนะนำสำหรับฉัน</button>
+    <button class="sc-tab" data-prepare-tab="search"><i class="fa-solid fa-magnifying-glass-location"></i> ค้นหาสถานประกอบการ</button>
+  </div>
+
+  <div class="sc-tab-panel active" data-prepare-tab-panel="resume">
+    <article class="sc-card"><div class="sc-card-header"><div><h2>Resume ของฉัน</h2><p>รองรับไฟล์ PDF</p></div></div>
+      <div class="sc-upload-zone" id="resumeDropZone">
+        <div class="sc-upload-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+        <h3 id="resumeUploadTitle">อัปโหลด Resume</h3><p id="resumeUploadDescription">ลากไฟล์ PDF มาวาง หรือเลือกไฟล์จากเครื่อง</p>
+        <label class="sc-btn sc-btn-primary sc-file-button"><i class="fa-solid fa-file-arrow-up"></i> เลือกไฟล์ PDF<input id="resumeFileInput" type="file" accept="application/pdf,.pdf" hidden /></label>
+        <div class="sc-uploaded-file" id="resumeFileCard"></div>
       </div>
+    </article>
+  </div>
 
-      <div
-        class="info-item student-inline-03"
-      >
-        <span>ประสบการณ์ / โครงงาน</span>
+  <div class="sc-tab-panel" data-prepare-tab-panel="recommend">
+    <article class="sc-card"><div class="sc-card-header"><div><h2>สถานประกอบการที่เหมาะกับคุณ</h2><p>จำลอง Job Match จาก Resume + ทักษะ + สาขา</p></div></div>
+      <div class="sc-info-banner" id="recommendationInfo"></div>
+      <div class="sc-company-grid" id="recommendationGrid"></div>
+    </article>
+  </div>
 
-        <strong>
-          โครงงานพัฒนาเว็บไซต์ระบบจัดการนักศึกษาสหกิจศึกษา
-          โดยรับผิดชอบการออกแบบ UI/UX และพัฒนา Frontend ด้วย React
-          พร้อมเชื่อมต่อ REST API
-        </strong>
+  <div class="sc-tab-panel" data-prepare-tab-panel="search">
+    <article class="sc-card">
+      <div class="sc-filter-grid four">
+        <div class="sc-field"><label for="companySearchInput">ค้นหา</label><div class="sc-input-icon"><i class="fa-solid fa-magnifying-glass"></i><input id="companySearchInput" placeholder="ชื่อบริษัท / ตำแหน่ง / ทักษะ" /></div></div>
+        <div class="sc-field"><label for="companyMajorFilter">สาขา</label><select id="companyMajorFilter"><option value="">ทุกสาขา</option><option>IT</option><option>INE</option></select></div>
+        <div class="sc-field"><label for="companyProvinceFilter">จังหวัด</label><select id="companyProvinceFilter"></select></div>
+        <div class="sc-field"><label for="companyTypeFilter">ประเภทงาน</label><select id="companyTypeFilter"><option value="">ทั้งหมด</option><option>Software</option><option>Data</option><option>Network</option><option>Cybersecurity</option><option>Cloud</option></select></div>
       </div>
+      <div class="sc-company-grid" id="companySearchGrid"></div>
+      <div class="sc-empty" id="companySearchEmpty"><i class="fa-solid fa-building-circle-xmark"></i><strong>ไม่พบสถานประกอบการ</strong><span>ลองเปลี่ยนคำค้นหาหรือตัวกรอง</span></div>
+    </article>
+  </div>
+</section>
 
-      <div class="info-item">
-        <span>ภาษาไทย</span>
-        <strong>เจ้าของภาษา</strong>
-      </div>
-
-      <div class="info-item">
-        <span>ภาษาอังกฤษ</span>
-        <strong>ระดับปานกลาง</strong>
-      </div>
-
+<section class="sc-panel" id="panel-request">
+  <div class="sc-page-heading with-action">
+    <div>
+      <p class="sc-eyebrow">CO-OP REQUEST</p>
+      <h1>คำร้องสหกิจศึกษา</h1>
+      <p>ยื่นคำร้องและติดตามสถานะตั้งแต่อาจารย์ที่ปรึกษา หัวหน้าภาควิชา จนถึงเริ่มสหกิจศึกษา</p>
     </div>
 
-    <div class="request-actions">
-      <button class="btn-mock-sm">
-        แก้ไขข้อมูลเรซูเม่
-      </button>
+    <button class="sc-btn sc-btn-primary" type="button" id="openNewRequestButton" onclick="openCoopRequestForm()">
+      <i class="fa-solid fa-file-circle-plus"></i>
+      ยื่นคำร้องสหกิจศึกษา
+    </button>
+  </div>
 
-      <button class="btn-mock-sm solid">
-        สร้างไฟล์ PDF
+  <div class="sc-mockup-badge">
+    <i class="fa-solid fa-flask"></i>
+    Mockup
+  </div>
+
+  <article class="sc-card sc-current-request-card">
+    <div id="currentCoopRequestCard"></div>
+  </article>
+
+  <article class="sc-card sc-request-history-card">
+    <div class="sc-card-header">
+      <div>
+        <h2>ประวัติคำร้องสหกิจศึกษาของฉัน</h2>
+        <p>แสดงรายการคำร้องที่ผ่านมาเพื่อใช้ตรวจสอบย้อนหลัง</p>
+      </div>
+    </div>
+
+    <div class="sc-table-wrap">
+      <table class="sc-table sc-request-history-table">
+        <thead>
+          <tr>
+            <th>สถานประกอบการ</th>
+            <th>ตำแหน่ง</th>
+            <th>วันที่ยื่น</th>
+            <th>สถานะ</th>
+          </tr>
+        </thead>
+        <tbody id="requestHistoryTableBody"></tbody>
+      </table>
+    </div>
+
+    <div class="sc-empty" id="requestHistoryEmpty">
+      <i class="fa-solid fa-clock-rotate-left"></i>
+      <strong>ยังไม่มีประวัติคำร้อง</strong>
+      <span>เมื่อมีการยื่นคำร้อง รายการจะปรากฏที่นี่</span>
+    </div>
+  </article>
+</section>
+
+<section class="sc-panel" id="panel-project">
+  <div class="sc-page-heading"><div><p class="sc-eyebrow">CO-OP PROJECT</p><h1>โครงการสหกิจ</h1><p>อาจารย์ที่ปรึกษา หัวข้อโครงการ พี่เลี้ยง และไฟล์โครงการ</p></div></div>
+  <div class="sc-tabs">
+    <button class="sc-tab active" data-project-tab="advisor"><i class="fa-solid fa-user-tie"></i> อาจารย์ที่ปรึกษา</button>
+    <button class="sc-tab" data-project-tab="topic"><i class="fa-solid fa-lightbulb"></i> หัวข้อโครงการ</button>
+    <button class="sc-tab" data-project-tab="mentor"><i class="fa-solid fa-user-check"></i> พี่เลี้ยง</button>
+    <button class="sc-tab" data-project-tab="files"><i class="fa-solid fa-folder-open"></i> เอกสารโครงการ</button>
+  </div>
+
+  <div class="sc-tab-panel active" data-project-tab-panel="advisor">
+    <article class="sc-card">
+      <div class="sc-advisor-grid">
+        <div class="sc-advisor-card"><span class="sc-card-kicker">อาจารย์ที่ปรึกษาประจำ</span><div class="sc-advisor-avatar"><i class="fa-solid fa-user-tie"></i></div><h3 id="academicAdvisorDisplay">-</h3><p>มาจากประวัตินักศึกษา</p></div>
+        <div class="sc-advisor-card highlight">
+          <span class="sc-card-kicker">อาจารย์ที่ปรึกษาโครงการสหกิจ</span>
+          <div class="sc-field"><label for="projectAdvisorSelect">เลือกอาจารย์</label><select id="projectAdvisorSelect"></select></div>
+          <div class="sc-advisor-status" id="projectAdvisorStatus"></div>
+          <div class="sc-form-actions compact">
+            <button class="sc-btn sc-btn-outline" type="button" onclick="saveProjectAdvisor()"><i class="fa-solid fa-floppy-disk"></i> บันทึกอาจารย์</button>
+            <button class="sc-btn sc-btn-primary" type="button" id="acknowledgeAdvisorButton" onclick="acknowledgeProjectAdvisor()"><i class="fa-solid fa-circle-check"></i> ตรวจสอบและยืนยันข้อมูล</button>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <div class="sc-tab-panel" data-project-tab-panel="topic">
+    <form id="projectTopicForm"><article class="sc-card">
+      <div class="sc-card-header"><div><h2>หัวข้อสอบ / หัวข้อโครงการสหกิจศึกษา</h2><p>บันทึกและแก้ไขหัวข้อโครงการ</p></div></div>
+      <div class="sc-form-grid">
+        <div class="sc-field full"><label for="projectTitleTh">ชื่อโครงการภาษาไทย</label><input id="projectTitleTh" required /></div>
+        <div class="sc-field full"><label for="projectTitleEn">ชื่อโครงการภาษาอังกฤษ</label><input id="projectTitleEn" /></div>
+        <div class="sc-field full"><label for="projectSummary">รายละเอียดโดยย่อ</label><textarea id="projectSummary"></textarea></div>
+      </div>
+      <div class="sc-form-actions"><span class="sc-status sc-status-muted" id="projectTopicStatus">ฉบับร่าง</span><button class="sc-btn sc-btn-primary" type="submit"><i class="fa-solid fa-floppy-disk"></i> บันทึกหัวข้อโครงการ</button></div>
+    </article></form>
+  </div>
+
+  <div class="sc-tab-panel" data-project-tab-panel="mentor">
+    <form id="mentorForm"><article class="sc-card">
+      <div class="sc-card-header"><div><h2>ข้อมูลพี่เลี้ยง</h2><p>Email ชื่อ นามสกุล และตำแหน่ง</p></div></div>
+      <div class="sc-form-grid">
+        <div class="sc-field"><label for="mentorEmail">Email</label><input id="mentorEmail" type="email" required /></div>
+        <div class="sc-field"><label for="mentorPosition">ตำแหน่ง</label><input id="mentorPosition" required /></div>
+        <div class="sc-field"><label for="mentorFirstName">ชื่อ</label><input id="mentorFirstName" required /></div>
+        <div class="sc-field"><label for="mentorLastName">นามสกุล</label><input id="mentorLastName" required /></div>
+      </div>
+      <div id="mentorStatusCard"></div>
+      <div class="sc-form-actions"><button class="sc-btn sc-btn-primary" type="submit"><i class="fa-solid fa-floppy-disk"></i> บันทึกข้อมูลพี่เลี้ยง</button></div>
+    </article></form>
+  </div>
+
+  <div class="sc-tab-panel" data-project-tab-panel="files">
+    <article class="sc-card"><div class="sc-card-header"><div><h2>เอกสารโครงการ</h2><p>รูปเล่มโครงการและโปสเตอร์</p></div></div>
+      <div class="sc-project-file-grid">
+        <div class="sc-project-file-card"><div class="sc-project-file-icon"><i class="fa-solid fa-book"></i></div><h3>รูปเล่มโครงการ</h3><p id="projectBookFileText">ยังไม่ได้อัปโหลด</p><label class="sc-btn sc-btn-outline sc-file-button"><i class="fa-solid fa-upload"></i> อัปโหลดรูปเล่ม<input id="projectBookInput" type="file" accept="application/pdf,.pdf" hidden /></label></div>
+        <div class="sc-project-file-card"><div class="sc-project-file-icon poster"><i class="fa-solid fa-image"></i></div><h3>โปสเตอร์</h3><p id="posterFileText">ยังไม่ได้อัปโหลด</p><label class="sc-btn sc-btn-outline sc-file-button"><i class="fa-solid fa-upload"></i> อัปโหลดโปสเตอร์<input id="posterInput" type="file" accept="application/pdf,image/*,.pdf" hidden /></label></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="sc-panel" id="panel-daily">
+  <div class="sc-page-heading with-action"><div><p class="sc-eyebrow">DAILY WORK LOG</p><h1>บันทึกการปฏิบัติงาน</h1><p>จัดการบันทึกประจำวันและรวมเป็นเล่มบันทึกสหกิจศึกษา</p></div><button class="sc-btn sc-btn-primary" type="button" onclick="openDailyLogModal()"><i class="fa-solid fa-plus"></i> บันทึกวันนี้</button></div>
+  <div class="sc-daily-summary-grid">
+    <article class="sc-mini-stat"><span>บันทึกทั้งหมด</span><strong id="dailyTotalCount">0</strong><small>วัน</small></article>
+    <article class="sc-mini-stat"><span>ฉบับร่าง</span><strong id="dailyDraftCount">0</strong><small>วัน</small></article>
+    <article class="sc-mini-stat"><span>ส่งแล้ว</span><strong id="dailySubmittedCount">0</strong><small>วัน</small></article>
+    <article class="sc-mini-stat"><span>รวมชั่วโมง</span><strong id="dailyHoursTotal">0</strong><small>ชม.</small></article>
+  </div>
+  <article class="sc-card">
+    <div class="sc-card-header"><div><h2>รายการบันทึกประจำวัน</h2><p>ตารางเห็นครบโดยไม่เลื่อนซ้าย-ขวา</p></div><button class="sc-btn sc-btn-outline" type="button" onclick="printDailyLogbook()"><i class="fa-solid fa-file-pdf"></i> สร้าง / ดาวน์โหลดเล่มบันทึก PDF</button></div>
+    <div class="sc-filter-grid two">
+      <div class="sc-field"><label for="dailySearchInput">ค้นหาบันทึก</label><div class="sc-input-icon"><i class="fa-solid fa-magnifying-glass"></i><input id="dailySearchInput" placeholder="วันที่ / งานที่ปฏิบัติ" /></div></div>
+      <div class="sc-field"><label for="dailyStatusFilter">สถานะ</label><select id="dailyStatusFilter"><option value="">ทั้งหมด</option><option value="draft">ฉบับร่าง</option><option value="submitted">ส่งแล้ว</option></select></div>
+    </div>
+    <div class="sc-table-wrap"><table class="sc-table sc-daily-table"><thead><tr><th>วันที่</th><th>งานที่ปฏิบัติ</th><th>ชั่วโมง</th><th>สถานะ</th><th>ดำเนินการ</th></tr></thead><tbody id="dailyLogTableBody"></tbody></table></div>
+    <div class="sc-empty" id="dailyLogEmpty"><i class="fa-solid fa-book-open"></i><strong>ยังไม่มีบันทึก</strong><span>เริ่มจาก “บันทึกวันนี้”</span></div>
+  </article>
+</section>
+
+<section class="sc-panel" id="panel-evaluation">
+  <div class="sc-page-heading"><div><p class="sc-eyebrow">COMPANY EVALUATION</p><h1>ประเมินสถานประกอบการ</h1><p>ประเมินประสบการณ์การทำงานและความเหมาะสมของสถานประกอบการ</p></div></div>
+  <div class="sc-grid-2 evaluation-layout">
+    <article class="sc-card"><div class="sc-card-header"><div><h2>สถานประกอบการของฉัน</h2><p>อ้างอิงจากคำร้องหรือบริษัทที่เลือก</p></div></div><div id="evaluationCompanyPreview"></div></article>
+    <article class="sc-card"><div class="sc-card-header"><div><h2>แบบประเมิน</h2><p>คะแนน 1–5</p></div></div>
+      <form id="companyEvaluationForm">
+        <div class="sc-rating-list" id="companyEvaluationCriteria"></div>
+        <div class="sc-field"><label for="companyEvaluationComment">ความคิดเห็นเพิ่มเติม</label><textarea id="companyEvaluationComment"></textarea></div>
+        <div class="sc-form-actions"><button class="sc-btn sc-btn-outline" type="button" onclick="saveCompanyEvaluation(true)"><i class="fa-solid fa-file-pen"></i> บันทึกฉบับร่าง</button><button class="sc-btn sc-btn-primary" type="submit"><i class="fa-solid fa-paper-plane"></i> ส่งแบบประเมิน</button></div>
+      </form>
+    </article>
+  </div>
+</section>
+
+<section class="sc-panel" id="panel-chatbot">
+  <div class="sc-page-heading"><div><p class="sc-eyebrow">KIWI ASSISTANT</p><h1>ผู้ช่วยเอกสารสหกิจศึกษา</h1><p>สอบถามขั้นตอนและวิธีดำเนินการด้านเอกสาร</p></div></div>
+  <div class="sc-chat-page">
+    <aside class="sc-chat-help-card"><div class="sc-chatbot-icon"><i class="fa-solid fa-robot"></i></div><h2>KIWI Assistant</h2><p>ตัวอย่างคำถาม</p>
+      <div class="sc-quick-questions">
+        <button onclick="askQuickQuestion('ขอฝึกงานต้องใช้เอกสารอะไรบ้าง')">ขอฝึกงานต้องใช้เอกสารอะไรบ้าง?</button>
+        <button onclick="askQuickQuestion('หนังสือขอความอนุเคราะห์คืออะไร')">หนังสือขอความอนุเคราะห์คืออะไร?</button>
+        <button onclick="askQuickQuestion('ตรวจสอบสถานะคำร้องยังไง')">ตรวจสอบสถานะคำร้องยังไง?</button>
+        <button onclick="askQuickQuestion('ต้องอัปโหลดโปสเตอร์เมื่อไหร่')">ต้องอัปโหลดโปสเตอร์เมื่อไหร่?</button>
+      </div>
+    </aside>
+    <article class="sc-card sc-chat-card"><div class="sc-chat-messages" id="chatMessages"></div><form id="chatForm" class="sc-chat-input-row"><input id="chatInput" placeholder="พิมพ์คำถาม..." autocomplete="off" /><button class="sc-btn sc-btn-primary" type="submit"><i class="fa-solid fa-paper-plane"></i> ส่ง</button></form></article>
+  </div>
+</section>
+
+</main>
+</div>
+
+<button class="sc-floating-chat" type="button" onclick="openChatDrawer()"><i class="fa-solid fa-comments"></i></button>
+<div class="sc-chat-drawer" id="chatDrawer" aria-hidden="true">
+  <div class="sc-chat-drawer-header"><div><strong>KIWI Assistant</strong><span>ผู้ช่วยด้านเอกสารสหกิจศึกษา</span></div><button type="button" onclick="closeChatDrawer()"><i class="fa-solid fa-xmark"></i></button></div>
+  <div class="sc-chat-drawer-messages" id="chatDrawerMessages"></div>
+  <form id="chatDrawerForm" class="sc-chat-drawer-form"><input id="chatDrawerInput" placeholder="พิมพ์คำถาม..." /><button type="submit"><i class="fa-solid fa-paper-plane"></i></button></form>
+</div>
+
+
+<!-- =========================================================
+     CO-OP REQUEST FORM MODAL
+     ========================================================= -->
+<div class="sc-modal" id="coopRequestFormModal" aria-hidden="true">
+  <div class="sc-modal-dialog sc-modal-xl sc-request-form-dialog">
+    <div class="sc-modal-header sc-request-form-header">
+      <div>
+        <p class="sc-eyebrow">CO-OP REQUEST FORM</p>
+        <h2>ขอจัดทำหนังสือขอความอนุเคราะห์รับนักศึกษาสหกิจศึกษา</h2>
+        <p>แบบคำร้องสำหรับยื่นต่อหัวหน้าภาควิชาเทคโนโลยีสารสนเทศ</p>
+      </div>
+      <button class="sc-modal-close" type="button" data-close-modal>
+        <i class="fa-solid fa-xmark"></i>
       </button>
     </div>
 
-  </div>
-  -->
-
-          <!-- ==================================================
-       สถานประกอบการแนะนำ
-       ================================================== -->
-
-          <div class="section-title-sm">
-            <i
-              class="fa-solid fa-building-circle-check student-inline-05"
-            ></i>
-
-            สถานประกอบการแนะนำสำหรับคุณ
-          </div>
-
-          <div class="recommend-grid">
-            <!-- บริษัทที่ 1 -->
-            <div class="recommend-card">
-              <div class="recommend-card-head">
-                <div>
-                  <b>บริษัท อินโนเวฟ ดิจิทัล จำกัด</b>
-                  <small>
-                    นักศึกษาสหกิจศึกษาด้าน Frontend (React / TypeScript)
-                  </small>
-                </div>
-
-                <span class="match-badge"> ตรงกัน 95% </span>
-              </div>
-
-              <div class="match-bar-track">
-                <div class="match-bar-fill student-inline-07"></div>
-              </div>
-
-              <span class="skill-chip">React</span>
-              <span class="skill-chip">TypeScript</span>
-              <span class="skill-chip">JavaScript</span>
-              <span class="skill-chip">Git</span>
-            </div>
-
-            <!-- บริษัทที่ 2 -->
-            <div class="recommend-card">
-              <div class="recommend-card-head">
-                <div>
-                  <b>บริษัท ดีไซน์พลัส เทคโนโลยี จำกัด</b>
-                  <small> นักศึกษาสหกิจศึกษาด้าน UI/UX </small>
-                </div>
-
-                <span class="match-badge"> ตรงกัน 91% </span>
-              </div>
-
-              <div class="match-bar-track">
-                <div class="match-bar-fill student-inline-08"></div>
-              </div>
-
-              <span class="skill-chip">Figma</span>
-              <span class="skill-chip">UI/UX</span>
-              <span class="skill-chip">Prototype</span>
-            </div>
-
-            <!-- บริษัทที่ 3 -->
-            <div class="recommend-card">
-              <div class="recommend-card-head">
-                <div>
-                  <b>บริษัท อีสเทิร์น ซอฟต์แวร์ โซลูชัน จำกัด</b>
-                  <small> นักศึกษาสหกิจศึกษาด้าน Web Development </small>
-                </div>
-
-                <span class="match-badge"> ตรงกัน 86% </span>
-              </div>
-
-              <div class="match-bar-track">
-                <div class="match-bar-fill student-inline-09"></div>
-              </div>
-
-              <span class="skill-chip">HTML</span>
-              <span class="skill-chip">CSS</span>
-              <span class="skill-chip">JavaScript</span>
-              <span class="skill-chip">REST API</span>
-            </div>
-
-            <!-- บริษัทที่ 4 -->
-            <div class="recommend-card">
-              <div class="recommend-card-head">
-                <div>
-                  <b>บริษัท สมาร์ทดาต้า อินไซต์ จำกัด</b>
-                  <small> นักศึกษาสหกิจศึกษาด้าน Data Visualization </small>
-                </div>
-
-                <span class="match-badge"> ตรงกัน 79% </span>
-              </div>
-
-              <div class="match-bar-track">
-                <div class="match-bar-fill student-inline-10"></div>
-              </div>
-
-              <span class="skill-chip">SQL</span>
-              <span class="skill-chip">Data Visualization</span>
-              <span class="skill-chip">Dashboard</span>
-            </div>
-          </div>
-
-          <p class="helper-note">
-            *คำนวณจากความสอดคล้องระหว่างเรซูเม่และประกาศรับสมัครในระบบ —
-            ข้อมูลตัวอย่างในหน้า Mockup เท่านั้น
-          </p>
-        </section>
-
-        <!-- ==================================================
-    คำร้องสหกิจศึกษา
-     ================================================== -->
-
-        <section class="content-panel" id="panel-request">
-          <div class="panel-header">
-            <h2>คำร้องสหกิจศึกษา</h2>
-            <p>ติดตามสถานะคำร้องและเอกสารสำหรับการออกปฏิบัติงานสหกิจศึกษา</p>
-          </div>
-
-          <span class="status-chip planned"> Mockup </span>
-
-          <!-- ==================================================
-       คำร้องปัจจุบัน
-       ================================================== -->
-
-          <div class="mock-card">
-            <div class="request-card-head">
-              <div>
-                <h4>BlueWave Digital Co., Ltd. — Frontend Developer</h4>
-
-                <p>คำร้องสหกิจศึกษาปัจจุบัน · จังหวัดชลบุรี</p>
-              </div>
-
-              <span class="tag tag-green"> อนุมัติแล้ว </span>
-            </div>
-
-            <!-- ==================================================
-         ขั้นตอนการดำเนินงาน
-         ================================================== -->
-
-            <div class="stepper">
-              <div class="step completed">
-                <div class="step-dot">
-                  <i class="fa-solid fa-check"></i>
-                </div>
-                <div class="step-label">ยื่นคำร้อง</div>
-              </div>
-
-              <div class="step completed">
-                <div class="step-dot">
-                  <i class="fa-solid fa-check"></i>
-                </div>
-                <div class="step-label">เจ้าหน้าที่ตรวจสอบ</div>
-              </div>
-
-              <div class="step completed">
-                <div class="step-dot">
-                  <i class="fa-solid fa-check"></i>
-                </div>
-                <div class="step-label">อนุมัติคำร้อง</div>
-              </div>
-
-              <div class="step completed">
-                <div class="step-dot">
-                  <i class="fa-solid fa-check"></i>
-                </div>
-                <div class="step-label">ออกเอกสารส่งตัว</div>
-              </div>
-
-              <div class="step completed">
-                <div class="step-dot">
-                  <i class="fa-solid fa-check"></i>
-                </div>
-                <div class="step-label">เริ่มสหกิจศึกษา</div>
-              </div>
-            </div>
-
-            <!-- ข้อมูลคำร้อง -->
-
-            <div
-              class="info-grid student-inline-11"
-            >
-              <div class="info-item">
-                <span>สถานประกอบการ</span>
-
-                <strong> BlueWave Digital Co., Ltd. </strong>
-              </div>
-
-              <div class="info-item">
-                <span>ตำแหน่ง</span>
-
-                <strong> Frontend Developer </strong>
-              </div>
-
-              <div class="info-item">
-                <span>จังหวัด</span>
-
-                <strong> ชลบุรี </strong>
-              </div>
-
-              <div class="info-item">
-                <span>วันที่ยื่นคำร้อง</span>
-
-                <strong> 20 สิงหาคม 2569 </strong>
-              </div>
-
-              <div class="info-item">
-                <span>วันที่เริ่มสหกิจศึกษา</span>
-
-                <strong> 1 กันยายน 2569 </strong>
-              </div>
-
-              <div class="info-item">
-                <span>วันที่สิ้นสุดสหกิจศึกษา</span>
-
-                <strong> 18 ธันวาคม 2569 </strong>
-              </div>
-            </div>
-
-            <p class="request-meta">
-              คำร้องได้รับการอนุมัติแล้ว และนักศึกษาเริ่มปฏิบัติงานสหกิจศึกษา
-              เมื่อวันที่ 1 กันยายน 2569
-            </p>
-
-            <div class="request-actions">
-              <!-- เขียนคำร้อง -->
-              <button
-                type="button"
-                class="btn-mock-sm solid"
-                id="openCoopRequest"
-              >
-                <i class="fa-solid fa-pen"></i>
-                เขียนคำร้องสหกิจศึกษา
-              </button>
-
-              <!-- ดูรายละเอียดคำร้อง -->
-              <button type="button" class="btn-mock-sm" id="viewCoopRequest">
-                <i class="fa-solid fa-file-lines"></i>
-                ดูรายละเอียดคำร้อง
-              </button>
-
-              <!-- ยกเลิกคำร้อง -->
-              <button
-                type="button"
-                class="btn-danger-outline student-inline-12"
-                id="openCancelRequest"
-              >
-                <i class="fa-solid fa-ban"></i>
-                ยกเลิกคำร้องสหกิจศึกษา
-              </button>
-            </div>
-          </div>
-
-          <!-- ==================================================
-       ประวัติคำร้อง
-       ================================================== -->
-
-          <div class="section-title-sm">ประวัติคำร้องสหกิจศึกษาทั้งหมด</div>
-
-          <div class="student-inline-13">
-            <div class="daily-table-wrap">
-              <table class="mock-table">
-                <thead>
-                  <tr>
-                    <th>สถานประกอบการ</th>
-                    <th>ตำแหน่ง</th>
-                    <th>วันที่ยื่น</th>
-                    <th>สถานะ</th>
-                  </tr>
-                </thead>
-
-                <tbody id="requestHistoryTableBody">
-                  <!-- คำร้องปัจจุบัน -->
-                  <tr>
-                    <td>BlueWave Digital Co., Ltd.</td>
-
-                    <td>Frontend Developer</td>
-
-                    <td>20 ส.ค. 2569</td>
-
-                    <td>
-                      <span class="tag tag-green"> อนุมัติแล้ว </span>
-                    </td>
-                  </tr>
-
-                  <!-- ประวัติคำร้องที่ 2 -->
-                  <tr>
-                    <td>บริษัท อินโนเวฟ ดิจิทัล จำกัด</td>
-
-                    <td>Frontend Developer</td>
-
-                    <td>8 ส.ค. 2569</td>
-
-                    <td>
-                      <span class="tag tag-muted"> ยกเลิกโดยนักศึกษา </span>
-                    </td>
-                  </tr>
-
-                  <!-- ประวัติคำร้องที่ 3 -->
-                  <tr>
-                    <td>บริษัท ดีไซน์พลัส เทคโนโลยี จำกัด</td>
-
-                    <td>UI/UX Designer</td>
-
-                    <td>28 ก.ค. 2569</td>
-
-                    <td>
-                      <span class="tag tag-dark"> ไม่ได้รับการอนุมัติ </span>
-                    </td>
-                  </tr>
-
-                  <!-- ประวัติคำร้องที่ 4 -->
-                  <tr>
-                    <td>บริษัท สมาร์ทดาต้า อินไซต์ จำกัด</td>
-
-                    <td>Data Visualization</td>
-
-                    <td>15 ก.ค. 2569</td>
-
-                    <td>
-                      <span class="tag tag-muted"> ยกเลิกโดยนักศึกษา </span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <p class="helper-note">
-            *ข้อมูลทั้งหมดเป็นข้อมูลตัวอย่างสำหรับหน้า Mockup เท่านั้น
-          </p>
-        </section>
-
-        <!-- ==================================================
-    Modal: เขียนคำร้องสหกิจศึกษา
-     ================================================== -->
-
-        <div class="request-modal" id="coopRequestModal" aria-hidden="true">
-          <div
-            class="request-modal-box"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="coopRequestTitle"
-          >
-            <!-- Header Modal -->
-            <div class="request-modal-head">
-              <div>
-                <h3 id="coopRequestTitle">
-                  ขอจัดทำหนังสือขอความอนุเคราะห์รับนักศึกษาสหกิจศึกษา
-                </h3>
-
-                <p>แบบคำร้องสำหรับยื่นต่อหัวหน้าภาควิชาเทคโนโลยีสารสนเทศ</p>
-              </div>
-
-              <button
-                type="button"
-                class="modal-close"
-                data-close-request="coopRequestModal"
-                aria-label="ปิด"
-              >
-                <i class="fa-solid fa-xmark"></i>
-              </button>
-            </div>
-
-            <!-- Body Modal -->
-            <div class="request-modal-body">
-              <!-- แจ้งเตือน -->
-              <div class="mock-notice">
-                <i class="fa-solid fa-circle-info"></i>
-
-                แบบฟอร์มนี้เป็น Mockup สำหรับแสดงหน้าตาการทำงาน
-                ข้อมูลสามารถแสดงได้ แต่ยังไม่เชื่อมต่อการส่งคำร้องจริง
-              </div>
-
-              <!-- ==================================================
-           เรื่อง / เรียน
-           ================================================== -->
-
-              <div class="form-section">
-                <h4>เรื่อง / เรียน</h4>
-
-                <div class="form-grid">
-                  <div class="form-field full">
-                    <label> เรื่อง </label>
-
-                    <input
-                      readonly
-                      value="ขอจัดทำหนังสือขอความอนุเคราะห์รับนักศึกษาสหกิจศึกษา"
-                    />
-                  </div>
-
-                  <div class="form-field full">
-                    <label> เรียน </label>
-
-                    <input readonly value="หัวหน้าภาควิชาเทคโนโลยีสารสนเทศ" />
-                  </div>
-                </div>
-              </div>
-
-              <!-- ==================================================
-           ข้อมูลนักศึกษา
-           ================================================== -->
-
-              <div class="form-section">
-                <h4>ข้อมูลนักศึกษา</h4>
-
-                <div class="form-grid">
-                  <div class="form-field">
-                    <label> ชื่อ-สกุล </label>
-
-                    <input readonly value="นางสาวพิมพ์ชนก สุขใจ" />
-                  </div>
-
-                  <div class="form-field">
-                    <label> รหัสประจำตัวนักศึกษา </label>
-
-                    <input readonly value="6702458196" />
-                  </div>
-
-                  <div class="form-field">
-                    <label> ชั้นปีที่ </label>
-
-                    <input readonly value="4" />
-                  </div>
-
-                  <div class="form-field">
-                    <label> เกรดเฉลี่ย </label>
-
-                    <input readonly value="3.71" />
-                  </div>
-
-                  <div class="form-field">
-                    <label> เบอร์โทร </label>
-
-                    <input readonly value="092-684-7315" />
-                  </div>
-
-                  <div class="form-field">
-                    <label> E-Mail </label>
-
-                    <input readonly value="studentcoop@email.kmutnb.ac.th" />
-                  </div>
-                </div>
-              </div>
-
-              <!-- ==================================================
-           ข้อมูลหน่วยงาน / สถานประกอบการ
-           ================================================== -->
-
-              <div class="form-section">
-                <h4>ข้อมูลหน่วยงาน / สถานประกอบการ</h4>
-
-                <div class="form-grid">
-                  <div class="form-field full">
-                    <label> ชื่อบริษัท / หน่วยงาน (ชื่อภาษาไทย) </label>
-
-                    <input readonly value="บริษัท อินโนเวฟ ดิจิทัล จำกัด" />
-                  </div>
-
-                  <div class="form-field">
-                    <label> เรียนถึง </label>
-
-                    <input readonly value="ผู้จัดการฝ่ายทรัพยากรบุคคล" />
-                  </div>
-
-                  <div class="form-field">
-                    <label> ตำแหน่ง / หน่วยงาน </label>
-
-                    <input readonly value="ฝ่ายทรัพยากรบุคคลและพัฒนาองค์กร" />
-                  </div>
-
-                  <div class="form-field full">
-                    <label> ที่อยู่ </label>
-
-                    <textarea readonly>
-88/8 หมู่ 4 ถนนสุขุมวิท ต.สุรศักดิ์ อ.ศรีราชา จ.ชลบุรี 20110</textarea
-                    >
-                  </div>
-
-                  <div class="form-field">
-                    <label>
-                      กำหนดการปฏิบัติงานสหกิจศึกษา เริ่มตั้งแต่วันที่
-                    </label>
-
-                    <input readonly value="1 ก.ย. 2569" />
-                  </div>
-
-                  <div class="form-field">
-                    <label> ถึงวันที่ </label>
-
-                    <input readonly value="18 ธ.ค. 2569" />
-                  </div>
-                </div>
-
-                <p class="helper-note">
-                  การนี้ข้าพเจ้าได้ติดต่อกับทางบริษัท/หน่วยงานข้างต้น
-                  เป็นที่เรียบร้อยแล้ว
-                </p>
-              </div>
-
-              <!-- ==================================================
-           การดำเนินการจัดส่งหนังสือ
-           ================================================== -->
-
-              <div class="form-section">
-                <h4>การดำเนินการจัดส่งหนังสือ (กรุณาทำเครื่องหมาย ✓)</h4>
-
-                <div class="check-row">
-                  <label class="check-item">
-                    <input type="checkbox" checked disabled />
-
-                    นักศึกษานำหนังสือไปยื่นด้วยตนเอง
-                  </label>
-
-                  <label class="check-item">
-                    <input type="checkbox" disabled />
-
-                    ให้ภาควิชาฯ จัดส่งให้ทางไปรษณีย์
-                  </label>
-
-                  <label class="check-item">
-                    <input type="checkbox" disabled />
-
-                    จัดส่งให้ทาง E-mail
-                  </label>
-                </div>
-              </div>
-
-              <!-- ==================================================
-           รายวิชาที่ต้องผ่านเกณฑ์
-           ================================================== -->
-
-              <div class="form-section">
-                <h4>
-                  รายวิชาที่ต้องผ่านเกณฑ์ก่อนออกสหกิจศึกษา
-                  สำหรับหลักสูตรวิศวกรรมศาสตรบัณฑิต (เทียบโอน)
-                </h4>
-
-                <p class="helper-note student-inline-14">
-                  กรุณาทำเครื่องหมายตามช่องรหัสวิชาที่เรียนผ่าน
-                  และระบุเกรดที่ได้ หรือกำลังลงทะเบียนเรียนในเทอมนี้
-                </p>
-
-                <div class="student-inline-13">
-                  <table class="course-table">
-                    <thead>
-                      <tr>
-                        <th>ลำดับ</th>
-                        <th>ผ่าน (เกรด)</th>
-                        <th>กำลังศึกษา</th>
-                        <th>รหัสวิชา</th>
-                        <th>รายวิชา</th>
-                      </tr>
-                    </thead>
-
-                    <tbody>
-                      <!-- วิชาที่ 1 -->
-                      <tr>
-                        <td>1</td>
-
-                        <td>
-                          <input class="mini-input" readonly value="A" />
-                        </td>
-
-                        <td>
-                          <input type="checkbox" disabled />
-                        </td>
-
-                        <td>060233107</td>
-
-                        <td>ระบบฐานข้อมูล</td>
-                      </tr>
-
-                      <!-- วิชาที่ 2 -->
-                      <tr>
-                        <td>2</td>
-
-                        <td>
-                          <input class="mini-input" readonly value="A" />
-                        </td>
-
-                        <td>
-                          <input type="checkbox" disabled />
-                        </td>
-
-                        <td>060233112</td>
-
-                        <td>วิศวกรรมข้อมูล</td>
-                      </tr>
-
-                      <!-- วิชาที่ 3 -->
-                      <tr>
-                        <td>3</td>
-
-                        <td>
-                          <input class="mini-input" readonly value="B+" />
-                        </td>
-
-                        <td>
-                          <input type="checkbox" disabled />
-                        </td>
-
-                        <td>060233113</td>
-
-                        <td>การเขียนโปรแกรมคอมพิวเตอร์ขั้นสูง</td>
-                      </tr>
-
-                      <!-- วิชาที่ 4 -->
-                      <tr>
-                        <td>4</td>
-
-                        <td>
-                          <input class="mini-input" readonly value="A" />
-                        </td>
-
-                        <td>
-                          <input type="checkbox" disabled />
-                        </td>
-
-                        <td>060233201</td>
-
-                        <td>ปฏิบัติการวิศวกรรมเครือข่าย 1</td>
-                      </tr>
-
-                      <!-- วิชาที่ 5 -->
-                      <tr>
-                        <td>5</td>
-
-                        <td>
-                          <input class="mini-input" readonly value="B+" />
-                        </td>
-
-                        <td>
-                          <input type="checkbox" disabled />
-                        </td>
-
-                        <td>060233204</td>
-
-                        <td>การออกแบบและการจัดทำเครือข่ายคอมพิวเตอร์</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-
-                <div class="approval-box">
-                  <p>
-                    <strong> หมายเหตุ : </strong>
-
-                    ต้องผ่านเกณฑ์การออกสหกิจศึกษา
-                    ต้องผ่านรายวิชาบังคับพื้นฐานและรายวิชาบังคับในแขนง
-                    โดยที่ไม่ติดสถานะวิทยาทัณฑ์
-                  </p>
-                </div>
-              </div>
-
-              <!-- ==================================================
-           ลงชื่อผู้ยื่นคำร้อง
-           ================================================== -->
-
-              <div class="form-section">
-                <h4>ลงชื่อผู้ยื่นคำร้อง</h4>
-
-                <div class="form-grid">
-                  <div class="form-field">
-                    <label> ลงชื่อ </label>
-
-                    <input readonly value="นางสาวพิมพ์ชนก สุขใจ" />
-                  </div>
-
-                  <div class="form-field">
-                    <label> ชื่อ-สกุล </label>
-
-                    <input readonly value="นางสาวพิมพ์ชนก สุขใจ" />
-                  </div>
-                </div>
-              </div>
-
-              <!-- ==================================================
-           ความเห็นชอบของอาจารย์ที่ปรึกษา
-           ================================================== -->
-
-              <div class="form-section">
-                <h4>ความเห็นชอบของอาจารย์ที่ปรึกษา</h4>
-
-                <p class="student-inline-15">
-                  นักศึกษามีคุณสมบัติครบตามเกณฑ์ขอสหกิจศึกษา
-                </p>
-
-                <div class="check-row">
-                  <label class="check-item">
-                    <input type="checkbox" checked disabled />
-
-                    ครบ
-                  </label>
-
-                  <label class="check-item">
-                    <input type="checkbox" disabled />
-
-                    ไม่ครบ
-                  </label>
-                </div>
-
-                <p class="student-inline-16">
-                  ให้เข้าทดสอบการปฏิบัติงานสหกิจศึกษา และออกสหกิจศึกษาครั้งนี้
-                </p>
-
-                <p class="student-inline-16">
-                  ความเห็นชอบให้นักศึกษาสหกิจศึกษากับบริษัท/หน่วยงาน
-                </p>
-
-                <div class="check-row">
-                  <label class="check-item">
-                    <input type="checkbox" checked disabled />
-
-                    เห็นควรให้นักศึกษาสหกิจศึกษากับบริษัท/หน่วยงาน
-                  </label>
-
-                  <label class="check-item">
-                    <input type="checkbox" disabled />
-
-                    ไม่เห็นควรให้นักศึกษาสหกิจศึกษากับบริษัท/หน่วยงาน
-                  </label>
-                </div>
-
-                <div class="form-grid student-inline-17">
-                  <div class="form-field">
-                    <label> อาจารย์ที่ปรึกษา </label>
-
-                    <input readonly value="ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ" />
-                  </div>
-
-                  <div class="form-field">
-                    <label> วันที่ </label>
-
-                    <input readonly value="21 ส.ค. 2569" />
-                  </div>
-                </div>
-              </div>
-
-              <!-- ==================================================
-           ความเห็นชอบของหัวหน้าภาควิชา
-           ================================================== -->
-
-              <div class="form-section">
-                <h4>ความเห็นชอบของหัวหน้าภาควิชา</h4>
-
-                <div class="check-row">
-                  <label class="check-item">
-                    <input type="checkbox" disabled />
-
-                    อนุญาต และดำเนินการจัดทำหนังสือ
-                  </label>
-
-                  <label class="check-item">
-                    <input type="checkbox" disabled />
-
-                    ไม่อนุญาต
-                  </label>
-                </div>
-
-                <div class="form-field full student-inline-18">
-                  <label> หมายเหตุ </label>
-
-                  <textarea readonly>
-....................................................................
-....................................................................</textarea
-                  >
-                </div>
-
-                <div class="form-grid student-inline-17">
-                  <div class="form-field">
-                    <label> ลงชื่อ </label>
-
-                    <input readonly value="ผู้ช่วยศาสตราจารย์ ดร.ขนิษฐา นามี" />
-                  </div>
-
-                  <div class="form-field">
-                    <label> วันที่ </label>
-
-                    <input readonly value="........../........../.........." />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Footer Modal -->
-            <div class="request-modal-foot">
-              <button
-                type="button"
-                class="btn-modal-secondary"
-                data-close-request="coopRequestModal"
-              >
-                ปิด
-              </button>
-
-              <button
-                type="button"
-                class="btn-mock-sm solid"
-                id="submitCoopRequest"
-              >
-                <i class="fa-solid fa-paper-plane"></i>
-                ส่งคำร้อง
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- ==================================================
-     Modal: ยกเลิกคำร้อง
-     ================================================== -->
-
-        <div class="request-modal" id="cancelRequestModal" aria-hidden="true">
-          <div
-            class="request-modal-box cancel-confirm"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="cancelRequestTitle"
-          >
-            <div class="request-modal-head">
-              <div>
-                <h3 id="cancelRequestTitle">ยกเลิกคำร้องสหกิจศึกษา</h3>
-
-                <p>ยืนยันการดำเนินการ</p>
-              </div>
-
-              <button
-                type="button"
-                class="modal-close"
-                data-close-request="cancelRequestModal"
-                aria-label="ปิด"
-              >
-                <i class="fa-solid fa-xmark"></i>
-              </button>
-            </div>
-
-            <div class="request-modal-body">
-              <div class="cancel-icon">
-                <i class="fa-solid fa-ban"></i>
-              </div>
-
-              <h4 class="student-inline-19"
-              >
-                ต้องการยกเลิกคำร้องนี้หรือไม่?
-              </h4>
-
-              <p class="student-inline-20">
-                บริษัท อินโนเวฟ ดิจิทัล จำกัด — นักศึกษาสหกิจศึกษาด้าน Frontend
-                (React / TypeScript)
-              </p>
-
-              <div
-                class="mock-notice student-inline-21"
-              >
-                <i class="fa-solid fa-circle-info"></i>
-
-                Mockup เท่านั้น การยกเลิกคำร้องจริงยังไม่เปิดใช้งาน
-                และข้อมูลจะไม่ถูกเปลี่ยนแปลง
-              </div>
-            </div>
-
-            <div class="request-modal-foot">
-              <button
-                type="button"
-                class="btn-modal-secondary"
-                data-close-request="cancelRequestModal"
-              >
-                ไม่ยกเลิก
-              </button>
-
-              <button
-                type="button"
-                class="btn-danger-outline student-inline-12"
-                id="confirmCancelRequest"
-              >
-                <i class="fa-solid fa-ban"></i>
-                ยืนยันการยกเลิก
-              </button>
-            </div>
-          </div>
-        </div>
-        <!-- ==================================================
-     ข้อมูลพี่เลี้ยง
-     ================================================== -->
-
-        <section class="content-panel" id="panel-mentor">
-          <div class="panel-header">
-            <h2>ข้อมูลพี่เลี้ยง</h2>
-
-            <p>จัดการข้อมูลพี่เลี้ยงสำหรับสหกิจศึกษา</p>
-          </div>
-
-          <span class="status-chip planned"> Mockup </span>
-
-          <div class="mock-card">
-            <div class="request-card-head">
-              <div>
-                <h4>
-                  <i class="fa-solid fa-user-tie"></i>
-                  ข้อมูลพี่เลี้ยงปัจจุบัน
-                </h4>
-
-                <p>ข้อมูลที่ใช้ติดต่อและประสานงานระหว่างสหกิจศึกษา</p>
-              </div>
-            </div>
-
-            <div class="info-grid student-inline-22">
-              <div class="info-item">
-                <span> Email </span>
-
-                <strong id="mentorEmail"> natcha.w@innowave.co.th </strong>
-              </div>
-
-              <div class="info-item">
-                <span> ชื่อ </span>
-
-                <strong id="mentorFirstName"> ณัฐชา </strong>
-              </div>
-
-              <div class="info-item">
-                <span> นามสกุล </span>
-
-                <strong id="mentorLastName"> วงศ์พิพัฒน์ </strong>
-              </div>
-
-              <div class="info-item">
-                <span> ตำแหน่ง </span>
-
-                <strong id="mentorPosition">
-                  Frontend Development Lead / พี่เลี้ยง
-                </strong>
-              </div>
-            </div>
-
-            <div class="request-actions">
-              <button type="button" class="btn-mock-sm solid" id="btnAddMentor">
-                <i class="fa-solid fa-plus"></i>
-                เพิ่มข้อมูลพี่เลี้ยง
-              </button>
-
-              <button type="button" class="btn-mock-sm" id="btnEditMentor">
-                <i class="fa-solid fa-pen"></i>
-                แก้ไขข้อมูลพี่เลี้ยง
-              </button>
-
-              <button
-                type="button"
-                class="btn-danger-outline student-inline-12"
-                id="btnDeleteMentor"
-              >
-                <i class="fa-solid fa-trash"></i>
-                ลบข้อมูลพี่เลี้ยง
-              </button>
-            </div>
-          </div>
-        </section>
-
-        <!-- ==================================================
-    บันทึกการปฏิบัติงานประจำวัน
-     ================================================== -->
-
-        <section class="content-panel" id="panel-daily">
-          <div class="panel-header">
-            <h2>บันทึกการปฏิบัติงานประจำวัน</h2>
-
-            <p>รวบรวมบันทึกประจำวันเป็นเล่มเสนออาจารย์นิเทศ</p>
-          </div>
-
-          <span class="status-chip planned"> ยังไม่เริ่มพัฒนา </span>
-
-          <div class="weekly-submit-bar">
-            <div class="weekly-submit-info">
-              <i class="fa-solid fa-user-tie"></i>
-
-              พี่เลี้ยง:
-
-              <a href="mentor_coop.html" class="mentor-link">
-                คุณณัฐชา วงศ์พิพัฒน์
-              </a>
-
-              <span class="student-inline-23">
-                · Frontend Development Lead / พี่เลี้ยง
-              </span>
-            </div>
-
-            <div class="student-inline-24"
-            >
-              <button type="button" class="btn-mock-sm" id="btnWriteDaily">
-                <i class="fa-solid fa-pen"></i>
-                เขียนบันทึกประจำวัน
-              </button>
-
-              <button
-                type="button"
-                class="btn-mock-sm solid"
-                id="btnSubmitWeekly"
-              >
-                <i class="fa-solid fa-paper-plane"></i>
-                ส่งบันทึกประจำสัปดาห์ให้พี่เลี้ยงตรวจ
-              </button>
-            </div>
-          </div>
-
-          <table class="mock-table">
-            <thead>
-              <tr>
-                <th>วันที่</th>
-                <th>งานที่ปฏิบัติ</th>
-                <th>สถานะ</th>
-                <th>การดำเนินการ</th>
-              </tr>
-            </thead>
-
-            <tbody id="dailyLogTableBody">
-              <tr>
-                <td>6 ก.ย. 2569</td>
-
-                <td>
-                  ทดสอบ Responsive Design ของหน้า Dashboard บน Desktop, Tablet
-                  และ Mobile
-                </td>
-
-                <td>
-                  <span class="tag tag-green"> ตรวจแล้ว </span>
-                </td>
-
-                <td>
-                  <button class="btn-mock-sm">ดู</button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>5 ก.ย. 2569</td>
-
-                <td>
-                  พัฒนา Component สำหรับแสดงข้อมูลสถิติ และกราฟบนหน้า Dashboard
-                </td>
-
-                <td>
-                  <span class="tag tag-green"> ตรวจแล้ว </span>
-                </td>
-
-                <td>
-                  <button class="btn-mock-sm">ดู</button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>4 ก.ย. 2569</td>
-
-                <td>เชื่อมต่อ REST API สำหรับดึงข้อมูลมาแสดงบน Dashboard</td>
-
-                <td>
-                  <span class="tag tag-dark"> ส่งแล้ว </span>
-                </td>
-
-                <td>
-                  <button class="btn-mock-sm">แก้ไข</button>
-
-                  <button class="btn-mock-sm">ลบ</button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>3 ก.ย. 2569</td>
-
-                <td>
-                  ออกแบบหน้า Dashboard ใน Figma และปรับ Component
-                  ตามข้อเสนอแนะของพี่เลี้ยง
-                </td>
-
-                <td>
-                  <span class="tag tag-dark"> ส่งแล้ว </span>
-                </td>
-
-                <td>
-                  <button class="btn-mock-sm">แก้ไข</button>
-
-                  <button class="btn-mock-sm">ลบ</button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>2 ก.ย. 2569</td>
-
-                <td>
-                  ศึกษาโครงสร้าง React Project, Design System และ Git Flow
-                  ของบริษัท
-                </td>
-
-                <td>
-                  <span class="tag tag-red"> รอตรวจ </span>
-                </td>
-
-                <td>
-                  <button class="btn-mock-sm">แก้ไข</button>
-
-                  <button class="btn-mock-sm">ลบ</button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>1 ก.ย. 2569</td>
-
-                <td>
-                  ปฐมนิเทศ ฝึกใช้งานระบบภายในบริษัท และประชุม Sprint Planning
-                  กับทีม Frontend
-                </td>
-
-                <td>
-                  <span class="tag tag-red"> รอตรวจ </span>
-                </td>
-
-                <td>
-                  <button class="btn-mock-sm">แก้ไข</button>
-
-                  <button class="btn-mock-sm">ลบ</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <p class="helper-note">*ข้อมูลตัวอย่างในหน้า mockup เท่านั้น</p>
-        </section>
-
-        <!-- ==================================================
-     โครงการสหกิจศึกษา
-     ================================================== -->
-
-        <section class="content-panel" id="panel-coop">
-          <div class="panel-header">
-            <h2>โครงการสหกิจศึกษา</h2>
-
-            <p>จัดการข้อมูลโครงการสำหรับนักศึกษาสหกิจศึกษา</p>
-          </div>
-
-          <span class="status-chip planned"> Mockup </span>
-
-          <!-- 7) จัดการข้อมูลอาจารย์ที่ปรึกษาโครงการ -->
-          <div class="mock-card student-inline-25">
-            <div class="request-card-head">
-              <div>
-                <h4>
-                  <i class="fa-solid fa-chalkboard-user"></i>
-                  7) จัดการข้อมูลอาจารย์ที่ปรึกษาโครงการ
-                </h4>
-
-                <p>
-                  เลือกอาจารย์ที่ปรึกษาโครงการ กรณีมีอาจารย์ที่ปรึกษาโครงการ
-                </p>
-              </div>
-            </div>
-
-            <div class="student-inline-22">
-              <label class="student-inline-26"
-                for="coopAdvisorSelect"
-              >
-                อาจารย์ที่ปรึกษาโครงการ
-              </label>
-
-              <select class="student-inline-27"
-                id="coopAdvisorSelect"
-              >
-                <option value="">-- เลือกอาจารย์ที่ปรึกษาโครงการ --</option>
-
-                <option value="ผศ.ดร.นิติการ นาคเจือทอง">
-                  ผศ.ดร.นิติการ นาคเจือทอง
-                </option>
-
-                <option value="ผศ.ดร.ขนิษฐา นามี">ผศ.ดร.ขนิษฐา นามี</option>
-
-                <option value="ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ" selected>
-                  ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ
-                </option>
-
-                <option value="อ.ดร.ศิรินทรา แว่วศรี">
-                  อ.ดร.ศิรินทรา แว่วศรี
-                </option>
-              </select>
-            </div>
-
-            <div class="request-actions">
-              <button
-                type="button"
-                class="btn-mock-sm solid"
-                id="btnSaveCoopAdvisor"
-              >
-                <i class="fa-solid fa-floppy-disk"></i>
-                บันทึกอาจารย์ที่ปรึกษา
-              </button>
-            </div>
-
-            <p class="helper-note">
-              *รายชื่ออาจารย์เป็นข้อมูลตัวอย่างสำหรับ Mockup เท่านั้น
-            </p>
-          </div>
-
-          <!-- 8) ตรวจสอบและยืนยันข้อมูลอาจารย์ที่ปรึกษาโครงการ -->
-          <div class="mock-card student-inline-25">
-            <div class="request-card-head">
-              <div>
-                <h4>
-                  <i class="fa-solid fa-circle-check"></i>
-                  8) ตรวจสอบและยืนยันข้อมูลอาจารย์ที่ปรึกษาโครงการ
-                </h4>
-
-                <p>ตรวจสอบชื่ออาจารย์ที่ปรึกษาโครงการและกดรับทราบ</p>
-              </div>
-            </div>
-
-            <div class="student-inline-28"
-            >
-              <div>
-                <span class="student-inline-29"
-                >
-                  อาจารย์ที่ปรึกษาโครงการ
-                </span>
-
-                <strong id="coopAdvisorConfirmName">
-                  ผศ.ดร.สุพาภรณ์ ซิ้มเจริญ
-                </strong>
-
-                <span
-                  id="coopAdvisorAckStatus"
-                  class="tag tag-red student-inline-30"
-                >
-                  ยังไม่รับทราบ
-                </span>
-              </div>
-
-              <button
-                type="button"
-                class="btn-mock-sm solid"
-                id="btnAcknowledgeCoopAdvisor"
-              >
-                <i class="fa-solid fa-check"></i>
-                รับทราบ
-              </button>
-            </div>
-
-            <p class="helper-note">
-              *เมื่อกดรับทราบ ระบบ Mockup จะแสดงสถานะว่าได้รับทราบข้อมูลแล้ว
-            </p>
-          </div>
-
-          <!-- 9) จัดการข้อมูลหัวข้อสอบโครงการ -->
-          <div class="mock-card student-inline-25">
-            <div class="request-card-head">
-              <div>
-                <h4>
-                  <i class="fa-solid fa-file-pen"></i>
-                  9) จัดการข้อมูลหัวข้อสอบโครงการ
-                </h4>
-
-                <p>กรอกชื่อหัวข้อโครงการ และสามารถบันทึกหรือแก้ไขข้อมูลได้</p>
-              </div>
-            </div>
-
-            <div class="student-inline-22">
-              <label class="student-inline-26"
-                for="coopProjectTitle"
-              >
-                ชื่อหัวข้อโครงการ
-              </label>
-
-              <input class="student-inline-31"
-                type="text"
-                id="coopProjectTitle"
-                value="ระบบวิเคราะห์และแสดงผลข้อมูลการทำงานด้วย React Dashboard"
-              />
-            </div>
-
-            <div class="request-actions">
-              <button
-                type="button"
-                class="btn-mock-sm solid"
-                id="btnSaveCoopProjectTitle"
-              >
-                <i class="fa-solid fa-floppy-disk"></i>
-                บันทึก
-              </button>
-
-              <button
-                type="button"
-                class="btn-mock-sm"
-                id="btnEditCoopProjectTitle"
-              >
-                <i class="fa-solid fa-pen"></i>
-                แก้ไข
-              </button>
-            </div>
-
-            <div class="student-inline-32"
-            >
-              <span class="student-inline-29"
-              >
-                หัวข้อโครงการปัจจุบัน
-              </span>
-
-              <strong id="coopProjectTitleDisplay">
-                ระบบวิเคราะห์และแสดงผลข้อมูลการทำงานด้วย React Dashboard
-              </strong>
-            </div>
-
-            <p class="helper-note">
-              *ข้อมูลทั้งหมดเป็นข้อมูลตัวอย่างสำหรับหน้า Mockup
-              และยังไม่เชื่อมต่อฐานข้อมูล
-            </p>
-          </div>
-        </section>
-
-        <!-- ==================================================
-     อัปโหลดรายงาน
-     ================================================== -->
-
-        <section class="content-panel" id="panel-report-upload">
-          <div class="panel-header">
-            <h2>อัปโหลดรายงาน</h2>
-
-            <p>อัปโหลดเอกสารรายงานโครงการสหกิจศึกษาของนักศึกษา</p>
-          </div>
-
-          <span class="status-chip planned"> Mockup </span>
-
-          <!-- 2) เล่มโครงการ และโปสเตอร์ (นักศึกษาสหกิจ) -->
-          <div class="mock-card student-inline-25">
-            <div class="request-card-head">
-              <div>
-                <h4>
-                  <i class="fa-solid fa-book"></i>
-                  เล่มโครงการ และโปสเตอร์ ของนักศึกษาสหกิจ
-                </h4>
-
-                <p>อัปโหลดเล่มโครงการและโปสเตอร์ สำหรับนักศึกษาสหกิจศึกษา</p>
-              </div>
-            </div>
-
-            <div class="student-inline-22">
-              <label class="student-inline-26"
-                for="coopProjectBookFile"
-              >
-                ไฟล์เล่มโครงการ
-              </label>
-
-              <input class="student-inline-31"
-                type="file"
-                id="coopProjectBookFile"
-                accept=".pdf,.doc,.docx"
-              />
-            </div>
-
-            <div class="student-inline-22">
-              <label class="student-inline-26"
-                for="coopPosterFile"
-              >
-                ไฟล์โปสเตอร์
-              </label>
-
-              <input class="student-inline-31"
-                type="file"
-                id="coopPosterFile"
-                accept=".pdf,.jpg,.jpeg,.png"
-              />
-            </div>
-
-            <div class="request-actions">
-              <button type="button" class="btn-mock-sm solid">
-                <i class="fa-solid fa-upload"></i>
-                อัปโหลดไฟล์
-              </button>
-            </div>
-
-            <p class="helper-note">
-              *ข้อมูลทั้งหมดเป็นข้อมูลตัวอย่างสำหรับหน้า Mockup
-              และยังไม่เชื่อมต่อฐานข้อมูล
-            </p>
-          </div>
-        </section>
-        <!-- ==================================================
-     ประเมิน
-     ================================================== -->
-
-        <section class="content-panel" id="panel-evaluate">
-          <div class="panel-header">
-            <h2>ประเมินสถานประกอบการ</h2>
-            <p>ประเมินสถานประกอบการที่นักศึกษากำลังปฏิบัติฝึกงานสหกิจศึกษา</p>
-          </div>
-
-          <div class="mock-card student-inline-25">
-            <div class="request-card-head">
-              <div>
-                <h4>
-                  <i
-                    class="fa-solid fa-building student-inline-01"
-                  ></i>
-
-                  บริษัท อินโนเวฟ ดิจิทัล จำกัด
-                </h4>
-
-                <p>ข้อมูลสถานประกอบการสำหรับการประเมิน</p>
-              </div>
-
-              <span class="tag tag-green"> กำลังปฏิบัติฝึกงานสหกิจศึกษา </span>
-            </div>
-
-            <div class="info-grid student-inline-33">
-              <div class="info-item">
-                <span>ชื่อสถานประกอบการ</span>
-
-                <strong> บริษัท อินโนเวฟ ดิจิทัล จำกัด </strong>
-              </div>
-
-              <div class="info-item">
-                <span>จังหวัด</span>
-
-                <strong> ชลบุรี </strong>
-              </div>
-
-              <div class="info-item">
-                <span>ตำแหน่งสหกิจศึกษา</span>
-
-                <strong> นักศึกษาสหกิจศึกษาด้าน Frontend </strong>
-              </div>
-
-              <div class="info-item">
-                <span>พี่เลี้ยง</span>
-
-                <strong> คุณณัฐชา วงศ์พิพัฒน์ </strong>
-              </div>
-
-              <div class="info-item">
-                <span>วันที่เริ่มสหกิจศึกษา</span>
-
-                <strong> 1 กันยายน 2569 </strong>
-              </div>
-
-              <div class="info-item">
-                <span>วันที่สิ้นสุดสหกิจศึกษา</span>
-
-                <strong> 18 ธันวาคม 2569 </strong>
-              </div>
-            </div>
-
-            <div
-              class="request-actions student-inline-34"
-            >
-              <button
-                type="button"
-                class="btn-mock-sm solid"
-                id="btnEvaluateCompany"
-              >
-                <i class="fa-solid fa-star"></i>
-                ประเมินสถานประกอบการ
-              </button>
-            </div>
-          </div>
-        </section>
-
-        <!-- ==================================================
-     ขอย้ายสถานประกอบการ
-     ================================================== -->
-
-        <section class="content-panel" id="panel-transfer">
-          <div class="panel-header">
-            <h2>ขอย้ายสถานประกอบการ</h2>
-
-            <p>
-              กรอกเหตุผลในการขอย้ายสถานประกอบการหรือสถานที่ปฏิบัติงานสหกิจศึกษา
-              เพื่อส่งเรื่องให้อาจารย์ที่ปรึกษาพิจารณาอนุมัติ
-            </p>
-          </div>
-
-          <div class="mock-card">
-            <div class="form-field full">
-              <label for="transferReason">
-                เหตุผลที่ต้องการย้ายสถานประกอบการ/สถานที่ปฏิบัติงานสหกิจศึกษา
-              </label>
-
-              <textarea
-                id="transferReason"
-                placeholder="กรอกเหตุผลที่ต้องการย้ายสถานประกอบการหรือสถานที่ปฏิบัติงานสหกิจศึกษา..."
-              ></textarea>
-            </div>
-
-            <div class="request-actions">
-              <button
-                type="button"
-                class="btn-mock-sm solid"
-                id="btnSubmitTransfer"
-              >
-                <i class="fa-solid fa-paper-plane"></i>
-                ส่งเรื่องให้อาจารย์ที่ปรึกษาอนุมัติ
-              </button>
-            </div>
-          </div>
-        </section>
-      </div>
+    <div class="sc-request-form-notice">
+      <i class="fa-solid fa-circle-info"></i>
+      <span>แบบฟอร์มนี้เป็น Mockup สำหรับแสดงหน้าตาการทำงาน ข้อมูลสามารถแสดงและบันทึกใน Browser ได้ แต่ยังไม่เชื่อมต่อการส่งคำร้องจริง</span>
     </div>
 
-    <footer class="footer">
-      <div class="footer-copyright">
-        <p>
-          © Development of a Web Platform for Co-operative Education Management
-        </p>
-      </div>
-    </footer>
-
-    <!-- Modal: เขียนบันทึกการปฏิบัติงานประจำวัน -->
-
-    <div
-      class="modal-overlay daily-log-modal"
-      id="dailyLogModal"
-      aria-hidden="true"
-    >
-      <div
-        class="request-modal-box"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="dailyLogModalTitle"
-      >
-        <div class="request-modal-head">
-          <div>
-            <h3 id="dailyLogModalTitle">บันทึกการปฏิบัติงาน</h3>
-
-            <p>กรอกข้อมูลการปฏิบัติงานประจำวันของนักศึกษา</p>
+    <form id="coopRequestForm">
+      <div class="sc-request-form-scroll">
+        <section class="sc-request-section">
+          <div class="sc-request-section-title">
+            <span>01</span>
+            <div>
+              <h3>เรื่อง / เรียน</h3>
+              <p>รายละเอียดหัวหนังสือสำหรับการขอความอนุเคราะห์</p>
+            </div>
           </div>
 
-          <button
-            type="button"
-            class="modal-close"
-            data-close-modal="dailyLogModal"
-            aria-label="ปิด"
-          >
-            <i class="fa-solid fa-xmark"></i>
+          <div class="sc-form-grid">
+            <div class="sc-field full">
+              <label for="requestSubject">เรื่อง</label>
+              <input id="requestSubject" type="text" required />
+            </div>
+
+            <div class="sc-field full">
+              <label for="requestTo">เรียน</label>
+              <input id="requestTo" type="text" required />
+            </div>
+          </div>
+        </section>
+
+        <section class="sc-request-section">
+          <div class="sc-request-section-title">
+            <span>02</span>
+            <div>
+              <h3>ข้อมูลนักศึกษา</h3>
+              <p>ดึงข้อมูลจากประวัตินักศึกษาอัตโนมัติ</p>
+            </div>
+          </div>
+
+          <div class="sc-source-chip">
+            <i class="fa-solid fa-circle-check"></i>
+            ข้อมูลจากประวัตินักศึกษา
+          </div>
+
+          <div class="sc-request-readonly-grid">
+            <div><span>ชื่อ-สกุล</span><strong id="requestStudentName">-</strong></div>
+            <div><span>รหัสประจำตัวนักศึกษา</span><strong id="requestStudentId">-</strong></div>
+            <div><span>ชั้นปีที่</span><strong id="requestStudentYear">-</strong></div>
+            <div><span>เกรดเฉลี่ย</span><strong id="requestStudentGpa">-</strong></div>
+            <div><span>เบอร์โทร</span><strong id="requestStudentPhone">-</strong></div>
+            <div><span>E-Mail</span><strong id="requestStudentEmail">-</strong></div>
+          </div>
+
+          <button class="sc-btn sc-btn-outline sc-btn-sm" type="button" onclick="closeModal('coopRequestFormModal');goToPanel('panel-profile')">
+            <i class="fa-solid fa-user-pen"></i>
+            แก้ไขข้อมูลประวัติ
           </button>
-        </div>
+        </section>
 
-        <div class="request-modal-body">
-          <div class="daily-log-title">บันทึกการปฏิบัติงาน</div>
-
-          <div class="form-section">
-            <div class="daily-date-row">
-              <div class="form-field">
-                <label> ประจำวันที่ </label>
-
-                <input
-                  id="dailyDay"
-                  type="number"
-                  min="1"
-                  max="31"
-                  placeholder="วัน"
-                />
-              </div>
-
-              <div class="form-field">
-                <label> เดือน </label>
-
-                <input id="dailyMonth" type="text" placeholder="เดือน" />
-              </div>
-
-              <div class="form-field">
-                <label> พ.ศ. </label>
-
-                <input
-                  id="dailyYear"
-                  type="number"
-                  min="2500"
-                  max="2700"
-                  placeholder="พ.ศ."
-                />
-              </div>
+        <section class="sc-request-section">
+          <div class="sc-request-section-title">
+            <span>03</span>
+            <div>
+              <h3>ข้อมูลหน่วยงาน / สถานประกอบการ</h3>
+              <p>ข้อมูลบริษัทและกำหนดการปฏิบัติงานสหกิจศึกษา</p>
             </div>
           </div>
 
-          <div class="form-section">
-            <h4 class="daily-section-title">
-              <i class="fa-solid fa-user-graduate"></i>
+          <div class="sc-request-company-highlight" id="requestSelectedCompanyPreview"></div>
 
-              ส่วนที่ 1 (สำหรับนักศึกษา)
-            </h4>
+          <div class="sc-form-grid">
+            <div class="sc-field full">
+              <label for="requestCompanyThai">ชื่อบริษัท / หน่วยงาน (ชื่อภาษาไทย)</label>
+              <input id="requestCompanyThai" type="text" required />
+            </div>
 
-            <div class="form-grid">
-              <div class="form-field full">
-                <label> งานที่ได้รับมอบหมาย </label>
+            <div class="sc-field">
+              <label for="requestCompanyAttention">เรียนถึง</label>
+              <input id="requestCompanyAttention" type="text" required />
+            </div>
 
-                <textarea
-                  id="dailyAssigned"
-                  placeholder="กรอกรายละเอียดงานที่ได้รับมอบหมาย"
-                ></textarea>
-              </div>
+            <div class="sc-field">
+              <label for="requestCompanyDepartment">ตำแหน่ง / หน่วยงาน</label>
+              <input id="requestCompanyDepartment" type="text" required />
+            </div>
 
-              <div class="form-field full">
-                <label> ผลการปฏิบัติงาน </label>
+            <div class="sc-field full">
+              <label for="requestCompanyAddress">ที่อยู่</label>
+              <textarea id="requestCompanyAddress" rows="3" required></textarea>
+            </div>
 
-                <textarea
-                  id="dailyResult"
-                  placeholder="กรอกรายละเอียดผลการปฏิบัติงาน"
-                ></textarea>
-              </div>
+            <div class="sc-field">
+              <label for="requestStartDate">เริ่มตั้งแต่วันที่</label>
+              <input id="requestStartDate" type="date" required />
+            </div>
 
-              <div class="form-field full">
-                <label> ปัญหาและอุปสรรค </label>
-
-                <textarea
-                  id="dailyProblem"
-                  placeholder="กรอกปัญหาและอุปสรรคที่พบ"
-                ></textarea>
-              </div>
-
-              <div class="form-field full">
-                <label> การแก้ไข </label>
-
-                <textarea
-                  id="dailySolution"
-                  placeholder="กรอกวิธีการแก้ไขปัญหา"
-                ></textarea>
-              </div>
-
-              <div class="form-field full">
-                <label> หมายเหตุ </label>
-
-                <textarea
-                  id="dailyNote"
-                  placeholder="กรอกหมายเหตุเพิ่มเติม (ถ้ามี)"
-                ></textarea>
-              </div>
+            <div class="sc-field">
+              <label for="requestEndDate">ถึงวันที่</label>
+              <input id="requestEndDate" type="date" required />
             </div>
           </div>
 
-          <!-- <div class="form-section">
-            <h4 class="daily-section-title">
-              <i class="fa-solid fa-user-tie"></i>
+          <label class="sc-check-row">
+            <input id="requestCompanyContacted" type="checkbox" />
+            <span>การนี้ข้าพเจ้าได้ติดต่อกับทางบริษัท/หน่วยงานข้างต้น เป็นที่เรียบร้อยแล้ว</span>
+          </label>
+        </section>
 
-              ส่วนที่ 2 (สำหรับผู้ดูแล)
-            </h4>
-
-            <div class="form-grid">
-              <div class="form-field full">
-                <label> ข้อเสนอแนะจากผู้ดูแล </label>
-
-                <textarea
-                  id="dailyFeedback"
-                  placeholder="กรอกข้อเสนอแนะจากผู้ดูแล"
-                ></textarea>
-              </div>
+        <section class="sc-request-section">
+          <div class="sc-request-section-title">
+            <span>04</span>
+            <div>
+              <h3>การดำเนินการจัดส่งหนังสือ</h3>
+              <p>กรุณาเลือกวิธีจัดส่งหนังสือ 1 วิธี</p>
             </div>
+          </div>
 
-            <div class="daily-signature">
-              <div>
-                ลงชื่อ
-                <span class="daily-signature-line"></span>
-                ผู้ดูแล
-              </div>
+          <div class="sc-delivery-options">
+            <label class="sc-choice-card">
+              <input type="radio" name="requestDeliveryMethod" value="self" />
+              <span class="icon"><i class="fa-solid fa-person-walking-arrow-right"></i></span>
+              <span><strong>ยื่นด้วยตนเอง</strong><small>นักศึกษานำหนังสือไปยื่นด้วยตนเอง</small></span>
+            </label>
 
-              <div class="daily-signature-name">
-                (...........................................................)
-              </div>
+            <label class="sc-choice-card">
+              <input type="radio" name="requestDeliveryMethod" value="post" />
+              <span class="icon"><i class="fa-solid fa-envelope"></i></span>
+              <span><strong>ไปรษณีย์</strong><small>ให้ภาควิชาจัดส่งทางไปรษณีย์</small></span>
+            </label>
 
-              <div class="student-inline-22">
-                วันที่ ........... / ........................... /
-                ....................
-              </div>
+            <label class="sc-choice-card">
+              <input type="radio" name="requestDeliveryMethod" value="email" />
+              <span class="icon"><i class="fa-solid fa-at"></i></span>
+              <span><strong>E-mail</strong><small>ให้ภาควิชาจัดส่งทาง E-mail</small></span>
+            </label>
+          </div>
+
+          <div class="sc-field sc-delivery-email-field" id="requestDeliveryEmailField">
+            <label for="requestDeliveryEmail">E-mail สำหรับจัดส่ง</label>
+            <input id="requestDeliveryEmail" type="email" placeholder="hr@company.com" />
+          </div>
+        </section>
+
+        <section class="sc-request-section">
+          <div class="sc-request-section-title">
+            <span>05</span>
+            <div>
+              <h3>รายวิชาที่ต้องผ่านเกณฑ์ก่อนออกสหกิจศึกษา</h3>
+              <p>หลักสูตรวิศวกรรมศาสตรบัณฑิต (เทียบโอน)</p>
             </div>
-          </div> -->
+          </div>
 
-          <div class="mock-notice">
+          <div class="sc-info-banner">
             <i class="fa-solid fa-circle-info"></i>
-
-            แบบฟอร์มนี้เป็น Mockup ข้อมูลจะถูกเพิ่มลงในตารางด้านบนของหน้านี้
+            <span>กรุณาระบุว่า “ผ่าน” พร้อมเกรด หรือ “กำลังศึกษา” สำหรับแต่ละรายวิชา</span>
           </div>
-        </div>
 
-        <div class="request-modal-foot">
-          <button
-            type="button"
-            class="btn-modal-secondary"
-            data-close-modal="dailyLogModal"
-          >
-            ยกเลิก
-          </button>
+          <div class="sc-table-wrap">
+            <table class="sc-table sc-request-course-table">
+              <thead>
+                <tr>
+                  <th>ลำดับ</th>
+                  <th>สถานะ / เกรด</th>
+                  <th>รหัสวิชา</th>
+                  <th>รายวิชา</th>
+                </tr>
+              </thead>
+              <tbody id="requestCourseTableBody"></tbody>
+            </table>
+          </div>
 
-          <button type="button" class="btn-mock-sm solid" id="btnSaveDaily">
+          <div class="sc-request-note">
+            <strong>หมายเหตุ :</strong>
+            ต้องผ่านเกณฑ์การออกสหกิจศึกษา ต้องผ่านรายวิชาบังคับพื้นฐานและรายวิชาบังคับในแขนง โดยที่ไม่ติดสถานะวิทยาทัณฑ์
+          </div>
+        </section>
+
+        <section class="sc-request-section">
+          <div class="sc-request-section-title">
+            <span>06</span>
+            <div>
+              <h3>การรับรองข้อมูลของนักศึกษา</h3>
+              <p>ตรวจสอบและรับรองข้อมูลก่อนส่งคำร้อง</p>
+            </div>
+          </div>
+
+          <label class="sc-check-row emphasis">
+            <input id="requestStudentCertification" type="checkbox" />
+            <span>ข้าพเจ้าขอรับรองว่าข้อมูลที่ระบุข้างต้นเป็นความจริง</span>
+          </label>
+
+          <div class="sc-request-sign-grid">
+            <div><span>ผู้ยื่นคำร้อง</span><strong id="requestSignerName">-</strong></div>
+            <div><span>วันที่ยื่น</span><strong id="requestSignerDate">-</strong></div>
+          </div>
+        </section>
+
+        <section class="sc-request-section sc-request-approval-section">
+          <div class="sc-request-section-title">
+            <span>07</span>
+            <div>
+              <h3>ความเห็นชอบของอาจารย์ที่ปรึกษา</h3>
+              <p>นักศึกษาดูสถานะได้ แต่ไม่สามารถแก้ไขผลการพิจารณา</p>
+            </div>
+          </div>
+
+          <div class="sc-approval-card" id="requestAdvisorApprovalCard"></div>
+        </section>
+
+        <section class="sc-request-section sc-request-approval-section">
+          <div class="sc-request-section-title">
+            <span>08</span>
+            <div>
+              <h3>ความเห็นชอบของหัวหน้าภาควิชา</h3>
+              <p>ผลการอนุญาตและการดำเนินการจัดทำหนังสือ</p>
+            </div>
+          </div>
+
+          <div class="sc-approval-card" id="requestHeadApprovalCard"></div>
+        </section>
+      </div>
+
+      <div class="sc-request-form-footer" id="coopRequestFormFooter">
+        <button class="sc-btn sc-btn-outline" type="button" onclick="closeModal('coopRequestFormModal')">
+          ปิด
+        </button>
+
+        <div class="sc-request-form-footer-actions">
+          <button class="sc-btn sc-btn-outline" type="button" id="saveRequestDraftButton" onclick="saveCoopRequestDraft()">
             <i class="fa-solid fa-floppy-disk"></i>
-            บันทึกการปฏิบัติงาน
+            บันทึกฉบับร่าง
+          </button>
+
+          <button class="sc-btn sc-btn-primary" type="button" id="reviewRequestButton" onclick="reviewCoopRequestBeforeSubmit()">
+            <i class="fa-solid fa-magnifying-glass-check"></i>
+            ตรวจสอบก่อนส่ง
           </button>
         </div>
       </div>
+    </form>
+  </div>
+</div>
+
+<!-- =========================================================
+     REQUEST REVIEW MODAL
+     ========================================================= -->
+<div class="sc-modal" id="coopRequestReviewModal" aria-hidden="true">
+  <div class="sc-modal-dialog sc-modal-lg">
+    <div class="sc-modal-header">
+      <div>
+        <p class="sc-eyebrow">REVIEW REQUEST</p>
+        <h2>ตรวจสอบก่อนส่งคำร้อง</h2>
+      </div>
+      <button class="sc-modal-close" type="button" data-close-modal>
+        <i class="fa-solid fa-xmark"></i>
+      </button>
     </div>
 
-    <!-- Modal ข้อมูลพี่เลี้ยง -->
+    <div class="sc-modal-body">
+      <div id="requestReviewBody"></div>
+    </div>
 
-    <div class="modal-overlay" id="mentorModal" aria-hidden="true">
-      <div class="request-modal-box student-inline-35">
-        <div class="request-modal-head">
-          <div>
-            <h3 id="mentorModalTitle">เพิ่มข้อมูลพี่เลี้ยง</h3>
+    <div class="sc-modal-footer">
+      <button class="sc-btn sc-btn-outline" type="button" onclick="closeModal('coopRequestReviewModal')">
+        กลับไปแก้ไข
+      </button>
+      <button class="sc-btn sc-btn-primary" type="button" onclick="finalSubmitCoopRequest()">
+        <i class="fa-solid fa-paper-plane"></i>
+        ยืนยันส่งคำร้อง
+      </button>
+    </div>
+  </div>
+</div>
 
-            <p>กรอกข้อมูลพี่เลี้ยงสำหรับสหกิจศึกษา</p>
-          </div>
+<div class="sc-modal" id="companyModal" aria-hidden="true">
+  <div class="sc-modal-dialog sc-modal-lg">
+    <div class="sc-modal-header"><div><p class="sc-eyebrow">COMPANY DETAIL</p><h2 id="companyModalTitle">รายละเอียดสถานประกอบการ</h2></div><button class="sc-modal-close" data-close-modal><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="sc-modal-body" id="companyModalBody"></div><div class="sc-modal-footer" id="companyModalFooter"></div>
+  </div>
+</div>
 
-          <button
-            type="button"
-            class="btn-close-modal"
-            data-close-modal="mentorModal"
-          >
-            &times;
-          </button>
-        </div>
-
-        <div class="request-modal-body">
-          <div class="form-grid">
-            <div class="form-field full">
-              <label> Email </label>
-
-              <input
-                id="mentorEmailInput"
-                type="email"
-                placeholder="mentor@example.com"
-              />
-            </div>
-
-            <div class="form-field">
-              <label> ชื่อ </label>
-
-              <input id="mentorFirstNameInput" type="text" placeholder="ชื่อ" />
-            </div>
-
-            <div class="form-field">
-              <label> นามสกุล </label>
-
-              <input
-                id="mentorLastNameInput"
-                type="text"
-                placeholder="นามสกุล"
-              />
-            </div>
-
-            <div class="form-field full">
-              <label> ตำแหน่ง </label>
-
-              <input
-                id="mentorPositionInput"
-                type="text"
-                placeholder="ตำแหน่ง"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div class="request-modal-foot">
-          <button
-            type="button"
-            class="btn-modal-secondary"
-            data-close-modal="mentorModal"
-          >
-            ยกเลิก
-          </button>
-
-          <button type="button" class="btn-mock-sm solid" id="btnSaveMentor">
-            บันทึกข้อมูล
-          </button>
+<div class="sc-modal" id="dailyLogModal" aria-hidden="true">
+  <div class="sc-modal-dialog sc-modal-lg">
+    <div class="sc-modal-header"><div><p class="sc-eyebrow">DAILY WORK LOG</p><h2 id="dailyLogModalTitle">บันทึกการปฏิบัติงาน</h2></div><button class="sc-modal-close" data-close-modal><i class="fa-solid fa-xmark"></i></button></div>
+    <form id="dailyLogForm">
+      <div class="sc-modal-body">
+        <input id="dailyLogId" type="hidden" />
+        <div class="sc-form-grid three">
+          <div class="sc-field"><label for="dailyDate">วันที่</label><input id="dailyDate" type="date" required /></div>
+          <div class="sc-field"><label for="dailyStartTime">เวลาเริ่ม</label><input id="dailyStartTime" type="time" required /></div>
+          <div class="sc-field"><label for="dailyEndTime">เวลาสิ้นสุด</label><input id="dailyEndTime" type="time" required /></div>
+          <div class="sc-field full"><label for="dailyWork">รายละเอียดงาน</label><textarea id="dailyWork" required></textarea></div>
+          <div class="sc-field full"><label for="dailyProblem">ปัญหาที่พบ</label><textarea id="dailyProblem"></textarea></div>
+          <div class="sc-field full"><label for="dailyLearning">สิ่งที่ได้เรียนรู้</label><textarea id="dailyLearning"></textarea></div>
         </div>
       </div>
-    </div>
+      <div class="sc-modal-footer"><button class="sc-btn sc-btn-outline" type="button" onclick="saveDailyLog('draft')"><i class="fa-solid fa-file-pen"></i> บันทึกฉบับร่าง</button><button class="sc-btn sc-btn-primary" type="submit"><i class="fa-solid fa-paper-plane"></i> ส่งบันทึก</button></div>
+    </form>
+  </div>
+</div>
 
-    <script type="module" src="main.js"></script>
+<div class="sc-modal" id="confirmModal" aria-hidden="true">
+  <div class="sc-modal-dialog sc-confirm-dialog">
+    <div class="sc-confirm-icon" id="confirmIcon"><i class="fa-solid fa-circle-question"></i></div>
+    <h2 id="confirmTitle">ยืนยันการดำเนินการ</h2><p id="confirmMessage"></p>
+    <div class="sc-confirm-actions"><button class="sc-btn sc-btn-outline" id="confirmCancelButton">ยกเลิก</button><button class="sc-btn sc-btn-primary" id="confirmOkButton">ยืนยัน</button></div>
+  </div>
+</div>
 
-    <script src="js/student_coop.js"></script>
-  </body>
+<div class="sc-toast-container" id="toastContainer"></div>
+<footer class="sc-footer"><p>© KIWI — Co-operative Education Management System</p></footer>
+
+<script type="module" src="main.js"></script>
+<script src="js/student_coop.js"></script>
+</body>
 </html>
