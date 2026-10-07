@@ -57,25 +57,25 @@ const state = {
   account:{email:"student@fitm.kmutnb.ac.th",googleConnected:true},
   runtime:{photoDataUrl:null,resumeObjectUrl:null},
   resume:null,
-  selectedCompanyId:"C001",
+  selectedCompanyId:"C002",
   request:{
     id:"COOP-2569-0012",
-    companyId:"C001",
+    companyId:"C002",
     submittedDate:"2026-08-20",
-    status:"approved",
-    stage:"started",
+    status:"pending",
+    stage:"head",
     startDate:"2026-09-01",
     endDate:"2026-12-18",
     form:{
       subject:"ขอความอนุเคราะห์รับนักศึกษาสหกิจศึกษา",
       to:"หัวหน้าภาควิชาเทคโนโลยีสารสนเทศ",
-      companyThai:"บริษัท บลูเวฟ ดิจิทัล จำกัด",
+      companyThai:"DataSphere Thailand",
       attention:"ผู้จัดการฝ่ายทรัพยากรบุคคล",
-      department:"ฝ่ายพัฒนาซอฟต์แวร์",
-      address:"ชลบุรี",
+      department:"Junior Data Analyst",
+      address:"กรุงเทพมหานคร",
       companyContacted:true,
       deliveryMethod:"email",
-      deliveryEmail:"hr@bluewave.co.th",
+      deliveryEmail:"hr@datasphere.co.th",
       studentCertification:true,
       courses:[
         {code:"060233107",name:"ระบบฐานข้อมูล",status:"passed",grade:"B+"},
@@ -129,6 +129,43 @@ function loadState(){
   try{
     const saved=JSON.parse(localStorage.getItem("studentCoopRedesignState")||"null");
     if(!saved)return;
+
+    // Migrate the old deployed demo request so GitHub Pages matches the current localhost mock state.
+    if(
+      saved.request?.id==="COOP-2569-0012" &&
+      saved.request?.companyId==="C001" &&
+      saved.request?.status==="approved"
+    ){
+      saved.selectedCompanyId="C002";
+      saved.request={
+        ...saved.request,
+        companyId:"C002",
+        status:"pending",
+        stage:"head",
+        startDate:"2026-09-01",
+        endDate:"2026-12-18",
+        form:{
+          ...saved.request.form,
+          companyThai:"DataSphere Thailand",
+          department:"Junior Data Analyst",
+          address:"กรุงเทพมหานคร",
+          deliveryEmail:"hr@datasphere.co.th"
+        },
+        advisorApproval:{
+          ...(saved.request.advisorApproval||{}),
+          status:"approved"
+        },
+        headApproval:{
+          ...(saved.request.headApproval||{}),
+          status:"pending",
+          decision:"",
+          note:"",
+          date:""
+        }
+      };
+      localStorage.setItem("studentCoopRedesignState",JSON.stringify(saved));
+    }
+
     for(const [k,v] of Object.entries(saved)){
       if(k in state&&k!=="runtime"){
         state[k]=(typeof state[k]==="object"&&!Array.isArray(state[k])&&state[k]!==null)?{...state[k],...v}:v;
