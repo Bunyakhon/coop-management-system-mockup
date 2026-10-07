@@ -52,6 +52,11 @@ button,input,select,textarea{font:inherit}
 .sc-sidebar-item:hover{background:#f4f7fb;color:var(--sc-primary)}
 .sc-sidebar-item.active{background:var(--sc-primary-soft);color:var(--sc-primary)}
 .sc-sidebar-item.active i{color:var(--sc-primary)}
+.sc-sidebar-item.sc-sidebar-danger{color:var(--sc-danger)}
+.sc-sidebar-item.sc-sidebar-danger i{color:var(--sc-danger)}
+.sc-sidebar-item.sc-sidebar-danger:hover{background:var(--sc-danger-soft);color:var(--sc-danger)}
+.sc-sidebar-item.sc-sidebar-danger.active{background:var(--sc-danger-soft);color:var(--sc-danger)}
+.sc-sidebar-item.sc-sidebar-danger.active i{color:var(--sc-danger)}
 .sc-sidebar-badge{min-width:25px;height:23px;display:inline-flex;align-items:center;justify-content:center;padding:0 6px;border-radius:999px;background:var(--sc-primary-soft);color:var(--sc-primary);font-size:10.5px;font-weight:800}
 .sc-sidebar-badge.warning{background:var(--sc-warning-soft);color:var(--sc-warning)}
 .sc-sidebar-badge.danger{background:var(--sc-danger-soft);color:var(--sc-danger)}
@@ -1047,3 +1052,9 @@ button,input,select,textarea{font:inherit}
     gap: 3px;
   }
 }
+
+
+/* TRANSFER COMPANY */
+.sc-transfer-message{min-height:22px;margin-top:14px;font-size:13px;font-weight:600}
+.sc-transfer-message.error{color:var(--sc-danger)}
+.sc-transfer-message.success{color:var(--sc-success)}
