@@ -26,11 +26,11 @@ const COMPANIES = [
 ];
 
 const EVALUATION_CRITERIA = [
-  ["jobSuitability","ลักษณะงานตรงกับสาขาวิชา","งานที่ได้รับมอบหมายสอดคล้องกับความรู้และทักษะ"],
-  ["mentorSupport","การดูแลของพี่เลี้ยง","ให้คำแนะนำ ติดตาม และสนับสนุนการทำงาน"],
-  ["workEnvironment","สภาพแวดล้อมในการทำงาน","เหมาะสม ปลอดภัย และเอื้อต่อการเรียนรู้"],
-  ["learningOpportunity","โอกาสในการเรียนรู้","ได้เรียนรู้เครื่องมือและประสบการณ์ใหม่"],
-  ["cooperation","ความร่วมมือกับภาควิชา","ประสานงานกับมหาวิทยาลัยได้ดี"],
+  ["workUnderstanding","ความเข้าใจที่ได้รับจากงานสหกิจศึกษา เกี่ยวกับงานที่ปฏิบัติ","หมวดที่ 1 การมอบหมายงานและความพร้อม"],
+  ["fieldAlignment","งานที่ได้รับมอบหมายตรงตามสาขาวิชาของนักศึกษา","หมวดที่ 1 การมอบหมายงานและความพร้อม"],
+  ["workBriefing","มีการชี้แจงขั้นตอนการปฏิบัติงาน ก่อนเริ่มการปฏิบัติงาน","หมวดที่ 1 การมอบหมายงานและความพร้อม"],
+  ["clearWorkPlan","มีแผนการปฏิบัติงานชัดเจน","หมวดที่ 2 การดำเนินงานและการสนับสนุน"],
+  ["planImprovement","มีการปรับปรุงแผนปฏิบัติงานเมื่อเกิดปัญหาในการปฏิบัติ","หมวดที่ 2 การดำเนินงานและการสนับสนุน"],
 ];
 
 const CHAT_KB = [
@@ -108,7 +108,7 @@ const state = {
     {id:1,date:"2026-10-01",startTime:"08:30",endTime:"17:00",work:"ศึกษาระบบเดิมและออกแบบโครงสร้างหน้า Dashboard",problem:"ต้องทำความเข้าใจข้อมูลหลายส่วน",learning:"เรียนรู้การวิเคราะห์ Requirement และออกแบบ UI",status:"submitted"},
     {id:2,date:"2026-10-02",startTime:"08:30",endTime:"17:00",work:"พัฒนา Frontend หน้า Dashboard และเชื่อมข้อมูล Mock",problem:"",learning:"ฝึก Responsive Design",status:"submitted"}
   ],
-  evaluation:{status:"pending",scores:{},comment:""},
+  evaluation:{status:"saved",scores:{workUnderstanding:6,fieldAlignment:6,workBriefing:6,clearWorkPlan:6,planImprovement:6},comment:""},
   chatHistory:[{role:"assistant",text:"สวัสดีครับ ผมคือ KIWI Assistant ถามเรื่องคำร้อง เอกสาร Resume สถานประกอบการ อาจารย์ที่ปรึกษา พี่เลี้ยง หรือโครงการสหกิจได้ครับ"}]
 };
 
@@ -177,6 +177,9 @@ function loadState(){
 
 document.addEventListener("DOMContentLoaded",()=>{
   document.getElementById("submitTransferBtn")?.addEventListener("click",submitTransferRequest);
+  document.getElementById("companyEvaluationCriteria")?.addEventListener("change",event=>{
+    if(event.target.matches('input[type="radio"]'))updateEvaluationSummary();
+  });
   renderTransferPanel();
 });
 
@@ -1068,18 +1071,102 @@ function printDailyLogbook(){
 }
 
 function renderEvaluation(){
-  const c=findCompany(state.request?.companyId||state.selectedCompanyId);
-  evaluationCompanyPreview.innerHTML=c?`<div class="sc-selected-company"><h3>${escapeHtml(c.name)}</h3><p>${escapeHtml(c.position)}</p><div class="meta"><span>${escapeHtml(c.province)}</span><span>${escapeHtml(c.type)}</span></div><div style="margin-top:12px">${state.evaluation.status==="submitted"?'<span class="sc-status sc-status-success">ส่งแบบประเมินแล้ว</span>':state.evaluation.status==="draft"?'<span class="sc-status sc-status-warning">ฉบับร่าง</span>':'<span class="sc-status sc-status-muted">ยังไม่ประเมิน</span>'}</div></div>`:'<div class="sc-empty show"><strong>ยังไม่มีสถานประกอบการ</strong></div>';
-  companyEvaluationCriteria.innerHTML=EVALUATION_CRITERIA.map(([k,t,h])=>`<div class="sc-rating-item"><div><strong>${escapeHtml(t)}</strong><span>${escapeHtml(h)}</span></div><div class="sc-rating-options">${[1,2,3,4,5].map(n=>`<label><input type="radio" name="evaluation-${k}" value="${n}" ${+state.evaluation.scores[k]===n?"checked":""}><small>${n}</small></label>`).join("")}</div></div>`).join("");
-  companyEvaluationComment.value=state.evaluation.comment||"";
+  const criteriaContainer=document.getElementById("companyEvaluationCriteria");
+  if(!criteriaContainer)return;
+
+  let lastCategory="";
+  let questionNumber=0;
+
+  criteriaContainer.innerHTML=EVALUATION_CRITERIA.map(([key,title,category])=>{
+    questionNumber+=1;
+    const categoryHeading=category!==lastCategory
+      ? `<div class="sc-evaluation-category"><strong>${escapeHtml(category)}</strong></div>`
+      : "";
+    lastCategory=category;
+
+    return `${categoryHeading}
+      <div class="sc-evaluation-question">
+        <div class="sc-evaluation-question-title">
+          <span class="sc-evaluation-question-number">${questionNumber}.</span>
+          <strong>${escapeHtml(title)}</strong>
+        </div>
+        <div class="sc-evaluation-score-row" role="radiogroup" aria-label="${escapeHtml(title)}">
+          <span class="sc-evaluation-score-label">เลือกคะแนน</span>
+          <div class="sc-evaluation-score-options">
+            ${Array.from({length:10},(_,index)=>index+1).map(score=>`
+              <label class="sc-evaluation-score-option">
+                <input
+                  type="radio"
+                  name="evaluation-${key}"
+                  value="${score}"
+                  ${+state.evaluation.scores?.[key]===score?"checked":""}
+                />
+                <span>${score}</span>
+              </label>
+            `).join("")}
+          </div>
+        </div>
+      </div>`;
+  }).join("");
+
+  const comment=document.getElementById("companyEvaluationComment");
+  if(comment)comment.value=state.evaluation.comment||"";
+  updateEvaluationSummary();
 }
-function collectEval(){const s={};EVALUATION_CRITERIA.forEach(([k])=>{const e=document.querySelector(`input[name="evaluation-${k}"]:checked`);if(e)s[k]=+e.value});return s}
-function saveCompanyEvaluation(draft){
-  const c=findCompany(state.request?.companyId||state.selectedCompanyId);if(!c){showToast({type:"warning",title:"ยังไม่มีสถานประกอบการ"});return}
-  const scores=collectEval();if(!draft&&Object.keys(scores).length!==EVALUATION_CRITERIA.length){showToast({type:"warning",title:"ให้คะแนนไม่ครบ"});return}
-  state.evaluation={status:draft?"draft":"submitted",scores,comment:companyEvaluationComment.value.trim()};saveState();renderAll();showToast({type:"success",title:draft?"บันทึกฉบับร่างแล้ว":"ส่งแบบประเมินแล้ว"});
+
+function collectEval(){
+  const scores={};
+  EVALUATION_CRITERIA.forEach(([key])=>{
+    const selected=document.querySelector(`input[name="evaluation-${key}"]:checked`);
+    if(selected)scores[key]=Number(selected.value);
+  });
+  return scores;
 }
-function submitCompanyEvaluation(ev){ev.preventDefault();saveCompanyEvaluation(false)}
+
+function updateEvaluationSummary(){
+  const scores=collectEval();
+  const values=Object.values(scores);
+  const total=values.reduce((sum,value)=>sum+value,0);
+  const average=values.length?total/EVALUATION_CRITERIA.length:0;
+
+  const totalElement=document.getElementById("evaluationTotalScore");
+  const averageElement=document.getElementById("evaluationAverageScore");
+  if(totalElement)totalElement.textContent=`${total} / 50`;
+  if(averageElement)averageElement.textContent=`${average.toFixed(2)} / 10`;
+}
+
+function saveCompanyEvaluation(){
+  const scores=collectEval();
+
+  if(Object.keys(scores).length!==EVALUATION_CRITERIA.length){
+    showToast({
+      type:"warning",
+      title:"กรุณาเลือกคะแนนให้ครบทั้ง 5 ข้อ"
+    });
+    return;
+  }
+
+  const comment=document.getElementById("companyEvaluationComment")?.value.trim()||"";
+  state.evaluation={
+    status:"saved",
+    scores,
+    comment,
+    savedAt:new Date().toISOString()
+  };
+  saveState();
+  updateEvaluationSummary();
+
+  showToast({
+    type:"success",
+    title:"บันทึกแบบประเมินแล้ว",
+    message:"สามารถกลับมาแก้ไขและบันทึกใหม่ได้"
+  });
+}
+
+function submitCompanyEvaluation(event){
+  event.preventDefault();
+  saveCompanyEvaluation();
+}
 
 function chatbotAnswer(q){
   const t=normalize(q),found=CHAT_KB.find(([ks])=>ks.some(k=>t.includes(normalize(k))));
