@@ -79,6 +79,7 @@
   <button class="sc-sidebar-item" data-panel="panel-project"><i class="fa-solid fa-graduation-cap"></i><span>โครงการสหกิจ</span><span class="sc-sidebar-badge danger" id="projectTaskBadge">0</span></button>
   <button class="sc-sidebar-item" data-panel="panel-daily"><i class="fa-solid fa-book-open"></i><span>บันทึกการปฏิบัติงาน</span><span class="sc-sidebar-badge" id="dailyLogBadge">0</span></button>
   <button class="sc-sidebar-item" data-panel="panel-evaluation"><i class="fa-solid fa-star-half-stroke"></i><span>ประเมินสถานประกอบการ</span></button>
+  <button class="sc-sidebar-item sc-sidebar-danger" data-panel="panel-transfer"><i class="fa-solid fa-arrow-right-arrow-left"></i><span>ขอย้ายสถานประกอบการ</span></button>
   <button class="sc-sidebar-item" data-panel="panel-chatbot"><i class="fa-solid fa-comments"></i><span>ผู้ช่วยเอกสาร</span></button>
   <div class="sc-sidebar-help"><i class="fa-solid fa-route"></i><div><strong>เส้นทางสหกิจ</strong><span>ประวัติ → Resume → บริษัท → คำร้อง → โครงการ → บันทึกงาน → ประเมิน</span></div></div>
 </aside>
@@ -407,6 +408,52 @@
       </form>
     </article>
   </div>
+</section>
+
+<section class="sc-panel" id="panel-transfer">
+  <div class="sc-page-heading">
+    <div>
+      <p class="sc-eyebrow">TRANSFER COMPANY</p>
+      <h1>ขอย้ายสถานประกอบการ</h1>
+      <p>ส่งคำร้องขอย้ายสถานประกอบการ พร้อมระบุเหตุผลในการขอย้าย</p>
+    </div>
+  </div>
+
+  <article class="sc-card">
+    <div class="sc-card-header">
+      <div>
+        <h2>คำร้องขอย้ายสถานประกอบการ</h2>
+        <p>ข้อมูลนี้เป็น Mockup และยังไม่ได้เชื่อมต่อ Backend</p>
+      </div>
+    </div>
+
+    <div class="sc-form-grid">
+      <div class="sc-field">
+        <label>สถานประกอบการปัจจุบัน</label>
+        <input id="transferCurrentCompany" type="text" readonly />
+      </div>
+
+      <div class="sc-field">
+        <label>ตำแหน่งปัจจุบัน</label>
+        <input id="transferCurrentPosition" type="text" readonly />
+      </div>
+
+      <div class="sc-field full">
+        <label for="transferReason">เหตุผลในการขอย้ายสถานประกอบการ</label>
+        <textarea id="transferReason" rows="6" placeholder="กรอกเหตุผลในการขอย้าย..." maxlength="2000"></textarea>
+        <small class="sc-field-help">กรุณาระบุเหตุผลให้ชัดเจน เพื่อใช้ประกอบการพิจารณา</small>
+      </div>
+    </div>
+
+    <div class="sc-form-actions">
+      <button class="sc-btn sc-btn-danger" type="button" id="submitTransferBtn">
+        <i class="fa-solid fa-paper-plane"></i>
+        ส่งคำร้องขอย้าย
+      </button>
+    </div>
+
+    <div class="sc-transfer-message" id="transferMessage" role="status" aria-live="polite"></div>
+  </article>
 </section>
 
 <section class="sc-panel" id="panel-chatbot">
