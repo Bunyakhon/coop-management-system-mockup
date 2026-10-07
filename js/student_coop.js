@@ -94,6 +94,7 @@ const state = {
     {id:"COOP-2569-0002",companyName:"บริษัท สมาร์ทดาต้า อินไซต์ จำกัด",position:"Data Visualization",submittedDate:"2026-07-15",status:"cancelled"}
   ],
   requestDraft:null,
+  transferRequest:null,
   project:{
     advisorId:"A002",advisorSystemConfirmed:true,studentAcknowledged:false,
     titleTh:"ระบบจัดการและวิเคราะห์ข้อมูลสำหรับสถานประกอบการ",
@@ -122,7 +123,7 @@ function calcAge(v){if(!v)return"";const b=new Date(`${v}T00:00:00`),t=new Date(
 function hoursBetween(s,e){if(!s||!e)return 0;const [sh,sm]=s.split(":").map(Number),[eh,em]=e.split(":").map(Number);return Math.max(0,+(((eh*60+em)-(sh*60+sm))/60).toFixed(1))}
 
 function saveState(){
-  const safe={profile:state.profile,account:state.account,resume:state.resume,selectedCompanyId:state.selectedCompanyId,request:state.request,requestHistory:state.requestHistory,requestDraft:state.requestDraft,project:state.project,dailyLogs:state.dailyLogs,evaluation:state.evaluation,chatHistory:state.chatHistory.slice(-30)};
+  const safe={profile:state.profile,account:state.account,resume:state.resume,selectedCompanyId:state.selectedCompanyId,request:state.request,requestHistory:state.requestHistory,requestDraft:state.requestDraft,transferRequest:state.transferRequest,project:state.project,dailyLogs:state.dailyLogs,evaluation:state.evaluation,chatHistory:state.chatHistory.slice(-30)};
   localStorage.setItem("studentCoopRedesignState",JSON.stringify(safe));
 }
 function loadState(){
@@ -173,6 +174,11 @@ function loadState(){
     }
   }catch(e){console.warn(e)}
 }
+
+document.addEventListener("DOMContentLoaded",()=>{
+  document.getElementById("submitTransferBtn")?.addEventListener("click",submitTransferRequest);
+  renderTransferPanel();
+});
 
 function switchStudentPanel(id){
   document.querySelectorAll(".sc-panel").forEach(p=>p.classList.toggle("active",p.id===id));
@@ -333,6 +339,62 @@ function handleResumeFile(file){
   state.resume={name:file.name,size:file.size,uploadedAt:new Date().toISOString()};
   saveState();renderResume();renderRecommendations();updateOverview();showToast({type:"success",title:"อัปโหลด Resume แล้ว",message:file.name});
 }
+function renderTransferPanel(){
+  const companyInput=document.getElementById("transferCurrentCompany");
+  const positionInput=document.getElementById("transferCurrentPosition");
+  const request=state.request;
+  const company=request?findCompany(request.companyId):null;
+
+  if(companyInput){
+    companyInput.value=company?.name||request?.form?.companyThai||"ยังไม่มีสถานประกอบการปัจจุบัน";
+  }
+
+  if(positionInput){
+    positionInput.value=company?.position||request?.form?.department||"-";
+  }
+}
+
+function submitTransferRequest(){
+  const reason=document.getElementById("transferReason")?.value.trim()||"";
+  const message=document.getElementById("transferMessage");
+
+  if(!state.request){
+    if(message){
+      message.className="sc-transfer-message error";
+      message.textContent="ยังไม่มีคำร้องสหกิจศึกษาปัจจุบัน จึงยังไม่สามารถขอย้ายสถานประกอบการได้";
+    }
+    showToast({type:"warning",title:"ยังไม่มีสถานประกอบการปัจจุบัน"});
+    return;
+  }
+
+  if(!reason){
+    if(message){
+      message.className="sc-transfer-message error";
+      message.textContent="กรุณากรอกเหตุผลในการขอย้ายสถานประกอบการ";
+    }
+    showToast({type:"warning",title:"กรุณากรอกเหตุผลในการขอย้าย"});
+    return;
+  }
+
+  state.transferRequest={
+    reason,
+    requestedAt:new Date().toISOString(),
+    status:"pending"
+  };
+  saveState();
+
+  if(message){
+    message.className="sc-transfer-message success";
+    message.textContent="บันทึกคำร้องขอย้ายสถานประกอบการแล้ว (Mockup — ยังไม่ได้เชื่อมต่อ Backend)";
+  }
+
+  showToast({
+    type:"success",
+    title:"ส่งคำร้องขอย้ายแล้ว",
+    message:"บันทึกใน Browser สำหรับ Mockup เรียบร้อยแล้ว"
+  });
+}
+
 function renderResume(){
   if(!state.resume){resumeFileCard.innerHTML="";resumeUploadTitle.textContent="อัปโหลด Resume";resumeUploadDescription.textContent="ลากไฟล์ PDF มาวาง หรือเลือกไฟล์จากเครื่อง";return}
   resumeUploadTitle.textContent="Resume พร้อมใช้งาน";resumeUploadDescription.textContent="อัปโหลดใหม่เพื่อแทนที่ไฟล์เดิม";
