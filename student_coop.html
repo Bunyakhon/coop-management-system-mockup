@@ -397,17 +397,77 @@
 </section>
 
 <section class="sc-panel" id="panel-evaluation">
-  <div class="sc-page-heading"><div><p class="sc-eyebrow">COMPANY EVALUATION</p><h1>ประเมินสถานประกอบการ</h1><p>ประเมินประสบการณ์การทำงานและความเหมาะสมของสถานประกอบการ</p></div></div>
-  <div class="sc-grid-2 evaluation-layout">
-    <article class="sc-card"><div class="sc-card-header"><div><h2>สถานประกอบการของฉัน</h2><p>อ้างอิงจากคำร้องหรือบริษัทที่เลือก</p></div></div><div id="evaluationCompanyPreview"></div></article>
-    <article class="sc-card"><div class="sc-card-header"><div><h2>แบบประเมิน</h2><p>คะแนน 1–5</p></div></div>
-      <form id="companyEvaluationForm">
-        <div class="sc-rating-list" id="companyEvaluationCriteria"></div>
-        <div class="sc-field"><label for="companyEvaluationComment">ความคิดเห็นเพิ่มเติม</label><textarea id="companyEvaluationComment"></textarea></div>
-        <div class="sc-form-actions"><button class="sc-btn sc-btn-outline" type="button" onclick="saveCompanyEvaluation(true)"><i class="fa-solid fa-file-pen"></i> บันทึกฉบับร่าง</button><button class="sc-btn sc-btn-primary" type="submit"><i class="fa-solid fa-paper-plane"></i> ส่งแบบประเมิน</button></div>
-      </form>
-    </article>
+  <div class="sc-page-heading">
+    <div>
+      <p class="sc-eyebrow">COMPANY EVALUATION</p>
+      <h1>ประเมินสถานประกอบการ</h1>
+      <p>แบบประเมินสถานประกอบการสำหรับนักศึกษาสหกิจศึกษา</p>
+    </div>
   </div>
+
+  <form id="companyEvaluationForm">
+    <article class="sc-card sc-evaluation-info-card">
+      <div class="sc-card-header">
+        <div>
+          <h2>ข้อมูลนักศึกษาและสถานประกอบการ</h2>
+        </div>
+      </div>
+
+      <div class="sc-evaluation-info-grid">
+        <div class="sc-evaluation-info-item"><span>ชื่อนักศึกษา</span><strong>กิตติพงศ์ วัฒนชัย</strong></div>
+        <div class="sc-evaluation-info-item"><span>ชื่อพี่เลี้ยง</span><strong>ณัฐวัฒน์ จันทร์ประเสริฐ</strong></div>
+        <div class="sc-evaluation-info-item"><span>รหัสนักศึกษา</span><strong>6706022510999</strong></div>
+        <div class="sc-evaluation-info-item"><span>ตำแหน่งพี่เลี้ยง</span><strong>Lead Software Developer</strong></div>
+        <div class="sc-evaluation-info-item"><span>สาขาวิชา</span><strong>IT</strong></div>
+        <div class="sc-evaluation-info-item"><span>ช่วงเวลาปฏิบัติงาน</span><strong>-</strong></div>
+        <div class="sc-evaluation-info-item"><span>ชื่อสถานประกอบการ</span><strong>-</strong></div>
+        <div class="sc-evaluation-info-item"><span>วันที่ประเมิน</span><strong>7 ต.ค. 2569</strong></div>
+      </div>
+    </article>
+
+    <div class="sc-info-banner sc-evaluation-notice">
+      <i class="fa-solid fa-circle-info"></i>
+      <span>เลือกคะแนน 1–10 ให้ครบทั้ง 5 ข้อ สามารถกลับมาแก้ไขแบบประเมินที่บันทึกแล้วได้</span>
+    </div>
+
+    <article class="sc-card sc-evaluation-form-card">
+      <div id="companyEvaluationCriteria"></div>
+
+      <div class="sc-field sc-evaluation-comment">
+        <label for="companyEvaluationComment">ข้อเสนอแนะเพิ่มเติม (ไม่บังคับ)</label>
+        <textarea id="companyEvaluationComment" rows="5" maxlength="2000" placeholder="กรอกข้อเสนอแนะเพิ่มเติม..."></textarea>
+        <small class="sc-field-help">ไม่เกิน 2,000 ตัวอักษร</small>
+      </div>
+    </article>
+
+    <article class="sc-card sc-evaluation-summary-card">
+      <div class="sc-card-header">
+        <div>
+          <h2>สรุปผลการประเมิน</h2>
+        </div>
+      </div>
+
+      <div class="sc-evaluation-summary-grid">
+        <div class="sc-evaluation-summary-item">
+          <span>คะแนนรวม</span>
+          <strong id="evaluationTotalScore">30 / 50</strong>
+        </div>
+        <div class="sc-evaluation-summary-item">
+          <span>ค่าเฉลี่ย</span>
+          <strong id="evaluationAverageScore">6.00 / 10</strong>
+        </div>
+      </div>
+
+      <p class="sc-evaluation-summary-help">คะแนนรวมระหว่างเลือกคำตอบ ค่าเฉลี่ยคำนวณจากทั้ง 5 ข้อ</p>
+
+      <div class="sc-form-actions">
+        <button class="sc-btn sc-btn-primary" type="submit" id="saveCompanyEvaluationBtn">
+          <i class="fa-solid fa-floppy-disk"></i>
+          บันทึกแบบประเมิน
+        </button>
+      </div>
+    </article>
+  </form>
 </section>
 
 <section class="sc-panel" id="panel-transfer">
