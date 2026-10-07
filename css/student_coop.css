@@ -281,15 +281,48 @@ button,input,select,textarea{font:inherit}
 .sc-status-muted{background:#f1f5f9;color:#64748b}
 
 /* EVALUATION */
-.evaluation-layout{align-items:start}
-.sc-rating-list{display:grid;gap:10px;margin-bottom:16px}
-.sc-rating-item{display:grid;grid-template-columns:minmax(0,1fr) 210px;align-items:center;gap:14px;padding:12px;border:1px solid var(--sc-border);border-radius:11px;background:#fbfdff}
-.sc-rating-item strong{display:block;font-size:11.5px}
-.sc-rating-item span{display:block;margin-top:2px;color:var(--sc-muted);font-size:9.5px}
-.sc-rating-options{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
-.sc-rating-options label{display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px;border-radius:7px;cursor:pointer}
-.sc-rating-options input{accent-color:var(--sc-primary)}
-.sc-rating-options small{font-size:8.5px}
+.sc-evaluation-info-card{margin-bottom:16px}
+.sc-evaluation-info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border:1px solid var(--sc-border);border-radius:12px;overflow:hidden}
+.sc-evaluation-info-item{min-height:76px;padding:15px 16px;border-bottom:1px solid var(--sc-border);background:#fff}
+.sc-evaluation-info-item:nth-child(odd){border-right:1px solid var(--sc-border)}
+.sc-evaluation-info-item:nth-last-child(-n+2){border-bottom:0}
+.sc-evaluation-info-item span{display:block;margin-bottom:5px;color:var(--sc-muted);font-size:12px}
+.sc-evaluation-info-item strong{display:block;color:var(--sc-text);font-size:15px}
+.sc-evaluation-notice{margin:0 0 16px}
+.sc-evaluation-form-card{margin-bottom:16px}
+.sc-evaluation-category{margin:0 -20px 4px;padding:13px 20px;background:#f8fafc;border-top:1px solid var(--sc-border);border-bottom:1px solid var(--sc-border)}
+.sc-evaluation-category:first-child{margin-top:-20px;border-top:0;border-radius:var(--sc-radius) var(--sc-radius) 0 0}
+.sc-evaluation-category strong{font-family:"Sarabun",sans-serif;font-size:16px}
+.sc-evaluation-question{padding:18px 0;border-bottom:1px solid #edf2f7}
+.sc-evaluation-question-title{display:flex;align-items:flex-start;gap:7px;margin-bottom:14px;font-size:14px;line-height:1.65}
+.sc-evaluation-question-number{flex:0 0 auto;font-weight:800}
+.sc-evaluation-score-row{display:flex;align-items:center;gap:16px}
+.sc-evaluation-score-label{min-width:86px;color:var(--sc-muted);font-size:12px}
+.sc-evaluation-score-options{display:grid;grid-template-columns:repeat(10,44px);gap:7px}
+.sc-evaluation-score-option{position:relative;display:block;cursor:pointer}
+.sc-evaluation-score-option input{position:absolute;opacity:0;pointer-events:none}
+.sc-evaluation-score-option span{width:44px;height:40px;display:flex;align-items:center;justify-content:center;border:1px solid var(--sc-border-strong);border-radius:9px;background:#fff;color:#475569;font-size:13px;font-weight:700;transition:.16s}
+.sc-evaluation-score-option:hover span{border-color:#9ab6d9;background:#f8fbff;color:var(--sc-primary)}
+.sc-evaluation-score-option input:checked+span{border-color:var(--sc-primary);background:var(--sc-primary);color:#fff;box-shadow:0 4px 12px rgba(24,89,173,.18)}
+.sc-evaluation-score-option input:focus-visible+span{outline:3px solid rgba(24,89,173,.18);outline-offset:2px}
+.sc-evaluation-comment{margin-top:20px}
+.sc-evaluation-summary-card{margin-bottom:20px}
+.sc-evaluation-summary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.sc-evaluation-summary-item{padding:17px;border:1px solid var(--sc-border);border-radius:12px;background:#fbfdff}
+.sc-evaluation-summary-item span{display:block;color:var(--sc-muted);font-size:12px}
+.sc-evaluation-summary-item strong{display:block;margin-top:4px;font-family:"Sarabun",sans-serif;font-size:24px;color:var(--sc-primary)}
+.sc-evaluation-summary-help{margin:12px 0 0;color:var(--sc-muted);font-size:11.5px}
+
+@media(max-width:900px){
+  .sc-evaluation-score-row{align-items:flex-start;flex-direction:column}
+  .sc-evaluation-score-options{width:100%;grid-template-columns:repeat(5,minmax(42px,1fr))}
+  .sc-evaluation-score-option span{width:100%}
+}
+@media(max-width:600px){
+  .sc-evaluation-info-grid,.sc-evaluation-summary-grid{grid-template-columns:1fr}
+  .sc-evaluation-info-item:nth-child(odd){border-right:0}
+  .sc-evaluation-info-item:nth-last-child(2){border-bottom:1px solid var(--sc-border)}
+}
 
 /* CHATBOT */
 .sc-chat-page{display:grid;grid-template-columns:290px minmax(0,1fr);gap:18px}
